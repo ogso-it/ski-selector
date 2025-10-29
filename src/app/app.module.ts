@@ -28,6 +28,9 @@ import { SplitStep5Component } from './ski-form/split-step5/split-step5.componen
 import { CarouselModule } from '@marcreichel/angular-carousel';
 
 
+import { environment } from '../environments/environment';
+
+
 export function playerFactory() {
   return player;
 }
@@ -68,6 +71,8 @@ export function playerFactory() {
     BrowserModule,
     CarouselModule,
     AppRoutingModule,
+
+    
   
     LottieModule.forRoot({ player: playerFactory })
   ],
