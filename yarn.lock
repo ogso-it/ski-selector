@@ -385,7 +385,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^11.2.14", "@angular/core@^12.0.0", "@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@^18.0.0", "@angular/core@^20.0.0", "@angular/core@^20.3.9", "@angular/core@>=13", "@angular/core@20.3.9":
+"@angular/core@^11.2.14", "@angular/core@^12.0.0", "@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@^18.0.0", "@angular/core@^20.0.0", "@angular/core@^20.3.9", "@angular/core@>=20", "@angular/core@20.3.9":
   version "20.3.9"
   resolved "https://registry.npmjs.org/@angular/core/-/core-20.3.9.tgz"
   integrity sha512-zZb7wUexBIIUojr1helzXsL25ilAoASm8aPOjBNHPLYr4ndDjMD/wogmH/dA7EzuCdmZf30ZmZZpuX149WdrpA==
@@ -5955,10 +5955,10 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lottie-web@^5.9.6, lottie-web@>=5.9.2:
-  version "5.9.6"
-  resolved "https://registry.npmjs.org/lottie-web/-/lottie-web-5.9.6.tgz"
-  integrity sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==
+lottie-web@^5.13.0, lottie-web@>=5.9.2:
+  version "5.13.0"
+  resolved "https://registry.npmjs.org/lottie-web/-/lottie-web-5.13.0.tgz"
+  integrity sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==
 
 lru-cache@^10.0.1:
   version "10.4.3"
@@ -6370,10 +6370,10 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-lottie@^8.2.2:
-  version "8.3.0"
-  resolved "https://registry.npmjs.org/ngx-lottie/-/ngx-lottie-8.3.0.tgz"
-  integrity sha512-pKjWFPzcDuj5+cNs80tuBvnOtG6BInDn0SoD19rLjRLUgRSRDlRkz+qc7T7/QlzRGizWiYnL4HiIcHCw49v6Uw==
+ngx-lottie@^20.0.0:
+  version "20.0.0"
+  resolved "https://registry.npmjs.org/ngx-lottie/-/ngx-lottie-20.0.0.tgz"
+  integrity sha512-8BRgwXH98bjvRqm1RPgk1+3cWcwDmoHjM08/9klK2Bunq0bfyhpz38tub5RH5CK8yBtYjQna/7BB8z6d0kClFQ==
   dependencies:
     "@scarf/scarf" "^1.1.1"
     tslib "^2.3.0"
