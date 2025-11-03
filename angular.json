@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "smart-ogso-selector:build:production"
+              "buildTarget": "smart-ogso-selector:build:production"
             },
             "development": {
-              "browserTarget": "smart-ogso-selector:build:development"
+              "buildTarget": "smart-ogso-selector:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "smart-ogso-selector:build"
+            "buildTarget": "smart-ogso-selector:build"
           }
         },
         "test": {
