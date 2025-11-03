@@ -21,7 +21,6 @@
     "@angular/router": "^20.3.9",
     "@coreui/angular": "4",
     "@marcreichel/angular-carousel": "^2.0.5",
-    "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "angular-responsive-carousel": "^2.1.2",
     "firebase": "^11.1.0",
     "igniteui-angular": "^14.0.15",
