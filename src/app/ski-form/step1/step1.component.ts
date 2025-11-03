@@ -7,9 +7,10 @@ import { DataServiceService } from 'src/app/data-service.service';
 
 
 @Component({
-  selector: 'app-step1',
-  templateUrl: './step1.component.html',
-  styleUrls: ['./step1.component.scss']
+    selector: 'app-step1',
+    templateUrl: './step1.component.html',
+    styleUrls: ['./step1.component.scss'],
+    standalone: false
 })
 export class Step1Component implements OnInit {
 

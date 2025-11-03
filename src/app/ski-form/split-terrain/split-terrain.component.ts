@@ -7,9 +7,10 @@ import { DataServiceService } from 'src/app/data-service.service';
 
 
 @Component({
-  selector: 'app-split-terrain',
-  templateUrl: './split-terrain.component.html',
-  styleUrls: ['./split-terrain.component.css']
+    selector: 'app-split-terrain',
+    templateUrl: './split-terrain.component.html',
+    styleUrls: ['./split-terrain.component.css'],
+    standalone: false
 })
 export class SplitTerrainComponent implements OnInit  {
   check : any 

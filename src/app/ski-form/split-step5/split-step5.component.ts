@@ -6,9 +6,10 @@ import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
-  selector: 'app-split-step5',
-  templateUrl: './split-step5.component.html',
-  styleUrls: ['./split-step5.component.css']
+    selector: 'app-split-step5',
+    templateUrl: './split-step5.component.html',
+    styleUrls: ['./split-step5.component.css'],
+    standalone: false
 })
 export class SplitStep5Component implements OnInit {
 

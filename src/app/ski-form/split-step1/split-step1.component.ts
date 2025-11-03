@@ -7,9 +7,10 @@ import { DataServiceService } from 'src/app/data-service.service';
 
 
 @Component({
-  selector: 'app-split-step1',
-  templateUrl: './split-step1.component.html',
-  styleUrls: ['./split-step1.component.scss']
+    selector: 'app-split-step1',
+    templateUrl: './split-step1.component.html',
+    styleUrls: ['./split-step1.component.scss'],
+    standalone: false
 })
 export class SplitStep1Component implements OnInit {
 

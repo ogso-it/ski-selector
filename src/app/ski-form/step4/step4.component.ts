@@ -7,9 +7,10 @@ import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
-  selector: 'app-step4',
-  templateUrl: './step4.component.html',
-  styleUrls: ['./step4.component.css']
+    selector: 'app-step4',
+    templateUrl: './step4.component.html',
+    styleUrls: ['./step4.component.css'],
+    standalone: false
 })
 export class Step4Component implements OnInit {
 

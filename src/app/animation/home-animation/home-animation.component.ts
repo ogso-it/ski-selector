@@ -5,9 +5,10 @@ import { AnimationOptions } from 'ngx-lottie';
 
 
 @Component({
-  selector: 'app-home-animation',
-  templateUrl: './home-animation.component.html',
-  styleUrls: ['./home-animation.component.css']
+    selector: 'app-home-animation',
+    templateUrl: './home-animation.component.html',
+    styleUrls: ['./home-animation.component.css'],
+    standalone: false
 })
 export class HomeAnimationComponent implements OnInit {
 

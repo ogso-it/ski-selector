@@ -9,9 +9,10 @@ import { skis } from 'src/assets/jsons/skis';
 
 
 @Component({
-  selector: 'app-split-step2',
-  templateUrl: './split-step2.component.html',
-  styleUrls: ['./split-step2.component.css']
+    selector: 'app-split-step2',
+    templateUrl: './split-step2.component.html',
+    styleUrls: ['./split-step2.component.css'],
+    standalone: false
 })
 export class SplitStep2Component implements OnInit {
 

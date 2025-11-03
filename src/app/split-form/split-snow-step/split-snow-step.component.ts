@@ -6,9 +6,10 @@ import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
-  selector: 'app-split-snow-step',
-  templateUrl: './split-snow-step.component.html',
-  styleUrls: ['./split-snow-step.component.css']
+    selector: 'app-split-snow-step',
+    templateUrl: './split-snow-step.component.html',
+    styleUrls: ['./split-snow-step.component.css'],
+    standalone: false
 })
 export class SplitSnowStepComponent implements OnInit {
 

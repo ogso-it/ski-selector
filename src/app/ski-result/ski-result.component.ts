@@ -12,9 +12,10 @@ import { UntypedFormArray } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-ski-result',
-  templateUrl: './ski-result.component.html',
-  styleUrls: ['./ski-result.component.scss']
+    selector: 'app-ski-result',
+    templateUrl: './ski-result.component.html',
+    styleUrls: ['./ski-result.component.scss'],
+    standalone: false
 })
 export class SkiResultComponent implements OnInit {
   Dweight: number =  0 ;

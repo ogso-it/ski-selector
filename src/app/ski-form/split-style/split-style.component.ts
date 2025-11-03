@@ -6,9 +6,10 @@ import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
-  selector: 'app-split-style',
-  templateUrl: './split-style.component.html',
-  styleUrls: ['./split-style.component.css']
+    selector: 'app-split-style',
+    templateUrl: './split-style.component.html',
+    styleUrls: ['./split-style.component.css'],
+    standalone: false
 })
 export class SplitStyleComponent implements  OnInit {
   check : any 

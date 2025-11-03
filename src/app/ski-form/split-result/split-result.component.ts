@@ -6,9 +6,10 @@ import { getDatabase, ref, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 @Component({
-  selector: 'app-split-result',
-  templateUrl: './split-result.component.html',
-  styleUrls: ['./split-result.component.css']
+    selector: 'app-split-result',
+    templateUrl: './split-result.component.html',
+    styleUrls: ['./split-result.component.css'],
+    standalone: false
 })
 export class SplitResultComponent implements OnInit {
 

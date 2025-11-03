@@ -8,9 +8,10 @@ import { DataServiceService } from 'src/app/data-service.service';
 
 
 @Component({
-  selector: 'app-step3',
-  templateUrl: './step3.component.html',
-  styleUrls: ['./step3.component.css']
+    selector: 'app-step3',
+    templateUrl: './step3.component.html',
+    styleUrls: ['./step3.component.css'],
+    standalone: false
 })
 
 
