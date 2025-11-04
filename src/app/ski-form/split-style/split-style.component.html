@@ -14,48 +14,47 @@
                  class="font-bold"> YOU</span>
            </span>
               </div>
-          
+         
               <div class="col-lg-4 text-center   hidden md:block">
            
-        
-                 <ng-lottie  [options]="options"  (animationCreated)="animationCreated($event)">
-                 </ng-lottie>
-                
-  
-                
+       
+                 <app-lottie-player  [options]="options"  (animationCreated)="animationCreated($any($event))"></app-lottie-player>
                
-            </div>
-          <div class="col-lg-4 text-center">
-            <h2  class="title font-bold font-sans  text-xl md:text-2xl  text-center mt-10 mb-2 text-orange-600">WHAT IS YOUR SKIING STYLE?</h2>
-            <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This filed is required</p>
+ 
+               
+              
+           </div>
+         <div class="col-lg-4 text-center">
+           <h2  class="title font-bold font-sans  text-xl md:text-2xl  text-center mt-10 mb-2 text-orange-600">WHAT IS YOUR SKIING STYLE?</h2>
+           <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This filed is required</p>
 
 
-             <div class="form_items radio-list">
-                <ul class="text-uppercase list-unstyled">
-                   <li>
-                      <label for="opt_277" class="step_6 rounded-pill animate__animated animate__fadeInRight animate_25ms">
-                         <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_277" name="stp_6_select_option" value="technical-precision">
-                         <span class="label-content d-inline-block text-center rounded-pill">Technical Precision</span>
-                      </label>
-                   </li>
-                   <li>
-                      <label for="opt_78" class="step_6 rounded-pill animate__animated animate__fadeInRight animate_50ms">
-                         <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_78" name="stp_6_select_option" value="fun-surf">
-                         <span class="label-content d-inline-block text-center rounded-pill">Fun & Surf</span>
-                      </label>
-                   </li>
-            
+            <div class="form_items radio-list">
+               <ul class="text-uppercase list-unstyled">
+                  <li>
+                     <label for="opt_277" class="step_6 rounded-pill animate__animated animate__fadeInRight animate_25ms">
+                        <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_277" name="stp_6_select_option" value="technical-precision">
+                        <span class="label-content d-inline-block text-center rounded-pill">Technical Precision</span>
+                     </label>
+                  </li>
+                  <li>
+                     <label for="opt_78" class="step_6 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+                        <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_78" name="stp_6_select_option" value="fun-surf">
+                        <span class="label-content d-inline-block text-center rounded-pill">Fun & Surf</span>
+                     </label>
+                  </li>
            
-                </ul>
-             </div>
-          </div>
-       </div>
+          
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!---------- Form Button ---------->
+   <div class="form_btn py-5 d-flex justify-content-center align-items-center">
+       <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" id="prevBtn"><span><i class="fas fa-arrow-left pe-1"></i></span>Back</button>
+       <button [disabled]="!tr" type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed opacity-30':  !tr  , 'js-btn-next f_btn rounded-pill active text-uppercase ' :  tr }"  id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
     </div>
-    <!---------- Form Button ---------->
-    <div class="form_btn py-5 d-flex justify-content-center align-items-center">
-        <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" id="prevBtn"><span><i class="fas fa-arrow-left pe-1"></i></span>Back</button>
-        <button [disabled]="!tr" type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed opacity-30':  !tr  , 'js-btn-next f_btn rounded-pill active text-uppercase ' :  tr }"  id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
-     </div>
 
-  
+ 
    </div>

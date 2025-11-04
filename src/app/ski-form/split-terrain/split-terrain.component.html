@@ -2,57 +2,39 @@
   <div class="multisteps_form_panel" data-animation="slideVert">
     <div class="form_content">
       <div class="row">
-         <div class="col-lg-4 self-center ">
-            <span class=" title text-black font-sans text-2xl md:text-5xl  mb-5 hidden md:block"><span class="font-bold">EACH TYPE</span> OF SKI
-            <span class="font-bold">PERFORMS<br></span> <span class="font-bold">DIFFERENTLY<br></span>ACCORDING TO THE <span
-            class="font-bold">TERRAIN</span>
-         </span>
-         
-           </div>
-           <div class="col-lg-4 self-center text-center md:hidden">
-            <span class=" title text-black font-sans text-2xl md:text-5xl  mb-5 "><span class="font-bold">EACH TYPE</span> OF SKI
-            <span class="font-bold">PERFORMS<br></span> <span class="font-bold">DIFFERENTLY<br></span>ACCORDING TO THE <span
-            class="font-bold">TERRAIN</span>
-         </span>
-         
-           </div>
-           <div class="col-lg-4 text-center   hidden md:block">
-            <div class="form_img justify-center">
-         
+         <div class="col-lg-4 text-center   hidden md:block">
+           
+           <app-lottie-player  [options]="options"  (animationCreated)="animationCreated($any($event))"></app-lottie-player>
+           
       
-               <ng-lottie  [options]="options"  (animationCreated)="animationCreated($event)">
-               </ng-lottie>
-              
+         </div>
+         <div class="col-lg-4 text-center">
+            <h2  class="title font-bold font-sans  text-xl md:text-2xl  text-center mt-10 mb-2 text-orange-600">WHAT TERRAIN YOU RIDE?</h2>
+            <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This filed is required</p>
 
-              
-             </div>
-          </div>
-          <div class="col-lg-4 text-center">
-           <h2  class="title font-bold font-sans   text-xl md:text-2xl text-center mt-10 mb-2 text-orange-600">WHAT IS THE TERRIN TYPE THAT YOU WILL BE SKIING MORE OFTEN?</h2>
-           <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This field is required</p>
-             <div class="form_items radio-list">
-                <ul class="text-uppercase list-unstyled">
-                   <li>
-                      <label for="opt_9" class="step_3 rounded animate__animated animate__fadeInRight animate_25ms">
-                      <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_9"  name="stp_3_select_option" value="touring-back-mountain">
-                         <span class="label-content d-inline-block text-center rounded-pill">ALL MOUNTAIN</span>
-                      </label>
-                   </li>
-                 
-                 
-                   <li>
-                      <label for="opt_12" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_12" name="stp_3_select_option" value="touring-mountaineering">
-                         <span class="label-content d-inline-block text-center rounded-pill">TOURING BACK MOUNTAIN</span>
-                      </label>
-                   </li>
-             
-                </ul>
-             </div>
-          </div>
-       </div>
+
+            <div class="form_items radio-list">
+               <ul class="text-uppercase list-unstyled">
+                  <li>
+                     <label for="opt_8" class="step_3 rounded-pill animate__animated animate__fadeInRight animate_25ms"><input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_8" name="stp_3_select_option" value="resort">
+                     <span class="label-content d-inline-block text-center rounded-pill">RESORT</span></label>
+                  </li>
+                  <li>
+                     <label for="opt_9" class="step_3 rounded-pill animate__animated animate__fadeInRight animate_50ms"><input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_9" name="stp_3_select_option" value="backcountry">
+                     <span class="label-content d-inline-block text-center rounded-pill">BACKCOUNTRY</span></label>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-lg-4 self-center ">
+            <span class="title text-black font-sans text-2xl md:text-5xl  mb-5 hidden md:block"><span class="font-bold"></span> WHERE <br>
+            <span >DO YOU</span><span
+               class="font-bold"> RIDE</span>
+         </span>
+            </div>
+
+      </div>
     </div>
-    <!---------- Form Button ---------->
     <div class="form_btn py-5 d-flex justify-content-center align-items-center">
       <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" id="prevBtn"><span><i class="fas fa-arrow-left pe-1"></i></span>Back</button>
       <button [disabled]="!tr" type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed opacity-30':  !tr  , 'js-btn-next f_btn rounded-pill active text-uppercase ' :  tr }"  id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>

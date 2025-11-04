@@ -10,9 +10,8 @@
  </div>
           <div class="col-lg-4 text-center   hidden md:block">
              
-            <ng-lottie   [options]="options " 
- (animationCreated)="animationCreated($event)">
-            </ng-lottie>
+            <app-lottie-player   [options]="options " 
+(animationCreated)="animationCreated($any($event))"></app-lottie-player>
 
 
             

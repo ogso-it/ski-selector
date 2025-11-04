@@ -21,20 +21,16 @@ import { SplitResultComponent } from './ski-form/split-result/split-result.compo
 import { SplitStep6Component } from './split-form/split-step6/split-step6.component';
 import { SplitStep2Component } from './split-form/split-step2/split-step2.component';
 import { SplitSnowStepComponent } from './split-form/split-snow-step/split-snow-step.component';
-import { LottieModule } from 'ngx-lottie';
-import player from 'lottie-web';
 import { HomeAnimationComponent } from './animation/home-animation/home-animation.component';
 import { SplitStep1Component } from './ski-form/split-step1/split-step1.component';
 import { SplitStep5Component } from './ski-form/split-step5/split-step5.component';
-import { CarouselModule } from '@marcreichel/angular-carousel';
+import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 import { environment } from '../environments/environment';
 
 
-export function playerFactory() {
-  return player;
-}
 
 
 
@@ -66,17 +62,14 @@ export function playerFactory() {
     HomeAnimationComponent,
     SplitStep1Component,
     SplitStep5Component,
+    LottiePlayerComponent,
+    CarouselComponent
    
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    CarouselModule,
-    AppRoutingModule,
-
-    
-  
-    LottieModule.forRoot({ player: playerFactory })
+    AppRoutingModule
   ],
   providers: [
   

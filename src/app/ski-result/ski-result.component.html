@@ -108,92 +108,41 @@
 
       
  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
- <angular-carousel [ngClass]="bn ? 'hidden' : 'block'"   class=" md:hidden" [bullets]="false">
-  <div  *angularCarouselSlide>
-    <a class='my-10 mx-10' target="_blank" href={{resultat[0].link}}>
+<app-carousel>
+  <div>
+    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[0].link}}>
       <div class="flex justify-center">
-    
-          <img 
-          src= {{resultat[0].src}}
-          alt={{resultat[0].name}}
-          class="mx-auto"
-        /> 
-    </div>
-    
-    <div class="text-center mt-4 ">
-      <img class="mb-2" src="../../assets/images/five-stars.png" />
-              <p class="text-sm font-bold" >{{resultat[0].name}}<br>
-                <span class="font-thin">{{resultat[0].size}} CM</span></p>
-       </div>
+        <img src={{resultat[0].src}} alt={{resultat[0].name}} class="mx-auto" />
+      </div>
+      <div class="text-center mt-4 ">
+        <img class="mb-2" src="../../assets/images/five-stars.png" />
+        <p class="text-sm font-bold">{{resultat[0].name}}<br><span class="font-thin">{{resultat[0].size}} CM</span></p>
+      </div>
     </a>
-        
   </div>
-  <div *angularCarouselSlide>
-    <a class='my-10 mx-10' target="_blank" href={{resultat[1].link}}>
+  <div>
+    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[1].link}}>
       <div class="flex justify-center">
-    
-          <img 
-          src= {{resultat[1].src}}
-          alt={{resultat[1].name}}
-          class="mx-auto"
-        /> 
-    </div>
-    
-    <div class="text-center mt-4 ">
-      <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
-              <p class="text-sm font-bold" >{{resultat[1].name}}<br>
-                <span class="font-thin">{{resultat[1].size}} CM</span></p>
-       </div>
+        <img src={{resultat[1].src}} alt={{resultat[1].name}} class="mx-auto" />
+      </div>
+      <div class="text-center mt-4 ">
+        <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
+        <p class="text-sm font-bold">{{resultat[1].name}}<br><span class="font-thin">{{resultat[1].size}} CM</span></p>
+      </div>
     </a>
-        
   </div>
-  <div *angularCarouselSlide>
-    <a class='my-10 mx-10' target="_blank" href={{resultat[2].link}}>
+  <div>
+    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[2].link}}>
       <div class="flex justify-center">
-    
-          <img 
-          src= {{resultat[2].src}}
-          alt={{resultat[2].name}}
-          class="mx-auto"
-        /> 
-    </div>
-    
-    <div class="text-center mt-4 ">
-      <img class="mb-2" src="../../assets/images/fours-stars.png" />
-              <p class="text-sm font-bold" >{{resultat[2].name}}<br>
-                <span class="font-thin">{{resultat[2].size}} CM</span></p>
-       </div>
+        <img src={{resultat[2].src}} alt={{resultat[2].name}} class="mx-auto" />
+      </div>
+      <div class="text-center mt-4 ">
+        <img class="mb-2" src="../../assets/images/fours-stars.png" />
+        <p class="text-sm font-bold">{{resultat[2].name}}<br><span class="font-thin">{{resultat[2].size}} CM</span></p>
+      </div>
     </a>
-        
   </div>
-</angular-carousel> 
-
-
-<angular-carousel [ngClass]="bn ? 'block' : 'hidden'"   class=" md:hidden" [bullets]="false">
-  <div  *angularCarouselSlide>
-    <a class='my-10 mx-10' target="_blank" href={{resultat[0].link}}>
-      <div class="flex justify-center">
-    
-          <img 
-          src= {{resultat[0].src}}
-          alt={{resultat[0].name}}
-          class="mx-auto"
-        /> 
-    </div>
-    
-    <div class="text-center mt-4 ">
-      <img class="mb-2" src="../../assets/images/five-stars.png" />
-              <p class="text-sm font-bold" >{{resultat[0].name}}<br>
-                <span class="font-thin">{{resultat[0].size}} CM</span></p>
-       </div>
-    </a>
-        
-  </div>
-  
-   
-        
-  
-</angular-carousel> 
+</app-carousel>
 
 
 
