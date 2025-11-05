@@ -1187,7 +1187,7 @@
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRAND_DADDY.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
       link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/', //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
       //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
   
