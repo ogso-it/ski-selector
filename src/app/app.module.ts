@@ -2,6 +2,13 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+
+// Add these Firebase imports
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
 import { AppComponent } from './app.component';
 import { SkiFormComponent } from './ski-form/ski-form.component';
 import { TopComponent } from './top/top.component';
@@ -27,16 +34,7 @@ import { SplitStep5Component } from './ski-form/split-step5/split-step5.componen
 import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
 import { CarouselComponent } from './carousel/carousel.component';
 
-
 import { environment } from '../environments/environment';
-
-
-
-
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -64,7 +62,6 @@ import { environment } from '../environments/environment';
     SplitStep5Component,
     LottiePlayerComponent,
     CarouselComponent
-   
   ],
   imports: [
     BrowserModule,
@@ -72,7 +69,11 @@ import { environment } from '../environments/environment';
     AppRoutingModule
   ],
   providers: [
-  
+    // Add Firebase providers here
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage())
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
