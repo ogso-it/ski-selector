@@ -1298,45 +1298,45 @@
   
   
     // },
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
-      size: 162, //size: 160,
-      max_height: 171,
-      min_height: 0,
-      max_weight: 60,
-      min_weight: 0,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
+    //   size: 162, //size: 160,
+    //   max_height: 171,
+    //   min_height: 0,
+    //   max_weight: 60,
+    //   min_weight: 0,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+    //   link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
   
-    },
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
-      size: 170, //size: 168,
-      max_height: 179,
-      min_height: 172,
-      max_weight: 74,
-      min_weight: 61,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
+    // },
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
+    //   size: 170, //size: 168,
+    //   max_height: 179,
+    //   min_height: 172,
+    //   max_weight: 74,
+    //   min_weight: 61,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+    //   link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
   
-    }
-    ,
+    // }
+    // ,
     // {
     //   family: 'NEOTERIC CAMBER',
     //   category: 'MEDIUM LIGHT',
@@ -1358,68 +1358,68 @@
   
     // }
 
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
-      size: 178, //size: 176,
-      max_height: 178,
-      min_height: 168,
-      max_weight: 76,
-      min_weight: 64,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-front-mountain'],
-      snow : ['crud','hard'],
-      ski_style: ['fun-surf'],
-      riding_speed: ['high-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
+    //   size: 178, //size: 176,
+    //   max_height: 178,
+    //   min_height: 168,
+    //   max_weight: 76,
+    //   min_weight: 64,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+    //   playground: ['touring-front-mountain'],
+    //   snow : ['crud','hard'],
+    //   ski_style: ['fun-surf'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['short'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+    //   link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
   
   
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
-      size: 186, //size: 184,
-      max_height: 195,
-      min_height: 188,
-      max_weight: 95,
-      min_weight: 88,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
+    // }
+    // ,
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
+    //   size: 186, //size: 184,
+    //   max_height: 195,
+    //   min_height: 188,
+    //   max_weight: 95,
+    //   min_weight: 88,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+    //   link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
   
   
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
-      size: 194, //size: 192,
-      max_height: 999,
-      min_height: 198,
-      max_weight: 999,
-      min_weight: 96,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
+    // }
+    // ,
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'ANGELIQUE', //name: 'DANAÏDES 90 NEO ML',
+    //   size: 194, //size: 192,
+    //   max_height: 999,
+    //   min_height: 198,
+    //   max_weight: 999,
+    //   min_weight: 96,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/ANGELIQUE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+    //   link : 'https://ogso-mountain-essentials.com/shop/utopic-camber/angelique/'
   
   
-    },
+    // },
      {
       family: 'NEOTERIC CAMBER',
       category: 'MEDIUM LIGHT',
@@ -1600,109 +1600,109 @@
   
   
     },
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
-      size: 162,
-      max_height: 173,
-      min_height: 0,
-      max_weight: 57,
-      min_weight: 0,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
-      link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
+    //   size: 162,
+    //   max_height: 173,
+    //   min_height: 0,
+    //   max_weight: 57,
+    //   min_weight: 0,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
+    //   link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
   
   
-    },
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
-      size: 170,
-      max_height: 181,
-      min_height: 174,
-      max_weight: 73,
-      min_weight: 58,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
-      link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
+    // },
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
+    //   size: 170,
+    //   max_height: 181,
+    //   min_height: 174,
+    //   max_weight: 73,
+    //   min_weight: 58,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
+    //   link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
   
   
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'LA VOUTE',  //name: 'MARINELLI 100 NEO ML',
-      size: 178,
-      max_height: 189,
-      min_height: 180,
-      max_weight: 87,
-      min_weight: 74,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
-      link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
+    // }
+    // ,
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'LA VOUTE',  //name: 'MARINELLI 100 NEO ML',
+    //   size: 178,
+    //   max_height: 189,
+    //   min_height: 180,
+    //   max_weight: 87,
+    //   min_weight: 74,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
+    //   link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
   
   
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
-      size: 186,
-      max_height: 197,
-      min_height: 190,
-      max_weight: 95,
-      min_weight: 88,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
-      link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
+    // }
+    // ,
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
+    //   size: 186,
+    //   max_height: 197,
+    //   min_height: 190,
+    //   max_weight: 95,
+    //   min_weight: 88,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
+    //   link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/', //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
   
   
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'MEDIUM LIGHT',
-      name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
-      size: 194,
-      max_height: 300,
-      min_height: 198,
-      max_weight: 999,
-      min_weight: 96,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride'],
-      snow : ['powder','hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
-      link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/',  //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
+    // }
+    // ,
+    // {
+    //   family: 'NEOTERIC CAMBER',
+    //   category: 'MEDIUM LIGHT',
+    //   name: 'LA VOUTE', //name: 'MARINELLI 100 NEO ML',
+    //   size: 194,
+    //   max_height: 300,
+    //   min_height: 198,
+    //   max_weight: 999,
+    //   min_weight: 96,
+    //   ski_level: ['intermediate', 'confirmed', 'pro-guide'],
+    //   playground: ['all-mountain' , 'freeride'],
+    //   snow : ['powder','hard'],
+    //   ski_style: ['technical-precision'],
+    //   riding_speed: ['high-speed'],
+    //   turn : ['long'],
+    //   src : 'https://ogso-mountain-essentials.com/app/ski-photos/LA_VOUTE.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/MARINELLI.png",
+    //   link: 'https://ogso-mountain-essentials.com/shop/utopic-camber/ogso-la-voute-cruise-tour/',  //link : 'https://ogso-mountain-essentials.com/product/marinelli-100-neo-ml/'
   
   
-    },
+    // },
     // {
     //   family: 'NEOTERIC CAMBER',
     //   category: 'MEDUIM LIGHT',
