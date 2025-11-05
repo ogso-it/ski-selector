@@ -113,7 +113,7 @@
       ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LE TOUNO.webp',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',
       link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/'  //      link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
 
   
@@ -134,7 +134,7 @@
       ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LE TOUNO.webp',   //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',   //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
       link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/'  // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
   
   
@@ -156,7 +156,7 @@
       ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/LE TOUNO.webp',  //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',  //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
       link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/' // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
   
   
