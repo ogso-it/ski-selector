@@ -1,5 +1,12 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist/smart-ogso-selector",
+  "installCommand": "npm install --legacy-peer-deps",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
