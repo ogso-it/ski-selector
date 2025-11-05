@@ -1,177 +1,153 @@
-
-  
-
 <div class="wrapper position-relative">
-    
   <div class="container-fluid px-5 flex-1 justify-center">
     <div class="step_bar_content ps-5 pt-5 hidden md:block">
-
-        <h5 class="text-black text-uppercase d-inline-block invisible">OGSO SMART PRODUCT SELECTOR</h5>
-     </div>
-
-     <div class="progress_bar steps_bar mt-3 ps-5 d-inline-block justify-center invisible">
-        <div class="step rounded-pill d-inline-block text-center position-relative active current">1</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">2</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">3</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">4</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">5</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">6</div>
-        <div class="step rounded-pill d-inline-block text-center position-relative">7</div>
-   
-     </div>
-     
-     <div class="logo hidden md:block" >    
-       <img src="./assets/images/ogso-logo.png" alt="image_not_found">
+      <h5 class="text-black text-uppercase d-inline-block invisible">
+        OGSO SMART PRODUCT SELECTOR
+      </h5>
     </div>
+
+    <div class="progress_bar steps_bar mt-3 ps-5 d-inline-block justify-center invisible">
+      <div class="step rounded-pill d-inline-block text-center position-relative active current">1</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">2</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">3</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">4</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">5</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">6</div>
+      <div class="step rounded-pill d-inline-block text-center position-relative">7</div>
+    </div>
+
+    <div class="logo hidden md:block">
+      <img src="./assets/images/ogso-logo.png" alt="image_not_found" />
+    </div>
+
     <div>
-      <img class="center md:invisible" src="./assets/images/ogso-logo.png" alt="image_not_found">
-      <p  id='title' class="text-center
-     
-      text-xl
-      md:text-4xl
-      font-bold
-       text-gray-800 md:mb-6
-      uppercase">THE MOST SUITABLE SKIS FOR YOU</p>
-      
+      <img class="center md:invisible" src="./assets/images/ogso-logo.png" alt="image_not_found" />
+      <p id="title" class="text-center text-xl md:text-4xl font-bold text-gray-800 md:mb-6 uppercase">
+        THE MOST SUITABLE SKIS FOR YOU
+      </p>
     </div>
-     <form class="multisteps_form position-relative" id="wizard" >
-      <div class="hidden md:grid mb-3  grid-cols-3 object-center justify-center content-center place-items-center">
 
+    <form class="multisteps_form position-relative" id="wizard">
+      <div class="hidden md:grid mb-3 grid-cols-3 object-center justify-center content-center place-items-center ski-grid">
 
-
-
-        <a  [ngClass]="bn ? 'invisible' : 'visible'"   class ='nmy-10 mx-10' target="_blank"  href={{resultat[0].link}}>
-          <div class="flex justify-center">
-          
-              <img 
-              src= {{resultat[0].src}}
-              alt={{resultat[0].name}}
-             class="mx-a uto"
-            /> 
-        </div>
-        <div class="text-center mt-4">
-          <img class="mb-2" src="../../assets/images/five-stars.png" />
-          <p class="text-sm font-bold" >{{resultat[0].name}}<br>
-            <span class="font-thin">{{resultat[0].size}} CM</span></p>
+        <!-- 1st ski -->
+        <a [ngClass]="bn ? 'invisible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[0].link}}">
+          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
+            <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto max-h-[250px] object-contain" />
+          </div>
+          <div class="text-center mt-4">
+            <img class="mb-2 mx-auto" src="../../assets/images/five-stars.png" />
+            <p class="text-sm font-bold">
+              {{resultat[0].name}}<br />
+              <span class="font-thin">{{resultat[0].size}} CM</span>
+            </p>
           </div>
         </a>
-    
-    
-    
-    
-    
-        <a  [ngClass]="bn ? 'visible' : 'visible'"   class='my-10 mx-10  grid-cols-3' target="_blank"  href={{resultat[1].link}}>
-          <div class="flex justify-center">
-        
-              <img 
-              src= {{resultat[1].src}}
-              alt={{resultat[1].name}}
-              class="mx-auto"
-            /> 
-        </div>
-    
-    
-        <div class="text-center mt-4">
-          <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
-          <p class="text-sm font-bold">{{resultat[1].name}}<br>
-           <span class="font-thin">{{resultat[1].size}} CM</span></p>
-           </div>
-        </a> 
-        
-        
-        
-        <a  [ngClass]="bn ? 'invisible' : 'visible'"   class='my-10 mx-10' target="_blank" href={{resultat[2].link}}>
-          <div class="flex justify-center">
-        
-              <img 
-              src= {{resultat[2].src}}
-              alt={{resultat[2].name}}
-              class="mx-auto"
-            /> 
-        </div>
-        
-        <div class="text-center mt-4 ">
-          <img class="mb-2" src="../../assets/images/fours-stars.png" />
-                  <p class="text-sm font-bold" >{{resultat[2].name}}<br>
-                    <span class="font-thin">{{resultat[2].size}} CM</span></p>
-           </div>
+
+        <!-- 2nd ski -->
+        <a [ngClass]="bn ? 'visible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[1].link}}">
+          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
+            <img src="{{resultat[1].src}}" alt="{{resultat[1].name}}" class="mx-auto max-h-[250px] object-contain" />
+          </div>
+          <div class="text-center mt-4">
+            <img class="mb-2 mx-auto" src="../../assets/images/4-starsand-a-half.png" />
+            <p class="text-sm font-bold">
+              {{resultat[1].name}}<br />
+              <span class="font-thin">{{resultat[1].size}} CM</span>
+            </p>
+          </div>
         </a>
-            
-      
-           
-          
-        
-         
-    
+
+        <!-- 3rd ski -->
+        <a [ngClass]="bn ? 'invisible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[2].link}}">
+          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
+            <img src="{{resultat[2].src}}" alt="{{resultat[2].name}}" class="mx-auto max-h-[250px] object-contain" />
+          </div>
+          <div class="text-center mt-4">
+            <img class="mb-2 mx-auto" src="../../assets/images/fours-stars.png" />
+            <p class="text-sm font-bold">
+              {{resultat[2].name}}<br />
+              <span class="font-thin">{{resultat[2].size}} CM</span>
+            </p>
+          </div>
+        </a>
       </div>
 
+      <!-- --------------------------------------------------------------------------------------------------------- -->
 
-      
- <!-- --------------------------------------------------------------------------------------------------------------------------- -->
-<app-carousel>
-  <div>
-    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[0].link}}>
-      <div class="flex justify-center">
-        <img src={{resultat[0].src}} alt={{resultat[0].name}} class="mx-auto" />
-      </div>
-      <div class="text-center mt-4 ">
-        <img class="mb-2" src="../../assets/images/five-stars.png" />
-        <p class="text-sm font-bold">{{resultat[0].name}}<br><span class="font-thin">{{resultat[0].size}} CM</span></p>
-      </div>
-    </a>
-  </div>
-  <div>
-    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[1].link}}>
-      <div class="flex justify-center">
-        <img src={{resultat[1].src}} alt={{resultat[1].name}} class="mx-auto" />
-      </div>
-      <div class="text-center mt-4 ">
-        <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
-        <p class="text-sm font-bold">{{resultat[1].name}}<br><span class="font-thin">{{resultat[1].size}} CM</span></p>
-      </div>
-    </a>
-  </div>
-  <div>
-    <a class='my-10 mx-10 md:hidden' target="_blank" href={{resultat[2].link}}>
-      <div class="flex justify-center">
-        <img src={{resultat[2].src}} alt={{resultat[2].name}} class="mx-auto" />
-      </div>
-      <div class="text-center mt-4 ">
-        <img class="mb-2" src="../../assets/images/fours-stars.png" />
-        <p class="text-sm font-bold">{{resultat[2].name}}<br><span class="font-thin">{{resultat[2].size}} CM</span></p>
-      </div>
-    </a>
-  </div>
-</app-carousel>
+      <angular-carousel [ngClass]="bn ? 'hidden' : 'block'" class="md:hidden" [bullets]="false">
+        <div *angularCarouselSlide>
+          <a class="my-10 mx-10" target="_blank" href="{{resultat[0].link}}">
+            <div class="flex justify-center">
+              <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto" />
+            </div>
+            <div class="text-center mt-4">
+              <img class="mb-2" src="../../assets/images/five-stars.png" />
+              <p class="text-sm font-bold">
+                {{resultat[0].name}}<br />
+                <span class="font-thin">{{resultat[0].size}} CM</span>
+              </p>
+            </div>
+          </a>
+        </div>
 
+        <div *angularCarouselSlide>
+          <a class="my-10 mx-10" target="_blank" href="{{resultat[1].link}}">
+            <div class="flex justify-center">
+              <img src="{{resultat[1].src}}" alt="{{resultat[1].name}}" class="mx-auto" />
+            </div>
+            <div class="text-center mt-4">
+              <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
+              <p class="text-sm font-bold">
+                {{resultat[1].name}}<br />
+                <span class="font-thin">{{resultat[1].size}} CM</span>
+              </p>
+            </div>
+          </a>
+        </div>
 
+        <div *angularCarouselSlide>
+          <a class="my-10 mx-10" target="_blank" href="{{resultat[2].link}}">
+            <div class="flex justify-center">
+              <img src="{{resultat[2].src}}" alt="{{resultat[2].name}}" class="mx-auto" />
+            </div>
+            <div class="text-center mt-4">
+              <img class="mb-2" src="../../assets/images/fours-stars.png" />
+              <p class="text-sm font-bold">
+                {{resultat[2].name}}<br />
+                <span class="font-thin">{{resultat[2].size}} CM</span>
+              </p>
+            </div>
+          </a>
+        </div>
+      </angular-carousel>
 
-
-
+      <angular-carousel [ngClass]="bn ? 'block' : 'hidden'" class="md:hidden" [bullets]="false">
+        <div *angularCarouselSlide>
+          <a class="my-10 mx-10" target="_blank" href="{{resultat[0].link}}">
+            <div class="flex justify-center">
+              <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto" />
+            </div>
+            <div class="text-center mt-4">
+              <img class="mb-2" src="../../assets/images/five-stars.png" />
+              <p class="text-sm font-bold">
+                {{resultat[0].name}}<br />
+                <span class="font-thin">{{resultat[0].size}} CM</span>
+              </p>
+            </div>
+          </a>
+        </div>
+      </angular-carousel>
     </form>
-        
-    <div >
-      
-      <p
-        class="
-         
-        text-sm
-          text-center            
-          uppercase
-          
-        "
-      >
-      <span  class=" font-bold ">ALL OGSO SKIS ARE GOOD IN ANY CONDITION.</span><br>
-      THE CHOICE MADE BY OUR SYSTEM IS TO SUIT <span class="font-bold">YOUR PARTICULAR DESIRE</span> AND<span class="font-bold"> WE DON'T </span><br><span class="font-bold">INTEND TO TELL YOU</span> THAT YOU SHOULD ONLY USE ONE OF THESE SKIS.
-    </p>
-    
-     
-  
-   
+
+    <div>
+      <p class="text-sm text-center uppercase">
+        <span class="font-bold">ALL OGSO SKIS ARE GOOD IN ANY CONDITION.</span><br />
+        THE CHOICE MADE BY OUR SYSTEM IS TO SUIT
+        <span class="font-bold">YOUR PARTICULAR DESIRE</span>
+        AND<span class="font-bold"> WE DON'T </span><br />
+        <span class="font-bold">INTEND TO TELL YOU</span> THAT YOU SHOULD ONLY USE ONE OF THESE SKIS.
+      </p>
     </div>
   </div>
-  
 </div>
-
-
-

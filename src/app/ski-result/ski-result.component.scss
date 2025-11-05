@@ -1,157 +1,164 @@
 .carousel__bullet {
-    color: #ffffff !important;
+  color: #ffffff !important;
   font-size: 0.9375rem;
   font-weight: 800;
   padding: 0.75rem 2rem;
   outline: none;
   border: none;
+  width: 2rem;
+  height: 0.2rem;
+  background: #54748b;
+  opacity: 0.25;
 }
- 
+
 .carousel__bullet:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
- 
+
 .carousel__bullet.carousel__bullet--active {
-    opacity: 1;
-    background: #6366F1;
+  opacity: 1;
+  background: #6366f1;
 }
 
-
-  a {
-    text-decoration: none;
-    color: inherit;
-}
-a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: #e8500e;
+.carousel__previous,
+.carousel__next {
+  background-color: #6366f1 !important;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: #e8500e;
+}
 
 #title {
   position: relative;
-  bottom : 130;
+  bottom: 130px;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+/* --- Custom alignment fixes for the 3-ski grid --- */
+.ski-grid {
+  align-items: end;
+}
+
+.ski-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ski-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  min-height: 250px;
+}
+
+.ski-card img {
+  object-fit: contain;
+  max-height: 250px;
+}
+
+/* carousel & layout */
 .container {
-	position: relative;
-	max-width: 640px;
+  position: relative;
+  max-width: 640px;
 }
 
 .carousel {
-	display: flex;
-	overflow: auto;
-	overflow-y: hidden; /* Safari "fix" */
-	scroll-snap-type: x mandatory;
-	padding: 12px 0;
+  display: flex;
+  overflow: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 12px 0;
 }
 
 .slide {
-	flex-shrink: 0;
-	scroll-snap-align: start;
-	touch-action: pan-x;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  touch-action: pan-x;
+  height: 320px;
+  margin-right: 12px;
+  width: 240px;
 }
 
 .nav {
-	background: gray;
-	border-radius: 100%;
-	height: 24px;
-	line-height: 1.5;
-	width: 24px;
+  background: gray;
+  border-radius: 100%;
+  height: 24px;
+  line-height: 1.5;
+  width: 24px;
 }
 
 .prev {
-	position: absolute;
-	top: 50%;
-	left: -48px;
+  position: absolute;
+  top: 50%;
+  left: -48px;
 }
 
 .next {
-	position: absolute;
-	top: 50%;
-	right: -48px;
+  position: absolute;
+  top: 50%;
+  right: -48px;
 }
 
 .pagination {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .dot {
-	all: unset;
-	background: gray;
-	border-radius: 100%;
-	height: 10px;
-	margin: 12px 6px 0 0;
-	width: 10px;
+  all: unset;
+  background: gray;
+  border-radius: 100%;
+  height: 10px;
+  margin: 12px 6px 0 0;
+  width: 10px;
 }
 
 .next:after {
-	content: ">";
+  content: ">";
 }
 
 .prev:after {
-	content: "<";
+  content: "<";
 }
 
 .dot:hover,
 .nav:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .dot:active,
 .nav:active {
-	outline: 1px solid black;
+  outline: 1px solid black;
 }
 
-/* Other CSS to make this page "pretty" */
 body {
-	text-align: center;
-	margin: 48px auto;
-	max-width: 320px;
-}
-
-.slide {
-	height: 320px;
-	margin-right: 12px;
-	width: 240px;
+  text-align: center;
+  margin: 48px auto;
+  max-width: 320px;
 }
 
 img {
-	border-radius: 8px;
+  border-radius: 8px;
 }
 
-
-
-.carousel__bullet {
-    width: 2rem;
-    height: 0.2rem;
-    background: #54748B;
-    opacity: 0.25;
+/* carousel button override */
+#wizard > angular-carousel > div > div > div > button {
+  background-color: red !important;
 }
- 
-.carousel__bullet:hover {
-    opacity: 0.6;
-}
- 
-.carousel__bullet.carousel__bullet--active {
-    opacity: 1;
-    background: #6366F1;
-}
-
-
-.carousel__previous, .carousel__next {
-	background-color: #6366F1 !important;
-}
-
-
-.center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom : 20px;
-  }
-
-  #wizard > angular-carousel > div > div > div > button {
-	background-color: red !important;
-  }
