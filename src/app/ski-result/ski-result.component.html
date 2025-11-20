@@ -1,153 +1,185 @@
-<div class="wrapper position-relative">
-  <div class="container-fluid px-5 flex-1 justify-center">
-    <div class="step_bar_content ps-5 pt-5 hidden md:block">
-      <h5 class="text-black text-uppercase d-inline-block invisible">
-        OGSO SMART PRODUCT SELECTOR
-      </h5>
-    </div>
+<div class="page-wrapper">
 
-    <div class="progress_bar steps_bar mt-3 ps-5 d-inline-block justify-center invisible">
-      <div class="step rounded-pill d-inline-block text-center position-relative active current">1</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">2</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">3</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">4</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">5</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">6</div>
-      <div class="step rounded-pill d-inline-block text-center position-relative">7</div>
-    </div>
+  <!-- HEADER -->
+  <div class="header">
+    <img class="logo" src="./assets/images/ogso-logo.png" alt="OGSO logo" />
+    <h1 class="title">YOUR PERFECT SKI MATCH</h1>
+    <div class="header-subtitle">Powered by Smart AI Selection</div>
+  </div>
 
-    <div class="logo hidden md:block">
-      <img src="./assets/images/ogso-logo.png" alt="image_not_found" />
-    </div>
+  <!-- MAIN GRID -->
+  <div class="content-grid">
 
-    <div>
-      <img class="center md:invisible" src="./assets/images/ogso-logo.png" alt="image_not_found" />
-      <p id="title" class="text-center text-xl md:text-4xl font-bold text-gray-800 md:mb-6 uppercase">
-        THE MOST SUITABLE SKIS FOR YOU
-      </p>
-    </div>
+    <!-- LEFT COL — SKI RESULTS -->
+    <div class="left-col">
 
-    <form class="multisteps_form position-relative" id="wizard">
-      <div class="hidden md:grid mb-3 grid-cols-3 object-center justify-center content-center place-items-center ski-grid">
-
-        <!-- 1st ski -->
-        <a [ngClass]="bn ? 'invisible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[0].link}}">
-          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
-            <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto max-h-[250px] object-contain" />
-          </div>
-          <div class="text-center mt-4">
-            <img class="mb-2 mx-auto" src="../../assets/images/five-stars.png" />
-            <p class="text-sm font-bold">
-              {{resultat[0].name}}<br />
-              <span class="font-thin">{{resultat[0].size}} CM</span>
-            </p>
-          </div>
-        </a>
-
-        <!-- 2nd ski -->
-        <a [ngClass]="bn ? 'visible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[1].link}}">
-          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
-            <img src="{{resultat[1].src}}" alt="{{resultat[1].name}}" class="mx-auto max-h-[250px] object-contain" />
-          </div>
-          <div class="text-center mt-4">
-            <img class="mb-2 mx-auto" src="../../assets/images/4-starsand-a-half.png" />
-            <p class="text-sm font-bold">
-              {{resultat[1].name}}<br />
-              <span class="font-thin">{{resultat[1].size}} CM</span>
-            </p>
-          </div>
-        </a>
-
-        <!-- 3rd ski -->
-        <a [ngClass]="bn ? 'invisible' : 'visible'" class="my-10 mx-10 ski-card" target="_blank" href="{{resultat[2].link}}">
-          <div class="ski-image-wrapper flex justify-center items-end min-h-[250px]">
-            <img src="{{resultat[2].src}}" alt="{{resultat[2].name}}" class="mx-auto max-h-[250px] object-contain" />
-          </div>
-          <div class="text-center mt-4">
-            <img class="mb-2 mx-auto" src="../../assets/images/fours-stars.png" />
-            <p class="text-sm font-bold">
-              {{resultat[2].name}}<br />
-              <span class="font-thin">{{resultat[2].size}} CM</span>
-            </p>
-          </div>
-        </a>
+      <div class="hero-intro">
+        <h2 class="hero-heading">Recommended Skis</h2>
+        <p class="hero-sub">Tailored to your profile • Live updates • Best matches</p>
       </div>
 
-      <!-- --------------------------------------------------------------------------------------------------------- -->
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Finding your perfect ski matches...</p>
+        <div class="loading-pulse"></div>
+      </div>
 
-      <angular-carousel [ngClass]="bn ? 'hidden' : 'block'" class="md:hidden" [bullets]="false">
-        <div *angularCarouselSlide>
-          <a class="my-10 mx-10" target="_blank" href="{{resultat[0].link}}">
-            <div class="flex justify-center">
-              <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto" />
+      <!-- Ski Results Grid -->
+      <div class="hero-list" [@listAnimation]="animationKey">
+        <div
+          class="hero-card"
+          *ngFor="let r of resultat | slice:0:3"
+          [@cardAnimation]
+          (click)="openSki(r)"
+        >
+
+          <div class="hero-media">
+            <img 
+              class="hero-img" 
+              [src]="r.src" 
+              [alt]="r.name" 
+              [@imageAnimation]
+            />
+            <div class="glow"></div>
+            <div class="badge">OGSO</div>
+            <div class="rank-badge">{{ resultat.indexOf(r) + 1 }}</div>
+          </div>
+
+          <div class="hero-body">
+            <h3 class="hero-name">{{ r.name }}</h3>
+            <p class="hero-meta">{{ r.size }} cm • {{ r.weight }}g</p>
+
+            <div class="hero-score">
+              <span 
+                class="score-pill" 
+                [@scoreAnimation]
+                [style.background]="getScoreColor(r.score || 0)"
+              >
+                Score: {{ r.score }}
+              </span>
+              <span class="match-percent">
+                {{ (r.score || 0) }}% match
+              </span>
             </div>
-            <div class="text-center mt-4">
-              <img class="mb-2" src="../../assets/images/five-stars.png" />
-              <p class="text-sm font-bold">
-                {{resultat[0].name}}<br />
-                <span class="font-thin">{{resultat[0].size}} CM</span>
-              </p>
+
+            <div class="ski-features">
+              <span class="feature-tag" *ngIf="r.family">{{ r.family }}</span>
+              <span class="feature-tag" *ngIf="r.category">{{ r.category }}</span>
             </div>
-          </a>
+          </div>
+
+          <div class="card-hover-effect">
+            <div class="hover-icon">Click for details</div>
+          </div>
+
         </div>
+      </div>
 
-        <div *angularCarouselSlide>
-          <a class="my-10 mx-10" target="_blank" href="{{resultat[1].link}}">
-            <div class="flex justify-center">
-              <img src="{{resultat[1].src}}" alt="{{resultat[1].name}}" class="mx-auto" />
-            </div>
-            <div class="text-center mt-4">
-              <img class="mb-2" src="../../assets/images/4-starsand-a-half.png" />
-              <p class="text-sm font-bold">
-                {{resultat[1].name}}<br />
-                <span class="font-thin">{{resultat[1].size}} CM</span>
-              </p>
-            </div>
-          </a>
-        </div>
-
-        <div *angularCarouselSlide>
-          <a class="my-10 mx-10" target="_blank" href="{{resultat[2].link}}">
-            <div class="flex justify-center">
-              <img src="{{resultat[2].src}}" alt="{{resultat[2].name}}" class="mx-auto" />
-            </div>
-            <div class="text-center mt-4">
-              <img class="mb-2" src="../../assets/images/fours-stars.png" />
-              <p class="text-sm font-bold">
-                {{resultat[2].name}}<br />
-                <span class="font-thin">{{resultat[2].size}} CM</span>
-              </p>
-            </div>
-          </a>
-        </div>
-      </angular-carousel>
-
-      <angular-carousel [ngClass]="bn ? 'block' : 'hidden'" class="md:hidden" [bullets]="false">
-        <div *angularCarouselSlide>
-          <a class="my-10 mx-10" target="_blank" href="{{resultat[0].link}}">
-            <div class="flex justify-center">
-              <img src="{{resultat[0].src}}" alt="{{resultat[0].name}}" class="mx-auto" />
-            </div>
-            <div class="text-center mt-4">
-              <img class="mb-2" src="../../assets/images/five-stars.png" />
-              <p class="text-sm font-bold">
-                {{resultat[0].name}}<br />
-                <span class="font-thin">{{resultat[0].size}} CM</span>
-              </p>
-            </div>
-          </a>
-        </div>
-      </angular-carousel>
-    </form>
-
-    <div>
-      <p class="text-sm text-center uppercase">
-        <span class="font-bold">ALL OGSO SKIS ARE GOOD IN ANY CONDITION.</span><br />
-        THE CHOICE MADE BY OUR SYSTEM IS TO SUIT
-        <span class="font-bold">YOUR PARTICULAR DESIRE</span>
-        AND<span class="font-bold"> WE DON'T </span><br />
-        <span class="font-bold">INTEND TO TELL YOU</span> THAT YOU SHOULD ONLY USE ONE OF THESE SKIS.
-      </p>
     </div>
+
+    <!-- RIGHT COL — PROFILE + EDITOR -->
+    <div class="right-col">
+      <div class="profile-card">
+
+        <div class="profile-head">
+          <h3>Your Ski Profile</h3>
+          <p class="muted">Adjust criteria • Instant results • Smart matching</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat" *ngFor="let item of generatedStats">
+            <div class="stat-icon">{{ item.icon }}</div>
+            <div class="stat-content">
+              <p class="stat-label">{{ item.label }}</p>
+              <p class="stat-value">{{ item.value }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editor Controls -->
+        <div class="editor-section">
+          <h4 class="editor-title">Adjust Your Preferences</h4>
+          
+          <div class="editor">
+            <div class="form-group">
+              <label>Height (cm)</label>
+              <input type="number" [(ngModel)]="height" (input)="onInlineCriteriaChange()">
+            </div>
+
+            <div class="form-group">
+              <label>Weight (kg)</label>
+              <input type="number" [(ngModel)]="weight" (input)="onInlineCriteriaChange()">
+            </div>
+
+            <div class="form-group">
+              <label>Terrain</label>
+              <select [(ngModel)]="terrain_type" (change)="onInlineCriteriaChange()">
+                <option *ngFor="let opt of terrainOptions" [value]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Snow Type</label>
+              <select [(ngModel)]="type_snow" (change)="onInlineCriteriaChange()">
+                <option *ngFor="let opt of snowOptions" [value]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Riding Style</label>
+              <select [(ngModel)]="ski_level_fun" (change)="onInlineCriteriaChange()">
+                <option *ngFor="let opt of funOptions" [value]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Riding Style</label>
+              <select [(ngModel)]="ski_turns" (change)="onInlineCriteriaChange()">
+                <option *ngFor="let opt of  turnOptions" [value]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Speed Preference</label>
+              <select [(ngModel)]="ski_speed" (change)="onInlineCriteriaChange()">
+                <option *ngFor="let opt of speedOptions" [value]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          All OGSO skis perform exceptionally in all conditions. 
+          These are personalized AI recommendations for optimal performance.
+        </p>
+
+      </div>
+
+      <!-- Quick Tips -->
+      <div class="tips-card">
+        <h4>Pro Tips</h4>
+        <ul class="tips-list">
+          <li>Higher score = Better match</li>
+          <li>Adjust speed for responsiveness</li>
+          <li>Terrain affects ski width</li>
+          <li>Snow type impacts flex</li>
+        </ul>
+      </div>
+
+    </div>
+
   </div>
+ 
 </div>

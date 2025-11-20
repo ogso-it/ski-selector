@@ -46,7 +46,7 @@ export class SplitResultComponent implements OnInit {
     }
   
     getHeight(){
-      this.dataService.height.subscribe(response => {
+      this.dataService.height$.subscribe((response: number | null) => {
       
       
        if(response){
@@ -56,7 +56,7 @@ export class SplitResultComponent implements OnInit {
       });
     }
     getWeight(){
-      this.dataService.weight.subscribe(response => {
+      this.dataService.weight$.subscribe((response: number | null) => {
   
     
         if(response){
@@ -66,7 +66,7 @@ export class SplitResultComponent implements OnInit {
       });
     }
     getTerrainType(){
-      this.dataService.terrain_type.subscribe(response => {
+      this.dataService.terrain_type$.subscribe((response: string | null)=>{
    
   
         
@@ -77,7 +77,7 @@ export class SplitResultComponent implements OnInit {
       });
     }
     getSnowType(){
-      this.dataService.type_snow.subscribe(response => {
+      this.dataService.type_snow$.subscribe((response: string | null)=>{
    
   
        
@@ -89,7 +89,7 @@ export class SplitResultComponent implements OnInit {
     }
   
     getSkiLevel(){
-      this.dataService.ski_level.subscribe(response => {
+      this.dataService.ski_level$.subscribe((response: string | null)=> {
    
   
   

@@ -23,7 +23,9 @@
       "dom"
     ],
     "useDefineForClassFields": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+     "resolveJsonModule": true,
+  
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -31,4 +33,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   }
+  
 }

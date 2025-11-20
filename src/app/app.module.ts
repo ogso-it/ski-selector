@@ -1,13 +1,18 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 
-// Add these Firebase imports
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideStorage, getStorage } from '@angular/fire/storage';
+// ❗ Version COMPAT (compatible NgModule)
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { SkiFormComponent } from './ski-form/ski-form.component';
@@ -34,8 +39,6 @@ import { SplitStep5Component } from './ski-form/split-step5/split-step5.componen
 import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
 import { CarouselComponent } from './carousel/carousel.component';
 
-import { environment } from '../environments/environment';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,22 +63,23 @@ import { environment } from '../environments/environment';
     HomeAnimationComponent,
     SplitStep1Component,
     SplitStep5Component,
-    LottiePlayerComponent,
     CarouselComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    AppRoutingModule
-  ],
-  providers: [
-    // Add Firebase providers here
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage())
+    BrowserAnimationsModule,
+    FormsModule,
+    AppRoutingModule,
+    LottiePlayerComponent,
+
+    // ✅ CORRECT Firebase config for NgModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

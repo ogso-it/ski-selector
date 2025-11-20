@@ -128,7 +128,7 @@ sendNewData(data: any) {
   }
 
 getData(){
-  this.dataService.terrain_type.subscribe(response => {
+  this.dataService.terrain_type$.subscribe((response: string | null) => {
 //  console.log(response);  // you will receive the data from sender component here.
   
     this.checkShow(response)

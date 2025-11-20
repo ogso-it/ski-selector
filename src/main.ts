@@ -7,27 +7,27 @@ import { environment } from './environments/environment';
 // Enable production mode
 if (environment.production) {
   enableProdMode();
-  
+
   // Optional: Reduce console noise in production
   if (window.console) {
     const noop = () => {};
     window.console.log = noop;
     window.console.warn = noop;
     window.console.info = noop;
-    
-    // Keep errors for debugging
+
+    // Keep errors visible
     // window.console.error = noop;
   }
 }
 
-// Bootstrap application
+// Bootstrap Angular application
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .then(() => {
     console.log('✅ Application bootstrapped successfully!');
     console.log('🌍 Environment:', environment.production ? 'Production' : 'Development');
-    
-    // Check if Firebase config is available
+
+    // Optional Firebase check
     if (environment.firebase) {
       console.log('🔥 Firebase configured');
     } else {
@@ -36,8 +36,8 @@ platformBrowserDynamic()
   })
   .catch(err => {
     console.error('❌ Bootstrap failed:', err);
-    
-    // Display user-friendly error message
+
+    // Display user-friendly error bar
     const errorElement = document.createElement('div');
     errorElement.style.cssText = `
       position: fixed;
@@ -50,12 +50,13 @@ platformBrowserDynamic()
       text-align: center;
       z-index: 9999;
       font-family: Arial, sans-serif;
+      font-size: 16px;
     `;
     errorElement.textContent = 'Application failed to load. Please refresh the page.';
     document.body.appendChild(errorElement);
   });
 
-// Error handling for uncaught errors
+// Global error handler
 window.addEventListener('error', (event) => {
   console.error('Global error:', event.error);
 });
