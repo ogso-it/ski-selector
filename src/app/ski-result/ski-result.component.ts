@@ -44,12 +44,13 @@ export interface Ski {
   styleUrls: ['./ski-result.component.scss'],
   standalone: false,
   animations: [
+    // Animation pour la liste
     trigger('listAnimation', [
       transition('* => *', [
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(40px) scale(0.8)' }),
           stagger('100ms', [
-            animate('1200ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+            animate('1200ms cubic-bezier(0.25, 0.8, 0.25, 1)', 
               keyframes([
                 style({ opacity: 0, transform: 'translateY(40px) scale(0.8)', offset: 0 }),
                 style({ opacity: 0.8, transform: 'translateY(-15px) scale(1.08)', offset: 0.4 }),
@@ -62,6 +63,7 @@ export interface Ski {
       ])
     ]),
 
+    // Animation pour les cartes
     trigger('cardAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.7) translateY(30px) rotateX(45deg)' }),
@@ -75,6 +77,7 @@ export interface Ski {
       ])
     ]),
 
+    // Animation pour les images
     trigger('imageAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.6) rotate(-8deg) translateY(20px)' }),
@@ -88,6 +91,7 @@ export interface Ski {
       ])
     ]),
 
+    // Animation pour les scores
     trigger('scoreAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) rotate(180deg)' }),
@@ -101,6 +105,7 @@ export interface Ski {
       ])
     ]),
 
+    // Animation pour les badges
     trigger('badgeAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) translateY(-20px)' }),
@@ -137,6 +142,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   animationKey = 0;
   isLoading: boolean = false;
 
+  // Icônes pour les différents critères
   terrainIcons: { [key: string]: string } = {
     'touring-front-mountain': '🏔️',
     'touring-back-mountain': '⛰️',
@@ -225,7 +231,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       this.svcObs('stable')
     ]).subscribe(([h, w, terrain, snow, styleFun, turns, stable]) => {
       if (h != null) this.height = h;
-      if (w != null) this.weight = w;
+      if (w != null) this.weight = w; // conservé mais n'est plus utilisé dans l'algorithme
       if (terrain) this.terrain_type = terrain;
       if (snow) this.type_snow = snow;
       if (styleFun) this.ski_level_fun = styleFun;
@@ -260,6 +266,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.recalculateRecommendationsWithAnimation();
   }
 
+  /**
+   * Ouvre les détails d'un ski sélectionné
+   */
   openSki(ski: Ski): void {
     console.log('Ski sélectionné:', ski);
     
@@ -276,6 +285,10 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.trackSkiSelection(ski);
   }
 
+  /**
+   * Recalcule les recommandations avec une animation élégante
+   * Maintenant publique pour être accessible depuis le template
+   */
   recalculateRecommendationsWithAnimation(): void {
     this.isLoading = true;
     
@@ -286,6 +299,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
+  /**
+   * Track ski selection for analytics
+   */
   private trackSkiSelection(ski: Ski): void {
     try {
       const db = getDatabase();
@@ -310,16 +326,14 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
     let ar: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
 
+    // 🔧 MODIF : on ne filtre PLUS par weight — only height compatibility remains
     ar = ar.filter(ski => {
       const byHeight =
         this.height >= (ski.min_height ?? 0) &&
         this.height <= (ski.max_height ?? 999);
 
-      const byWeight =
-        this.weight >= (ski.min_weight ?? 0) &&
-        this.weight <= (ski.max_weight ?? 999);
-
-      return byHeight || byWeight;
+      // removed byWeight usage so weight has no effect on compatibility
+      return byHeight;
     });
 
     const bonnati_check = ar.filter(ski => {
@@ -348,7 +362,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
           ski_style: s.ski_style,
           riding_speed: s.riding_speed,
           turn: s.turn,
-          difference_weight: 0,
+          difference_weight: 0, // weight influence removed
           weight: s.weight
         });
       }
@@ -382,16 +396,8 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         score += 10;
 
       if (score >= 20) {
-        const avgWeight =
-          ((ski.min_weight ?? 0) + (ski.max_weight ?? 0)) / 2;
-
-        const difference_weight =
-          (this.height >= (ski.min_height ?? 0) &&
-           this.height <= (ski.max_height ?? 999) &&
-           this.weight >= (ski.min_weight ?? 0) &&
-           this.weight <= (ski.max_weight ?? 999))
-            ? 0
-            : Math.abs(avgWeight - this.weight);
+        // 🔧 MODIF : weight no longer used to compute difference_weight
+        const difference_weight = 0;
 
         this.resultat.push({
           name: ski.name,
@@ -421,7 +427,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     // Garder uniquement les skis avec un score ≥ 80
     this.resultat = this.resultat.filter(s => (s.score ?? 0) >= 80);
 
-    // Tri final
+    // Tri final (difference_weight est 0 pour tous si non calculé)
     this.resultat.sort((a, b) =>
       (b.score ?? 0) - (a.score ?? 0) ||
       (a.difference_weight ?? 0) - (b.difference_weight ?? 0)
