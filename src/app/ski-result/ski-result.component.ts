@@ -44,13 +44,12 @@ export interface Ski {
   styleUrls: ['./ski-result.component.scss'],
   standalone: false,
   animations: [
-    // Animation pour la liste
     trigger('listAnimation', [
       transition('* => *', [
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(40px) scale(0.8)' }),
           stagger('100ms', [
-            animate('1200ms cubic-bezier(0.25, 0.8, 0.25, 1)', 
+            animate('1200ms cubic-bezier(0.25, 0.8, 0.25, 1)',
               keyframes([
                 style({ opacity: 0, transform: 'translateY(40px) scale(0.8)', offset: 0 }),
                 style({ opacity: 0.8, transform: 'translateY(-15px) scale(1.08)', offset: 0.4 }),
@@ -63,7 +62,6 @@ export interface Ski {
       ])
     ]),
 
-    // Animation pour les cartes
     trigger('cardAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.7) translateY(30px) rotateX(45deg)' }),
@@ -77,7 +75,6 @@ export interface Ski {
       ])
     ]),
 
-    // Animation pour les images
     trigger('imageAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.6) rotate(-8deg) translateY(20px)' }),
@@ -91,7 +88,6 @@ export interface Ski {
       ])
     ]),
 
-    // Animation pour les scores
     trigger('scoreAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) rotate(180deg)' }),
@@ -105,7 +101,6 @@ export interface Ski {
       ])
     ]),
 
-    // Animation pour les badges
     trigger('badgeAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) translateY(-20px)' }),
@@ -142,7 +137,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   animationKey = 0;
   isLoading: boolean = false;
 
-  // Icônes pour les différents critères
   terrainIcons: { [key: string]: string } = {
     'touring-front-mountain': '🏔️',
     'touring-back-mountain': '⛰️',
@@ -190,10 +184,10 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   }
 
   getScoreColor(score: number): string {
-    if (score >= 90) return '#10b981'; // Vert émeraude
-    if (score >= 70) return '#3b82f6'; // Bleu
-    if (score >= 50) return '#f59e0b'; // Orange
-    return '#ef4444'; // Rouge
+    if (score >= 90) return '#10b981';
+    if (score >= 70) return '#3b82f6';
+    if (score >= 50) return '#f59e0b';
+    return '#ef4444';
   }
 
   getScoreIcon(score: number): string {
@@ -266,9 +260,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.recalculateRecommendationsWithAnimation();
   }
 
-  /**
-   * Ouvre les détails d'un ski sélectionné
-   */
   openSki(ski: Ski): void {
     console.log('Ski sélectionné:', ski);
     
@@ -285,10 +276,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.trackSkiSelection(ski);
   }
 
-  /**
-   * Recalcule les recommandations avec une animation élégante
-   * Maintenant publique pour être accessible depuis le template
-   */
   recalculateRecommendationsWithAnimation(): void {
     this.isLoading = true;
     
@@ -299,9 +286,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  /**
-   * Track ski selection for analytics
-   */
   private trackSkiSelection(ski: Ski): void {
     try {
       const db = getDatabase();
@@ -433,11 +417,17 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       }
     }
 
+    // 🔥🔥🔥 MODIFICATION DEMANDÉE :
+    // Garder uniquement les skis avec un score ≥ 80
+    this.resultat = this.resultat.filter(s => (s.score ?? 0) >= 80);
+
+    // Tri final
     this.resultat.sort((a, b) =>
       (b.score ?? 0) - (a.score ?? 0) ||
       (a.difference_weight ?? 0) - (b.difference_weight ?? 0)
     );
 
+    // Éliminer les doublons par nom
     this.resultat = this.resultat.reduce((acc: Ski[], cur: Ski) => {
       if (!acc.some(x => x.name === cur.name)) acc.push(cur);
       return acc;

@@ -141,7 +141,7 @@
             </div>
             
             <div class="form-group">
-              <label>Riding Style</label>
+              <label>Turns Style</label>
               <select [(ngModel)]="ski_turns" (change)="onInlineCriteriaChange()">
                 <option *ngFor="let opt of  turnOptions" [value]="opt">
                   {{ opt }}
@@ -168,7 +168,7 @@
       </div>
 
       <!-- Quick Tips -->
-      <div class="tips-card">
+      <!-- <div class="tips-card">
         <h4>Pro Tips</h4>
         <ul class="tips-list">
           <li>Higher score = Better match</li>
@@ -176,7 +176,7 @@
           <li>Terrain affects ski width</li>
           <li>Snow type impacts flex</li>
         </ul>
-      </div>
+      </div> -->
 
     </div>
 
