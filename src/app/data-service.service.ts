@@ -9,7 +9,7 @@ export class DataServiceService {
   // ✅ Listes centralisées des options (identiques à celles du quiz)
   terrainOptions = [
     'touring-back-mountain',
-    'touring-front-mountaint',
+    'touring-front-mountain',
     'touring-race',
     'touring-mountaineering',
     'all-mountain',

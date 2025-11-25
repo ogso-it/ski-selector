@@ -609,7 +609,7 @@
   
     // },
       {
-      family: 'SUPER ROCKER',
+      family: 'PLAY AND RIDE',
       category: 'ULTRA LIGHT', 
       name: 'LE TOUNO',   // name: 'COSMIQUE 90 SR UL',
       size: 162,  // size: 160,
@@ -630,7 +630,7 @@
     },
 
     {
-      family: 'SUPER ROCKER',
+      family: 'PLAY AND RIDE',
       category: 'ULTRA LIGHT',
       name: 'LE TOUNO', // name: 'COSMIQUE 90 SR UL',
       size: 172,   // size: 168,
@@ -652,7 +652,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
+      family: 'PLAY AND RIDE',
       category: 'ULTRA LIGHT',
       name: 'LE TOUNO', // name: 'COSMIQUE 90 SR UL',
       size: 182,  // size: 176,
@@ -674,28 +674,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
-      category: 'MEDIUM LIGHT',
-      name: 'GRIZZLY', //name: 'DIABLE 100 SR ML',
-      size: 162,
-      max_height: 169,
-      min_height: 0,
-      max_weight: 58,
-      min_weight: 0,
-      ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
-      playground: ['all-mountain' , 'freeride' , 'freetouring'],
-      snow : ['powder','hard', 'crud'],
-      ski_style: ['fun-surf'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRIZZLY.webp',   //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly/' ,  //link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
-      //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/g-s.png'
-  
-  
-    },
-    {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT SR ML',
       name: 'GRIZZLY',
       size: 170,
@@ -717,7 +696,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT SR ML',
       name: 'GRIZZLY',
       size: 178,
@@ -739,7 +718,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: 'GRIZZLY' , // name: 'DIABLE 100 SR ML',
       size: 186,
@@ -761,7 +740,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: 'GRIZZLY', // name: 'DIABLE 100 SR ML',
       size: 194,
@@ -783,7 +762,7 @@
     }
     ,
     {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: "BIG",  //name: "SPENECER 110 SR ML",
       size: 170, // size: 171,
@@ -803,7 +782,7 @@
   
     }
     , {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: "BIG", // name: "SPENECER 110 SR ML",
       size: 178,  //size: 179,
@@ -823,7 +802,7 @@
   
     }
     , {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: "BIG", // name: "SPENECER 110 SR ML",
       size: 186,  //size: 187,
@@ -843,7 +822,7 @@
   
     }
     , {
-      family: 'SUPER ROCKER',
+      family: 'FREE RIDE',
       category: 'MEDIUM LIGHT',
       name: "BIG", //name: "SPENECER 110 SR ML",
       size: 194,  //size: 195,
@@ -865,7 +844,7 @@
     , 
 
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'SWISS', //name: 'JAEGER 80 NEO UL',
       size: 162, // size: 156,
@@ -884,7 +863,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'SWISS', //name: 'JAEGER 80 NEO UL',
       size: 170, //size: 164,
@@ -905,7 +884,7 @@
     }
     ,
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'SWISS', //name: 'JAEGER 80 NEO UL',
       size: 178, //size: 172,
@@ -925,54 +904,12 @@
   
     }
     ,
+   
     {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'SWISS',  // name: 'JAEGER 80 NEO UL',
-      size: 186, //size: 180,
-      max_height: 190,
-      min_height: 183,
-      max_weight: 95,
-      min_weight: 82,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-mountaineering','touring-race', 'touring-front-mountain' ],
-
-      snow : ['crud', 'hard'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SWISS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss/'
-  
-  
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'SWISS', // name: 'JAEGER 80 NEO UL',
-      size: 194, // size: 188,
-      max_height: 999,
-      min_height: 191,
-      max_weight: 999,
-      min_weight: 96,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-mountaineering','touring-race', 'touring-front-mountain' ],
-
-      snow : ['hard', 'crud'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SWISS.webp', // src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss/'
-  
-  
-    },
-    {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'STS', //name: 'THOR 90 NEO UL',
-      size: 162, //size: 160,
+      size: 170, //size: 160,
       max_height: 171,
       min_height: 0,
       max_weight: 59,
@@ -989,10 +926,10 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'STS', //name: 'THOR 90 NEO UL',
-      size: 170, //size: 168,
+      size: 178, //size: 168,
       max_height: 179,
       min_height: 172,
       max_weight: 74,
@@ -1010,30 +947,9 @@
   
     }
     ,
+   
     {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'STS', //name: 'THOR 90 NEO UL',
-      size: 178, //size: 176,
-      max_height: 187,
-      min_height: 180,
-      max_weight: 87,
-      min_weight: 75,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain'],
-
-      snow : ['powder','hard', 'crud'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/STS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts-2/'
-  
-  
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'STS', //name: 'THOR 90 NEO UL',
       size: 186, //size: 184,
@@ -1054,32 +970,12 @@
   
     }
     ,
+   
     {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'STS', //name: 'THOR 90 NEO UL',
-      size: 194, //size: 192,
-      max_height: 300,
-      min_height: 196,
-      max_weight: 999,
-      min_weight: 96,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide'],
-      playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain'],
-
-      snow : ['powder','hard', 'crud'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/STS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts-2/'
-  
-  
-    },
-    {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
-      size: 162,
+      size: 178,
       max_height: 173,
       min_height: 0,
       max_weight: 59,
@@ -1098,7 +994,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
       size: 170,
@@ -1123,10 +1019,10 @@
     }
     ,
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
       name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
-      size: 178,
+      size: 186,
       max_height: 189,
       min_height: 182,
       max_weight: 86,
@@ -1146,58 +1042,10 @@
   
     }
     ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
-      size: 186,
-      max_height: 197,
-      min_height: 190,
-      max_weight: 91,
-      min_weight: 87,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-
-
-      snow : ['powder','hard', 'crud'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
-      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/', //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
-      //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
-  
-  
-  
-    }
-    ,
-    {
-      family: 'NEOTERIC CAMBER',
-      category: 'ULTRA LIGHT',
-      name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
-      size: 194,
-      max_height: 300,
-      min_height: 198,
-      max_weight: 999,
-      min_weight: 91,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-
-
-      snow : ['powder','hard', 'crud'],
-      ski_style: ['technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
-      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/', //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
-      //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
-  
-  
-  
-    }
-    ,
+   
+    
      {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 162, //size: 176,
@@ -1217,7 +1065,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 172, //size: 176,
@@ -1237,7 +1085,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 182, //size: 176,
@@ -1257,7 +1105,7 @@
   
     },
      {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 162, //size: 176,
@@ -1277,7 +1125,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 172, //size: 176,
@@ -1297,7 +1145,7 @@
   
     },
     {
-      family: 'NEOTERIC CAMBER',
+      family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 182, //size: 176,
@@ -1317,7 +1165,7 @@
   
     },
      {
-      family: 'NEOTERIC CAMBER',
+      family: 'FRONT RESORT',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 162, //size: 176,
@@ -1337,7 +1185,7 @@
   
     },
       {
-      family: 'NEOTERIC CAMBER',
+      family: 'FRONT RESORT',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 172, //size: 176,
@@ -1357,7 +1205,7 @@
   
     },
       {
-      family: 'NEOTERIC CAMBER',
+      family: 'FRONT RESORT',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 182, //size: 176,
