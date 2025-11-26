@@ -27,7 +27,7 @@ export interface Ski {
   score?: number;
   difference_weight?: number;
   weight?: number;
-  realScore?: number; // Nouveau champ pour stocker le score réel
+  realScore?: number; // score réel calculé (100 - 10 * mismatches)
 }
 
 @Component({
@@ -131,14 +131,13 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     'resort': '🎿',
     'carving': '🔄',
     'freeride': '🚀',
-    'playride': '🛝',
-    
+    'playride': '🛝'
   };
 
   snowIcons: { [key: string]: string } = {
     'powder': '❄️',
     'crud': '🌨️',
-    'hard': '🧊',
+    'hard': '🧊'
   };
 
   styleIcons: { [key: string]: string } = {
@@ -173,10 +172,10 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   }
 
   getScoreColor(score: number): string {
-    if (score >= 90) return '#10b981';
-    if (score >= 70) return '#3b82f6';
-    if (score >= 50) return '#f59e0b';
-    return '#ef4444';
+    if (score >= 90) return '#10b981'; // vert
+    if (score >= 70) return '#3b82f6'; // bleu
+    if (score >= 50) return '#f59e0b'; // orange
+    return '#ef4444'; // rouge
   }
 
   getScoreIcon(score: number): string {
@@ -189,19 +188,16 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const svcAny = this.dataService as any;
     this.terrainOptions = svcAny?.terrainOptions ?? [
-    'touring-back-mountain',
-    'touring-front-mountain',
-    'touring-race',
-    'touring-mountaineering',
-    'freetouring',
-    'all-mountain',
-    'freeride',
-    'resort',
-    'carving',
-    'playride'
-    
-
-    
+      'touring-back-mountain',
+      'touring-front-mountain',
+      'touring-race',
+      'touring-mountaineering',
+      'freetouring',
+      'all-mountain',
+      'freeride',
+      'resort',
+      'carving',
+      'playride'
     ];
     this.snowOptions = svcAny?.snowOptions ?? ['powder', 'crud', 'hard', 'packed'];
     this.speedOptions = svcAny?.speedOptions ?? ['moderate-speed', 'high-speed'];
@@ -216,8 +212,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       this.svcObs('type_snow'),
       this.svcObs('ski_style_fun'),
       this.svcObs('turns'),
-      this.svcObs('stable')
-    ]).subscribe(([h, w, terrain, snow, styleFun, turns, stable]) => {
+      this.svcObs('stable'),
+      this.svcObs('ski_level')
+    ]).subscribe(([h, w, terrain, snow, styleFun, turns, stable, skiLevel]) => {
       if (h != null) this.height = h;
       if (w != null) this.weight = w;
       if (terrain) this.terrain_type = terrain;
@@ -225,6 +222,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       if (styleFun) this.ski_level_fun = styleFun;
       if (turns) this.ski_turns = turns;
       if (stable) this.ski_speed = stable;
+      if (skiLevel) this.ski_level = skiLevel;
       this.recalculateRecommendationsWithAnimation();
     });
 
@@ -261,14 +259,14 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     console.log('Ski sélectionné:', ski);
     // Afficher le score réel dans la console pour debug
     console.log('Score réel:', ski.realScore, 'Score affiché:', ski.score);
-    
+
     if (ski.link) {
       setTimeout(() => {
         window.open(ski.link, '_blank');
       }, 300);
     } else {
       setTimeout(() => {
-        alert(`🎿 ${ski.name}\n📏 Taille: ${ski.size}cm\n⭐ Score réel: ${ski.realScore}\n⚖️ Poids: ${ski.weight}g\n🏔️ Famille: ${ski.family || 'N/A'}`);
+        alert(`🎿 ${ski.name}\n📏 Taille: ${ski.size}cm\n⭐ Score réel: ${ski.realScore}\n⚖️ Poids: ${ski.weight ?? 'N/A'}g\n🏔️ Famille: ${ski.family || 'N/A'}`);
       }, 200);
     }
     this.trackSkiSelection(ski);
@@ -298,7 +296,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         ski_name: ski.name,
         ski_size: ski.size,
         ski_score: ski.score,
-        ski_real_score: ski.realScore, // Enregistrer aussi le score réel
+        ski_real_score: ski.realScore,
         user_height: this.height,
         user_weight: this.weight,
         terrain_type: this.terrain_type,
@@ -312,59 +310,64 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   private recalculateRecommendations(): void {
     this.resultat = [];
     this.bn = false;
-    
+
     // Prendre tous les skis sans filtrer par height
     let ar: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
 
-    // // Filtrer les skis de type touring-race
+    // Exemple: si tu veux filtrer certains playgrounds, tu peux décommenter et adapter
     // ar = ar.filter(ski => {
     //   const pg = ski.playground;
     //   return pg ? !(Array.isArray(pg) ? pg.includes('touring-race') : pg === 'touring-race') : true;
     // });
 
+    // Calcul des scores : chaque ski commence à 100, on enlève 10 pour chaque critère non matching
     const scoredSkis: Ski[] = [];
 
     for (const ski of ar) {
-      let realScore = 0;
-      
-      // Calcul du score réel avec 25 points par critère
-      if (ski.playground && (Array.isArray(ski.playground) ? ski.playground.includes(this.terrain_type) : ski.playground === this.terrain_type)) 
-        realScore += 25;
-      
-      if (ski.snow && (Array.isArray(ski.snow) ? ski.snow.includes(this.type_snow) : ski.snow === this.type_snow)) 
-        realScore += 25;
-      
-      if (ski.riding_speed && (Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.ski_speed) : ski.riding_speed === this.ski_speed)) 
-        realScore += 25;
-      
-      if (ski.ski_style && (Array.isArray(ski.ski_style) ? ski.ski_style.includes(this.ski_level_fun) : ski.ski_style === this.ski_level_fun)) 
-        realScore += 25;
+      let realScore = 100; // score initial
 
-      if (realScore >= 80) {
-        const difference_weight = 0;
-        scoredSkis.push({
-          name: ski.name,
-          src: ski.src,
-          size: ski.size,
-          link: ski.link,
-          score: realScore, // Score réel pour le tri
-          realScore: realScore, // Sauvegarde du score réel
-          family: ski.family,
-          category: ski.category,
-          min_height: ski.min_height,
-          max_height: ski.max_height,
-          min_weight: ski.min_weight,
-          max_weight: ski.max_weight,
-          ski_level: ski.ski_level,
-          playground: ski.playground,
-          snow: ski.snow,
-          ski_style: ski.ski_style,
-          riding_speed: ski.riding_speed,
-          turn: ski.turn,
-          difference_weight,
-          weight: ski.weight
-        });
-      }
+      // Critère terrain (playground)
+      const matchesTerrain = ski.playground
+        ? (Array.isArray(ski.playground) ? ski.playground.includes(this.terrain_type) : ski.playground === this.terrain_type)
+        : false;
+      if (!matchesTerrain) realScore -= 10;
+
+      // Critère snow
+      const matchesSnow = ski.snow
+        ? (Array.isArray(ski.snow) ? ski.snow.includes(this.type_snow) : ski.snow === this.type_snow)
+        : false;
+      if (!matchesSnow) realScore -= 10;
+
+      // Critère riding_speed
+      const matchesSpeed = ski.riding_speed
+        ? (Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.ski_speed) : ski.riding_speed === this.ski_speed)
+        : false;
+      if (!matchesSpeed) realScore -= 10;
+
+      // Critère ski_style (fun/technical)
+      const matchesStyle = ski.ski_style
+        ? (Array.isArray(ski.ski_style) ? ski.ski_style.includes(this.ski_level_fun) : ski.ski_style === this.ski_level_fun)
+        : false;
+      if (!matchesStyle) realScore -= 10;
+
+      // Critère turns
+      const matchesTurn = ski.turn
+        ? (Array.isArray(ski.turn) ? ski.turn.includes(this.ski_turns) : ski.turn === this.ski_turns)
+        : false;
+      if (!matchesTurn) realScore -= 10;
+
+      // S'assurer que le score ne descend pas en dessous de 0
+      if (realScore < 0) realScore = 0;
+
+      // Calcul / valeurs supplémentaires (difference_weight si nécessaire)
+      const difference_weight = typeof ski.weight === 'number' ? Math.abs((ski.weight || 0) - this.weight) : 0;
+
+      scoredSkis.push({
+        ...ski,
+        realScore,
+        difference_weight,
+        score: realScore // par défaut afficher le réel, sera normalisé plus bas pour affichage si besoin
+      });
     }
 
     // Trier par score réel décroissant
@@ -377,10 +380,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       return acc;
     }, []);
 
-    // 🔥 NORMALISATION DES SCORES : 100, 90, 80 pour les 3 premiers
+    // 🔥 NORMALISATION DES SCORES : 100, 90, 80, 70, 60, 50 pour les 6 premiers (comme avant)
     this.resultat = uniqueSkis.slice(0, 6).map((ski, index) => {
       let displayScore: number;
-      
       switch (index) {
         case 0: displayScore = 100; break;
         case 1: displayScore = 90; break;
@@ -388,14 +390,15 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         case 3: displayScore = 70; break;
         case 4: displayScore = 60; break;
         case 5: displayScore = 50; break;
-        default: displayScore = ski.realScore || 0;
+        default: displayScore = ski.realScore ?? 0;
       }
-      
       return {
         ...ski,
-        score: displayScore // Score affiché normalisé
+        score: displayScore // Score affiché (normalisé)
       };
     });
+
+    // Si tu veux afficher tous les skis (pas seulement 6), remplace slice(0,6) plus haut
 
     this.writeUserDataIfPossible();
   }
@@ -414,6 +417,8 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         snow: this.type_snow,
         terrain: this.terrain_type
       });
-    } catch {}
+    } catch (e) {
+      // silent fail
+    }
   }
 }
