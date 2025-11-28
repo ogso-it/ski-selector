@@ -27,7 +27,14 @@ export interface Ski {
   score?: number;
   difference_weight?: number;
   weight?: number;
-  realScore?: number; // score réel calculé (100 - 10 * mismatches)
+  realScore?: number; // score réel calculé (100 - pénalités)
+}
+
+// Interface pour gérer les différentes tailles disponibles par modèle
+interface SkiModel {
+  name: string;
+  availableSizes: number[];
+  family?: string;
 }
 
 @Component({
@@ -152,6 +159,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
   private subs: Subscription | null = null;
 
+  // Map des modèles de skis avec leurs tailles disponibles
+  private skiModels: SkiModel[] = [];
+
   constructor(public dataService: DataServiceService) {}
 
   private svcObs(name: string): Observable<any> {
@@ -205,6 +215,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.funOptions = svcAny?.funOptions ?? ['fun-surf', 'technical-precision'];
     this.levelOptions = svcAny?.levelOptions ?? ['newbie', 'intermediate', 'confirmed', 'pro-guide'];
 
+    // Initialiser la liste des modèles de skis avec leurs tailles disponibles
+    this.initializeSkiModels();
+
     this.subs = combineLatest([
       this.svcObs('height'),
       this.svcObs('weight'),
@@ -253,11 +266,97 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Initialise la liste des modèles de skis avec leurs tailles disponibles
+   */
+  private initializeSkiModels(): void {
+    const allSkis: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
+    
+    // Grouper les skis par nom et collecter toutes les tailles disponibles
+    const modelMap = new Map<string, number[]>();
+    
+    allSkis.forEach(ski => {
+      if (!modelMap.has(ski.name)) {
+        modelMap.set(ski.name, []);
+      }
+      if (!modelMap.get(ski.name)!.includes(ski.size)) {
+        modelMap.get(ski.name)!.push(ski.size);
+      }
+    });
+
+    // Créer la liste des modèles avec leurs tailles triées
+    this.skiModels = Array.from(modelMap.entries()).map(([name, sizes]) => ({
+      name,
+      availableSizes: sizes.sort((a, b) => a - b),
+      family: allSkis.find(ski => ski.name === name)?.family
+    }));
+  }
+
+  /**
+   * Trouve la taille optimale pour un modèle de ski donné selon les règles spécifiques
+   */
+  private findOptimalSize(skiName: string, userHeight: number): number {
+    const model = this.skiModels.find(m => m.name === skiName);
+    if (!model || !model.availableSizes.length) {
+      return userHeight; // Fallback si le modèle n'est pas trouvé
+    }
+
+    const availableSizes = model.availableSizes;
+    let targetHeight = userHeight;
+
+    // Appliquer les règles spécifiques selon le modèle
+    if (this.isSTSOrSwissOrGrandDaddy(skiName)) {
+      // Règle 1: STS, Swiss, Grand Daddy - taille la plus proche de (hauteur - 5 ou 10 cm)
+      targetHeight = userHeight - 7.5; // Moyenne de 5-10 cm
+    } else if (this.isCroixDeFerOrTouno(skiName)) {
+      // Règle 2: Croix de fer, Le Touno - taille la plus proche de (hauteur ou hauteur - 5 cm)
+      targetHeight = userHeight - 2.5; // Privilégier légèrement les tailles plus courtes
+    } else if (this.isRyumonKoiryuBigGrizzly(skiName)) {
+      // Règle 3: Ryumon, Koiryu, Big, Grizzly - taille la plus proche de (hauteur ± 3 cm)
+      targetHeight = userHeight; // Garder la hauteur exacte
+    }
+
+    // Trouver la taille la plus proche de la hauteur cible
+    return this.findClosestSize(availableSizes, targetHeight);
+  }
+
+  /**
+   * Vérifie si le ski fait partie des modèles STS, Swiss ou Grand Daddy
+   */
+  private isSTSOrSwissOrGrandDaddy(skiName: string): boolean {
+    const lowerName = skiName.toLowerCase();
+    return lowerName.includes('sts') || lowerName.includes('swiss') || lowerName.includes('grand') || lowerName.includes('daddy');
+  }
+
+  /**
+   * Vérifie si le ski fait partie des modèles Croix de fer ou Le Touno
+   */
+  private isCroixDeFerOrTouno(skiName: string): boolean {
+    const lowerName = skiName.toLowerCase();
+    return lowerName.includes('croix') || lowerName.includes('fer') || lowerName.includes('touno');
+  }
+
+  /**
+   * Vérifie si le ski fait partie des modèles Ryumon, Koiryu, Big ou Grizzly
+   */
+  private isRyumonKoiryuBigGrizzly(skiName: string): boolean {
+    const lowerName = skiName.toLowerCase();
+    return lowerName.includes('ryumon') || lowerName.includes('koiryu') || lowerName.includes('big') || lowerName.includes('grizzly');
+  }
+
+  /**
+   * Trouve la taille la plus proche dans la liste des tailles disponibles
+   */
+  private findClosestSize(availableSizes: number[], targetHeight: number): number {
+    return availableSizes.reduce((prev, curr) => {
+      return (Math.abs(curr - targetHeight) < Math.abs(prev - targetHeight) ? curr : prev);
+    });
+  }
+
+  /**
    * Ouvre les détails d'un ski sélectionné
    */
   openSki(ski: Ski): void {
     console.log('Ski sélectionné:', ski);
-    // Afficher le score réel dans la console pour debug
     console.log('Score réel:', ski.realScore, 'Score affiché:', ski.score);
 
     if (ski.link) {
@@ -274,7 +373,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
   /**
    * Recalcule les recommandations avec une animation élégante
-   * Maintenant publique pour être accessible depuis le template
    */
   recalculateRecommendationsWithAnimation(): void {
     this.isLoading = true;
@@ -314,47 +412,35 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     // Prendre tous les skis sans filtrer par height
     let ar: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
 
-    // Exemple: si tu veux filtrer certains playgrounds, tu peux décommenter et adapter
-    // ar = ar.filter(ski => {
-    //   const pg = ski.playground;
-    //   return pg ? !(Array.isArray(pg) ? pg.includes('touring-race') : pg === 'touring-race') : true;
-    // });
-
-    // Calcul des scores : chaque ski commence à 100, on enlève 10 pour chaque critère non matching
+    // Calcul des scores : chaque ski commence à 100, on applique des pénalités seulement si ça ne matche pas
     const scoredSkis: Ski[] = [];
 
     for (const ski of ar) {
       let realScore = 100; // score initial
 
-      // Critère terrain (playground)
+      // Critère terrain (playground) : -10 si ne matche pas
       const matchesTerrain = ski.playground
         ? (Array.isArray(ski.playground) ? ski.playground.includes(this.terrain_type) : ski.playground === this.terrain_type)
         : false;
       if (!matchesTerrain) realScore -= 10;
 
-      // Critère snow
+      // Critère snow : -10 si ne matche pas
       const matchesSnow = ski.snow
         ? (Array.isArray(ski.snow) ? ski.snow.includes(this.type_snow) : ski.snow === this.type_snow)
         : false;
       if (!matchesSnow) realScore -= 10;
 
-      // Critère riding_speed
+      // Critère riding_speed (ski_style) : -5 si ne matche pas
       const matchesSpeed = ski.riding_speed
         ? (Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.ski_speed) : ski.riding_speed === this.ski_speed)
         : false;
-      if (!matchesSpeed) realScore -= 10;
+      if (!matchesSpeed) realScore -= 5;
 
-      // Critère ski_style (fun/technical)
-      const matchesStyle = ski.ski_style
-        ? (Array.isArray(ski.ski_style) ? ski.ski_style.includes(this.ski_level_fun) : ski.ski_style === this.ski_level_fun)
-        : false;
-      if (!matchesStyle) realScore -= 10;
-
-      // Critère turns
+      // Critère turns : -5 si ne matche pas
       const matchesTurn = ski.turn
         ? (Array.isArray(ski.turn) ? ski.turn.includes(this.ski_turns) : ski.turn === this.ski_turns)
         : false;
-      if (!matchesTurn) realScore -= 10;
+      if (!matchesTurn) realScore -= 5;
 
       // S'assurer que le score ne descend pas en dessous de 0
       if (realScore < 0) realScore = 0;
@@ -366,7 +452,7 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         ...ski,
         realScore,
         difference_weight,
-        score: realScore // par défaut afficher le réel, sera normalisé plus bas pour affichage si besoin
+        score: realScore
       });
     }
 
@@ -380,8 +466,19 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       return acc;
     }, []);
 
-    // 🔥 NORMALISATION DES SCORES : 100, 90, 80, 70, 60, 50 pour les 6 premiers (comme avant)
-    this.resultat = uniqueSkis.slice(0, 6).map((ski, index) => {
+    // Sélectionner les 6 meilleurs skis et appliquer la taille optimale
+    const topSkis = uniqueSkis.slice(0, 6);
+    
+    // Pour chaque ski sélectionné, trouver la taille optimale selon les règles
+    const skisWithOptimalSize = topSkis.map((ski, index) => {
+      const optimalSize = this.findOptimalSize(ski.name, this.height);
+      
+      // Trouver le ski correspondant au modèle et à la taille optimale
+      const optimalSki = ar.find(s => 
+        s.name === ski.name && 
+        s.size === optimalSize
+      ) || ski; // Fallback au ski original si non trouvé
+
       let displayScore: number;
       switch (index) {
         case 0: displayScore = 100; break;
@@ -390,16 +487,17 @@ export class SkiResultComponent implements OnInit, OnDestroy {
         case 3: displayScore = 70; break;
         case 4: displayScore = 60; break;
         case 5: displayScore = 50; break;
-        default: displayScore = ski.realScore ?? 0;
+        default: displayScore = optimalSki.realScore ?? 0;
       }
+
       return {
-        ...ski,
-        score: displayScore // Score affiché (normalisé)
+        ...optimalSki,
+        score: displayScore,
+        realScore: optimalSki.realScore
       };
     });
 
-    // Si tu veux afficher tous les skis (pas seulement 6), remplace slice(0,6) plus haut
-
+    this.resultat = skisWithOptimalSize;
     this.writeUserDataIfPossible();
   }
 
