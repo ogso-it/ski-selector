@@ -6,6 +6,10 @@ import { DataServiceService } from '../data-service.service';
 import { getDatabase, ref, set } from 'firebase/database';
 import { skis } from 'src/assets/jsons/skis';
 import { trigger, transition, style, animate, query, stagger, keyframes } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
+
+// Service pour générer des PDFs
+import { jsPDF } from 'jspdf';
 
 export interface Ski {
   family?: string;
@@ -27,10 +31,9 @@ export interface Ski {
   score?: number;
   difference_weight?: number;
   weight?: number;
-  realScore?: number; // score réel calculé (100 - pénalités)
+  realScore?: number;
 }
 
-// Interface pour gérer les différentes tailles disponibles par modèle
 interface SkiModel {
   name: string;
   availableSizes: number[];
@@ -43,7 +46,6 @@ interface SkiModel {
   styleUrls: ['./ski-result.component.scss'],
   standalone: false,
   animations: [
-    // Animation pour la liste
     trigger('listAnimation', [
       transition('* => *', [
         query(':enter', [
@@ -59,7 +61,6 @@ interface SkiModel {
         ], { optional: true })
       ])
     ]),
-    // Animation pour les cartes
     trigger('cardAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.7) translateY(30px) rotateX(45deg)' }),
@@ -70,7 +71,6 @@ interface SkiModel {
         ]))
       ])
     ]),
-    // Animation pour les images
     trigger('imageAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.6) rotate(-8deg) translateY(20px)' }),
@@ -81,7 +81,6 @@ interface SkiModel {
         ]))
       ])
     ]),
-    // Animation pour les scores
     trigger('scoreAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) rotate(180deg)' }),
@@ -92,7 +91,6 @@ interface SkiModel {
         ]))
       ])
     ]),
-    // Animation pour les badges
     trigger('badgeAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0) translateY(-20px)' }),
@@ -126,8 +124,11 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   bn: boolean = false;
   animationKey = 0;
   isLoading: boolean = false;
+  
+  // Variables pour le PDF (email supprimé)
+  isGeneratingPDF: boolean = false;
+  pdfGenerated: boolean = false;
 
-  // Icônes pour les différents critères
   terrainIcons: { [key: string]: string } = {
     'touring-front-mountain': '🏔️',
     'touring-back-mountain': '⛰️',
@@ -158,11 +159,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   };
 
   private subs: Subscription | null = null;
-
-  // Map des modèles de skis avec leurs tailles disponibles
   private skiModels: SkiModel[] = [];
 
-  constructor(public dataService: DataServiceService) {}
+  constructor(public dataService: DataServiceService, private http: HttpClient) {}
 
   private svcObs(name: string): Observable<any> {
     const svc = this.dataService as any;
@@ -182,17 +181,10 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   }
 
   getScoreColor(score: number): string {
-    if (score >= 90) return '#10b981'; // vert
-    if (score >= 70) return '#3b82f6'; // bleu
-    if (score >= 50) return '#f59e0b'; // orange
-    return '#ef4444'; // rouge
-  }
-
-  getScoreIcon(score: number): string {
-    if (score >= 90) return '⭐';
-    if (score >= 70) return '🔥';
-    if (score >= 50) return '👍';
-    return '💫';
+    if (score >= 90) return '#10b981';
+    if (score >= 70) return '#3b82f6';
+    if (score >= 50) return '#f59e0b';
+    return '#ef4444';
   }
 
   ngOnInit(): void {
@@ -215,7 +207,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.funOptions = svcAny?.funOptions ?? ['fun-surf', 'technical-precision'];
     this.levelOptions = svcAny?.levelOptions ?? ['newbie', 'intermediate', 'confirmed', 'pro-guide'];
 
-    // Initialiser la liste des modèles de skis avec leurs tailles disponibles
     this.initializeSkiModels();
 
     this.subs = combineLatest([
@@ -246,6 +237,156 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.subs?.unsubscribe();
   }
 
+  /**
+   * Génère un PDF élégant avec les recommandations
+   */
+  async generatePDF(): Promise<void> {
+    this.isGeneratingPDF = true;
+    
+    try {
+      const doc = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = doc.internal.pageSize.getWidth();
+      
+      // En-tête avec gradient
+      doc.setFillColor(11, 12, 20);
+      doc.rect(0, 0, pageWidth, 50, 'F');
+      
+      // Logo et titre
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(28);
+      doc.setFont('helvetica', 'bold');
+      doc.text('OGSO SKI RECOMMENDATIONS', pageWidth / 2, 22, { align: 'center' });
+      
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Generated on ${new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })}`, pageWidth / 2, 32, { align: 'center' });
+      
+      // Profil utilisateur
+      doc.setFillColor(30, 30, 40);
+      doc.roundedRect(20, 45, pageWidth - 40, 30, 3, 3, 'F');
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('USER PROFILE', 28, 55);
+      
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Height: ${this.height} cm`, 28, 63);
+      doc.text(`Weight: ${this.weight} kg`, pageWidth / 2, 63);
+      doc.text(`Terrain: ${this.terrain_type}`, 28, 68);
+      doc.text(`Snow: ${this.type_snow}`, pageWidth / 2, 68);
+      
+      let yPos = 85;
+      
+      // Top 3 recommandations
+      doc.setFontSize(18);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOP 3 RECOMMENDED SKIS', pageWidth / 2, yPos, { align: 'center' });
+      yPos += 15;
+      
+      for (let i = 0; i < Math.min(3, this.resultat.length); i++) {
+        const ski = this.resultat[i];
+        
+        // Carte pour chaque ski
+        doc.setFillColor(40, 40, 50);
+        doc.roundedRect(20, yPos, pageWidth - 40, 45, 3, 3, 'F');
+        
+        // Rang
+        doc.setFillColor(0, 102, 255);
+        doc.circle(30, yPos + 15, 8, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${i + 1}`, 30, yPos + 17.5, { align: 'center' });
+        
+        // Nom et détails
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text(ski.name, 45, yPos + 12);
+        
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Size: ${ski.size} cm`, 45, yPos + 20);
+        doc.text(`Weight: ${ski.weight || 'N/A'} g`, 45, yPos + 26);
+        
+        // Score
+        const score = ski.score || 0;
+        const scoreColor = this.getScoreColor(score);
+        const rgb = this.hexToRgb(scoreColor);
+        doc.setFillColor(rgb.r, rgb.g, rgb.b);
+        doc.roundedRect(pageWidth - 70, yPos + 10, 50, 15, 3, 3, 'F');
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${score}% Match`, pageWidth - 45, yPos + 20, { align: 'center' });
+        
+        yPos += 50;
+        
+        // Nouvelle page si nécessaire
+        if (yPos > 250 && i < 2) {
+          doc.addPage();
+          yPos = 20;
+        }
+      }
+      
+      // Footer
+      doc.setFontSize(9);
+      doc.setTextColor(150, 150, 150);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Generated by OGSO Ski Recommender • www.ogso-ski.com', 
+              pageWidth / 2, doc.internal.pageSize.getHeight() - 10, 
+              { align: 'center' });
+      
+      // Sauvegarder le PDF
+      const fileName = `OGSO_Ski_Recommendations_${new Date().getTime()}.pdf`;
+      doc.save(fileName);
+      
+      this.pdfGenerated = true;
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+    } finally {
+      this.isGeneratingPDF = false;
+    }
+  }
+  
+  /**
+   * Convert hex color to RGB
+   */
+  private hexToRgb(hex: string): { r: number, g: number, b: number } {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : { r: 0, g: 0, b: 0 };
+  }
+  
+  /**
+   * Génère et télécharge le PDF
+   */
+  async generateAndDownloadPDF(): Promise<void> {
+    if (this.resultat.length === 0) {
+      alert('No ski recommendations to export.');
+      return;
+    }
+    
+    const confirmed = confirm('Generate a beautiful PDF with your ski recommendations?');
+    if (!confirmed) return;
+    
+    await this.generatePDF();
+  }
+
   onInlineCriteriaChange(): void {
     const svc = this.dataService as any;
     if (svc?.setProfile) {
@@ -265,13 +406,8 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.recalculateRecommendationsWithAnimation();
   }
 
-  /**
-   * Initialise la liste des modèles de skis avec leurs tailles disponibles
-   */
   private initializeSkiModels(): void {
     const allSkis: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
-    
-    // Grouper les skis par nom et collecter toutes les tailles disponibles
     const modelMap = new Map<string, number[]>();
     
     allSkis.forEach(ski => {
@@ -283,7 +419,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Créer la liste des modèles avec leurs tailles triées
     this.skiModels = Array.from(modelMap.entries()).map(([name, sizes]) => ({
       name,
       availableSizes: sizes.sort((a, b) => a - b),
@@ -291,70 +426,47 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     }));
   }
 
-  /**
-   * Trouve la taille optimale pour un modèle de ski donné selon les règles spécifiques
-   */
   private findOptimalSize(skiName: string, userHeight: number): number {
     const model = this.skiModels.find(m => m.name === skiName);
     if (!model || !model.availableSizes.length) {
-      return userHeight; // Fallback si le modèle n'est pas trouvé
+      return userHeight;
     }
 
     const availableSizes = model.availableSizes;
     let targetHeight = userHeight;
 
-    // Appliquer les règles spécifiques selon le modèle
     if (this.isSTSOrSwissOrGrandDaddy(skiName)) {
-      // Règle 1: STS, Swiss, Grand Daddy - taille la plus proche de (hauteur - 5 ou 10 cm)
-      targetHeight = userHeight - 7.5; // Moyenne de 5-10 cm
+      targetHeight = userHeight - 7.5;
     } else if (this.isCroixDeFerOrTouno(skiName)) {
-      // Règle 2: Croix de fer, Le Touno - taille la plus proche de (hauteur ou hauteur - 5 cm)
-      targetHeight = userHeight - 2.5; // Privilégier légèrement les tailles plus courtes
+      targetHeight = userHeight - 2.5;
     } else if (this.isRyumonKoiryuBigGrizzly(skiName)) {
-      // Règle 3: Ryumon, Koiryu, Big, Grizzly - taille la plus proche de (hauteur ± 3 cm)
-      targetHeight = userHeight; // Garder la hauteur exacte
+      targetHeight = userHeight;
     }
 
-    // Trouver la taille la plus proche de la hauteur cible
     return this.findClosestSize(availableSizes, targetHeight);
   }
 
-  /**
-   * Vérifie si le ski fait partie des modèles STS, Swiss ou Grand Daddy
-   */
   private isSTSOrSwissOrGrandDaddy(skiName: string): boolean {
     const lowerName = skiName.toLowerCase();
     return lowerName.includes('sts') || lowerName.includes('swiss') || lowerName.includes('grand') || lowerName.includes('daddy');
   }
 
-  /**
-   * Vérifie si le ski fait partie des modèles Croix de fer ou Le Touno
-   */
   private isCroixDeFerOrTouno(skiName: string): boolean {
     const lowerName = skiName.toLowerCase();
     return lowerName.includes('croix') || lowerName.includes('fer') || lowerName.includes('touno');
   }
 
-  /**
-   * Vérifie si le ski fait partie des modèles Ryumon, Koiryu, Big ou Grizzly
-   */
   private isRyumonKoiryuBigGrizzly(skiName: string): boolean {
     const lowerName = skiName.toLowerCase();
     return lowerName.includes('ryumon') || lowerName.includes('koiryu') || lowerName.includes('big') || lowerName.includes('grizzly');
   }
 
-  /**
-   * Trouve la taille la plus proche dans la liste des tailles disponibles
-   */
   private findClosestSize(availableSizes: number[], targetHeight: number): number {
     return availableSizes.reduce((prev, curr) => {
       return (Math.abs(curr - targetHeight) < Math.abs(prev - targetHeight) ? curr : prev);
     });
   }
 
-  /**
-   * Ouvre les détails d'un ski sélectionné
-   */
   openSki(ski: Ski): void {
     console.log('Ski sélectionné:', ski);
     console.log('Score réel:', ski.realScore, 'Score affiché:', ski.score);
@@ -371,9 +483,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.trackSkiSelection(ski);
   }
 
-  /**
-   * Recalcule les recommandations avec une animation élégante
-   */
   recalculateRecommendationsWithAnimation(): void {
     this.isLoading = true;
     setTimeout(() => {
@@ -383,9 +492,6 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  /**
-   * Track ski selection for analytics
-   */
   private trackSkiSelection(ski: Ski): void {
     try {
       const db = getDatabase();
@@ -409,43 +515,34 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     this.resultat = [];
     this.bn = false;
 
-    // Prendre tous les skis sans filtrer par height
     let ar: Ski[] = (skis as any[])?.filter(x => !!x) ?? [];
-
-    // Calcul des scores : chaque ski commence à 100, on applique des pénalités seulement si ça ne matche pas
     const scoredSkis: Ski[] = [];
 
     for (const ski of ar) {
-      let realScore = 100; // score initial
+      let realScore = 100;
 
-      // Critère terrain (playground) : -10 si ne matche pas
       const matchesTerrain = ski.playground
         ? (Array.isArray(ski.playground) ? ski.playground.includes(this.terrain_type) : ski.playground === this.terrain_type)
         : false;
       if (!matchesTerrain) realScore -= 10;
 
-      // Critère snow : -10 si ne matche pas
       const matchesSnow = ski.snow
         ? (Array.isArray(ski.snow) ? ski.snow.includes(this.type_snow) : ski.snow === this.type_snow)
         : false;
       if (!matchesSnow) realScore -= 10;
 
-      // Critère riding_speed (ski_style) : -5 si ne matche pas
       const matchesSpeed = ski.riding_speed
         ? (Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.ski_speed) : ski.riding_speed === this.ski_speed)
         : false;
       if (!matchesSpeed) realScore -= 5;
 
-      // Critère turns : -5 si ne matche pas
       const matchesTurn = ski.turn
         ? (Array.isArray(ski.turn) ? ski.turn.includes(this.ski_turns) : ski.turn === this.ski_turns)
         : false;
       if (!matchesTurn) realScore -= 5;
 
-      // S'assurer que le score ne descend pas en dessous de 0
       if (realScore < 0) realScore = 0;
 
-      // Calcul / valeurs supplémentaires (difference_weight si nécessaire)
       const difference_weight = typeof ski.weight === 'number' ? Math.abs((ski.weight || 0) - this.weight) : 0;
 
       scoredSkis.push({
@@ -456,28 +553,21 @@ export class SkiResultComponent implements OnInit, OnDestroy {
       });
     }
 
-    // Trier par score réel décroissant
     scoredSkis.sort((a, b) => (b.realScore ?? 0) - (a.realScore ?? 0));
-
-    // Éliminer les doublons par nom (garder le meilleur score pour chaque modèle)
     const uniqueSkis = scoredSkis.reduce((acc: Ski[], cur: Ski) => {
       const existing = acc.find(x => x.name === cur.name);
       if (!existing) acc.push(cur);
       return acc;
     }, []);
 
-    // Sélectionner les 6 meilleurs skis et appliquer la taille optimale
     const topSkis = uniqueSkis.slice(0, 6);
     
-    // Pour chaque ski sélectionné, trouver la taille optimale selon les règles
     const skisWithOptimalSize = topSkis.map((ski, index) => {
       const optimalSize = this.findOptimalSize(ski.name, this.height);
-      
-      // Trouver le ski correspondant au modèle et à la taille optimale
       const optimalSki = ar.find(s => 
         s.name === ski.name && 
         s.size === optimalSize
-      ) || ski; // Fallback au ski original si non trouvé
+      ) || ski;
 
       let displayScore: number;
       switch (index) {

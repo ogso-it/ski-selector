@@ -75,18 +75,19 @@ body {
   padding: 20px 0;
   position: relative;
   margin-bottom: 26px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   z-index: 8;
-  text-align: center;
+  gap: 20px;
 }
 
 .logo {
   width: 98px;
   height: auto;
-  display: inline-block;
   transition: transform var(--timing-medium) cubic-bezier(.2,.9,.2,1), filter var(--timing-medium);
   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
-  margin-bottom: 10px;
 }
 .logo:hover { 
   transform: translateY(-4px) scale(1.03); 
@@ -104,6 +105,8 @@ body {
  -webkit-text-fill-color: transparent;
   text-shadow: 0 0 20px rgba(0,102,255,0.3);
   position: relative;
+  text-align: center;
+  flex-grow: 1;
 }
 
 .header-subtitle {
@@ -113,6 +116,93 @@ body {
   letter-spacing: 1.4px;
   font-weight: 600;
   margin-top: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+/* --------------------------
+   BOUTONS PDF/EMAIL - Style fixe (pas de changement au hover)
+   -------------------------- */
+
+/* Bouton Export PDF dans le header */
+.print-btn {
+  background: var(--sport-gradient);
+  color: white !important;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,102,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  min-width: 140px;
+  height: 46px;
+  text-align: center;
+  /* Pas de transition pour le style de base */
+}
+
+/* Pas de changement au survol - même style */
+.print-btn:hover {
+  /* Même style que normal */
+  background: var(--sport-gradient);
+  color: white !important;
+  box-shadow: 0 8px 24px rgba(0,102,255,0.4);
+  transform: none; /* Pas de déplacement */
+}
+
+.print-btn:active {
+  /* Léger feedback au clic seulement */
+  transform: scale(0.98);
+}
+
+.print-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #666 0%, #888 50%, #999 100%);
+}
+
+/* Bouton Send Email */
+.send-email-btn {
+  background: var(--sport-gradient);
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+  white-space: nowrap;
+  min-width: 100px;
+  height: 40px;
+  text-align: center;
+  /* Pas de transition */
+}
+
+/* Même style au survol */
+.send-email-btn:hover {
+  background: var(--sport-gradient);
+  color: white !important;
+  box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+  transform: none;
+}
+
+.send-email-btn:active {
+  transform: scale(0.98);
+}
+
+.send-email-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #666 0%, #888 100%);
 }
 
 /* decorative top bar behind header */
@@ -481,6 +571,66 @@ body {
   color: var(--muted); 
 }
 
+/* Email Section */
+.email-section {
+  background: linear-gradient(180deg, rgba(0,102,255,0.08), rgba(123,47,255,0.08));
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0,102,255,0.2);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.email-section h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.email-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.email-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border-2);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-2) !important;
+  font-size: 14px;
+  /* Pas de transition pour éviter les changements */
+}
+
+.email-input::placeholder {
+  color: rgba(255,255,255,0.5) !important;
+}
+
+.email-input:focus {
+  outline: none;
+  border-color: rgba(0,102,255,0.4);
+  box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+.email-hint {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* stats grid */
 .stats-grid {
   display: grid;
@@ -588,50 +738,6 @@ body {
   background: rgba(255,255,255,0.02);
 }
 
-/* tips */
-.tips-card {
-  padding: 14px;
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-  border: 1px solid var(--glass-border-2);
-  box-shadow: var(--shadow-soft);
-}
-.tips-card h4 { 
-  margin: 0 0 10px; 
-  font-size: 14px; 
-  font-weight: 800; 
-  color: var(--text-2); 
-  text-shadow: 0 0 8px rgba(0,102,255,0.2);
-}
-.tips-list { 
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-  display:block; 
-}
-.tips-list li {
-  padding: 10px 6px;
-  border-bottom: 1px dashed rgba(255,255,255,0.02);
-  color: var(--muted);
-  font-size: 13px;
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  transition: color var(--timing-medium);
-}
-.tips-list li:hover {
-  color: var(--text-2);
-}
-.tips-list li:last-child { border-bottom: none; }
-.tips-list li::before {
-  content: '→';
-  color: var(--accent);
-  display:inline-block;
-  width:18px;
-  margin-left:-6px;
-  text-shadow: 0 0 8px rgba(255,123,0,0.3);
-}
-
 /* --------------------------
    Responsive
    -------------------------- */
@@ -639,6 +745,8 @@ body {
   .content-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 40px; }
   .right-col { position: relative; top: 0; }
   .hero-list { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .header { flex-direction: column; text-align: center; gap: 15px; }
+  .print-btn { order: 3; width: 100%; max-width: 200px; margin: 0 auto; }
 }
 
 @media (max-width: 768px) {
@@ -648,6 +756,8 @@ body {
   .content-grid { padding: 0 12px; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .right-col { position: relative; top: 0; }
+  .email-input-group { flex-direction: column; }
+  .send-email-btn { width: 100%; }
 }
 
 @media (max-width: 480px) {
@@ -658,14 +768,165 @@ body {
   .title { font-size: 20px; }
   .page-wrapper { padding: 14px 12px 60px; }
   .stats-grid { grid-template-columns: 1fr; }
+  .print-btn { padding: 10px 16px; font-size: 13px; min-width: 120px; }
 }
 
 /* --------------------------
    Accessibility helpers
    -------------------------- */
-/* focus outlines for keyboard users */
 :focus { outline: none; box-shadow: 0 0 0 3px rgba(0,102,255,0.12); border-radius: 6px; }
 
 /* --------------------------
-   End of file
+   Loading animation for PDF generation
    -------------------------- */
+.pdf-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 12, 20, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.pdf-loading .loading-spinner {
+  width: 60px;
+  height: 60px;
+  border-width: 5px;
+  margin-bottom: 20px;
+}
+
+.pdf-loading p {
+  color: var(--text-2);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* Success message */
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  z-index: 1001;
+  animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 3s forwards;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* --------------------------
+   Correction du texte des boutons - FORCER LA VISIBILITÉ
+   -------------------------- */
+.print-btn, .print-btn span,
+.send-email-btn, .send-email-btn span {
+  color: white !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+  font-weight: 800 !important;
+}
+
+/* Force l'icône à être visible */
+.print-btn::before {
+  content: '📄 ';
+  display: inline;
+  font-size: 16px;
+}
+
+.print-btn[disabled]::before {
+  content: '⏳ ';
+}
+
+/* Assure que tout le texte est blanc et lisible */
+button, button *, 
+button span, button div {
+  color: white !important;
+}
+/* ==================== */
+/* CORRECTIONS BOUTONS  */
+/* ==================== */
+
+/* ==================== */
+/* DESIGN ÉLÉGANT - BOUTONS PREMIUM */
+/* ==================== */
+
+/* ==================== */
+/* DESIGN GLASSMORPHISM */
+/* ==================== */
+
+/* ==================== */
+/* DESIGN MINIMALISTE ÉLÉGANT */
+/* ==================== */
+
+.print-btn {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 9px 20px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  min-width: 120px !important;
+  height: 38px !important;
+  cursor: pointer !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.2s ease !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.print-btn:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.print-btn::after {
+  content: ' →' !important;
+  margin-left: 4px !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.print-btn:hover::after {
+  opacity: 1 !important;
+}
+
+.send-email-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 7px 16px !important;
+  border-radius: 5px !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  min-width: 85px !important;
+  height: 34px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.send-email-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: rgba(255, 255, 255, 1) !important;
+}

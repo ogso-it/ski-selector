@@ -38,7 +38,7 @@ import { SplitStep1Component } from './ski-form/split-step1/split-step1.componen
 import { SplitStep5Component } from './ski-form/split-step5/split-step5.component';
 import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
 import { CarouselComponent } from './carousel/carousel.component';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +70,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+  
     AppRoutingModule,
     LottiePlayerComponent,
 

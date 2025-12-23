@@ -5,6 +5,11 @@
     <img class="logo" src="./assets/images/ogso-logo.png" alt="OGSO logo" />
     <h1 class="title">YOUR PERFECT SKI MATCH</h1>
     <div class="header-subtitle">Powered by Smart AI Selection</div>
+    
+    <!-- Print/Export Button -->
+    <button class="print-btn" (click)="generateAndDownloadPDF()">
+      📄 Export PDF
+    </button>
   </div>
 
   <!-- MAIN GRID -->
@@ -151,7 +156,7 @@
 
             <div class="form-group">
               <label>Speed Preference</label>
-              <select [(ngModel)]="ski_speed" (change)="onInlineCriteriaChange()">
+              <select [(ngModel)]="ski_speed" (input)="onInlineCriteriaChange()">
                 <option *ngFor="let opt of speedOptions" [value]="opt">
                   {{ opt }}
                 </option>
@@ -166,17 +171,6 @@
         </p>
 
       </div>
-
-      <!-- Quick Tips -->
-      <!-- <div class="tips-card">
-        <h4>Pro Tips</h4>
-        <ul class="tips-list">
-          <li>Higher score = Better match</li>
-          <li>Adjust speed for responsiveness</li>
-          <li>Terrain affects ski width</li>
-          <li>Snow type impacts flex</li>
-        </ul>
-      </div> -->
 
     </div>
 
