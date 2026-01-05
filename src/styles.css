@@ -13,6 +13,13 @@
   overflow-y:  scroll !important;
 }
 
+.top-right-logo img {
+  max-width: 180px;       /* ajuste selon ton design */
+  height: auto;           /* garde les proportions */
+  object-fit: contain;    /* évite toute déformation */
+  float : right;          /* positionne à droite */
+   transform: translateY(-50px); /* ⬆️ remonte le logo */
+}
 
 
 @tailwind base;
@@ -46,6 +53,7 @@
 .logo  {
     float: right;
  }
+
  
  
  @media screen and (max-width: 600px) {
