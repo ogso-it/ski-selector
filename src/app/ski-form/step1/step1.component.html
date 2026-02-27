@@ -1,72 +1,63 @@
-  <!------------------------- Step-1 ----------------------------->
-  <div class="multisteps_form_panel active" data-animation="slideVert">
-    <div class="form_content">
-       <div class="row">
-          <div class="col-lg-4 self-center">
-             <div class="form_title ps-5  ">
-      <span  class="title text-black font-sans text-2xl md:text-5xl  mb-5 "><span class="font-bold">HEIGHT </span> AND <span class="font-bold">WEIGHT </span>WILL&nbsp;BE <br>OUR <span class="font-bold"><span></span>STARTING POINT</span></span>
+<!-- STEP 1 CONTENT (injecté dans SkiLayout) -->
 
+<div class="step-layout">
+
+  <!-- LEFT TEXT -->
+  <div class="left">
+    <h1>
+      HEIGHT AND<br>
+      WEIGHT WILL<br>
+      BE<br>
+      OUR STARTING<br>
+      POINT
+    </h1>
+  </div>
+
+  <!-- RIGHT INPUTS -->
+  <div class="right">
+
+    <!-- HEIGHT -->
+    <div class="input-block">
+      <h2>HOW TALL ARE YOU?</h2>
+
+      <div class="range-labels">
+        <span>140 cm</span>
+        <span>220 cm</span>
       </div>
- </div>
-          <div class="col-lg-4 text-center   hidden md:block">
-             
-            <app-lottie-player   [options]="options " 
-(animationCreated)="animationCreated($any($event))"></app-lottie-player>
 
+      <p class="value">{{ height }} cm</p>
 
-            
-          </div>
-          <div class="col-lg-4 text-end">
-           <div  >
-             <ul  >
-                <li>
-                  <div class="review_block mt-6">
-                     <div class="range-field mb-3">
-                        <h2  class="title font-bold font-sans   text-base md:text-2xl  text-center mt-10  text-orange-600">HOW TALL ARE YOU ?</h2>
-                        <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This field is required</p>
-                       <span class="min_slider">140 cm</span>
-                       <span class="max_slider">220 cm</span>
-
-                       <p class="text-center text-2xl font-bold  mb-2" for ="range_height" >{{height}}</p>
-                       <input   value='50'  class="slider" type="range" id="range_height" min="10" max="90" step="1"   (input)="HeightChanged($event)" /> 
-                   
-                    
-                    
-                     </div>
-                   </div>
-                </li>
-             
-              
-                <li>
-                  <div class="review_block">
-                     <div class="range-field">
-                        <h2  class="title font-bold font-sans  text-base md:text-2xl text-center mt-10  text-orange-600">HOW MUCH DO YOU WEIGH ?</h2>
-                        <p class="text-center mb-2 md:mb-4
-                        "><span class=" text-orange-600">*</span> This field is required</p>
-                       <span class="min_slider">40 kg</span>
-                       <span class="max_slider">150 kg</span>
-
-                       <p  class="text-center text-2xl font-bold  mb-2" for ="range_weight" >{{weight}}</p>
-                       <input   value='65' class="slider" type="range" id="range_weight" min="10" max="120" step="1"   (input)="WeightChanged($event)" /> 
-                  
-                  
-                    
-                     </div>
-                   </div>
-                </li>
-             </ul>
-           </div>
-        </div>
-       </div>
-    </div>
- 
-    <!---------- Form Button ---------->
-    <div class="form_btn py-4 d-flex justify-content-center align-items-center">
-      <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" routerLink='/choose-your-gear'><span><i class="fas fa-arrow-left pe-1"></i></span>PREV.</button>
-       <button  type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed':  !(tr1 && tr2)  , 'js-btn-next f_btn rounded-pill active text-uppercase' : tr1 && tr2 }"  id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
-       
-
-       
+      <input type="range"
+             min="140"
+             max="220"
+             step="1"
+             [value]="height"
+             (input)="onHeightChange($event)" />
     </div>
 
- </div>
+    <!-- WEIGHT -->
+    <div class="input-block">
+      <h2>HOW MUCH DO YOU WEIGH?</h2>
+
+      <div class="range-labels">
+        <span>40 kg</span>
+        <span>150 kg</span>
+      </div>
+
+      <p class="value">{{ weight }} kg</p>
+
+      <input type="range"
+             min="40"
+             max="150"
+             step="1"
+             [value]="weight"
+             (input)="onWeightChange($event)" />
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BUTTONS -->
+<button class="prev-btn" routerLink="/">PREV</button>
+<button class="next-btn" (click)="next()">NEXT</button>

@@ -1,119 +1,54 @@
-
-import { Component, OnInit  , NgZone} from '@angular/core';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-step5',
-    templateUrl: './step5.component.html',
-    styleUrls: ['./step5.component.css'],
-    standalone: false
+  selector: 'app-step5',
+  templateUrl: './step5.component.html',
+  styleUrls: ['./step5.component.css'],
+  standalone: false
 })
-export class Step5Component implements OnInit {
+export class Step5Component implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
 
+  hidden: boolean = false;
+  selectedTurn: string | null = null;
 
-
-
-
-
-
-
-  private animationItem!: AnimationItem;
-  
-  options: AnimationOptions = {
-    
-    autoplay:false,
-    path: '../../../assets/jsons/animation/8/8.json',
-  
-  };
-
-
-  options2: AnimationOptions = {
-    
-    autoplay:true,
-    path: '../../../assets/jsons/animation/1/1.json',
-  
-  };
-
-
-  updateAnimation(): void {
-
-
-    this.options = {
-      
-      ...this.options, // In case you have other properties that you want to copy
-      path: '../../../assets/jsons/animation/test.json',
-     
-
-  }
-  }
-
-  
-  animationCreated(animationItem: AnimationItem): void {
-    this.animationItem = animationItem;
-    
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  hidden : any ;
-  constructor (private  dataService: DataServiceService  ,private ngZone: NgZone , private router: Router) { }
-
-
-  play(): void {
-    this.ngZone.runOutsideAngular(() => {
-      this.animationItem.play();
-    });
-  }
-  
-  stop(): void {
-    this.ngZone.runOutsideAngular(() => {
-      this.animationItem.pause();
-    });
-  }
-
-
+  constructor(
+    private dataService: DataServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-   // this.getData()
+    this.dataService.profile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(profile => {
+        this.selectedTurn = profile.turns;
+        this.hidden = !!profile.turns;
+      });
   }
 
-
-  checkCheckBoxvalue1(event : any ){
-
-    this.checkchecked(event.target.value)
-    this.dataService.sendDataTurns(event.target.value)
-    this.stop()
-    this.play()
-    setTimeout(()=>{
-     this.stop()
-    },1440)
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  checkchecked( x : any ){
-    if(x){
-      this.hidden = true
+  onTurnChange(value: string): void {
+    this.selectedTurn = value;
+    this.hidden = true;
+    this.dataService.setTurns(value);
+    console.log('Turn preference selected:', value);
+  }
 
-    }
-    else {
-      this.hidden = false
-    }
-  } 
+  prev(): void {
+    this.router.navigate(['/ski/step4']);
+  }
 
-  sendNewData(data: any) {
-    this.dataService.sendData3(data);
+  next(): void {
+    if (this.hidden) {
+      this.router.navigate(['/ski/step6']);
+    }
   }
 }

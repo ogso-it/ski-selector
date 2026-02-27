@@ -1,179 +1,203 @@
-<div class="page-wrapper">
+<div class="results-container">
 
-  <!-- HEADER -->
-  <div class="header">
-    <img class="logo" src="./assets/images/ogso-logo.png" alt="OGSO logo" />
-    <h1 class="title">YOUR PERFECT SKI MATCH</h1>
-    <div class="header-subtitle">Powered by Smart AI Selection</div>
-    
-    <!-- Print/Export Button -->
-    <button class="print-btn" (click)="generateAndDownloadPDF()">
-      📄 Export PDF
-    </button>
-  </div>
+  <!-- VIDEO BACKGROUND -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/images/BACKGROUND.webm" type="video/webm">
+  </video>
 
-  <!-- MAIN GRID -->
-  <div class="content-grid">
+  <!-- CONTENT -->
+  <div class="content-overlay">
 
-    <!-- LEFT COL — SKI RESULTS -->
-    <div class="left-col">
+    <!-- HEADER -->
+    <header class="results-header">
+      <img src="assets/images/ogsologo.png" alt="OGSO" class="main-logo">
+      <button class="export-btn" (click)="generateAndDownloadPDF()" [disabled]="isGeneratingPDF">
+        <span>{{ isGeneratingPDF ? 'GENERATING...' : 'EXPORT PDF' }}</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </header>
 
-      <div class="hero-intro">
-        <h2 class="hero-heading">Recommended Skis</h2>
-        <p class="hero-sub">Tailored to your profile • Live updates • Best matches</p>
-      </div>
+    <!-- MAIN CONTENT -->
+    <main class="results-main">
 
-      <!-- Loading State -->
+      <!-- Loading -->
       <div *ngIf="isLoading" class="loading-state">
-        <div class="loading-spinner"></div>
+        <div class="spinner"></div>
         <p>Finding your perfect ski matches...</p>
-        <div class="loading-pulse"></div>
       </div>
 
-      <!-- Ski Results Grid -->
-      <div class="hero-list" [@listAnimation]="animationKey">
-        <div
-          class="hero-card"
-          *ngFor="let r of resultat | slice:0:3"
-          [@cardAnimation]
-          (click)="openSki(r)"
-        >
+      <!-- Results -->
+      <div *ngIf="!isLoading" class="results-content">
 
-          <div class="hero-media">
-            <img 
-              class="hero-img" 
-              [src]="r.src" 
-              [alt]="r.name" 
-              [@imageAnimation]
-            />
-            <div class="glow"></div>
-            <div class="badge">OGSO</div>
-            <div class="rank-badge">{{ resultat.indexOf(r) + 1 }}</div>
-          </div>
+        <!-- Title -->
+        <h1 class="main-title">YOUR PERFECT SKI MATCH</h1>
 
-          <div class="hero-body">
-            <h3 class="hero-name">{{ r.name }}</h3>
-            <p class="hero-meta">{{ r.size }} cm • {{ r.weight }}g</p>
-
-            <div class="hero-score">
-              <span 
-                class="score-pill" 
-                [@scoreAnimation]
-                [style.background]="getScoreColor(r.score || 0)"
-              >
-                Score: {{ r.score }}
-              </span>
-              <span class="match-percent">
-                {{ (r.score || 0) }}% match
-              </span>
-            </div>
-
-            <div class="ski-features">
-              <span class="feature-tag" *ngIf="r.family">{{ r.family }}</span>
-              <span class="feature-tag" *ngIf="r.category">{{ r.category }}</span>
-            </div>
-          </div>
-
-          <div class="card-hover-effect">
-            <div class="hover-icon">Click for details</div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT COL — PROFILE + EDITOR -->
-    <div class="right-col">
-      <div class="profile-card">
-
-        <div class="profile-head">
-          <h3>Your Ski Profile</h3>
-          <p class="muted">Adjust criteria • Instant results • Smart matching</p>
-        </div>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-          <div class="stat" *ngFor="let item of generatedStats">
-            <div class="stat-icon">{{ item.icon }}</div>
-            <div class="stat-content">
-              <p class="stat-label">{{ item.label }}</p>
-              <p class="stat-value">{{ item.value }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Editor Controls -->
-        <div class="editor-section">
-          <h4 class="editor-title">Adjust Your Preferences</h4>
-          
-          <div class="editor">
-            <div class="form-group">
-              <label>Height (cm)</label>
-              <input type="number" [(ngModel)]="height" (input)="onInlineCriteriaChange()">
-            </div>
-
-            <div class="form-group">
-              <label>Weight (kg)</label>
-              <input type="number" [(ngModel)]="weight" (input)="onInlineCriteriaChange()">
-            </div>
-
-            <div class="form-group">
-              <label>Terrain</label>
-              <select [(ngModel)]="terrain_type" (change)="onInlineCriteriaChange()">
-                <option *ngFor="let opt of terrainOptions" [value]="opt">
-                  {{ opt }}
-                </option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Snow Type</label>
-              <select [(ngModel)]="type_snow" (change)="onInlineCriteriaChange()">
-                <option *ngFor="let opt of snowOptions" [value]="opt">
-                  {{ opt }}
-                </option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Riding Style</label>
-              <select [(ngModel)]="ski_level_fun" (change)="onInlineCriteriaChange()">
-                <option *ngFor="let opt of funOptions" [value]="opt">
-                  {{ opt }}
-                </option>
-              </select>
-            </div>
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+          <div class="ski-card" 
+               *ngFor="let ski of resultat | slice:0:3; let i = index"
+               (click)="openSki(ski)">
             
-            <div class="form-group">
-              <label>Turns Style</label>
-              <select [(ngModel)]="ski_turns" (change)="onInlineCriteriaChange()">
-                <option *ngFor="let opt of turnOptions" [value]="opt">
-                  {{ opt }}
-                </option>
-              </select>
+            <!-- Rank Badge -->
+            <div class="card-rank" [style.background]="getRankColor(i)">
+              {{ i + 1 }}
             </div>
 
-            <div class="form-group">
-              <label>Speed Preference</label>
-              <select [(ngModel)]="ski_speed" (input)="onInlineCriteriaChange()">
-                <option *ngFor="let opt of speedOptions" [value]="opt">
-                  {{ opt }}
-                </option>
-              </select>
+            <!-- Image -->
+            <div class="card-image">
+              <img [src]="ski.src" [alt]="ski.name">
+            </div>
+
+            <!-- Info -->
+            <div class="card-details">
+              <h3 class="ski-name">{{ ski.name }}</h3>
+              <p class="ski-family">{{ ski.family || 'OGSO' }}</p>
+              
+              <div class="ski-specs">
+                {{ ski.size }} cm • {{ ski.weight || 'N/A' }} g
+              </div>
+
+              <!-- Score -->
+              <div class="ski-score">
+                <span class="score-badge" [style.background]="getScoreColor(ski.score || 0)">
+                  {{ ski.score }}%
+                </span>
+                <span class="score-text">MATCH</span>
+              </div>
+
+              <!-- View Button -->
+              <button class="view-details">
+                VIEW DETAILS
+                <span class="arrow">→</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <p class="disclaimer">
-          All OGSO skis perform exceptionally in all conditions. 
-          These are personalized AI recommendations for optimal performance.
-        </p>
+        <!-- Profile Section -->
+        <div class="profile-wrapper">
+          <h2 class="profile-title">YOUR PROFILE</h2>
+
+          <!-- Stats -->
+          <div class="profile-stats">
+            <div class="stat-block">
+              <span class="stat-icon">📏</span>
+              <div class="stat-info">
+                <span class="stat-label">Height</span>
+                <span class="stat-number">{{ height }} cm</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">⚖️</span>
+              <div class="stat-info">
+                <span class="stat-label">Weight</span>
+                <span class="stat-number">{{ weight }} kg</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">🏔️</span>
+              <div class="stat-info">
+                <span class="stat-label">Terrain</span>
+                <span class="stat-number">{{ formatTerrain(terrain_type) }}</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">❄️</span>
+              <div class="stat-info">
+                <span class="stat-label">Snow</span>
+                <span class="stat-number">{{ formatSnow(type_snow) }}</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">🎨</span>
+              <div class="stat-info">
+                <span class="stat-label">Style</span>
+                <span class="stat-number">{{ formatStyle(ski_level_fun) }}</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">🔄</span>
+              <div class="stat-info">
+                <span class="stat-label">Turns</span>
+                <span class="stat-number">{{ formatTurns(ski_turns) }}</span>
+              </div>
+            </div>
+
+            <div class="stat-block">
+              <span class="stat-icon">⚡</span>
+              <div class="stat-info">
+                <span class="stat-label">Speed</span>
+                <span class="stat-number">{{ formatSpeed(ski_speed) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor -->
+          <div class="preferences-editor">
+            <div class="editor-grid">
+              <div class="editor-item" title="Height (cm)">
+                <label title="Height (cm)">H</label>
+                <input type="number" [(ngModel)]="height" (input)="onInlineCriteriaChange()" title="Height in centimeters">
+              </div>
+              <div class="editor-item" title="Weight (kg)">
+                <label title="Weight (kg)">W</label>
+                <input type="number" [(ngModel)]="weight" (input)="onInlineCriteriaChange()" title="Weight in kilograms">
+              </div>
+              <div class="editor-item" title="Terrain type">
+                <label title="Terrain type">T</label>
+                <select [(ngModel)]="terrain_type" (change)="onInlineCriteriaChange()" title="Select terrain">
+                  <option *ngFor="let opt of terrainOptions" [value]="opt">{{ formatTerrain(opt) }}</option>
+                </select>
+              </div>
+              <div class="editor-item" title="Snow condition">
+                <label title="Snow condition">S</label>
+                <select [(ngModel)]="type_snow" (change)="onInlineCriteriaChange()" title="Select snow type">
+                  <option *ngFor="let opt of snowOptions" [value]="opt">{{ formatSnow(opt) }}</option>
+                </select>
+              </div>
+              <div class="editor-item" title="Skiing style">
+                <label title="Skiing style">ST</label>
+                <select [(ngModel)]="ski_level_fun" (change)="onInlineCriteriaChange()" title="Select style">
+                  <option *ngFor="let opt of funOptions" [value]="opt">{{ formatStyle(opt) }}</option>
+                </select>
+              </div>
+              <div class="editor-item" title="Turning preference">
+                <label title="Turning preference">TU</label>
+                <select [(ngModel)]="ski_turns" (change)="onInlineCriteriaChange()" title="Select turns preference">
+                  <option *ngFor="let opt of turnOptions" [value]="opt">{{ formatTurns(opt) }}</option>
+                </select>
+              </div>
+              <div class="editor-item" title="Speed preference">
+                <label title="Speed preference">SP</label>
+                <select [(ngModel)]="ski_speed" (change)="onInlineCriteriaChange()" title="Select speed">
+                  <option *ngFor="let opt of speedOptions" [value]="opt">{{ formatSpeed(opt) }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer-credit">OGSO • Smart Product Selector</p>
+        </div>
 
       </div>
-
-    </div>
+    </main>
 
   </div>
- 
+
+  <!-- PDF Overlay -->
+  <div class="pdf-overlay" *ngIf="isGeneratingPDF">
+    <div class="spinner"></div>
+    <p>Generating PDF...</p>
+  </div>
+
+  <!-- Success Toast -->
+  <div class="success-toast" *ngIf="pdfGenerated">
+    ✓ PDF generated successfully
+  </div>
+
 </div>

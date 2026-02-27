@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Step6Component } from './step6.component';
+import { Step7Component } from './step7.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DataServiceService } from 'src/app/data-service.service';
 
-describe('Step6Component', () => {
-  let component: Step6Component;
-  let fixture: ComponentFixture<Step6Component>;
+describe('Step7Component', () => {
+  let component: Step7Component;
+  let fixture: ComponentFixture<Step7Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Step6Component],
+      declarations: [Step7Component],
       imports: [RouterTestingModule],
       providers: [DataServiceService]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Step6Component);
+    fixture = TestBed.createComponent(Step7Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,28 +23,28 @@ describe('Step6Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should select speed preference', () => {
-    component.onSpeedChange('moderate-speed');
-    expect(component.selectedSpeed).toBe('moderate-speed');
+  it('should select skiing style', () => {
+    component.onStyleChange('technical-precision');
+    expect(component.selectedStyle).toBe('technical-precision');
     expect(component.hidden).toBeTrue();
   });
 
-  it('should not navigate if no preference selected', () => {
+  it('should not navigate if no style selected', () => {
     const routerSpy = spyOn(component['router'], 'navigate');
     component.next();
     expect(routerSpy).not.toHaveBeenCalled();
   });
 
-  it('should navigate when preference selected', () => {
+  it('should navigate to results page when style selected', () => {
     const routerSpy = spyOn(component['router'], 'navigate');
-    component.onSpeedChange('high-speed');
+    component.onStyleChange('fun-surf');
     component.next();
-    expect(routerSpy).toHaveBeenCalledWith(['/ski/step7']);
+    expect(routerSpy).toHaveBeenCalledWith(['/recommanded-skis']);
   });
 
-  it('should navigate to step5 on prev', () => {
+  it('should navigate to step6 on prev', () => {
     const routerSpy = spyOn(component['router'], 'navigate');
     component.prev();
-    expect(routerSpy).toHaveBeenCalledWith(['/ski/step5']);
+    expect(routerSpy).toHaveBeenCalledWith(['/ski/step6']);
   });
 });

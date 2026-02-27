@@ -24,13 +24,9 @@
          <img src="./assets/images/ogso-logo.png" alt="image_not_found">
       </div> -->
        <form class="multisteps_form position-relative" id="wizard" >
-         <app-step1></app-step1>
-         <app-step2></app-step2>
-         <app-step3></app-step3>
-         <app-step4></app-step4>
-         <app-split-style></app-split-style>
-         <app-step6></app-step6>
-         <app-step5></app-step5>
+         <div class="step-content position-relative">
+            <router-outlet></router-outlet>
+         </div>
        
       </form>
     </div>

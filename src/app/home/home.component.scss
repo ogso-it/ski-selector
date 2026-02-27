@@ -1,0 +1,209 @@
+/* ================= LEFT TEXT ================= */
+.left {
+  position: absolute;
+  left: 6%;
+  top: 20%;
+  width: 35%;
+  z-index: 5;
+}
+
+.left h1 {
+  color: #ff6a00;
+  font-size: 60px;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+/* ================= CENTER SKI ================= */
+.center {
+  position: absolute;
+  left: 50%;
+  bottom: 38%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.ski-img {
+  height: 390px;
+  width: auto;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+}
+
+/* ================= RIGHT TEXT ================= */
+.right {
+  position: absolute;
+  right: 6%;
+  bottom: 48%;
+  width: 32%;
+  z-index: 5;
+}
+
+.right p {
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.right p:first-of-type {
+  margin-bottom: 25px;
+}
+
+.signature {
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 15px;
+}
+
+/* ================= NEXT BUTTON ================= */
+.next-btn {
+  position: absolute;
+  right: 6%;
+  bottom: 18%;
+  background: linear-gradient(90deg, #00aaff, #00eaff);
+  border: none;
+  padding: 10px 35px;
+  border-radius: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+  z-index: 10;
+}
+
+.next-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 234, 255, 0.5);
+}
+
+/* ================= TABLETTE (768px - 1024px) ================= */
+@media (max-width: 1024px) {
+  .left h1 {
+    font-size: 48px;
+  }
+  
+  .ski-img {
+    height: 300px;
+  }
+  
+  .right p {
+    font-size: 15px;
+  }
+}
+
+/* ================= MOBILE (jusqu'à 768px) ================= */
+@media (max-width: 768px) {
+  /* Reset des positions absolues */
+  .left, .center, .right {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    transform: none;
+  }
+  
+  /* Ordre d'affichage */
+  .left { 
+    order: 1; 
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .center { 
+    order: 2; 
+    text-align: center;
+  }
+  
+  .right { 
+    order: 3; 
+    text-align: center;
+  }
+  
+  /* Ajustements visuels */
+  .left h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+  
+  .ski-img {
+    height: 200px;
+    margin: 0 auto;
+  }
+  
+  .right p {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .signature {
+    margin-top: 10px;
+  }
+  
+  /* Bouton */
+  .next-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 300px;
+    padding: 12px 20px;
+    font-size: 14px;
+    z-index: 30;
+  }
+  
+  .next-btn:hover {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+/* ================= PETIT MOBILE (jusqu'à 480px) ================= */
+@media (max-width: 480px) {
+  .left h1 {
+    font-size: 28px;
+  }
+  
+  .ski-img {
+    height: 150px;
+  }
+  
+  .right p {
+    font-size: 13px;
+  }
+  
+  .next-btn {
+    bottom: 15px;
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+/* ================= TRÈS PETIT MOBILE (jusqu'à 360px) ================= */
+@media (max-width: 360px) {
+  .left h1 {
+    font-size: 24px;
+  }
+  
+  .ski-img {
+    height: 120px;
+  }
+  
+  .right p {
+    font-size: 12px;
+  }
+}

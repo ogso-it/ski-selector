@@ -1,143 +1,95 @@
-import { Component, OnInit  , NgZone} from '@angular/core';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
-
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 
 @Component({
-    selector: 'app-step1',
-    templateUrl: './step1.component.html',
-    styleUrls: ['./step1.component.scss'],
-    standalone: false
+  selector: 'app-step1',
+  templateUrl: './step1.component.html',
+  styleUrls: ['./step1.component.scss'],
+  standalone: false
 })
 export class Step1Component implements OnInit {
 
-
-
-  private animationItem!: AnimationItem;
+  height: number = 178;
+  weight: number = 75;
   
-  options: AnimationOptions = {
-    
-    autoplay:false,
-    path: '../../../assets/jsons/animation/2/2.json',
-  
-  };
+  // Height and weight constraints
+  private readonly HEIGHT_MIN = 140;
+  private readonly HEIGHT_MAX = 220;
+  private readonly WEIGHT_MIN = 40;
+  private readonly WEIGHT_MAX = 150;
 
+  constructor(
+    private dataService: DataServiceService,
+    private router: Router,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
+  ngOnInit(): void {
+    // Load saved values from service if available
+    const profile = this.dataService.profile;
+    if (profile.height && profile.height > 0) {
+      this.height = profile.height;
+    }
+    if (profile.weight && profile.weight > 0) {
+      this.weight = profile.weight;
+    }
+  }
 
+  /* ===== HEIGHT CHANGE (FAST DOM) ===== */
+  onHeightChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.height = parseInt(input.value, 10);
+  }
 
+  /* ===== WEIGHT CHANGE (FAST DOM) ===== */
+  onWeightChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.weight = parseInt(input.value, 10);
+  }
 
-  updateAnimation(): void {
+  /* ===== VALIDATION ===== */
+  private isValid(): { valid: boolean; errors: string[] } {
+    const errors: string[] = [];
 
+    if (!this.height || this.height < this.HEIGHT_MIN || this.height > this.HEIGHT_MAX) {
+      errors.push(`Height must be between ${this.HEIGHT_MIN}cm and ${this.HEIGHT_MAX}cm`);
+    }
 
-    this.options = {
+    if (!this.weight || this.weight < this.WEIGHT_MIN || this.weight > this.WEIGHT_MAX) {
+      errors.push(`Weight must be between ${this.WEIGHT_MIN}kg and ${this.WEIGHT_MAX}kg`);
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors
+    };
+  }
+
+  /* ===== NEXT STEP ===== */
+  next(): void {
+    try {
+      const validation = this.isValid();
       
-      ...this.options, // In case you have other properties that you want to copy
-      path: '../../../assets/jsons/animation/2/2.json',
-     
+      if (!validation.valid) {
+        // Show all validation errors
+        validation.errors.forEach(error => {
+          this.errorHandler.addValidationError(error);
+        });
+        return; // Prevent navigation
+      }
 
+      // Enregistrer dans le service
+      this.dataService.setHeight(this.height);
+      this.dataService.setWeight(this.weight);
+
+      // Navigation
+      this.router.navigate(['/ski/step2']).catch(error => {
+        this.errorHandler.handleNavigationError(error, 'Failed to navigate to next step');
+      });
+    } catch (error) {
+      this.errorHandler.handleServiceError(error, 'Step1');
+    }
   }
-  }
-
-  
-  animationCreated(animationItem: AnimationItem): void {
-    this.animationItem = animationItem;
-    
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  height : any = "Slide me";
-  weight : any = "Slide me";
-  tr1 : any = false ;
-  tr2 : any = false ;
-  dur = "0s" ;
-
-
- constructor (private  dataService: DataServiceService  ,private ngZone: NgZone , private router: Router) { }
-
- play(): void {
-  this.ngZone.runOutsideAngular(() => {
-    this.animationItem.play();
-  });
-}
-
-stop(): void {
-  this.ngZone.runOutsideAngular(() => {
-    this.animationItem.pause();
-  });
-}
-
-
-
-
-
- ngOnInit(
-  
-
- ): void {
-  this.animationCreated(this.animationItem)
- }
-
- 
- HeightChanged(e : any ) {
-   this.height = parseInt(e.target.value)+130 +" cm"
-   this.tr1 = true 
-   this.dur = "10s"
-   this.sendHeight(parseInt(e.target.value)+130)
-   this.stop()
-   this.play()
-   setTimeout(()=>{
-    this.stop()
-   },1500)
-  
- }
-
-
- WeightChanged(e : any ) {
-   this.weight = parseInt(e.target.value)+30 + " Kg"
-   this.tr2 = true
-   this.sendWeight(parseInt(e.target.value)+30)
-   this.stop()
-   this.play()
-   setTimeout(()=>{
-    this.stop()
-   },1500)
-  
- }
-
-//console.log('TEST')
-verif(){
-  return this.tr1 && this.tr2
-}
-
-
-sendHeight(data: any) {
-  this.dataService.sendData(data);
-}
-
-
-sendWeight(data: any) {
-  this.dataService.sendData2(data);
-}
-
-
-
 }

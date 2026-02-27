@@ -1,108 +1,139 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+export interface SkiProfile {
+  height: number | null;
+  weight: number | null;
+  skiLevel: string | null;
+  terrainType: string | null;
+  typeSnow: string | null;
+  skiStyleFun: string | null;
+  turns: string | null;
+  stable: string | null;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
 
-  // ✅ Listes centralisées des options (identiques à celles du quiz)
-  terrainOptions = [
-    'touring-back-mountain',
-    'touring-front-mountain',
-    'touring-race',
-    'touring-mountaineering',
-    'all-mountain',
-    'freeride',
-    'freetouring',
-    'resort',
-    'carving',
-    'playride'
-    
+  /* ================= STATE CENTRAL ================= */
 
-  ];
+  private readonly STORAGE_KEY = 'ski_profile_data';
+  private defaultProfile: SkiProfile = {
+    height: null,
+    weight: null,
+    skiLevel: null,
+    terrainType: null,
+    typeSnow: null,
+    skiStyleFun: null,
+    turns: null,
+    stable: null
+  };
 
-  snowOptions = [
-    'powder',
-    'hard',
-    'crud'
-  ];
+  private profileSubject = new BehaviorSubject<SkiProfile>(this.loadFromStorage());
 
-  speedOptions = [
-    'moderate-speed',
-    'high-speed'
-  ];
+  profile$ = this.profileSubject.asObservable();
 
-  turnOptions = [
-    'short',
-    'long'
-  ];
+  constructor() {
+    // Load profile from localStorage on service initialization
+    const savedProfile = this.loadFromStorage();
+    if (savedProfile !== this.defaultProfile) {
+      this.profileSubject.next(savedProfile);
+    }
+  }
 
-  funOptions = [
-    'fun-surf',
-    'technical-precision',
-  ];
+  /* ================= GET CURRENT VALUE ================= */
 
-  levelOptions = [
-    'newbie',
-    'intermediate',
-    'confirmed',
-    'pro-guide'
-  ];
+  get profile(): SkiProfile {
+    return this.profileSubject.value;
+  }
 
-  // -------------------------------------------------------
-  // BehaviorSubjects (valeurs initiales neutres)
-  private dataSourceHeight = new BehaviorSubject<number | null>(null);
-  private dataSourceWeight = new BehaviorSubject<number | null>(null);
-  private dataSourceSkiLevel = new BehaviorSubject<string | null>(null);
-  private dataSourceTypeSnow = new BehaviorSubject<string | null>(null);
-  private dataSourceTerrainType = new BehaviorSubject<string | null>(null);
-  private dataSourceSkiStyleFun = new BehaviorSubject<string | null>(null);
-  private dataSourceTurns = new BehaviorSubject<string | null>(null);
-  private dataSourceStable = new BehaviorSubject<string | null>(null);
+  /* ================= UPDATE METHODS ================= */
 
-  // Observables publiques
-  height$: Observable<number | null> = this.dataSourceHeight.asObservable();
-  weight$: Observable<number | null> = this.dataSourceWeight.asObservable();
-  ski_level$: Observable<string | null> = this.dataSourceSkiLevel.asObservable();
-  type_snow$: Observable<string | null> = this.dataSourceTypeSnow.asObservable();
-  terrain_type$: Observable<string | null> = this.dataSourceTerrainType.asObservable();
-  ski_style_fun$: Observable<string | null> = this.dataSourceSkiStyleFun.asObservable();
-  turns$: Observable<string | null> = this.dataSourceTurns.asObservable();
-  stable$: Observable<string | null> = this.dataSourceStable.asObservable();
+  setHeight(height: number) {
+    this.update({ height });
+  }
 
-  constructor() {}
+  setWeight(weight: number) {
+    this.update({ weight });
+  }
 
-  // -------------------------------------------------------
-  // Méthodes d'envoi unitaires
-  sendData(data: number) { this.dataSourceHeight.next(data); }
-  sendData2(data: number) { this.dataSourceWeight.next(data); }
-  sendData3(data: string) { this.dataSourceSkiLevel.next(data); }
-  sendData4(data: string) { this.dataSourceTerrainType.next(data); }
-  sendDataT(data: string) { this.dataSourceTypeSnow.next(data); }
-  sendDataF(data: string) { this.dataSourceSkiStyleFun.next(data); }
-  sendDataTurns(data: string) { this.dataSourceTurns.next(data); }
-  sendDataStable(data: string) { this.dataSourceStable.next(data); }
+  setSkiLevel(skiLevel: string) {
+    this.update({ skiLevel });
+  }
 
-  // -------------------------------------------------------
-  // Méthode utilitaire pour mise à jour complète
-  setProfile(profile: {
-    height?: number | null;
-    weight?: number | null;
-    skiLevel?: string | null;
-    typeSnow?: string | null;
-    terrainType?: string | null;
-    skiStyleFun?: string | null;
-    turns?: string | null;
-    stable?: string | null;
-  }) {
-    if (typeof profile.height === 'number') this.dataSourceHeight.next(profile.height);
-    if (typeof profile.weight === 'number') this.dataSourceWeight.next(profile.weight);
-    if (typeof profile.skiLevel === 'string') this.dataSourceSkiLevel.next(profile.skiLevel);
-    if (typeof profile.typeSnow === 'string') this.dataSourceTypeSnow.next(profile.typeSnow);
-    if (typeof profile.terrainType === 'string') this.dataSourceTerrainType.next(profile.terrainType);
-    if (typeof profile.skiStyleFun === 'string') this.dataSourceSkiStyleFun.next(profile.skiStyleFun);
-    if (typeof profile.turns === 'string') this.dataSourceTurns.next(profile.turns);
-    if (typeof profile.stable === 'string') this.dataSourceStable.next(profile.stable);
+  setTerrainType(terrainType: string) {
+    this.update({ terrainType });
+  }
+
+  setTypeSnow(typeSnow: string) {
+    this.update({ typeSnow });
+  }
+
+  setSkiStyleFun(skiStyleFun: string) {
+    this.update({ skiStyleFun });
+  }
+
+  setTurns(turns: string) {
+    this.update({ turns });
+  }
+
+  setStable(stable: string) {
+    this.update({ stable });
+  }
+
+  /* ================= INTERNAL UPDATE ================= */
+
+  private update(patch: Partial<SkiProfile>) {
+    const updatedProfile = {
+      ...this.profileSubject.value,
+      ...patch
+    };
+    this.profileSubject.next(updatedProfile);
+    this.saveToStorage(updatedProfile);
+  }
+
+  /* ================= RESET ================= */
+
+  reset() {
+    this.profileSubject.next(this.defaultProfile);
+    this.clearStorage();
+  }
+
+  /* ================= STORAGE METHODS ================= */
+
+  private saveToStorage(profile: SkiProfile): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(profile));
+      }
+    } catch (error) {
+      console.warn('Failed to save profile to localStorage:', error);
+    }
+  }
+
+  private loadFromStorage(): SkiProfile {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const stored = localStorage.getItem(this.STORAGE_KEY);
+        if (stored) {
+          return JSON.parse(stored) as SkiProfile;
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load profile from localStorage:', error);
+    }
+    return this.defaultProfile;
+  }
+
+  private clearStorage(): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem(this.STORAGE_KEY);
+      }
+    } catch (error) {
+      console.warn('Failed to clear profile from localStorage:', error);
+    }
   }
 }

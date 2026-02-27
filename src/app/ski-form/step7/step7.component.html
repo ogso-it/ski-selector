@@ -1,0 +1,47 @@
+<!-- STEP 7 CONTENT -->
+
+<div class="step-layout">
+
+  <!-- LEFT TEXT -->
+  <div class="left">
+    <h1>
+      IT'S ALL<br>
+      ABOUT<br>
+      YOU
+    </h1>
+  </div>
+
+  <!-- RIGHT RADIO BUTTONS -->
+  <div class="right">
+    <h2 class="section-title">WHAT IS YOUR SKIING STYLE?</h2>
+    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
+    
+    <div class="radio-list">
+      <label class="radio-option" [class.selected]="selectedStyle === 'technical-precision'">
+        <input type="radio" 
+               name="skiingStyle" 
+               value="technical-precision" 
+               (change)="onStyleChange('technical-precision')"
+               [checked]="selectedStyle === 'technical-precision'">
+        <span class="radio-label">TECHNICAL PRECISION</span>
+      </label>
+
+      <label class="radio-option" [class.selected]="selectedStyle === 'fun-surf'">
+        <input type="radio" 
+               name="skiingStyle" 
+               value="fun-surf" 
+               (change)="onStyleChange('fun-surf')"
+               [checked]="selectedStyle === 'fun-surf'">
+        <span class="radio-label">FUN & SURF</span>
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUTTONS -->
+<button class="prev-btn" (click)="prev()">PREV</button>
+<button class="next-btn" 
+        [class.disabled]="!selectedStyle"
+        [disabled]="!selectedStyle"
+        (click)="next()">NEXT</button>

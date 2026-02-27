@@ -1,59 +1,47 @@
-    <!------------------------- Step-5 ----------------------------->
-    <div class="multisteps_form_panel" data-animation="slideVert">
-        <div class="form_content">
-           <div class="row">
-             <div class="col-lg-4 self-center ">
-               <span class="title text-black font-sans text-2xl md:text-5xl  mb-5 hidden md:block"><span class="font-bold"></span> IT'S ALL<br>
-               <span >ABOUT</span><span
-                  class="font-bold"> YOU</span>
-            </span>
-               </div>
-               <div class="col-lg-4 self-center text-center md:hidden">
-                  <span class=" title text-black font-sans text-2xl md:text-5xl  mb-5 "><span class="font-bold"></span> IT'S ALL<br>
-                  <span >ABOUT</span><span
-                     class="font-bold"> YOU</span>
-               </span>
-                  </div>
-              
-                  <div class="col-lg-4 text-center   hidden md:block">
-               
-            
-                     <app-lottie-player  [options]="options"  (animationCreated)="animationCreated($any($event))"></app-lottie-player>
-                    
-      
-                    
-                   
-                </div>
-              <div class="col-lg-4 text-center">
-                <h2  class="title font-bold font-sans   text-xl md:text-2xl text-center mt-10 mb-2 text-orange-600">DO YOU PREFER?</h2>
-                <p class="text-center mb-2 md:mb-4"><span class=" text-orange-600">*</span> This filed is required</p>
+<!-- STEP 5 CONTENT -->
 
-                 <div class="form_items radio-list">
-                    <ul class="text-uppercase list-unstyled">
-                       <li>
-                          <label for="opt_18" class="step_5 rounded-pill animate__animated animate__fadeInRight animate_25ms">
-                            <input (change)="checkCheckBoxvalue1($event)"  type="radio" id="opt_18" name="stp_5_select_option" value="short">
-                             <span class="label-content d-inline-block text-center rounded-pill">SHORT TURNS</span>
-                          </label>
-                       </li>
-                       <li>
-                          <label for="opt_19" class="step_5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
-                            <input (change)="checkCheckBoxvalue1($event)"  type="radio" id="opt_19" name="stp_5_select_option" value="long">
-                             <span class="label-content d-inline-block text-center rounded-pill">LONG TURNS</span>
-                          </label>
-                       </li>
-                
-               
-                    </ul>
-                 </div>
-              </div>
-           </div>
-        </div>
-        <!---------- Form Button ---------->
-        <div class="form_btn py-5 d-flex justify-content-center align-items-center">
-         <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" id="prevBtn"><span><i class="fas fa-arrow-left pe-1"></i></span>PREV.</button>
-           <button [disabled]="!hidden" type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed opacity-30':  !hidden  , 'js-btn-next f_btn rounded-pill active text-uppercase ' :  hidden }" routerLink="/recommanded-skis" id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
-         </div>
+<div class="step-layout">
+
+  <!-- LEFT TEXT -->
+  <div class="left">
+    <h1>
+      IT'S ALL<br>
+      ABOUT<br>
+      YOU
+    </h1>
+  </div>
+
+  <!-- RIGHT RADIO BUTTONS -->
+  <div class="right">
+    <h2 class="section-title">DO YOU PREFER?</h2>
+    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
     
+    <div class="radio-list">
+      <label class="radio-option" [class.selected]="selectedTurn === 'short'">
+        <input type="radio" 
+               name="turnPreference" 
+               value="short" 
+               (change)="onTurnChange('short')"
+               [checked]="selectedTurn === 'short'">
+        <span class="radio-label">SHORT TURNS</span>
+      </label>
 
-     </div>
+      <label class="radio-option" [class.selected]="selectedTurn === 'long'">
+        <input type="radio" 
+               name="turnPreference" 
+               value="long" 
+               (change)="onTurnChange('long')"
+               [checked]="selectedTurn === 'long'">
+        <span class="radio-label">LONG TURNS</span>
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUTTONS -->
+<button class="prev-btn" (click)="prev()">PREV</button>
+<button class="next-btn" 
+        [class.disabled]="!selectedTurn"
+        [disabled]="!selectedTurn"
+        (click)="next()">NEXT</button>

@@ -1,105 +1,107 @@
-  <!------------------------- Step-3 ----------------------------->
-  <div class="multisteps_form_panel" data-animation="slideVert">
-    <div class="form_content">
-       <div class="row">
-         <div class="col-lg-4 self-center ">
-            <span class=" title text-black font-sans text-2xl md:text-5xl  mb-5 hidden md:block"><span class="font-bold">EACH TYPE</span> OF SKI
-            <span class="font-bold">PERFORMS<br></span> <span class="font-bold">DIFFERENTLY<br></span>ACCORDING TO THE <span
-            class="font-bold">TERRAIN</span>
-         </span>
-         
-           </div>
-           <div class="col-lg-4 self-center text-center md:hidden">
-            <span class=" title text-black font-sans text-2xl md:text-5xl  mb-5 "><span class="font-bold">EACH TYPE</span> OF SKI
-            <span class="font-bold">PERFORMS<br></span> <span class="font-bold">DIFFERENTLY<br></span>ACCORDING TO THE <span
-            class="font-bold">TERRAIN</span>
-         </span>
-         
-           </div>
-           <div class="col-lg-4 text-center   hidden md:block">
-            <div class="form_img justify-center">
-         
+<!-- STEP 3 CONTENT -->
+
+<div class="step-layout">
+
+  <!-- LEFT TEXT -->
+  <div class="left">
+    <h1>
+      EACH TYPE OF SKI<br>
+      PERFORMS DIFFERENTLY<br>
+      ACCORDING TO THE TERRAIN
+    </h1>
+  </div>
+
+  <!-- RIGHT SECTION (centrée) -->
+  <div class="right">
+    <div class="right-content">
+      <h2 class="section-title">WHAT IS YOUR SKI TIP?</h2>
+      <p class="required-field"><span class="asterisk">*</span> This field is required</p>
       
-               <app-lottie-player  [options]="options"  (animationCreated)="animationCreated($any($event))"></app-lottie-player>
-              
+      <div class="radio-two-columns">
+        <!-- COLONNE GAUCHE -->
+        <div class="radio-column">
+          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-back-mountain'">
+            <input type="radio" name="skiTechnique" value="touring-back-mountain" 
+                   (change)="onTechniqueChange('touring-back-mountain')"
+                   [checked]="selectedTechnique === 'touring-back-mountain'">
+            <span class="radio-label">TOURING BACK MOUNTAIN</span>
+          </label>
 
-              
-             </div>
-          </div>
-          <div class="col-lg-4 text-center">
-           <h2  class="title font-bold font-sans  text-xl md:text-2xl  text-center mt-10  text-orange-600">WHAT IS YOUR SKI TECHNIQUE</h2>
-           <p class="text-center "><span class=" text-orange-600">*</span> This field is required</p>
-             <div class="form_items radio-list">
-                <ul class="text-uppercase list-unstyled">
-                   <li>
-                      <label for="opt_9" class="step_3 rounded animate__animated animate__fadeInRight animate_25ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_9"  name="stp_3_select_option" value="touring-back-mountain">
-                         <span class="label-content d-inline-block text-center rounded-pill">TOURING BACK MOUNTAIN</span>
-                      </label>
-                   </li>
-                   <li>
-                      <label for="opt_10" class="step_3 rounded animate__animated animate__fadeInRight animate_50ms">
-                       <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_10" name="stp_3_select_option" value="touring-front-mountain">
-                         <span class="label-content d-inline-block text-center rounded-pill">TOURING FRONT MOUNTAIN</span>
-                      </label>
-                   </li>
-                   <li>
-                      <label for="opt_11" class="step_3 rounded animate__animated animate__fadeInRight animate_100ms">
-                        <input (change)="checkCheckBoxvalue($event)"  type="radio" id="opt_11" name="stp_3_select_option" value="touring-race">
-                         <span class="label-content d-inline-block text-center rounded-pill">TOURING RACE</span>
-                      </label>
-                   </li>
-                   <li>
-                     <label for="opt_138" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_138" name="stp_3_select_option" value="freetouring">
-                        <span class="label-content d-inline-block text-center rounded-pill">FREETOURING</span>
-                     </label>
-                  </li>
-                   <li>
-                      <label for="opt_12" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                        <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_12" name="stp_3_select_option" value="touring-mountaineering">
-                         <span class="label-content d-inline-block text-center rounded-pill">TOURING MOUNTAINEERING</span>
-                      </label>
-                   </li>
-                   <li>
-                     <label for="opt_77" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_77" name="stp_3_select_option" value="all-mountain">
-                        <span class="label-content d-inline-block text-center rounded-pill">ALL MOUNTAIN</span>
-                     </label>
-                  </li>
-                  <li>
-                     <label for="opt_38" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_38" name="stp_3_select_option" value="freeride">
-                        <span class="label-content d-inline-block text-center rounded-pill">FREERIDE</span>
-                     </label>
-                  </li>
-                  <li>
-                     <label for="opt_138" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_138" name="stp_3_select_option" value="resort">
-                        <span class="label-content d-inline-block text-center rounded-pill">RESORT</span>
-                     </label>
-                  </li>
-                  <li>
-                     <label for="opt_138" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_138" name="stp_3_select_option" value="carving">
-                        <span class="label-content d-inline-block text-center rounded-pill">CARVING</span>
-                     </label>
-                  </li>
-                  <li>
-                     <label for="opt_138" class="step_3 rounded animate__animated animate__fadeInRight animate_150ms">
-                       <input (change)="checkCheckBoxvalue($event)" type="radio" id="opt_138" name="stp_3_select_option" value="playride">
-                        <span class="label-content d-inline-block text-center rounded-pill">PLAYRIDE</span>
-                     </label>
-                  </li>
-                </ul>
-             </div>
-          </div>
-       </div>
-    </div>
-    <!---------- Form Button ---------->
-    <div class="form_btn py-5 d-flex justify-content-center align-items-center">
-      <button type="button" class="js-btn-prev f_btn rounded-pill disable text-uppercase" id="prevBtn"><span><i class="fas fa-arrow-left pe-1"></i></span>PREV.</button>
-      <button [disabled]="!tr" type="button" [ngClass]="{'js-btn-next f_btn rounded-pill active text-uppercase cursor-not-allowed opacity-30':  !tr  , 'js-btn-next f_btn rounded-pill active text-uppercase ' :  tr }"  id="nextBtn"> Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
-    </div>
+          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-front-mountain'">
+            <input type="radio" name="skiTechnique" value="touring-front-mountain" 
+                   (change)="onTechniqueChange('touring-front-mountain')"
+                   [checked]="selectedTechnique === 'touring-front-mountain'">
+            <span class="radio-label">TOURING FRONT MOUNTAIN</span>
+          </label>
 
- </div>
+          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-race'">
+            <input type="radio" name="skiTechnique" value="touring-race" 
+                   (change)="onTechniqueChange('touring-race')"
+                   [checked]="selectedTechnique === 'touring-race'">
+            <span class="radio-label">TOURING RACE</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'freetouring'">
+            <input type="radio" name="skiTechnique" value="freetouring" 
+                   (change)="onTechniqueChange('freetouring')"
+                   [checked]="selectedTechnique === 'freetouring'">
+            <span class="radio-label">FREETOURING</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-mountaineering'">
+            <input type="radio" name="skiTechnique" value="touring-mountaineering" 
+                   (change)="onTechniqueChange('touring-mountaineering')"
+                   [checked]="selectedTechnique === 'touring-mountaineering'">
+            <span class="radio-label">TOURING MOUNTAINEERING</span>
+          </label>
+        </div>
+
+        <!-- COLONNE DROITE -->
+        <div class="radio-column">
+          <label class="radio-option" [class.selected]="selectedTechnique === 'all-mountain'">
+            <input type="radio" name="skiTechnique" value="all-mountain" 
+                   (change)="onTechniqueChange('all-mountain')"
+                   [checked]="selectedTechnique === 'all-mountain'">
+            <span class="radio-label">ALL MOUNTAIN</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'freeride'">
+            <input type="radio" name="skiTechnique" value="freeride" 
+                   (change)="onTechniqueChange('freeride')"
+                   [checked]="selectedTechnique === 'freeride'">
+            <span class="radio-label">FREERIDE</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'resort'">
+            <input type="radio" name="skiTechnique" value="resort" 
+                   (change)="onTechniqueChange('resort')"
+                   [checked]="selectedTechnique === 'resort'">
+            <span class="radio-label">RESORT</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'carving'">
+            <input type="radio" name="skiTechnique" value="carving" 
+                   (change)="onTechniqueChange('carving')"
+                   [checked]="selectedTechnique === 'carving'">
+            <span class="radio-label">CARVING</span>
+          </label>
+
+          <label class="radio-option" [class.selected]="selectedTechnique === 'playride'">
+            <input type="radio" name="skiTechnique" value="playride" 
+                   (change)="onTechniqueChange('playride')"
+                   [checked]="selectedTechnique === 'playride'">
+            <span class="radio-label">PLAYRIDE</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUTTONS -->
+<button class="prev-btn" (click)="prev()">PREV</button>
+<button class="next-btn" 
+        [class.disabled]="!selectedTechnique"
+        [disabled]="!selectedTechnique"
+        (click)="next()">NEXT</button>

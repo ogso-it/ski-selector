@@ -1,0 +1,272 @@
+/* ============================= */
+/* ===== GLOBAL LAYOUT BASE ==== */
+/* ============================= */
+
+.home-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= VIDEO BACKGROUND ================= */
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* ================= PANEL WRAPPER ================= */
+.panel-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================= PANEL ================= */
+.panel {
+  position: relative;
+  width: 95vw;
+  max-width: 1400px;
+  height: 90vh;
+  max-height: 900px;
+}
+
+/* ================= PANEL BACKGROUND ================= */
+.panel-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================= PANEL CONTENT ================= */
+.panel-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= HEADER ================= */
+.panel-header {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 20;
+}
+
+.header-left h3 {
+  color: white;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+/* ================= PROGRESS STEPS ================= */
+.steps {
+  display: flex;
+  gap: 12px;
+}
+
+.steps span {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 15px;
+  background: transparent;
+  transition: 0.3s ease;
+}
+
+.steps span.active {
+  border-color: #00eaff;
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+}
+
+/* ================= LOGO ================= */
+.header-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-top: 0;
+  position: relative;
+  top: -51px;
+}
+
+.ogso-logo {
+  height: 200px;
+  width: auto;
+  max-width: 300px;
+  opacity: 0.95;
+  transition: all 0.3s ease;
+}
+
+/* ================= BODY ================= */
+.panel-body {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  scrollbar-width: none; /* Cache scrollbar Firefox */
+  -ms-overflow-style: none; /* Cache scrollbar IE/Edge */
+}
+
+.panel-body::-webkit-scrollbar {
+  display: none; /* Cache scrollbar Chrome/Safari */
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablette (768px - 1024px) */
+@media (max-width: 1024px) {
+  .panel-header {
+    top: 4%;
+    left: 4%;
+    right: 4%;
+  }
+  
+  .header-left h3 {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  
+  .steps {
+    gap: 10px;
+  }
+  
+  .steps span {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+  
+  .header-right {
+    top: -40px;
+  }
+  
+  .ogso-logo {
+    height: 150px;
+    max-width: 200px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .panel {
+    width: 100vw;
+    height: 100vh;
+    max-height: none;
+  }
+  
+  .panel-header {
+    flex-direction: column;
+    gap: 15px;
+    top: 3%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    padding-bottom: 15px;
+  }
+  
+  .header-left {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .header-left h3 {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .steps {
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .steps span {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+  
+  .header-right {
+    top: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .ogso-logo {
+    height: 80px;
+    max-width: 120px;
+  }
+  
+  /* Style du body pour le contenu scrollable */
+  .panel-body {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 20px 80px 20px;
+    overflow-y: auto;
+  }
+}
+
+/* Petit mobile */
+@media (max-width: 480px) {
+  .panel-header {
+    top: 2%;
+    left: 3%;
+    right: 3%;
+    gap: 10px;
+  }
+  
+  .header-left h3 {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  
+  .steps {
+    gap: 5px;
+  }
+  
+  .steps span {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .ogso-logo {
+    height: 60px;
+  }
+  
+  .panel-body {
+    padding: 90px 15px 70px 15px;
+  }
+}
+
+/* Très petit mobile */
+@media (max-width: 360px) {
+  .steps span {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+  
+  .panel-body {
+    padding: 80px 10px 60px 10px;
+  }
+}

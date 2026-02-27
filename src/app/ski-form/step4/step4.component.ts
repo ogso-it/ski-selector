@@ -1,181 +1,54 @@
-
-import { Component, OnInit  , NgZone} from '@angular/core';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { skis } from 'src/assets/jsons/skis';
 import { DataServiceService } from 'src/app/data-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-step4',
-    templateUrl: './step4.component.html',
-    styleUrls: ['./step4.component.css'],
-    standalone: false
+  selector: 'app-step4',
+  templateUrl: './step4.component.html',
+  styleUrls: ['./step4.component.css'],
+  standalone: false
 })
-export class Step4Component implements OnInit {
+export class Step4Component implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
 
+  hidden: boolean = false;
+  type_snow: string | null = null;
 
-
-
-
-
-  private animationItem!: AnimationItem;
-  
-  options: AnimationOptions = {
-    
-    autoplay:false,
-    path: '../../../assets/jsons/animation/5/5.json',
-  
-  };
-
-
-  options2: AnimationOptions = {
-    
-    autoplay:true,
-    path: '../../../assets/jsons/animation/1/1.json',
-  
-  };
-
-
-  updateAnimation(): void {
-
-
-    this.options = {
-      
-      ...this.options, // In case you have other properties that you want to copy
-      path: '../../../assets/jsons/animation/test.json',
-     
-
-  }
-  }
-
-  
-  animationCreated(animationItem: AnimationItem): void {
-    this.animationItem = animationItem;
-    
-  }
-
-
- 
-  hidden : any  = null;
-  type_snow : any = null
-  show1: boolean = false;
-  show2: boolean = false;
-  show3: boolean = false;
-  show4!: boolean;
-  show5!: boolean;
-
-  constructor (private  dataService: DataServiceService  ,private ngZone: NgZone , private router: Router) { }
-
-  play(): void {
-   this.ngZone.runOutsideAngular(() => {
-     this.animationItem.play();
-   });
- }
- 
- stop(): void {
-   this.ngZone.runOutsideAngular(() => {
-     this.animationItem.pause();
-   });
- }
-
- 
+  constructor(
+    private dataService: DataServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getData()
+    this.dataService.profile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(profile => {
+        this.type_snow = profile.typeSnow;
+        this.hidden = !!profile.typeSnow;
+      });
   }
 
-  arrayRemove(arr : any , value : any) { 
-    
-    return arr.filter(function(ele : any){ 
-        return ele != value; 
-    });
-}
-
-
-sendNewData(data: any) {
-  this.dataService.sendDataT(data);
-}
-
-  checkCheckBoxvalue1(event : any ){
-
-    this.checkchecked(event.target.value)
-
-    if (event.target.checked){
-      this.stop()
-      this.play()
-      setTimeout(()=>{
-       this.stop()
-      },1500)
-      this.type_snow = event.target.value
-      console.log(this.type_snow)
-     } 
-     
-  
-  
-     
-   
-    
-
-    this.getData()  
-  // console.log(this.type_snow)
-  this.sendNewData(this.type_snow)
-
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-getData(){
-  this.dataService.terrain_type$.subscribe((response: string | null) => {
-//  console.log(response);  // you will receive the data from sender component here.
-  
-    this.checkShow(response)
-   
-  });
-}
-
-
-
-checkchecked( x : any ){
-  if(x){
-    this.hidden = true
-  }
-  else {
-    this.hidden = false
-  }
-} 
-
-
-  checkShow (e : any ){
-    if (e == 'touring-back-mountain'){
-      this.show1 = true
-    }
-    else {
-     this.show1 = false
-    }
-    if (e == 'touring-front-mountain'){
-      this.show2 = true
-    }
-    else {
-     this.show2 = false
-    }
-    if (e == 'touring-race'){
-      this.show3 = true
-    }
-    else {
-     this.show3 = false
-    }
-    if (e == 'touring-mountaineering'){
-      this.show4 = true
-    }
-    else {
-      this.show4 = false
-    }
-    if (e == 'all-mountain'){
-      this.show5 = true
-    }
-    else {
-     this.show5 = false
-    }
+  onSnowTypeChange(value: string): void {
+    this.hidden = true;
+    this.type_snow = value;
+    this.dataService.setTypeSnow(value);
+    console.log('Snow type selected:', value);
   }
 
+  prev(): void {
+    this.router.navigate(['/ski/step3']);
+  }
 
+  next(): void {
+    if (this.hidden) {
+      this.router.navigate(['/ski/step5']);
+    }
+  }
 }

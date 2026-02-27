@@ -1,94 +1,35 @@
-<div class="wrapper position-relative">
-   <div class="container-fluid px-5">
-      
-      <div class="step_bar_content ps-5 pt-5">
-     
+<!-- CONTENU UNIQUEMENT (injecté dans ski-layout via router-outlet) -->
 
-         <h5 class="text-black bold text-uppercase d-inline-block">OGSO SMART PRODUCT SELECTOR</h5>
-         <div class="top-right-logo">
-    <img src="./assets/images/thumbnail_sps logo V2.png" alt="OGSO logo">
-  </div>
-      </div>
-      <div class="progress_bar steps_bar mt-3 ps-5 d-inline-block">
-       <div class="step rounded-pill d-inline-block text-center position-relative active current">1</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">2</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">3</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">4</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">5</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">6</div>
-       <div class="step rounded-pill d-inline-block text-center position-relative">7</div>
-    </div>
-    <!-- <div class="logo" >    
-      <img src="./assets/images/thumbnail_sps logo V2.png" alt="image_not_found">
-   </div> -->
-       <div class="multisteps_form position-relative" id="wizard" >
-    
-     
- 
-  <div class="multisteps_form_panel active" data-animation="slideVert">
-    <div class="form_content">
-       <div class="row">
-          <div class="col-lg-4 self-center ">
-             <div class="form_title ps-5 px-3 ">
-               <span  class="title text-black font-bold text-3xl  mb-5 md:text-5xl">LET'S PICK <br>THE PERFECT OGSO APPARATUS <br>FOR YOU!</span>
+<div class="left">
+  <h1>
+    LET'S PICK <br>
+    THE PERFECT <br>
+    OGSO <br>
+    APPARATUS <br>
+    FOR YOU!
+  </h1>
+</div>
 
-      </div>
- </div>
+<div class="center">
+  <img src="assets/images/SKIBASE.webp" class="ski-img">
+</div>
 
-          <div class="col-lg-4 text-center">
-            
-             <div class="form_img justify-center hidden md:block">
-         
-      
-               <video width="485" height="485"  playsinline
-               loop
-               autoplay
-               [muted]="true">
-                  <source src="../../assets/jsons/animation/1/1.webm" type="video/mp4">
-              
-                Your browser does not support the video tag.
-                </video>
+<div class="right">
+  <p>
+    Weight, width, length and camber are unique to the rider,
+    and this depends on your style, capabilities, age,
+    height, weight, purpose and situation.
+  </p>
 
-              
-             </div>
-          </div>
-       
-          <div class="col-lg-4 text-l self-center text-center md:hidden ">
-            <h6 class="'font-serif  mb-7 mt-10 text-center ">
-        
-               Weight, width, length and camber are unique to the rider, and this is depending on your style, capabilities, age, height, weight, purpose and situation.</h6>
+  <p>
+    We developed this app in order to help you
+    pick the appropriate OGSO product.
+  </p>
 
-                <h6>We developed this app in order to help you pick the appropriate ogso product.</h6><br>
-                
-                <p class="font-bold ">- OGSO Team</p>
-        </div>
-        <div class="col-lg-4 text-l self-center hidden  md:block ">
-         <h6 class="'font-serif  mb-7 mt-10  ">
-     
-            Weight, width, length and camber are unique to the rider, and this is depending on your style, capabilities, age, height, weight, purpose and situation.</h6>
+  <p class="signature">
+    - OGSO Team
+  </p>
+</div>
 
-             <h6>We developed this app in order to help you pick the appropriate ogso product.</h6><br>
-             
-             <p class="font-bold ">- OGSO Team</p>
-     </div>
+<button class="next-btn" routerLink="/ski/step1">NEXT</button>
 
-       </div>
-       
-    </div>
-    <!---------- Form Button ---------->
-     <div class="form_btn py-3 d-flex justify-content-center align-items-center">
-      <div >
-         <button routerLink="choose-your-gear" type="button" class=" f_btn rounded-pill active text-uppercase" > Next <span><i class="fas fa-arrow-right ps-1"></i></span></button>
-      </div>
-      
-     </div> 
-
- </div>
-         
-       </div>
-    </div>
-    
-  </div>
-
-
-  

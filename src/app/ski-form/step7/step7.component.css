@@ -1,4 +1,4 @@
-/* ===== STEP 3 LAYOUT ===== */
+/* ===== STEP 7 LAYOUT ===== */
 .step-layout {
   position: absolute;
   inset: 0;
@@ -13,45 +13,38 @@
 
 /* ===== LEFT TEXT ===== */
 .left {
-  width: 40%;
+  width: 45%;
 }
 
 .left h1 {
   color: #ff6a00;
-  font-size: 48px;
+  font-size: 70px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: -1px;
 }
 
-/* ===== RIGHT SECTION (centrée) ===== */
+/* ===== RIGHT RADIO BUTTONS ===== */
 .right {
-  width: 55%;
-  display: flex;
-  justify-content: center;
-}
-
-.right-content {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
+  width: 45%;
+  text-align: left;
 }
 
 .section-title {
   color: #ff6a00;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .required-field {
   color: white;
-  font-size: 13px;
-  margin-bottom: 20px;
+  font-size: 14px;
+  margin-bottom: 30px;
   font-weight: 300;
 }
 
@@ -60,18 +53,10 @@
   font-weight: bold;
 }
 
-/* ===== 2 COLONNES ===== */
-.radio-two-columns {
-  display: flex;
-  gap: 20px;
-  text-align: left;
-}
-
-.radio-column {
-  flex: 1;
+.radio-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .radio-option {
@@ -86,35 +71,32 @@
 
 .radio-label {
   display: inline-block;
-  padding: 8px 12px;
+  padding: 15px 25px;
   background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
   color: white;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
   width: 100%;
   text-align: center;
   transition: all 0.3s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   box-sizing: border-box;
 }
 
 .radio-option:hover .radio-label {
   border-color: #ff6a00;
   background: rgba(255, 106, 0, 0.1);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .radio-option.selected .radio-label {
   background: #ff6a00;
   border-color: #ff6a00;
   color: white;
-  box-shadow: 0 0 15px rgba(255, 106, 0, 0.5);
+  box-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
 }
 
 /* ===== BUTTONS ===== */
@@ -124,10 +106,10 @@
   bottom: 12%;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 8px 30px;
+  padding: 10px 35px;
   border-radius: 30px;
   color: white;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
@@ -147,10 +129,10 @@
   bottom: 12%;
   background: linear-gradient(90deg, #00aaff, #00eaff);
   border: none;
-  padding: 8px 30px;
+  padding: 10px 35px;
   border-radius: 30px;
   color: white;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
@@ -176,42 +158,41 @@
 /* Large desktop */
 @media (max-width: 1200px) {
   .left h1 {
-    font-size: 42px;
+    font-size: 60px;
   }
   
   .section-title {
-    font-size: 20px;
+    font-size: 24px;
   }
   
   .radio-label {
-    font-size: 11px;
-    padding: 7px 10px;
+    font-size: 18px;
+    padding: 14px 22px;
   }
 }
 
 /* Tablette */
 @media (max-width: 1024px) {
   .left h1 {
-    font-size: 36px;
+    font-size: 50px;
   }
   
   .section-title {
-    font-size: 18px;
+    font-size: 22px;
   }
   
   .required-field {
-    font-size: 12px;
-    margin-bottom: 15px;
-  }
-  
-  .radio-two-columns {
-    gap: 15px;
+    font-size: 13px;
+    margin-bottom: 25px;
   }
   
   .radio-label {
-    font-size: 10px;
-    padding: 6px 8px;
-    letter-spacing: 0.2px;
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+  
+  .radio-list {
+    gap: 18px;
   }
 }
 
@@ -220,12 +201,12 @@
   .step-layout {
     position: relative;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 20px;
     padding-top: 100px;
     padding-bottom: 100px;
-    gap: 30px;
+    gap: 40px;
   }
   
   .left {
@@ -234,7 +215,7 @@
   }
   
   .left h1 {
-    font-size: 32px;
+    font-size: 48px;
     text-align: center;
     br {
       display: none; /* Cache les br pour un texte continu */
@@ -243,44 +224,27 @@
   
   .right {
     width: 100%;
-  }
-  
-  .right-content {
-    max-width: 500px;
+    max-width: 400px;
+    text-align: center;
   }
   
   .section-title {
-    font-size: 18px;
+    font-size: 24px;
+    text-align: center;
   }
   
   .required-field {
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 25px;
   }
   
-  /* Passage en une seule colonne sur mobile */
-  .radio-two-columns {
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .radio-column {
-    width: 100%;
-  }
-  
-  /* Espacement entre les deux groupes */
-  .radio-column:first-child {
-    margin-bottom: 5px;
+  .radio-list {
+    gap: 15px;
   }
   
   .radio-label {
-    font-size: 14px;
-    padding: 12px 15px;
-    white-space: normal; /* Permet le retour à la ligne */
-    word-break: break-word;
-  }
-  
-  .radio-option {
-    margin-bottom: 8px;
+    font-size: 18px;
+    padding: 16px 20px;
   }
   
   /* Ajustement des boutons pour mobile */
@@ -305,25 +269,27 @@
   .step-layout {
     padding-top: 90px;
     padding-bottom: 90px;
-    gap: 25px;
+    gap: 35px;
   }
   
   .left h1 {
-    font-size: 26px;
+    font-size: 40px;
   }
   
   .section-title {
-    font-size: 16px;
+    font-size: 22px;
+    margin-bottom: 5px;
   }
   
   .required-field {
-    font-size: 11px;
-    margin-bottom: 15px;
+    font-size: 12px;
+    margin-bottom: 20px;
   }
   
   .radio-label {
-    font-size: 13px;
-    padding: 10px 12px;
+    font-size: 16px;
+    padding: 14px 18px;
+    border-width: 1.5px;
   }
   
   .prev-btn, .next-btn {
@@ -338,24 +304,25 @@
   .step-layout {
     padding-top: 80px;
     padding-bottom: 80px;
-    gap: 20px;
+    gap: 30px;
   }
   
   .left h1 {
-    font-size: 22px;
+    font-size: 32px;
   }
   
   .section-title {
-    font-size: 15px;
+    font-size: 20px;
   }
   
   .required-field {
-    font-size: 10px;
+    font-size: 11px;
+    margin-bottom: 18px;
   }
   
   .radio-label {
-    font-size: 12px;
-    padding: 8px 10px;
+    font-size: 15px;
+    padding: 12px 16px;
   }
   
   .prev-btn, .next-btn {
@@ -367,15 +334,15 @@
 /* Ajout pour les écrans très larges */
 @media (min-width: 1800px) {
   .left h1 {
-    font-size: 56px;
+    font-size: 85px;
   }
   
   .section-title {
-    font-size: 26px;
+    font-size: 32px;
   }
   
   .radio-label {
-    font-size: 14px;
-    padding: 10px 15px;
+    font-size: 24px;
+    padding: 18px 30px;
   }
 }

@@ -5,16 +5,16 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-step6',
-  templateUrl: './step6.component.html',
-  styleUrls: ['./step6.component.css'],
+  selector: 'app-step7',
+  templateUrl: './step7.component.html',
+  styleUrls: ['./step7.component.css'],
   standalone: false
 })
-export class Step6Component implements OnInit, OnDestroy {
+export class Step7Component implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   hidden: boolean = false;
-  selectedSpeed: string | null = null;
+  selectedStyle: string | null = null;
 
   constructor(
     private dataService: DataServiceService,
@@ -25,8 +25,8 @@ export class Step6Component implements OnInit, OnDestroy {
     this.dataService.profile$
       .pipe(takeUntil(this.destroy$))
       .subscribe(profile => {
-        this.selectedSpeed = profile.stable;
-        this.hidden = !!profile.stable;
+        this.selectedStyle = profile.skiStyleFun;  // ← Changé de skiingStyle à skiStyleFun
+        this.hidden = !!profile.skiStyleFun;        // ← Changé ici aussi
       });
   }
 
@@ -35,20 +35,20 @@ export class Step6Component implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onSpeedChange(value: string): void {
-    this.selectedSpeed = value;
+  onStyleChange(value: string): void {
+    this.selectedStyle = value;
     this.hidden = true;
-    this.dataService.setStable(value);
-    console.log('Speed preference selected:', value);
+    this.dataService.setSkiStyleFun(value);  // ← Changé de setSkiingStyle à setSkiStyleFun
+    console.log('Skiing style selected:', value);
   }
 
   prev(): void {
-    this.router.navigate(['/ski/step5']);
+    this.router.navigate(['/ski/step6']);
   }
 
   next(): void {
     if (this.hidden) {
-      this.router.navigate(['/ski/step7']); // ou vers la page de résultats si step7 n'existe pas
+      this.router.navigate(['/recommanded-skis']);
     }
   }
 }
