@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { combineLatest, Subscription, Observable, of } from 'rxjs';
-import { DataServiceService } from '../data-service.service';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { DataServiceService, SkiProfile } from '../data-service.service';
 import { getDatabase, ref, set } from 'firebase/database';
 import { skis } from 'src/assets/jsons/skis';
 import { HttpClient } from '@angular/common/http';
@@ -42,14 +43,23 @@ interface SkiModel {
   standalone: false
 })
 export class SkiResultComponent implements OnInit, OnDestroy {
+  // Variables correspondant exactement aux noms du service
   height: number = 179;
   weight: number = 83;
-  terrain_type: string = 'touring-back-mountain';
-  type_snow: string = 'powder';
-  ski_level_fun: string = 'fun-surf';
-  ski_speed: string = 'high-speed';
-  ski_turns: string = 'long';
-  ski_level: string = 'pro-guide';
+  terrainType: string = 'touring-back-mountain';
+  typeSnow: string = 'powder';
+  skiStyleFun: string = 'fun-surf';
+  stable: string = 'high-speed';
+  turns: string = 'long';
+  skiLevel: string = 'pro-guide';
+
+  // Pour le template, on crée des getters formatés
+  get terrain_type() { return this.terrainType; }
+  get type_snow() { return this.typeSnow; }
+  get ski_level_fun() { return this.skiStyleFun; }
+  get ski_speed() { return this.stable; }
+  get ski_turns() { return this.turns; }
+  get ski_level() { return this.skiLevel; }
 
   terrainOptions: string[] = [];
   snowOptions: string[] = [];
@@ -65,6 +75,11 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   
   isGeneratingPDF: boolean = false;
   pdfGenerated: boolean = false;
+
+  // Timer pour le debounce
+  private updateTimer: any = null;
+  private profileSubscription: Subscription | null = null;
+  private skiModels: SkiModel[] = [];
 
   terrainIcons: { [key: string]: string } = {
     'touring-front-mountain': '🏔️',
@@ -95,25 +110,21 @@ export class SkiResultComponent implements OnInit, OnDestroy {
     'high-speed': '⚡'
   };
 
-  private subs: Subscription | null = null;
-  private skiModels: SkiModel[] = [];
-
-  constructor(public dataService: DataServiceService, private http: HttpClient) {}
-
-  private svcObs(name: string): Observable<any> {
-    const svc = this.dataService as any;
-    return (svc?.[name] || svc?.[`${name}$`]) ?? of(null);
-  }
+  constructor(
+    public dataService: DataServiceService, 
+    private http: HttpClient,
+    private ngZone: NgZone
+  ) {}
 
   get generatedStats() {
     return [
       { label: 'Height', value: `${this.height} cm`, icon: '📏' },
       { label: 'Weight', value: `${this.weight} kg`, icon: '⚖️' },
-      { label: 'Terrain', value: this.formatTerrain(this.terrain_type), icon: this.terrainIcons[this.terrain_type] || '🏔️' },
-      { label: 'Snow', value: this.formatSnow(this.type_snow), icon: this.snowIcons[this.type_snow] || '❄️' },
-      { label: 'Style', value: this.formatStyle(this.ski_level_fun), icon: this.styleIcons[this.ski_level_fun] || '🎨' },
-      { label: 'Turns', value: this.formatTurns(this.ski_turns), icon: '🔄' },
-      { label: 'Speed', value: this.formatSpeed(this.ski_speed), icon: this.speedIcons[this.ski_speed] || '⚡' }
+      { label: 'Terrain', value: this.formatTerrain(this.terrainType), icon: this.terrainIcons[this.terrainType] || '🏔️' },
+      { label: 'Snow', value: this.formatSnow(this.typeSnow), icon: this.snowIcons[this.typeSnow] || '❄️' },
+      { label: 'Style', value: this.formatStyle(this.skiStyleFun), icon: this.styleIcons[this.skiStyleFun] || '🎨' },
+      { label: 'Turns', value: this.formatTurns(this.turns), icon: '🔄' },
+      { label: 'Speed', value: this.formatSpeed(this.stable), icon: this.speedIcons[this.stable] || '⚡' }
     ];
   }
 
@@ -202,264 +213,324 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
     this.initializeSkiModels();
 
-    this.subs = combineLatest([
-      this.svcObs('height'),
-      this.svcObs('weight'),
-      this.svcObs('terrainType'),
-      this.svcObs('typeSnow'),
-      this.svcObs('skiStyleFun'),
-      this.svcObs('turns'),
-      this.svcObs('stable'),
-      this.svcObs('skiLevel')
-    ]).subscribe(([h, w, terrain, snow, styleFun, turns, stable, skiLevel]) => {
-      if (h != null) this.height = h;
-      if (w != null) this.weight = w;
-      if (terrain) this.terrain_type = terrain;
-      if (snow) this.type_snow = snow;
-      if (styleFun) this.ski_level_fun = styleFun;
-      if (turns) this.ski_turns = turns;
-      if (stable) this.ski_speed = stable;
-      if (skiLevel) this.ski_level = skiLevel;
-      this.recalculateRecommendationsWithAnimation();
-    });
+    // S'abonner au profile$ avec debounce pour éviter les mises à jour trop fréquentes
+    this.profileSubscription = this.dataService.profile$
+      .pipe(debounceTime(300))
+      .subscribe(profile => {
+        this.ngZone.run(() => {
+          console.log('Profile updated:', profile);
+          
+          if (profile.height != null) this.height = profile.height;
+          if (profile.weight != null) this.weight = profile.weight;
+          if (profile.terrainType) this.terrainType = profile.terrainType;
+          if (profile.typeSnow) this.typeSnow = profile.typeSnow;
+          if (profile.skiStyleFun) this.skiStyleFun = profile.skiStyleFun;
+          if (profile.turns) this.turns = profile.turns;
+          if (profile.stable) this.stable = profile.stable;
+          if (profile.skiLevel) this.skiLevel = profile.skiLevel;
+          
+          this.recalculateRecommendationsWithAnimation();
+        });
+      });
 
     this.recalculateRecommendationsWithAnimation();
   }
 
   ngOnDestroy(): void {
-    this.subs?.unsubscribe();
+    this.profileSubscription?.unsubscribe();
+    if (this.updateTimer) {
+      clearTimeout(this.updateTimer);
+    }
   }
 
-async generatePDF(): Promise<void> {
-  this.isGeneratingPDF = true;
-  
-  try {
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
+  /* ===== GESTION DES CHANGEMENTS UTILISATEUR ===== */
+
+  // Pour les inputs range (changements fréquents)
+  onHeightInput(event: any): void {
+    this.height = parseInt(event.target.value, 10);
+    this.scheduleUpdate();
+  }
+
+  onWeightInput(event: any): void {
+    this.weight = parseInt(event.target.value, 10);
+    this.scheduleUpdate();
+  }
+
+  // Pour les inputs number (changements manuels)
+  onHeightChange(value: number): void {
+    this.height = value;
+    this.scheduleUpdate();
+  }
+
+  onWeightChange(value: number): void {
+    this.weight = value;
+    this.scheduleUpdate();
+  }
+
+  // Pour les selects (changements immédiats)
+  onTerrainChange(value: string): void {
+    this.terrainType = value;
+    this.scheduleUpdate();
+  }
+
+  onSnowChange(value: string): void {
+    this.typeSnow = value;
+    this.scheduleUpdate();
+  }
+
+  onStyleChange(value: string): void {
+    this.skiStyleFun = value;
+    this.scheduleUpdate();
+  }
+
+  onTurnsChange(value: string): void {
+    this.turns = value;
+    this.scheduleUpdate();
+  }
+
+  onSpeedChange(value: string): void {
+    this.stable = value;
+    this.scheduleUpdate();
+  }
+
+  // Méthode pour planifier une mise à jour avec debounce
+  private scheduleUpdate(): void {
+    if (this.updateTimer) {
+      clearTimeout(this.updateTimer);
+    }
     
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 20;
+    this.updateTimer = setTimeout(() => {
+      this.applyChanges();
+    }, 600); // Attend 600ms après le dernier changement
+  }
+
+  // Application immédiate (quand l'utilisateur relâche le slider)
+  onSliderRelease(): void {
+    if (this.updateTimer) {
+      clearTimeout(this.updateTimer);
+      this.applyChanges();
+    }
+  }
+
+  // Applique les changements au service
+  private applyChanges(): void {
+    this.dataService.setHeight(this.height);
+    this.dataService.setWeight(this.weight);
+    this.dataService.setTerrainType(this.terrainType);
+    this.dataService.setTypeSnow(this.typeSnow);
+    this.dataService.setSkiStyleFun(this.skiStyleFun);
+    this.dataService.setTurns(this.turns);
+    this.dataService.setStable(this.stable);
+    this.dataService.setSkiLevel(this.skiLevel);
     
-    // ===== COULEURS OGSO =====
-    const colors = {
-      bgDark: [11, 12, 20],
-      bgCard: [30, 30, 40],
-      orange: [255, 106, 0],
-      white: [255, 255, 255],
-      gray: [150, 150, 150],
-      lightGray: [200, 200, 200]
-    };
+    this.updateTimer = null;
+  }
+
+  async generatePDF(): Promise<void> {
+    this.isGeneratingPDF = true;
     
-    // ===== EN-TÊTE =====
-    doc.setFillColor(colors.bgDark[0], colors.bgDark[1], colors.bgDark[2]);
-    doc.rect(0, 0, pageWidth, 35, 'F');
-    
-    doc.setFillColor(colors.orange[0], colors.orange[1], colors.orange[2]);
-    doc.rect(0, 30, pageWidth, 5, 'F');
-    
-    doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
-    doc.setFontSize(24);
-    doc.setFont('helvetica', 'bold');
-    doc.text('OGSO', margin, 18);
-    
-    doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text('SKI RECOMMENDATIONS', margin, 26);
-    
-    const dateStr = new Date().toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric' 
-    });
-    doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
-    doc.setFontSize(8);
-    doc.text(dateStr, pageWidth - margin, 18, { align: 'right' });
-    
-    // ===== PROFIL UTILISATEUR =====
-    let yPos = 45;
-    
-    doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('PROFILE', margin, yPos);
-    
-    yPos += 10;
-    
-    // Calcul des positions des colonnes
-    const colWidth = (pageWidth - (margin * 2)) / 4;
-    const colPositions = [
-      margin + colWidth/2,           // Colonne 1 (centrée)
-      margin + colWidth*1.5,         // Colonne 2 (centrée)
-      margin + colWidth*2.5,         // Colonne 3 (centrée)
-      margin + colWidth*3.5          // Colonne 4 (centrée)
-    ];
-    
-    // Titres des colonnes
-    doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'normal');
-    
-    doc.text('H', colPositions[0], yPos, { align: 'center' });
-    doc.text('W', colPositions[1], yPos, { align: 'center' });
-    doc.text('TER', colPositions[2], yPos, { align: 'center' });
-    doc.text('SNOW', colPositions[3], yPos, { align: 'center' });
-    
-    yPos += 5;
-    
-    // Carte profil
-    doc.setFillColor(colors.bgCard[0], colors.bgCard[1], colors.bgCard[2]);
-    doc.roundedRect(margin, yPos, pageWidth - (margin * 2), 20, 3, 3, 'F');
-    
-    // Valeurs du profil (centrées sous chaque titre)
-    doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    
-    doc.text(`${this.height} cm`, colPositions[0], yPos + 13, { align: 'center' });
-    doc.text(`${this.weight} kg`, colPositions[1], yPos + 13, { align: 'center' });
-    doc.text(this.formatTerrain(this.terrain_type), colPositions[2], yPos + 13, { align: 'center' });
-    doc.text(this.formatSnow(this.type_snow), colPositions[3], yPos + 13, { align: 'center' });
-    
-    yPos += 35;
-    
-    // ===== TOP 3 SKIS =====
-    doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.text('TOP 3 SKIS', margin, yPos);
-    
-    yPos += 10;
-    
-    for (let i = 0; i < Math.min(3, this.resultat.length); i++) {
-      const ski = this.resultat[i];
+    try {
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
       
-      // Carte
-      doc.setFillColor(colors.bgCard[0], colors.bgCard[1], colors.bgCard[2]);
-      doc.roundedRect(margin, yPos, pageWidth - (margin * 2), 35, 3, 3, 'F');
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const margin = 20;
       
-      // ===== RANG CENTRÉ DANS LE CERCLE =====
-      const medalColors = [
-        [255, 215, 0],   // Or
-        [192, 192, 192], // Argent
-        [205, 127, 50]   // Bronze
-      ];
+      // ===== COULEURS OGSO =====
+      const colors = {
+        bgDark: [11, 12, 20],
+        bgCard: [30, 30, 40],
+        orange: [255, 106, 0],
+        white: [255, 255, 255],
+        gray: [150, 150, 150],
+        lightGray: [200, 200, 200]
+      };
       
-      const circleX = margin + 17;
-      const circleY = yPos + 12;
-      const circleRadius = 8;
+      // ===== EN-TÊTE =====
+      doc.setFillColor(colors.bgDark[0], colors.bgDark[1], colors.bgDark[2]);
+      doc.rect(0, 0, pageWidth, 35, 'F');
       
-      doc.setFillColor(medalColors[i][0], medalColors[i][1], medalColors[i][2]);
-      doc.circle(circleX, circleY, circleRadius, 'F');
+      doc.setFillColor(colors.orange[0], colors.orange[1], colors.orange[2]);
+      doc.rect(0, 30, pageWidth, 5, 'F');
       
-      doc.setTextColor(colors.bgDark[0], colors.bgDark[1], colors.bgDark[2]);
-      doc.setFontSize(11);
+      doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
+      doc.setFontSize(24);
       doc.setFont('helvetica', 'bold');
-      doc.text(`${i + 1}`, circleX, circleY + 4, { align: 'center' });
+      doc.text('OGSO', margin, 18);
       
-      // ===== NOM ET FAMILLE =====
       doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
       doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text(ski.name, margin + 40, yPos + 12);
+      doc.setFont('helvetica', 'normal');
+      doc.text('SKI RECOMMENDATIONS', margin, 26);
       
+      const dateStr = new Date().toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      });
+      doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
+      doc.setFontSize(8);
+      doc.text(dateStr, pageWidth - margin, 18, { align: 'right' });
+      
+      // ===== PROFIL UTILISATEUR =====
+      let yPos = 45;
+      
+      doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PROFILE', margin, yPos);
+      
+      yPos += 10;
+      
+      // Calcul des positions des colonnes
+      const colWidth = (pageWidth - (margin * 2)) / 4;
+      const colPositions = [
+        margin + colWidth/2,
+        margin + colWidth*1.5,
+        margin + colWidth*2.5,
+        margin + colWidth*3.5
+      ];
+      
+      // Titres des colonnes
       doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
       doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.text(ski.family || 'OGSO', margin + 40, yPos + 21);
       
-      // ===== SPÉCIFICATIONS (centrées) =====
-      const specsX = pageWidth / 2 - 10;
-      doc.setTextColor(colors.lightGray[0], colors.lightGray[1], colors.lightGray[2]);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'normal');
-      doc.text(`${ski.size}cm`, specsX, yPos + 12);
-      doc.text(`${ski.weight || 'N/A'}g`, specsX, yPos + 21);
+      doc.text('H', colPositions[0], yPos, { align: 'center' });
+      doc.text('W', colPositions[1], yPos, { align: 'center' });
+      doc.text('TER', colPositions[2], yPos, { align: 'center' });
+      doc.text('SNOW', colPositions[3], yPos, { align: 'center' });
       
-      // ===== SCORE CENTRÉ DANS LE RECTANGLE =====
-      const score = ski.score || 0;
+      yPos += 5;
       
-      let scoreRgb;
-      if (score >= 90) scoreRgb = [16, 185, 129];   // Vert
-      else if (score >= 70) scoreRgb = [59, 130, 246]; // Bleu
-      else if (score >= 50) scoreRgb = [245, 158, 11]; // Orange
-      else scoreRgb = [239, 68, 68]; // Rouge
+      // Carte profil
+      doc.setFillColor(colors.bgCard[0], colors.bgCard[1], colors.bgCard[2]);
+      doc.roundedRect(margin, yPos, pageWidth - (margin * 2), 20, 3, 3, 'F');
       
-      const scoreX = pageWidth - margin - 40;
-      const scoreY = yPos + 7;
-      const scoreWidth = 30;
-      const scoreHeight = 18;
-      
-      doc.setFillColor(scoreRgb[0], scoreRgb[1], scoreRgb[2]);
-      doc.roundedRect(scoreX, scoreY, scoreWidth, scoreHeight, 5, 5, 'F');
-      
+      // Valeurs du profil
       doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
-      doc.setFontSize(14);
+      doc.setFontSize(10);
       doc.setFont('helvetica', 'bold');
-      doc.text(`${score}%`, scoreX + scoreWidth/2, scoreY + scoreHeight/2 + 2, { align: 'center' });
       
-      yPos += 42;
+      doc.text(`${this.height} cm`, colPositions[0], yPos + 13, { align: 'center' });
+      doc.text(`${this.weight} kg`, colPositions[1], yPos + 13, { align: 'center' });
+      doc.text(this.formatTerrain(this.terrainType), colPositions[2], yPos + 13, { align: 'center' });
+      doc.text(this.formatSnow(this.typeSnow), colPositions[3], yPos + 13, { align: 'center' });
+      
+      yPos += 35;
+      
+      // ===== TOP 3 SKIS =====
+      doc.setTextColor(colors.orange[0], colors.orange[1], colors.orange[2]);
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOP 3 SKIS', margin, yPos);
+      
+      yPos += 10;
+      
+      for (let i = 0; i < Math.min(3, this.resultat.length); i++) {
+        const ski = this.resultat[i];
+        
+        // Carte
+        doc.setFillColor(colors.bgCard[0], colors.bgCard[1], colors.bgCard[2]);
+        doc.roundedRect(margin, yPos, pageWidth - (margin * 2), 35, 3, 3, 'F');
+        
+        // Rang
+        const medalColors = [
+          [255, 215, 0],
+          [192, 192, 192],
+          [205, 127, 50]
+        ];
+        
+        const circleX = margin + 17;
+        const circleY = yPos + 12;
+        const circleRadius = 8;
+        
+        doc.setFillColor(medalColors[i][0], medalColors[i][1], medalColors[i][2]);
+        doc.circle(circleX, circleY, circleRadius, 'F');
+        
+        doc.setTextColor(colors.bgDark[0], colors.bgDark[1], colors.bgDark[2]);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${i + 1}`, circleX, circleY + 4, { align: 'center' });
+        
+        // Nom et famille
+        doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text(ski.name, margin + 40, yPos + 12);
+        
+        doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'normal');
+        doc.text(ski.family || 'OGSO', margin + 40, yPos + 21);
+        
+        // Spécifications
+        const specsX = pageWidth / 2 - 10;
+        doc.setTextColor(colors.lightGray[0], colors.lightGray[1], colors.lightGray[2]);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`${ski.size}cm`, specsX, yPos + 12);
+        doc.text(`${ski.weight || 'N/A'}g`, specsX, yPos + 21);
+        
+        // Score
+        const score = ski.score || 0;
+        
+        let scoreRgb;
+        if (score >= 90) scoreRgb = [16, 185, 129];
+        else if (score >= 70) scoreRgb = [59, 130, 246];
+        else if (score >= 50) scoreRgb = [245, 158, 11];
+        else scoreRgb = [239, 68, 68];
+        
+        const scoreX = pageWidth - margin - 40;
+        const scoreY = yPos + 7;
+        const scoreWidth = 30;
+        const scoreHeight = 18;
+        
+        doc.setFillColor(scoreRgb[0], scoreRgb[1], scoreRgb[2]);
+        doc.roundedRect(scoreX, scoreY, scoreWidth, scoreHeight, 5, 5, 'F');
+        
+        doc.setTextColor(colors.white[0], colors.white[1], colors.white[2]);
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${score}%`, scoreX + scoreWidth/2, scoreY + scoreHeight/2 + 2, { align: 'center' });
+        
+        yPos += 42;
+      }
+      
+      // ===== FOOTER =====
+      doc.setDrawColor(colors.gray[0], colors.gray[1], colors.gray[2]);
+      doc.setLineWidth(0.3);
+      doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
+      
+      doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'normal');
+      doc.text('OGSO - Smart Product Selector', pageWidth / 2, pageHeight - 8, { align: 'center' });
+      
+      const fileName = `OGSO_Ski_Recommendations_${new Date().getTime()}.pdf`;
+      doc.save(fileName);
+      
+      this.pdfGenerated = true;
+      setTimeout(() => this.pdfGenerated = false, 3000);
+      
+    } catch (error) {
+      console.error('PDF Generation Error:', error);
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      this.isGeneratingPDF = false;
     }
-    
-    // ===== FOOTER =====
-    doc.setDrawColor(colors.gray[0], colors.gray[1], colors.gray[2]);
-    doc.setLineWidth(0.3);
-    doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
-    
-    doc.setTextColor(colors.gray[0], colors.gray[1], colors.gray[2]);
-    doc.setFontSize(7);
-    doc.setFont('helvetica', 'normal');
-    doc.text('OGSO - Smart Product Selector', pageWidth / 2, pageHeight - 8, { align: 'center' });
-    
-    const fileName = `OGSO_Ski_Recommendations_${new Date().getTime()}.pdf`;
-    doc.save(fileName);
-    
-    this.pdfGenerated = true;
-    setTimeout(() => this.pdfGenerated = false, 3000);
-    
-  } catch (error) {
-    console.error('PDF Generation Error:', error);
-    alert('Failed to generate PDF. Please try again.');
-  } finally {
-    this.isGeneratingPDF = false;
   }
-}
-  private hexToRgb(hex: string): { r: number, g: number, b: number } {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : { r: 0, g: 0, b: 0 };
-  }
-  
+
   async generateAndDownloadPDF(): Promise<void> {
     if (this.resultat.length === 0) {
       alert('No ski recommendations to export.');
       return;
     }
     await this.generatePDF();
-  }
-
-  onInlineCriteriaChange(): void {
-    const svc = this.dataService as any;
-    if (svc?.setProfile) {
-      svc.setProfile({
-        height: this.height,
-        weight: this.weight,
-        terrainType: this.terrain_type,
-        typeSnow: this.type_snow,
-        skiStyleFun: this.ski_level_fun,
-        turns: this.ski_turns,
-        stable: this.ski_speed,
-        skiLevel: this.ski_level
-      });
-    }
-    this.recalculateRecommendationsWithAnimation();
   }
 
   private initializeSkiModels(): void {
@@ -548,19 +619,19 @@ async generatePDF(): Promise<void> {
     for (const ski of ar) {
       let realScore = 100;
 
-      if (ski.playground && !(Array.isArray(ski.playground) ? ski.playground.includes(this.terrain_type) : ski.playground === this.terrain_type)) {
+      if (ski.playground && !(Array.isArray(ski.playground) ? ski.playground.includes(this.terrainType) : ski.playground === this.terrainType)) {
         realScore -= 10;
       }
-      if (ski.snow && !(Array.isArray(ski.snow) ? ski.snow.includes(this.type_snow) : ski.snow === this.type_snow)) {
+      if (ski.snow && !(Array.isArray(ski.snow) ? ski.snow.includes(this.typeSnow) : ski.snow === this.typeSnow)) {
         realScore -= 10;
       }
-      if (ski.riding_speed && !(Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.ski_speed) : ski.riding_speed === this.ski_speed)) {
+      if (ski.riding_speed && !(Array.isArray(ski.riding_speed) ? ski.riding_speed.includes(this.stable) : ski.riding_speed === this.stable)) {
         realScore -= 5;
       }
-      if (ski.turn && !(Array.isArray(ski.turn) ? ski.turn.includes(this.ski_turns) : ski.turn === this.ski_turns)) {
+      if (ski.turn && !(Array.isArray(ski.turn) ? ski.turn.includes(this.turns) : ski.turn === this.turns)) {
         realScore -= 5;
       }
-      if (ski.ski_style && !(Array.isArray(ski.ski_style) ? ski.ski_style.includes(this.ski_level_fun) : ski.ski_style === this.ski_level_fun)) {
+      if (ski.ski_style && !(Array.isArray(ski.ski_style) ? ski.ski_style.includes(this.skiStyleFun) : ski.ski_style === this.skiStyleFun)) {
         realScore -= 10;
       }
 
@@ -595,7 +666,6 @@ async generatePDF(): Promise<void> {
     });
 
     this.writeUserDataIfPossible();
-    
   }
 
   private writeUserDataIfPossible(): void {

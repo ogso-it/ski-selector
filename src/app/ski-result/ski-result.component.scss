@@ -15,7 +15,190 @@
   overflow: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
+/* ===== EDITOR AVEC SLIDERS ===== */
 
+.input-with-slider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  padding: 4px 0;
+
+  input[type="number"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #ff6a00;
+      box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.2);
+    }
+
+    &::-webkit-inner-spin-button, 
+    &::-webkit-outer-spin-button {
+      opacity: 0.5;
+      height: 20px;
+    }
+  }
+
+  .range-slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: #ff6a00;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(255, 106, 0, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        transform: scale(1.2);
+        background: #ff8533;
+      }
+    }
+
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: #ff6a00;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(255, 106, 0, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        transform: scale(1.2);
+        background: #ff8533;
+      }
+    }
+
+    &:active::-webkit-slider-thumb {
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* Ajustements responsive pour les sliders */
+@media (max-width: 768px) {
+  .input-with-slider {
+    gap: 6px;
+
+    input[type="number"] {
+      padding: 8px;
+      font-size: 16px; /* Meilleur pour le tactile */
+    }
+
+    .range-slider {
+      height: 8px;
+
+      &::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
+/* Amélioration de l'éditor-grid existant */
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editor-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  label {
+    display: block;
+    color: #ff6a00;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #ff6a00;
+      box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.2);
+    }
+
+    option {
+      background: #1a1b25;
+      color: white;
+      padding: 8px;
+    }
+  }
+}
+
+/* Animation pour les changements */
+.ski-card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.recalculating {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Amélioration des statistiques */
+.profile-stats {
+  .stat-block {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
 /* ===== VIDEO BACKGROUND ===== */
 .bg-video {
   position: absolute;

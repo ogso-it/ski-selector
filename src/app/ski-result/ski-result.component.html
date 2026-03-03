@@ -137,44 +137,93 @@
             </div>
           </div>
 
-          <!-- Editor -->
+          <!-- Editor avec sliders intégrés -->
           <div class="preferences-editor">
             <div class="editor-grid">
+              <!-- Height Input avec slider -->
               <div class="editor-item" title="Height (cm)">
                 <label title="Height (cm)">H</label>
-                <input type="number" [(ngModel)]="height" (input)="onInlineCriteriaChange()" title="Height in centimeters">
+                <div class="input-with-slider">
+                  <input type="number" 
+                         [ngModel]="height" 
+                         (ngModelChange)="onHeightChange($event)" 
+                         title="Height in centimeters"
+                         min="140" 
+                         max="220"
+                         step="1">
+                  <input type="range"
+                         [ngModel]="height"
+                         (ngModelChange)="onHeightChange($event)"
+                         (input)="onHeightInput($event)"
+                         (mouseup)="onSliderRelease()"
+                         (touchend)="onSliderRelease()"
+                         min="140"
+                         max="220"
+                         step="1"
+                         class="range-slider">
+                </div>
               </div>
+
+              <!-- Weight Input avec slider -->
               <div class="editor-item" title="Weight (kg)">
                 <label title="Weight (kg)">W</label>
-                <input type="number" [(ngModel)]="weight" (input)="onInlineCriteriaChange()" title="Weight in kilograms">
+                <div class="input-with-slider">
+                  <input type="number" 
+                         [ngModel]="weight" 
+                         (ngModelChange)="onWeightChange($event)" 
+                         title="Weight in kilograms"
+                         min="40" 
+                         max="150"
+                         step="1">
+                  <input type="range"
+                         [ngModel]="weight"
+                         (ngModelChange)="onWeightChange($event)"
+                         (input)="onWeightInput($event)"
+                         (mouseup)="onSliderRelease()"
+                         (touchend)="onSliderRelease()"
+                         min="40"
+                         max="150"
+                         step="1"
+                         class="range-slider">
+                </div>
               </div>
+
+              <!-- Terrain Select -->
               <div class="editor-item" title="Terrain type">
                 <label title="Terrain type">T</label>
-                <select [(ngModel)]="terrain_type" (change)="onInlineCriteriaChange()" title="Select terrain">
+                <select [ngModel]="terrain_type" (ngModelChange)="onTerrainChange($event)" title="Select terrain">
                   <option *ngFor="let opt of terrainOptions" [value]="opt">{{ formatTerrain(opt) }}</option>
                 </select>
               </div>
+
+              <!-- Snow Select -->
               <div class="editor-item" title="Snow condition">
                 <label title="Snow condition">S</label>
-                <select [(ngModel)]="type_snow" (change)="onInlineCriteriaChange()" title="Select snow type">
+                <select [ngModel]="type_snow" (ngModelChange)="onSnowChange($event)" title="Select snow type">
                   <option *ngFor="let opt of snowOptions" [value]="opt">{{ formatSnow(opt) }}</option>
                 </select>
               </div>
+
+              <!-- Style Select -->
               <div class="editor-item" title="Skiing style">
                 <label title="Skiing style">ST</label>
-                <select [(ngModel)]="ski_level_fun" (change)="onInlineCriteriaChange()" title="Select style">
+                <select [ngModel]="ski_level_fun" (ngModelChange)="onStyleChange($event)" title="Select style">
                   <option *ngFor="let opt of funOptions" [value]="opt">{{ formatStyle(opt) }}</option>
                 </select>
               </div>
+
+              <!-- Turns Select -->
               <div class="editor-item" title="Turning preference">
                 <label title="Turning preference">TU</label>
-                <select [(ngModel)]="ski_turns" (change)="onInlineCriteriaChange()" title="Select turns preference">
+                <select [ngModel]="ski_turns" (ngModelChange)="onTurnsChange($event)" title="Select turns preference">
                   <option *ngFor="let opt of turnOptions" [value]="opt">{{ formatTurns(opt) }}</option>
                 </select>
               </div>
+
+              <!-- Speed Select -->
               <div class="editor-item" title="Speed preference">
                 <label title="Speed preference">SP</label>
-                <select [(ngModel)]="ski_speed" (change)="onInlineCriteriaChange()" title="Select speed">
+                <select [ngModel]="ski_speed" (ngModelChange)="onSpeedChange($event)" title="Select speed">
                   <option *ngFor="let opt of speedOptions" [value]="opt">{{ formatSpeed(opt) }}</option>
                 </select>
               </div>
