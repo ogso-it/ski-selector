@@ -1,7 +1,5 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { fromEvent, Subscription } from 'rxjs';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-ski-layout',
@@ -9,102 +7,112 @@ import { fromEvent, Subscription } from 'rxjs';
   styleUrls: ['./ski-layout.scss'],
   standalone: false
 })
-export class SkiLayoutComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('videoBg') videoElement!: ElementRef<HTMLVideoElement>;
-  
+export class SkiLayoutComponent implements OnInit, AfterViewInit {
+  @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
   currentStep: number = 1;
-  private visibilitySubscription!: Subscription;
-  private checkInterval: any;
+  private isBrowser: boolean;
 
-  constructor(private router: Router) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.updateCurrentStep(event.url);
-    });
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  ngAfterViewInit() {
-    // Initialiser la vidéo après que la vue soit prête
-    setTimeout(() => {
+  ngOnInit(): void {
+    // Récupérer l'étape courante depuis l'URL ou un service
+    this.updateCurrentStep();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
       this.initVideo();
-    }, 100);
-  }
-
-  ngOnDestroy() {
-    // Nettoyer les abonnements
-    if (this.visibilitySubscription) {
-      this.visibilitySubscription.unsubscribe();
-    }
-    if (this.checkInterval) {
-      clearInterval(this.checkInterval);
     }
   }
 
-  private initVideo() {
-    const video = this.videoElement?.nativeElement;
-    if (!video) return;
+  private initVideo(): void {
+    try {
+      const video = document.querySelector('.layout-bg-video') as HTMLVideoElement;
+      if (!video) return;
 
-    // Configuration de la vidéo
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-
-    // Première tentative de lecture
-    this.attemptPlay(video);
-
-    // Surveiller les changements de visibilité de la page
-    this.visibilitySubscription = fromEvent(document, 'visibilitychange').subscribe(() => {
-      if (document.visibilityState === 'visible') {
-        this.attemptPlay(video);
+      // Configuration pour mobile
+      video.setAttribute('playsinline', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('autoplay', '');
+      video.setAttribute('loop', '');
+      video.setAttribute('disableRemotePlayback', '');
+      
+      // Important pour iOS
+      video.muted = true;
+      
+      // Tenter de jouer la vidéo
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Video playing successfully');
+        }).catch(error => {
+          console.log('Video autoplay failed:', error);
+          this.showFallbackImage();
+          
+          // Tentative de lecture après interaction utilisateur
+          this.setupUserInteractionListener(video);
+        });
       }
-    });
-
-    // Vérifier périodiquement que la vidéo joue
-    this.checkInterval = setInterval(() => {
-      this.attemptPlay(video);
-    }, 2000);
-
-    // Réessayer quand l'utilisateur interagit avec la page
-    const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
-    interactionEvents.forEach(event => {
-      document.addEventListener(event, () => {
-        this.attemptPlay(video);
-      }, { once: true });
-    });
-
-    // Gérer les erreurs de lecture
-    video.addEventListener('error', () => {
-      console.log('Erreur vidéo, tentative de rechargement');
-      setTimeout(() => this.attemptPlay(video), 1000);
-    });
-
-    // Si la vidéo est mise en pause, la relancer
-    video.addEventListener('pause', () => {
-      setTimeout(() => this.attemptPlay(video), 100);
-    });
-  }
-
-  private attemptPlay(video: HTMLVideoElement) {
-    if (!video) return;
-    
-    if (video.paused) {
-      video.play().catch(error => {
-        // Ignorer silencieusement - on réessaiera plus tard
-        // C'est normal que ça échoue si l'utilisateur n'a pas encore interagi
-      });
+    } catch (e) {
+      console.error('Video initialization error:', e);
+      this.showFallbackImage();
     }
   }
 
-  updateCurrentStep(url: string) {
-    if (url.includes('/step1')) this.currentStep = 1;
-    else if (url.includes('/step2')) this.currentStep = 2;
-    else if (url.includes('/step3')) this.currentStep = 3;
-    else if (url.includes('/step4')) this.currentStep = 4;
-    else if (url.includes('/step5')) this.currentStep = 5;
-    else if (url.includes('/step6')) this.currentStep = 6;
-    else if (url.includes('/step7')) this.currentStep = 7;
-    else this.currentStep = 1; // Par défaut
+  private setupUserInteractionListener(video: HTMLVideoElement): void {
+    const playVideoOnInteraction = () => {
+      video.play().then(() => {
+        console.log('Video started after user interaction');
+      }).catch(e => {
+        console.log('Still failed to play video:', e);
+        this.showFallbackImage();
+      });
+      
+      // Retirer les listeners après la première interaction
+      document.removeEventListener('touchstart', playVideoOnInteraction);
+      document.removeEventListener('click', playVideoOnInteraction);
+    };
+
+    document.addEventListener('touchstart', playVideoOnInteraction, { once: true });
+    document.addEventListener('click', playVideoOnInteraction, { once: true });
+  }
+
+  private showFallbackImage(): void {
+    const video = document.querySelector('.layout-bg-video') as HTMLVideoElement;
+    const fallback = document.querySelector('.layout-bg-fallback') as HTMLElement;
+    
+    if (video) {
+      video.style.display = 'none';
+    }
+    
+    if (fallback) {
+      fallback.style.display = 'block';
+      fallback.style.backgroundImage = 'url(assets/images/BACKGROUND-fallback.webp)';
+      fallback.style.backgroundSize = 'cover';
+      fallback.style.backgroundPosition = 'center';
+      fallback.style.position = 'absolute';
+      fallback.style.top = '0';
+      fallback.style.left = '0';
+      fallback.style.width = '100%';
+      fallback.style.height = '100%';
+      fallback.style.zIndex = '1';
+    }
+  }
+
+  private updateCurrentStep(): void {
+    // Logique pour déterminer l'étape courante
+    // À implémenter selon ton routage
+    const path = window.location.pathname;
+    if (path.includes('/ski/step1')) this.currentStep = 1;
+    else if (path.includes('/ski/step2')) this.currentStep = 2;
+    else if (path.includes('/ski/step3')) this.currentStep = 3;
+    else if (path.includes('/ski/step4')) this.currentStep = 4;
+    else if (path.includes('/ski/step5')) this.currentStep = 5;
+    else if (path.includes('/ski/step6')) this.currentStep = 6;
+    else if (path.includes('/ski/step7')) this.currentStep = 7;
+    else this.currentStep = 1;
   }
 }

@@ -1,8 +1,21 @@
 <div class="layout-container">
-  <!-- VIDEO BACKGROUND -->
-  <video class="layout-bg-video" autoplay muted loop playsinline>
+  <!-- VIDEO BACKGROUND avec fallback image -->
+  <video 
+    class="layout-bg-video" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    disableRemotePlayback
+    preload="auto"
+    poster="assets/images/BACKGROUND-fallback.webp">
     <source src="assets/images/BACKGROUND.webm" type="video/webm">
+    <source src="assets/images/BACKGROUND.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
+
+  <!-- Fallback image si la vidéo ne se lance pas -->
+  <div class="layout-bg-fallback" style="display: none;"></div>
 
   <div class="layout-panel-wrapper">
     <div class="layout-panel">
