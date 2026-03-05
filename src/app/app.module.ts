@@ -36,6 +36,7 @@ import { HomeAnimationComponent } from './animation/home-animation/home-animatio
 import { CarouselComponent } from './carousel/carousel.component';
 import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

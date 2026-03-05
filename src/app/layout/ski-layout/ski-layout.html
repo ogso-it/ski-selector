@@ -1,25 +1,19 @@
-<div class="home-container">
-
+<div class="layout-container">
   <!-- VIDEO BACKGROUND -->
-  <video #videoBg class="bg-video" autoplay muted loop playsinline preload="auto">
+  <video class="layout-bg-video" autoplay muted loop playsinline>
     <source src="assets/images/BACKGROUND.webm" type="video/webm">
   </video>
-  
-  <!-- PANEL WRAPPER -->
-  <div class="panel-wrapper">
 
-    <div class="panel">
+  <div class="layout-panel-wrapper">
+    <div class="layout-panel">
+      <img src="assets/images/fond.webp" class="layout-panel-bg" alt="panel">
 
-      <img src="assets/images/fond.webp" class="panel-bg" alt="panel">
-
-      <div class="panel-content">
-
+      <div class="layout-panel-content">
         <!-- HEADER -->
-        <div class="panel-header">
-          <div class="header-left">
-            <h3>OGSO SMART PRODUCT SELECTOR</h3>
-
-            <div class="steps">
+        <div class="layout-header">
+          <div class="layout-header-left">
+            <h3 class="layout-header-title">OGSO SMART PRODUCT SELECTOR</h3>
+            <div class="layout-steps">
               <span [class.active]="currentStep === 1">1</span>
               <span [class.active]="currentStep === 2">2</span>
               <span [class.active]="currentStep === 3">3</span>
@@ -30,17 +24,15 @@
             </div>
           </div>
 
-          <div class="header-right">
-            <img src="assets/images/ogsologo.png" alt="OGSO" class="ogso-logo">
+          <div class="layout-header-right">
+            <img src="assets/images/ogsologo.png" class="layout-logo" alt="OGSO">
           </div>
         </div>
 
-        <!-- BODY -->
-        <div class="panel-body">
-          <!-- CONTENU DYNAMIQUE DES STEPS -->
+        <!-- CONTENT -->
+        <div class="layout-body">
           <router-outlet></router-outlet>
         </div>
-
       </div>
     </div>
   </div>
