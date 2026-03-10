@@ -1,52 +1,63 @@
 <div class="layout-container">
-  <!-- VIDEO BACKGROUND avec fallback image -->
-  <video 
-    class="layout-bg-video" 
-    autoplay 
-    muted 
-    loop 
+
+  <!-- VIDEO BACKGROUND -->
+  <video
+    class="layout-bg-video"
+    autoplay
+    muted
+    loop
     playsinline
-    disableRemotePlayback
     preload="auto"
-    poster="assets/images/BACKGROUND-fallback.webp">
+    poster="assets/images/backupvideo.png">
+
     <source src="assets/images/BACKGROUND.webm" type="video/webm">
     <source src="assets/images/BACKGROUND.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+
   </video>
 
-  <!-- Fallback image si la vidéo ne se lance pas -->
-  <div class="layout-bg-fallback" style="display: none;"></div>
-
   <div class="layout-panel-wrapper">
+
     <div class="layout-panel">
+
       <img src="assets/images/fond.webp" class="layout-panel-bg" alt="panel">
 
       <div class="layout-panel-content">
+
         <!-- HEADER -->
         <div class="layout-header">
+
           <div class="layout-header-left">
-            <h3 class="layout-header-title">OGSO SMART PRODUCT SELECTOR</h3>
-            <div class="layout-steps">
-              <span [class.active]="currentStep === 1">1</span>
-              <span [class.active]="currentStep === 2">2</span>
-              <span [class.active]="currentStep === 3">3</span>
-              <span [class.active]="currentStep === 4">4</span>
-              <span [class.active]="currentStep === 5">5</span>
-              <span [class.active]="currentStep === 6">6</span>
-              <span [class.active]="currentStep === 7">7</span>
+            <h3 class="layout-header-title">
+              OGSO SMART PRODUCT SELECTOR
+            </h3>
+            
+            <!-- Progress bar avec indices dynamiques -->
+            <div class="layout-steps-container">
+              <span 
+                *ngFor="let step of [1,2,3,4,5,6,7]" 
+                class="step-number"
+                [class.active]="currentStep === step"
+                [class.completed]="currentStep > step">
+                {{ step }}
+              </span>
             </div>
           </div>
 
           <div class="layout-header-right">
             <img src="assets/images/ogsologo.png" class="layout-logo" alt="OGSO">
           </div>
+
         </div>
 
         <!-- CONTENT -->
         <div class="layout-body">
           <router-outlet></router-outlet>
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
