@@ -3,6 +3,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { inject } from '@vercel/analytics';
+
 
 // Enable production mode
 if (environment.production) {
@@ -60,6 +62,7 @@ platformBrowserDynamic()
 window.addEventListener('error', (event) => {
   console.error('Global error:', event.error);
 });
+inject();
 
 window.addEventListener('unhandledrejection', (event) => {
   console.error('Unhandled promise rejection:', event.reason);
