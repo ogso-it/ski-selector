@@ -1,5 +1,4 @@
 <!-- STEP 6 CONTENT -->
-
 <div class="step-layout">
 
   <!-- LEFT TEXT -->
@@ -11,37 +10,79 @@
     </h1>
   </div>
 
+  <!-- SPEED ANIMATION -->
+  <!-- <div class="center-animation" *ngIf="selectedSpeed">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto">
+      <source
+        src="assets/animations/step6.webm"
+        type="video/webm">
+    </video>
+  </div> -->
+
   <!-- RIGHT RADIO BUTTONS -->
   <div class="right">
     <h2 class="section-title">DO YOU PREFER?</h2>
-    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-    
+
+    <p class="required-field">
+      <span class="asterisk">*</span>
+      This field is required
+    </p>
+
     <div class="radio-list">
-      <label class="radio-option" [class.selected]="selectedSpeed === 'moderate-speed'">
-        <input type="radio" 
-               name="speedPreference" 
-               value="moderate-speed" 
-               (change)="onSpeedChange('moderate-speed')"
-               [checked]="selectedSpeed === 'moderate-speed'">
-        <span class="radio-label">MODERATE SPEED</span>
+
+      <label
+        class="radio-option"
+        [class.selected]="selectedSpeed === 'moderate-speed'">
+
+        <input
+          type="radio"
+          name="speedPreference"
+          value="moderate-speed"
+          (change)="onSpeedChange('moderate-speed')"
+          [checked]="selectedSpeed === 'moderate-speed'">
+
+        <span class="radio-label">
+          MODERATE SPEED
+        </span>
       </label>
 
-      <label class="radio-option" [class.selected]="selectedSpeed === 'high-speed'">
-        <input type="radio" 
-               name="speedPreference" 
-               value="high-speed" 
-               (change)="onSpeedChange('high-speed')"
-               [checked]="selectedSpeed === 'high-speed'">
-        <span class="radio-label">HIGH SPEED</span>
+      <label
+        class="radio-option"
+        [class.selected]="selectedSpeed === 'high-speed'">
+
+        <input
+          type="radio"
+          name="speedPreference"
+          value="high-speed"
+          (change)="onSpeedChange('high-speed')"
+          [checked]="selectedSpeed === 'high-speed'">
+
+        <span class="radio-label">
+          HIGH SPEED
+        </span>
       </label>
+
     </div>
   </div>
 
 </div>
 
 <!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!selectedSpeed"
-        [disabled]="!selectedSpeed"
-        (click)="next()">NEXT</button>
+<button
+  class="prev-btn"
+  (click)="prev()">
+  PREV
+</button>
+
+<button
+  class="next-btn"
+  [class.disabled]="!selectedSpeed"
+  [disabled]="!selectedSpeed"
+  (click)="next()">
+  NEXT
+</button>

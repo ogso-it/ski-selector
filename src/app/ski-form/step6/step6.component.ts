@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService } from 'src/app/data-service.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-step6',
@@ -11,9 +12,10 @@ import { takeUntil } from 'rxjs/operators';
   standalone: false
 })
 export class Step6Component implements OnInit, OnDestroy {
+
   private destroy$ = new Subject<void>();
 
-  hidden: boolean = false;
+  hidden = false;
   selectedSpeed: string | null = null;
 
   constructor(
@@ -22,11 +24,16 @@ export class Step6Component implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+
     this.dataService.profile$
       .pipe(takeUntil(this.destroy$))
       .subscribe(profile => {
+
         this.selectedSpeed = profile.stable;
-        this.hidden = !!profile.stable;
+
+        if (profile.stable) {
+          this.hidden = true;
+        }
       });
   }
 
@@ -36,9 +43,12 @@ export class Step6Component implements OnInit, OnDestroy {
   }
 
   onSpeedChange(value: string): void {
+
     this.selectedSpeed = value;
     this.hidden = true;
+
     this.dataService.setStable(value);
+
     console.log('Speed preference selected:', value);
   }
 
@@ -47,8 +57,11 @@ export class Step6Component implements OnInit, OnDestroy {
   }
 
   next(): void {
-    if (this.hidden) {
-      this.router.navigate(['/ski/step7']); // ou vers la page de résultats si step7 n'existe pas
+
+    if (!this.selectedSpeed) {
+      return;
     }
+
+    this.router.navigate(['/ski/step7']);
   }
 }

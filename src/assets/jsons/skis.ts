@@ -1224,6 +1224,283 @@
   
   
     },
+    {
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'CORBET ZERO ', //name: 'DANAÏDES 90 NEO ML',
+      size: 170, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-back-mountain'],
+      snow : ['powder'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },{
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'CORBET ZERO ', //name: 'DANAÏDES 90 NEO ML',
+      size: 178, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-back-mountain'],
+      snow : ['powder'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },{
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'CORBET ZERO ', //name: 'DANAÏDES 90 NEO ML',
+      size: 186, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-back-mountain'],
+      snow : ['powder'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },{
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'CORBET ZERO ', //name: 'DANAÏDES 90 NEO ML',
+      size: 194, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-back-mountain'],
+      snow : ['powder'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },{
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'SCHWARZTOR ', //name: 'DANAÏDES 90 NEO ML',
+      size: 170, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['freetouring'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    {
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'SCHWARZTOR ', //name: 'DANAÏDES 90 NEO ML',
+      size: 178, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['freetouring'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    {
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'SCHWARZTOR ', //name: 'DANAÏDES 90 NEO ML',
+      size: 186, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['freetouring'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+     {
+      family: 'ZERO SOPHISTO',
+      category: 'MEDIUM LIGHT',
+      name: 'SCHWARZTOR ', //name: 'DANAÏDES 90 NEO ML',
+      size: 194, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['freetouring'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['moderate-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    {
+      family: 'SCURRY ODYSSEY',
+      category: 'MEDIUM LIGHT',
+      name: 'RYUJIN', //name: 'DANAÏDES 90 NEO ML',
+      size: 176, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['playride'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+     {
+      family: 'SCURRY ODYSSEY',
+      category: 'MEDIUM LIGHT',
+      name: 'RYUJIN', //name: 'DANAÏDES 90 NEO ML',
+      size: 184, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['playride'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+     {
+      family: 'SCURRY ODYSSEY',
+      category: 'MEDIUM LIGHT',
+      name: 'RYUJIN', //name: 'DANAÏDES 90 NEO ML',
+      size: 192, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['playride'],
+      snow : ['crud'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    {
+      family: 'CONTEMPORARY',
+      category: 'MEDIUM LIGHT',
+      name: 'BARBEY ', //name: 'DANAÏDES 90 NEO ML',
+      size: 172, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['freetouring'],
+      snow : ['powder'],
+      ski_style: ['technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    {
+      family: 'CONTEMPORARY',
+      category: 'MEDIUM LIGHT',
+      name: 'BARBEY ', //name: 'DANAÏDES 90 NEO ML',
+      size: 182, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+       playground: ['freetouring'],
+      snow : ['powder'],
+      ski_style: ['technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+     {
+      family: 'CONTEMPORARY',
+      category: 'MEDIUM LIGHT',
+      name: 'BARBEY ', //name: 'DANAÏDES 90 NEO ML',
+      size: 192, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+       playground: ['freetouring'],
+      snow : ['powder'],
+      ski_style: ['technical-precision'],
+      riding_speed: ['high-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+  
+  
+    },
+    
     // {
     //   family: 'NEOTERIC CAMBER',
     //   category: 'MEDIUM LIGHT',
