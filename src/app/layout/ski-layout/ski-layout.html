@@ -1,63 +1,107 @@
 <div class="layout-container">
 
-  <!-- VIDEO BACKGROUND -->
-  <video
-    class="layout-bg-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    poster="assets/images/backupvideo.png">
+    <video
+        class="layout-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="assets/images/backupvideo.png">
 
-    <source src="assets/images/BACKGROUND.webm" type="video/webm">
-    <source src="assets/images/BACKGROUND.mp4" type="video/mp4">
+        <source
+            src="assets/images/NEWanimatedbackground.webm"
+            type="video/webm">
 
-  </video>
+        <source
+            src="assets/images/NEWanimatedbackground.mp4"
+            type="video/mp4">
 
-  <div class="layout-panel-wrapper">
+    </video>
 
-    <div class="layout-panel">
+    <div class="layout-panel-wrapper">
+        <div class="layout-panel">
 
-      <img src="assets/images/fond.webp" class="layout-panel-bg" alt="panel">
+            <picture
+                class="layout-panel-picture"
+                aria-hidden="true">
 
-      <div class="layout-panel-content">
+                <source
+                    media="(max-width:600px) and (min-resolution:2dppx)"
+                    srcset="assets/images/banner2.png">
 
-        <!-- HEADER -->
-        <div class="layout-header">
+                <source
+                    media="(max-width:600px)"
+                    srcset="assets/images/banner1.png">
 
-          <div class="layout-header-left">
-            <h3 class="layout-header-title">
-              OGSO SMART PRODUCT SELECTOR
-            </h3>
-            
-            <!-- Progress bar avec indices dynamiques -->
-            <div class="layout-steps-container">
-              <span 
-                *ngFor="let step of [1,2,3,4,5,6,7]" 
-                class="step-number"
-                [class.active]="currentStep === step"
-                [class.completed]="currentStep > step">
-                {{ step }}
-              </span>
+                <source
+                    media="(min-width:601px) and (max-width:1024px) and (orientation:portrait)"
+                    srcset="assets/images/banner3.png">
+
+                <source
+                    media="(min-width:601px) and (max-width:1024px) and (orientation:landscape)"
+                    srcset="assets/images/banner4.png">
+
+                <img
+                    class="layout-panel-bg"
+                    src="assets/images/BannerStup.png"
+                    alt="">
+
+            </picture>
+
+            <div class="layout-panel-content">
+
+                <!-- Safe area aligned to the useful inside of each banner -->
+                <div class="layout-safe-area">
+
+                    <header class="layout-header">
+
+                        <div class="layout-header-left">
+
+                            <div class="layout-mobile-step">
+                                Step {{ currentStep }} of 7
+                            </div>
+
+                            <h3 class="layout-header-title">
+                                OGSO SMART PRODUCT SELECTOR
+                            </h3>
+
+                            <nav
+                                class="layout-steps-container"
+                                aria-label="Progress">
+
+                                <span
+                                    *ngFor="let step of [1,2,3,4,5,6,7]"
+                                    class="step-number"
+                                    [class.active]="currentStep===step"
+                                    [class.completed]="currentStep>step">
+                                    {{ step }}
+                                </span>
+
+                            </nav>
+
+                        </div>
+
+                        <div class="layout-header-right">
+                            <img
+                                class="layout-logo"
+                                src="assets/images/ogsologo.png"
+                                alt="OGSO">
+                        </div>
+
+                    </header>
+
+                    <main class="layout-body">
+                        <div class="layout-body-content">
+                            <router-outlet></router-outlet>
+                        </div>
+                    </main>
+
+                </div>
+
             </div>
-          </div>
-
-          <div class="layout-header-right">
-            <img src="assets/images/ogsologo.png" class="layout-logo" alt="OGSO">
-          </div>
 
         </div>
-
-        <!-- CONTENT -->
-        <div class="layout-body">
-          <router-outlet></router-outlet>
-        </div>
-
-      </div>
-
     </div>
-
-  </div>
 
 </div>

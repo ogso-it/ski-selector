@@ -1,19 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService } from 'src/app/data-service.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-step7',
   templateUrl: './step7.component.html',
-  styleUrls: ['./step7.component.css'],
+  styleUrls: ['./step7.component.scss'],
   standalone: false
 })
-export class Step7Component implements OnInit, OnDestroy {
+export class Step7Component implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild('styleVideo')
+  styleVideo?: ElementRef<HTMLVideoElement>;
+
   private destroy$ = new Subject<void>();
 
-  hidden: boolean = false;
   selectedStyle: string | null = null;
 
   constructor(
@@ -25,21 +36,29 @@ export class Step7Component implements OnInit, OnDestroy {
     this.dataService.profile$
       .pipe(takeUntil(this.destroy$))
       .subscribe(profile => {
-        this.selectedStyle = profile.skiStyleFun;  // ← Changé de skiingStyle à skiStyleFun
-        this.hidden = !!profile.skiStyleFun;        // ← Changé ici aussi
+        this.selectedStyle = profile.skiStyleFun ?? null;
       });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  ngAfterViewInit(): void {
+    const video = this.styleVideo?.nativeElement;
+
+    if (!video) {
+      return;
+    }
+
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+
+    video.play().catch(error => {
+      console.warn('Step 7 video could not autoplay:', error);
+    });
   }
 
   onStyleChange(value: string): void {
     this.selectedStyle = value;
-    this.hidden = true;
-    this.dataService.setSkiStyleFun(value);  // ← Changé de setSkiingStyle à setSkiStyleFun
-    console.log('Skiing style selected:', value);
+    this.dataService.setSkiStyleFun(value);
   }
 
   prev(): void {
@@ -47,8 +66,23 @@ export class Step7Component implements OnInit, OnDestroy {
   }
 
   next(): void {
-    if (this.hidden) {
-      this.router.navigate(['/recommanded-skis']);
+    if (!this.selectedStyle) {
+      return;
     }
+
+    this.router.navigate(['/recommanded-skis']);
+  }
+
+  ngOnDestroy(): void {
+    const video = this.styleVideo?.nativeElement;
+
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

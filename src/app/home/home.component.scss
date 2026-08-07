@@ -1,508 +1,1419 @@
-:host {
-  display: block;
-  width: 100%;
-  height: 100%;
+:host{
+    display:block;
+    width:100%;
+    height:100%;
 }
 
-/* CONTAINER */
-.home-content {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.home-content{
+    position:relative;
+    width:100%;
+    height:100%;
 }
 
-/* LEFT TEXT - Desktop (inchangé) */
-.home-left {
-  position: absolute;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-65%);
-  width: 35%;
+/* =======================================================
+   HERO
+======================================================= */
+
+.hero-container{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    gap:28px;
+
+    padding:0 120px;
+
+    transform:translateY(5px);
 }
 
-.home-title {
-  color: #ff6a00;
-  font-size: clamp(42px, 4vw, 64px);
-  line-height: 1;
-  font-weight: 800;
-  text-transform: uppercase;
+/* =======================================================
+   LOGO
+======================================================= */
+.hero-logo{
+
+    position:relative;
+
+    top:auto;
+
+    left:auto;
+
+    transform:none;
+
+    margin:0;
 }
 
-/* SKI - Desktop (inchangé) */
-.home-center {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -65%);
+.hero-logo img{
+
+    width:90px;          /* ajuste entre 80 et 100px */
+
+    height:auto;
+
+    filter:
+        brightness(0)
+        invert(1);
+}
+/* =======================================================
+   TITLE
+======================================================= */
+
+.hero-title{
+
+    position:relative;
+
+    top:auto;
+
+    left:auto;
+
+    transform:none;
+
+    width:auto;
+
+    margin:0;
 }
 
-.home-ski-img {
-  height: clamp(150px, 45vh, 250px);
-  width: auto;
+.hero-title h1{
+
+    margin:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+    line-height:.92;
 }
 
-/* RIGHT TEXT - Desktop (inchangé) */
-.home-right {
-  position: absolute;
-  right: 6%;
-  top: 50%;
-  transform: translateY(-65%);
-  width: 28%;
+.title-white{
+
+    color:#fff;
+
+    font-size:clamp(72px,6vw,96px);
+
+    font-weight:800;
+
+    letter-spacing:-2px;
 }
 
-.home-right p {
-  color: white;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 16px;
+.title-orange{
+
+    color:#ff5b25;
+
+    font-size:clamp(84px,6.5vw,108px);
+
+    font-weight:800;
+
+    letter-spacing:-2px;
 }
 
-.home-signature {
-  color: #00eaff;
-  font-style: italic;
+/* =======================================================
+   DESCRIPTION
+======================================================= */
+
+.hero-description{
+
+    position:relative;
+
+    top:auto;
+
+    left:auto;
+
+    transform:none;
+
+    width:720px;
+
+    max-width:80%;
+
+    margin:0;
 }
 
-/* BUTTON - Desktop (inchangé) */
-.home-next-btn {
-  position: absolute;
-  right: 8%;
-  bottom: 12%;
-  background: linear-gradient(90deg, #00aaff, #00eaff);
-  border: none;
-  padding: 12px 40px;
-  border-radius: 40px;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  cursor: pointer;
+.hero-description p{
+
+    margin:0;
+
+    color:white;
+
+    font-size:22px;
+
+    line-height:1.55;
+
+    font-weight:400;
 }
 
-/* ===== DESKTOP - STRICTEMENT INCHANGÉ ===== */
-/* Ne s'applique que sur écrans > 1200px */
-@media screen and (min-width: 1200px) {
-  .home-content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
+/* =======================================================
+   BUTTON
+======================================================= */
 
-  .home-left {
-    position: absolute;
-    left: 6%;
-    top: 50%;
-    transform: translateY(-65%);
-    width: 35%;
-  }
+.hero-actions{
 
-  .home-title {
-    color: #ff6a00;
-    font-size: clamp(42px, 4vw, 64px);
-    line-height: 1;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
+    position:relative;
 
-  .home-center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -65%);
-  }
+    top:auto;
 
-  .home-ski-img {
-    height: clamp(150px, 30vh, 250px);
-    width: auto;
-  }
+    left:auto;
 
-  .home-right {
-    position: absolute;
-    right: 6%;
-    top: 50%;
-    transform: translateY(-65%);
-    width: 28%;
-  }
+    transform:none;
 
-  .home-right p {
-    color: white;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-
-  .home-signature {
-    color: #00eaff;
-    font-style: italic;
-  }
-
-  .home-next-btn {
-    position: absolute;
-    right: 8%;
-    bottom: 12%;
-    background: linear-gradient(90deg, #00aaff, #00eaff);
-    border: none;
-    padding: 12px 40px;
-    border-radius: 40px;
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .home-next-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 234, 255, 0.5);
-  }
+    margin-top:18px;
 }
-@media screen and (min-width: 1200px) {
-  .home-content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
 
-  .home-left {
-    position: absolute;
-    left: 6%;
-    top: 50%;
-    transform: translateY(-65%);
-    width: 35%;
-  }
+.hero-btn{
 
-  .home-title {
-    color: #ff6a00;
-    font-size: clamp(42px, 4vw, 64px);
-    line-height: 1;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
+    width:430px;
 
-  .home-center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -65%);
-  }
+    height:88px;
 
-  .home-ski-img {
-    height: clamp(150px, 30vh, 250px);
-    width: auto;
-  }
+    display:flex;
 
-  .home-right {
-    position: absolute;
-    right: 6%;
-    top: 50%;
-    transform: translateY(-65%);
-    width: 28%;
-  }
+    justify-content:center;
 
-  .home-right p {
-    color: white;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
+    align-items:center;
 
-  .home-signature {
-    color: #00eaff;
-    font-style: italic;
-  }
+    gap:16px;
 
-  .home-next-btn {
-    position: absolute;
-    right: 8%;
-    bottom: 12%;
-    background: linear-gradient(90deg, #00aaff, #00eaff);
-    border: none;
-    padding: 12px 40px;
-    border-radius: 40px;
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 234, 255, 0.5);
+    background:rgba(255,255,255,.06);
+
+    border:1.5px solid rgba(255,255,255,.75);
+
+    border-radius:22px;
+
+    backdrop-filter:blur(14px);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 14px 40px rgba(0,0,0,.35);
+}
+
+.hero-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:rgba(255,255,255,.12);
+
+    border-color:white;
+}
+
+.hero-btn-text{
+
+    font-size:34px;
+
+    font-weight:700;
+}
+
+.hero-btn-arrow{
+
+    font-size:34px;
+
+    transition:.3s;
+}
+
+.hero-btn:hover .hero-btn-arrow{
+
+    transform:translateX(8px);
+}
+
+/* =======================================================
+   ANIMATION
+======================================================= */
+
+@keyframes heroAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
     }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+/* =======================================================
+   TABLET
+======================================================= */
+/* =======================================================
+   LAPTOP
+======================================================= */
+
+@media screen and (max-width: 1400px) {
+
+  .hero-container {
+    gap: 22px;
+    padding: 0 90px;
+  }
+
+  .hero-logo img {
+    width: 56px;
+  }
+
+  .title-white {
+    font-size: clamp(58px, 5.5vw, 78px);
+  }
+
+  .title-orange {
+    font-size: clamp(66px, 6vw, 88px);
+  }
+
+  .hero-description {
+    width: 620px;
+  }
+
+  .hero-description p {
+    font-size: 19px;
+  }
+
+  .hero-btn {
+    width: 370px;
+    height: 74px;
+  }
+
+  .hero-btn-text {
+    font-size: 28px;
+  }
+
+  .hero-btn-arrow {
+    font-size: 28px;
   }
 }
 
-/* ===== TABLETTE ET MOBILE - TOUS LES AUTRES ÉCRANS ===== */
-@media screen and (max-width: 1199px) {
-  .home-content {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    box-sizing: border-box;
+/* =======================================================
+   TABLET
+======================================================= */
+
+@media screen and (max-width: 1024px) {
+
+  .hero-container {
+    gap: 18px;
+    padding: 30px 70px 0;
+    transform: translateY(8px);
   }
 
-  // Reset positions absolues
-  .home-left,
-  .home-center,
-  .home-right,
-  .home-next-btn {
+  .hero-logo img {
+    width: 48px;
+  }
+
+  .hero-title h1 {
+    gap: 7px;
+  }
+
+  .title-white {
+    font-size: clamp(46px, 7vw, 64px);
+    letter-spacing: -1.5px;
+  }
+
+  .title-orange {
+    font-size: clamp(52px, 8vw, 72px);
+    letter-spacing: -1.5px;
+  }
+
+  .hero-description {
+    width: 520px;
+    max-width: 90%;
+  }
+
+  .hero-description p {
+    font-size: 17px;
+    line-height: 1.45;
+  }
+
+  .hero-actions {
+    margin-top: 14px;
+  }
+
+  .hero-btn {
+    width: 330px;
+    height: 66px;
+    border-radius: 18px;
+  }
+
+  .hero-btn-text {
+    font-size: 24px;
+  }
+
+  .hero-btn-arrow {
+    font-size: 24px;
+  }
+}
+
+/* =======================================================
+   MOBILE
+======================================================= */
+
+@media screen and (max-width: 767px) {
+
+  .hero-container {
     position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    transform: none;
+    inset: auto;
+
     width: 100%;
-    max-width: 600px;
+    height: 100%;
+
+    gap: 15px;
+
+    padding: 55px 24px 25px;
+
+    box-sizing: border-box;
+
+    transform: none;
   }
 
-  // Left text
-  .home-left {
-    order: 1;
-    text-align: center;
-    margin-top: clamp(20px, 5vh, 60px);
+  .hero-logo img {
+    width: 40px;
   }
 
-  .home-title {
-    color: #ff6a00;
-    font-size: clamp(32px, 6vw, 48px);
-    line-height: 1.1;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 0;
+  .title-white {
+    font-size: clamp(34px, 11vw, 48px);
+    letter-spacing: -1px;
   }
 
-  // Ski image - version corrigée pour tous les écrans < 1200px
-  .home-center {
-    order: 2;
+  .title-orange {
+    font-size: clamp(38px, 12vw, 54px);
+    letter-spacing: -1px;
+  }
+
+  .hero-description {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .hero-description p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .hero-actions {
+    width: 100%;
+    margin-top: 10px;
+
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: clamp(10px, 3vh, 30px) 0;
   }
 
-  .home-ski-img {
-    height: clamp(150px, 25vh, 280px);
-    width: auto;
-    max-width: 90%;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  .hero-btn {
+    width: min(100%, 300px);
+    height: 58px;
+
+    border-radius: 16px;
   }
 
-  // Right text
-  .home-right {
-    order: 3;
-    text-align: center;
-    padding: 0 15px;
-    
-    p {
-      color: white;
-      font-size: clamp(12px, 3.5vw, 15px);
-      line-height: 1.6;
-      margin-bottom: clamp(10px, 2vh, 16px);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
+  .hero-btn-text {
+    font-size: 20px;
   }
 
-  .home-signature {
-    color: #00eaff;
-    font-style: italic;
-    font-size: clamp(13px, 4vw, 16px);
-  }
-
-  // Button
-  .home-next-btn {
-    order: 4;
-    display: block;
-    width: fit-content;
-    min-width: 200px;
-    margin: clamp(15px, 4vh, 30px) auto clamp(20px, 5vh, 40px);
-    background: linear-gradient(90deg, #00aaff, #00eaff);
-    border: none;
-    padding: clamp(10px, 2vh, 14px) clamp(30px, 8vw, 50px);
-    border-radius: 40px;
-    color: white;
-    font-size: clamp(12px, 3.5vw, 14px);
-    font-weight: 600;
-    letter-spacing: 2px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 234, 255, 0.3);
-    transition: all 0.3s ease;
-    text-align: center;
-    
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 234, 255, 0.5);
-    }
-  }
-
-  // Petits mobiles (< 480px)
-  @media screen and (max-width: 480px) {
-    .home-title {
-      font-size: clamp(24px, 7vw, 32px);
-    }
-
-    .home-ski-img {
-      height: clamp(120px, 20vh, 160px);
-    }
-
-    .home-right p {
-      font-size: clamp(11px, 3.5vw, 12px);
-      margin-bottom: 8px;
-    }
-
-    .home-next-btn {
-      min-width: 160px;
-      padding: 8px 25px;
-    }
-  }
-
-  // Mobiles moyens (481px - 767px)
-  @media screen and (min-width: 481px) and (max-width: 767px) {
-    .home-title {
-      font-size: clamp(32px, 6vw, 42px);
-    }
-
-    .home-ski-img {
-      height: clamp(150px, 22vh, 200px);
-    }
-
-    .home-right p {
-      font-size: 13px;
-    }
-  }
-
-  // Tablettes (768px - 1024px) - CORRIGÉ POUR LE CENTRAGE
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .home-content {
-      padding: 30px;
-    }
-
-    .home-left {
-      margin-top: 40px;
-    }
-
-    .home-title {
-      font-size: clamp(42px, 5vw, 52px);
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .home-center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 30px 0;
-    }
-
-    .home-ski-img {
-      height: clamp(220px, 30vh, 300px);
-      max-width: 80%;
-    }
-
-    .home-right {
-      max-width: 600px;
-      
-      p {
-        font-size: 15px;
-        line-height: 1.7;
-      }
-    }
-
-    .home-next-btn {
-      padding: 14px 50px;
-      font-size: 14px;
-      min-width: 220px;
-    }
-  }
-
-  // Petits laptops (1025px - 1199px)
-  @media screen and (min-width: 1025px) and (max-width: 1199px) {
-    .home-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .home-title {
-      font-size: 48px;
-    }
-
-    .home-ski-img {
-      height: 250px;
-    }
-
-    .home-right p {
-      font-size: 14px;
-    }
-  }
-
-  // Mode paysage
-  @media screen and (max-width: 1024px) and (orientation: landscape) {
-    .home-content {
-      min-height: auto;
-      padding: 15px;
-    }
-
-    .home-left {
-      margin-top: 10px;
-    }
-
-    .home-title {
-      font-size: clamp(24px, 4vw, 36px);
-    }
-
-    .home-center {
-      margin: 5px 0;
-    }
-
-    .home-ski-img {
-      height: clamp(120px, 30vh, 180px);
-    }
-
-    .home-right {
-      max-width: 80%;
-      
-      p {
-        font-size: clamp(11px, 2.5vw, 13px);
-        margin-bottom: 5px;
-      }
-    }
-
-    .home-next-btn {
-      margin: 10px auto 15px;
-      padding: 8px 35px;
-    }
+  .hero-btn-arrow {
+    font-size: 21px;
   }
 }
 
-// Très grands écrans
-@media screen and (min-width: 1920px) {
-  .home-left {
-    left: 8%;
+/* =======================================================
+   SMALL MOBILE
+======================================================= */
+
+@media screen and (max-width: 480px) {
+
+  .hero-container {
+    gap: 12px;
+    padding: 58px 18px 18px;
   }
 
-  .home-title {
-    font-size: 72px;
+  .hero-logo img {
+    width: 34px;
   }
 
-  .home-right {
-    right: 8%;
-    
-    p {
-      font-size: 16px;
+  .title-white {
+    font-size: clamp(29px, 10vw, 38px);
+  }
+
+  .title-orange {
+    font-size: clamp(33px, 11vw, 43px);
+  }
+
+  .hero-description p {
+    font-size: 13px;
+  }
+
+  .hero-btn {
+    width: min(100%, 260px);
+    height: 52px;
+  }
+
+  .hero-btn-text {
+    font-size: 17px;
+  }
+
+  .hero-btn-arrow {
+    font-size: 18px;
+  }
+}
+
+/* =======================================================
+   SHORT LANDSCAPE SCREENS
+======================================================= */
+
+@media screen and (max-height: 700px) and (orientation: landscape) {
+
+  .hero-container {
+    gap: 10px;
+    padding-top: 45px;
+    transform: none;
+  }
+
+  .hero-logo img {
+    width: 34px;
+  }
+
+  .title-white {
+    font-size: 38px;
+  }
+
+  .title-orange {
+    font-size: 44px;
+  }
+
+  .hero-description p {
+    font-size: 13px;
+  }
+
+  .hero-actions {
+    margin-top: 4px;
+  }
+
+  .hero-btn {
+    width: 280px;
+    height: 50px;
+  }
+
+  .hero-btn-text {
+    font-size: 18px;
+  }
+}
+/*==========================================================
+LARGE LAPTOP
+==========================================================*/
+
+@media screen
+and (max-width:1600px){
+
+    .hero-container{
+
+        gap:24px;
+
+        padding:0 90px;
+
+        transform:translateY(0);
     }
-  }
 
-  .home-ski-img {
-    height: 300px;
-  }
+    .hero-logo img{
+
+        width:58px;
+    }
+
+    .title-white{
+
+        font-size:clamp(62px,5.8vw,82px);
+
+        letter-spacing:-1.8px;
+    }
+
+    .title-orange{
+
+        font-size:clamp(72px,6.2vw,94px);
+
+        letter-spacing:-1.8px;
+    }
+
+    .hero-description{
+
+        width:620px;
+    }
+
+    .hero-description p{
+
+        font-size:20px;
+    }
+
+    .hero-actions{
+
+        margin-top:16px;
+    }
+
+    .hero-btn{
+
+        width:390px;
+
+        height:80px;
+
+        border-radius:20px;
+    }
+
+    .hero-btn-text{
+
+        font-size:30px;
+    }
+
+    .hero-btn-arrow{
+
+        font-size:30px;
+    }
+
+}
+
+
+/*==========================================================
+TABLET
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px){
+
+    .hero-container{
+
+        gap:18px;
+
+        padding:40px 70px 20px;
+
+        justify-content:center;
+
+        transform:none;
+    }
+
+    .hero-logo img{
+
+        width:48px;
+    }
+
+    .hero-title h1{
+
+        gap:8px;
+    }
+
+    .title-white{
+
+        font-size:54px;
+
+        letter-spacing:-1.4px;
+    }
+
+    .title-orange{
+
+        font-size:64px;
+
+        letter-spacing:-1.4px;
+    }
+
+    .hero-description{
+
+        width:500px;
+
+        max-width:100%;
+    }
+
+    .hero-description p{
+
+        font-size:17px;
+
+        line-height:1.45;
+    }
+
+    .hero-actions{
+
+        margin-top:12px;
+    }
+
+    .hero-btn{
+
+        width:320px;
+
+        height:66px;
+
+        border-radius:18px;
+    }
+
+    .hero-btn-text{
+
+        font-size:24px;
+    }
+
+    .hero-btn-arrow{
+
+        font-size:24px;
+    }
+
+}
+
+
+/*==========================================================
+TABLET PORTRAIT
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px)
+and (orientation:portrait){
+
+    .hero-container{
+
+        gap:20px;
+
+        padding:40px 55px 10px;
+    }
+
+    .title-white{
+
+        font-size:50px;
+    }
+
+    .title-orange{
+
+        font-size:60px;
+    }
+
+    .hero-description{
+
+        width:450px;
+    }
+
+    .hero-description p{
+
+        font-size:16px;
+    }
+
+    .hero-btn{
+
+        width:300px;
+
+        height:62px;
+    }
+
+}
+
+
+/*==========================================================
+TABLET LANDSCAPE
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px)
+and (orientation:landscape){
+
+    .hero-container{
+
+        gap:16px;
+
+        padding:25px 70px;
+
+        transform:translateY(-5px);
+    }
+
+    .hero-logo img{
+
+        width:42px;
+    }
+
+    .title-white{
+
+        font-size:44px;
+    }
+
+    .title-orange{
+
+        font-size:52px;
+    }
+
+    .hero-description{
+
+        width:520px;
+    }
+
+    .hero-description p{
+
+        font-size:15px;
+    }
+
+    .hero-actions{
+
+        margin-top:8px;
+    }
+
+    .hero-btn{
+
+        width:290px;
+
+        height:58px;
+
+        border-radius:16px;
+    }
+
+    .hero-btn-text{
+
+        font-size:21px;
+    }
+
+    .hero-btn-arrow{
+
+        font-size:21px;
+    }
+
+}
+
+
+/*==========================================================
+SHORT LAPTOP
+==========================================================*/
+
+@media screen
+and (min-width:1025px)
+and (max-height:820px){
+
+    .hero-container{
+
+        gap:18px;
+
+        transform:none;
+    }
+
+    .hero-logo img{
+
+        width:48px;
+    }
+
+    .title-white{
+
+        font-size:58px;
+    }
+
+    .title-orange{
+
+        font-size:68px;
+    }
+
+    .hero-description{
+
+        width:620px;
+    }
+
+    .hero-description p{
+
+        font-size:18px;
+    }
+
+    .hero-actions{
+
+        margin-top:10px;
+    }
+
+    .hero-btn{
+
+        width:360px;
+
+        height:72px;
+    }
+
+    .hero-btn-text{
+
+        font-size:28px;
+    }
+
+    .hero-btn-arrow{
+
+        font-size:28px;
+    }
+
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+/*==========================================================
+MOBILE
+==========================================================*/
+
+@media screen and (max-width:600px){
+
+    :host{
+        width:100%;
+        height:100%;
+        min-height:100%;
+    }
+
+    .home-content{
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+    .hero-container{
+        position:absolute;
+        inset:0;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+
+        width:100%;
+        height:100%;
+
+        gap:14px;
+
+        padding:
+            38px
+            22px
+            28px;
+
+        text-align:center;
+
+        transform:none;
+
+        overflow:hidden;
+    }
+
+
+    /*------------------------------------------------------
+    LOGO
+    ------------------------------------------------------*/
+
+    .hero-logo{
+        flex:0 0 auto;
+
+        margin:0;
+    }
+
+    .hero-logo img{
+        display:block;
+
+        width:38px;
+        height:auto;
+    }
+
+
+    /*------------------------------------------------------
+    TITLE
+    ------------------------------------------------------*/
+
+    .hero-title{
+        width:100%;
+
+        margin:0;
+    }
+
+    .hero-title h1{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+
+        gap:5px;
+
+        width:100%;
+
+        margin:0;
+
+        line-height:.94;
+    }
+
+    .title-white{
+        display:block;
+
+        width:100%;
+
+        font-size:clamp(36px,10.8vw,48px);
+        font-weight:800;
+
+        line-height:.95;
+        letter-spacing:-1.2px;
+
+        white-space:nowrap;
+    }
+
+    .title-orange{
+        display:block;
+
+        width:100%;
+
+        font-size:clamp(42px,12vw,54px);
+        font-weight:800;
+
+        line-height:.94;
+        letter-spacing:-1.3px;
+
+        white-space:nowrap;
+    }
+
+
+    /*------------------------------------------------------
+    DESCRIPTION
+    ------------------------------------------------------*/
+
+    .hero-description{
+        width:100%;
+        max-width:315px;
+
+        margin:3px 0 0;
+    }
+
+    .hero-description p{
+        margin:0;
+
+        font-size:14px;
+        font-weight:400;
+
+        line-height:1.45;
+
+        text-wrap:pretty;
+    }
+
+
+    /*------------------------------------------------------
+    ACTION
+    ------------------------------------------------------*/
+
+    .hero-actions{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:100%;
+
+        margin-top:12px;
+    }
+
+    .hero-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:min(100%,290px);
+        height:58px;
+
+        gap:11px;
+
+        padding:0 22px;
+
+        border-radius:16px;
+
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+
+        box-shadow:
+            inset 0 0 0 1px rgba(255,255,255,.07),
+            0 12px 30px rgba(0,0,0,.30);
+    }
+
+    .hero-btn-text{
+        font-size:19px;
+        font-weight:700;
+    }
+
+    .hero-btn-arrow{
+        font-size:21px;
+    }
+}
+
+
+/*==========================================================
+SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:390px){
+
+    .hero-container{
+        gap:12px;
+
+        padding:
+            34px
+            18px
+            24px;
+    }
+
+    .hero-logo img{
+        width:34px;
+    }
+
+    .hero-title h1{
+        gap:4px;
+    }
+
+    .title-white{
+        font-size:clamp(32px,10.5vw,40px);
+
+        letter-spacing:-1px;
+    }
+
+    .title-orange{
+        font-size:clamp(37px,11.5vw,46px);
+
+        letter-spacing:-1.1px;
+    }
+
+    .hero-description{
+        max-width:285px;
+    }
+
+    .hero-description p{
+        font-size:13px;
+
+        line-height:1.42;
+    }
+
+    .hero-actions{
+        margin-top:10px;
+    }
+
+    .hero-btn{
+        width:min(100%,260px);
+        height:54px;
+
+        border-radius:15px;
+    }
+
+    .hero-btn-text{
+        font-size:17px;
+    }
+
+    .hero-btn-arrow{
+        font-size:19px;
+    }
+}
+
+
+/*==========================================================
+EXTRA SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:350px){
+
+    .hero-container{
+        gap:10px;
+
+        padding:
+            28px
+            14px
+            20px;
+    }
+
+    .hero-logo img{
+        width:31px;
+    }
+
+    .title-white{
+        font-size:30px;
+    }
+
+    .title-orange{
+        font-size:35px;
+    }
+
+    .hero-description{
+        max-width:255px;
+    }
+
+    .hero-description p{
+        font-size:12px;
+    }
+
+    .hero-btn{
+        width:min(100%,235px);
+        height:50px;
+
+        padding:0 16px;
+    }
+
+    .hero-btn-text{
+        font-size:16px;
+    }
+
+    .hero-btn-arrow{
+        font-size:17px;
+    }
+}
+
+
+/*==========================================================
+SHORT MOBILE
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:760px){
+
+    .hero-container{
+        gap:9px;
+
+        padding:
+            24px
+            20px
+            18px;
+    }
+
+    .hero-logo img{
+        width:30px;
+    }
+
+    .hero-title h1{
+        gap:3px;
+    }
+
+    .title-white{
+        font-size:31px;
+    }
+
+    .title-orange{
+        font-size:36px;
+    }
+
+    .hero-description{
+        max-width:280px;
+
+        margin-top:1px;
+    }
+
+    .hero-description p{
+        font-size:12px;
+
+        line-height:1.35;
+    }
+
+    .hero-actions{
+        margin-top:7px;
+    }
+
+    .hero-btn{
+        width:min(100%,245px);
+        height:48px;
+
+        border-radius:14px;
+    }
+
+    .hero-btn-text{
+        font-size:16px;
+    }
+
+    .hero-btn-arrow{
+        font-size:17px;
+    }
+}
+
+
+/*==========================================================
+VERY SHORT MOBILE
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:640px){
+
+    .hero-container{
+        gap:7px;
+
+        padding:
+            18px
+            18px
+            14px;
+    }
+
+    .hero-logo img{
+        width:27px;
+    }
+
+    .title-white{
+        font-size:27px;
+    }
+
+    .title-orange{
+        font-size:32px;
+    }
+
+    .hero-description{
+        max-width:250px;
+    }
+
+    .hero-description p{
+        font-size:11px;
+    }
+
+    .hero-actions{
+        margin-top:4px;
+    }
+
+    .hero-btn{
+        width:min(100%,225px);
+        height:44px;
+    }
+
+    .hero-btn-text{
+        font-size:14px;
+    }
+
+    .hero-btn-arrow{
+        font-size:16px;
+    }
+}
+
+
+/*==========================================================
+MOBILE LANDSCAPE
+==========================================================*/
+
+@media screen
+and (max-height:500px)
+and (orientation:landscape){
+
+    .hero-container{
+        justify-content:center;
+
+        gap:6px;
+
+        padding:
+            12px
+            30px
+            10px;
+
+        transform:none;
+    }
+
+    .hero-logo img{
+        width:25px;
+    }
+
+    .hero-title h1{
+        gap:2px;
+    }
+
+    .title-white{
+        font-size:25px;
+    }
+
+    .title-orange{
+        font-size:30px;
+    }
+
+    .hero-description{
+        width:430px;
+        max-width:78%;
+    }
+
+    .hero-description p{
+        font-size:10px;
+
+        line-height:1.3;
+    }
+
+    .hero-actions{
+        margin-top:3px;
+    }
+
+    .hero-btn{
+        width:220px;
+        height:40px;
+
+        border-radius:12px;
+    }
+
+    .hero-btn-text{
+        font-size:14px;
+    }
+
+    .hero-btn-arrow{
+        font-size:15px;
+    }
+}
+
+
+/*==========================================================
+SAFE AREA
+==========================================================*/
+
+@supports (padding:max(0px)){
+
+    @media screen and (max-width:600px){
+
+        .hero-container{
+            padding-top:
+                max(34px,env(safe-area-inset-top));
+
+            padding-left:
+                max(18px,env(safe-area-inset-left));
+
+            padding-right:
+                max(18px,env(safe-area-inset-right));
+
+            padding-bottom:
+                max(22px,env(safe-area-inset-bottom));
+        }
+    }
+}
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+@media (hover:none){
+
+    .hero-btn:hover{
+        transform:none;
+
+        background:rgba(255,255,255,.06);
+
+        border-color:rgba(255,255,255,.75);
+    }
+
+    .hero-btn:hover .hero-btn-arrow{
+        transform:none;
+    }
+
+    .hero-btn:active{
+        transform:scale(.98);
+
+        background:rgba(255,255,255,.11);
+    }
+}
+
+
+/*==========================================================
+REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .hero-container,
+    .hero-logo,
+    .hero-title,
+    .hero-description,
+    .hero-actions,
+    .hero-btn,
+    .hero-btn-arrow{
+        animation:none !important;
+        transition:none !important;
+    }
 }

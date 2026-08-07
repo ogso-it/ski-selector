@@ -1,107 +1,230 @@
-<!-- STEP 3 CONTENT -->
+<div class="step3">
 
-<div class="step-layout">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      EACH TYPE OF SKI<br>
-      PERFORMS DIFFERENTLY<br>
-      ACCORDING TO THE TERRAIN
-    </h1>
-  </div>
+    <section class="step3-copy">
 
-  <!-- RIGHT SECTION (centrée) -->
-  <div class="right">
-    <div class="right-content">
-      <h2 class="section-title">WHAT IS YOUR SKI TIP?</h2>
-      <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-      
-      <div class="radio-two-columns">
-        <!-- COLONNE GAUCHE -->
-        <div class="radio-column">
-          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-back-mountain'">
-            <input type="radio" name="skiTechnique" value="touring-back-mountain" 
-                   (change)="onTechniqueChange('touring-back-mountain')"
-                   [checked]="selectedTechnique === 'touring-back-mountain'">
-            <span class="radio-label">TOURING BACK MOUNTAIN</span>
-          </label>
+        <h1 class="step3-title">
+            Where do you spend most of your time?
+        </h1>
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-front-mountain'">
-            <input type="radio" name="skiTechnique" value="touring-front-mountain" 
-                   (change)="onTechniqueChange('touring-front-mountain')"
-                   [checked]="selectedTechnique === 'touring-front-mountain'">
-            <span class="radio-label">TOURING FRONT MOUNTAIN</span>
-          </label>
+        <p class="step3-description">
+            Every terrain demands a different kind of ski.
+        </p>
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-race'">
-            <input type="radio" name="skiTechnique" value="touring-race" 
-                   (change)="onTechniqueChange('touring-race')"
-                   [checked]="selectedTechnique === 'touring-race'">
-            <span class="radio-label">TOURING RACE</span>
-          </label>
+    </section>
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'freetouring'">
-            <input type="radio" name="skiTechnique" value="freetouring" 
-                   (change)="onTechniqueChange('freetouring')"
-                   [checked]="selectedTechnique === 'freetouring'">
-            <span class="radio-label">FREETOURING</span>
-          </label>
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'touring-mountaineering'">
-            <input type="radio" name="skiTechnique" value="touring-mountaineering" 
-                   (change)="onTechniqueChange('touring-mountaineering')"
-                   [checked]="selectedTechnique === 'touring-mountaineering'">
-            <span class="radio-label">TOURING MOUNTAINEERING</span>
-          </label>
+    <section class="step3-content">
+
+        <div class="step3-preview">
+
+            <video
+                #terrainVideo
+                class="step3-terrain-video"
+                muted
+                playsinline
+                preload="auto">
+            </video>
+
         </div>
 
-        <!-- COLONNE DROITE -->
-        <div class="radio-column">
-          <label class="radio-option" [class.selected]="selectedTechnique === 'all-mountain'">
-            <input type="radio" name="skiTechnique" value="all-mountain" 
-                   (change)="onTechniqueChange('all-mountain')"
-                   [checked]="selectedTechnique === 'all-mountain'">
-            <span class="radio-label">ALL MOUNTAIN</span>
-          </label>
+        <div class="step3-options">
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'freeride'">
-            <input type="radio" name="skiTechnique" value="freeride" 
-                   (change)="onTechniqueChange('freeride')"
-                   [checked]="selectedTechnique === 'freeride'">
-            <span class="radio-label">FREERIDE</span>
-          </label>
+            <div class="step3-terrain-grid">
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'resort'">
-            <input type="radio" name="skiTechnique" value="resort" 
-                   (change)="onTechniqueChange('resort')"
-                   [checked]="selectedTechnique === 'resort'">
-            <span class="radio-label">RESORT</span>
-          </label>
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'touring-back-mountain'">
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'carving'">
-            <input type="radio" name="skiTechnique" value="carving" 
-                   (change)="onTechniqueChange('carving')"
-                   [checked]="selectedTechnique === 'carving'">
-            <span class="radio-label">CARVING</span>
-          </label>
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="touring-back-mountain"
+                        [checked]="selectedTechnique === 'touring-back-mountain'"
+                        (change)="onTechniqueChange('touring-back-mountain')">
 
-          <label class="radio-option" [class.selected]="selectedTechnique === 'playride'">
-            <input type="radio" name="skiTechnique" value="playride" 
-                   (change)="onTechniqueChange('playride')"
-                   [checked]="selectedTechnique === 'playride'">
-            <span class="radio-label">PLAYRIDE</span>
-          </label>
+                    <span>Touring Back Mountain</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'touring-front-mountain'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="touring-front-mountain"
+                        [checked]="selectedTechnique === 'touring-front-mountain'"
+                        (change)="onTechniqueChange('touring-front-mountain')">
+
+                    <span>Touring Front Mountain</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'touring-race'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="touring-race"
+                        [checked]="selectedTechnique === 'touring-race'"
+                        (change)="onTechniqueChange('touring-race')">
+
+                    <span>Touring Race</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'freetouring'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="freetouring"
+                        [checked]="selectedTechnique === 'freetouring'"
+                        (change)="onTechniqueChange('freetouring')">
+
+                    <span>Freetouring</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'touring-mountaineering'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="touring-mountaineering"
+                        [checked]="selectedTechnique === 'touring-mountaineering'"
+                        (change)="onTechniqueChange('touring-mountaineering')">
+
+                    <span>Touring Mountaineering</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'all-mountain'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="all-mountain"
+                        [checked]="selectedTechnique === 'all-mountain'"
+                        (change)="onTechniqueChange('all-mountain')">
+
+                    <span>All Mountain</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'freeride'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="freeride"
+                        [checked]="selectedTechnique === 'freeride'"
+                        (change)="onTechniqueChange('freeride')">
+
+                    <span>Freeride</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'resort'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="resort"
+                        [checked]="selectedTechnique === 'resort'"
+                        (change)="onTechniqueChange('resort')">
+
+                    <span>Resort</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'carving'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="carving"
+                        [checked]="selectedTechnique === 'carving'"
+                        (change)="onTechniqueChange('carving')">
+
+                    <span>Carving</span>
+
+                </label>
+
+                <label
+                    class="step3-terrain-card"
+                    [class.active]="selectedTechnique === 'playride'">
+
+                    <input
+                        type="radio"
+                        name="terrain"
+                        value="playride"
+                        [checked]="selectedTechnique === 'playride'"
+                        (change)="onTechniqueChange('playride')">
+
+                    <span>Playride</span>
+
+                </label>
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  </div>
+
+    </section>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="step3-footer">
+
+        <div class="step3-footer-actions">
+
+            <button
+                type="button"
+                class="step3-navigation-button step3-previous-button"
+                (click)="prev()">
+
+                <span aria-hidden="true">←</span>
+                <span>Previous</span>
+
+            </button>
+
+            <button
+                type="button"
+                class="step3-navigation-button step3-next-button"
+                [disabled]="!selectedTechnique"
+                (click)="next()">
+
+                <span>Next</span>
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </div>
+
+    </footer>
 
 </div>
-
-<!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!selectedTechnique"
-        [disabled]="!selectedTechnique"
-        (click)="next()">NEXT</button>

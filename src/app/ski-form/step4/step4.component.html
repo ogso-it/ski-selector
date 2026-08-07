@@ -1,67 +1,188 @@
-<!-- STEP 4 CONTENT -->
+<div class="step4">
 
-<div class="step-layout">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      CAMBER AND<br>
-      ROCKER DEPENDS<br>
-      ON MOUNTAIN<br>
-      CONDITIONS<br>
-      AND SNOW
-    </h1>
-  </div>
+    <section class="step4-copy">
 
-  <!-- RIGHT RADIO BUTTONS -->
-  <div class="right">
-    <h2 class="section-title">WHAT IS/ARE THE MOST COMMON SNOW TYPES YOU MIGHT ENCOUNTER?</h2>
-    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-    
-    <div class="radio-list">
-      <label class="radio-option" [class.selected]="type_snow === 'powder'">
-        <input type="radio" 
-               name="snowType" 
-               value="powder" 
-               (change)="onSnowTypeChange('powder')"
-               [checked]="type_snow === 'powder'">
-        <span class="radio-label">
-          POWDER<br>
-          <span class="subtext">(FRESH - DEEP - SLUSH)</span>
-        </span>
-      </label>  
+        <h1 class="step4-title">
+            What snow do you ski most often?
+        </h1>
 
-      <label class="radio-option" [class.selected]="type_snow === 'crud'">
-        <input type="radio" 
-               name="snowType" 
-               value="crud" 
-               (change)="onSnowTypeChange('crud')"
-               [checked]="type_snow === 'crud'">
-        <span class="radio-label">
-          CRUD<br>
-          <span class="subtext">(CHOPPY - TRACKED - CRUST)</span>
-        </span>
-      </label>
+        <p class="step4-description">
+            Snow conditions shape how a ski performs.
+        </p>
 
-      <label class="radio-option" [class.selected]="type_snow === 'hard'">
-        <input type="radio" 
-               name="snowType" 
-               value="hard" 
-               (change)="onSnowTypeChange('hard')"
-               [checked]="type_snow === 'hard'">
-        <span class="radio-label">
-          HARD<br>
-          <span class="subtext">(COMPRESSED - CONCRETE - ICE)</span>
-        </span>
-      </label>
-    </div>
-  </div>
+    </section>
+
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <section class="step4-content">
+
+        <!-- =================================================
+             SNOW PREVIEW
+        ================================================== -->
+
+        <div class="step4-preview">
+
+            <video
+                #snowVideo
+                class="step4-snow-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                aria-hidden="true">
+            </video>
+
+        </div>
+
+
+        <!-- =================================================
+             OPTIONS
+        ================================================== -->
+
+        <div class="step4-options">
+
+            <div class="step4-snow-list">
+
+                <!-- POWDER -->
+
+                <label
+                    class="step4-snow-card"
+                    [class.active]="type_snow === 'powder'">
+
+                    <input
+                        type="radio"
+                        name="snowType"
+                        value="powder"
+                        [checked]="type_snow === 'powder'"
+                        (change)="onSnowTypeChange('powder')">
+
+                    <div class="step4-card-content">
+
+                        <h3>
+                            Powder
+                        </h3>
+
+                        <p>
+                            Fresh / Deep / Slush
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- CRUD -->
+
+                <label
+                    class="step4-snow-card"
+                    [class.active]="type_snow === 'crud'">
+
+                    <input
+                        type="radio"
+                        name="snowType"
+                        value="crud"
+                        [checked]="type_snow === 'crud'"
+                        (change)="onSnowTypeChange('crud')">
+
+                    <div class="step4-card-content">
+
+                        <h3>
+                            Crud
+                        </h3>
+
+                        <p>
+                            Choppy / Tracked / Crust
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- HARD -->
+
+                <label
+                    class="step4-snow-card"
+                    [class.active]="type_snow === 'hard'">
+
+                    <input
+                        type="radio"
+                        name="snowType"
+                        value="hard"
+                        [checked]="type_snow === 'hard'"
+                        (change)="onSnowTypeChange('hard')">
+
+                    <div class="step4-card-content">
+
+                        <h3>
+                            Hard
+                        </h3>
+
+                        <p>
+                            Compressed / Concrete / Ice
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="step4-footer">
+
+        <div class="step4-footer-actions">
+
+            <button
+                type="button"
+                class="step4-navigation-button step4-previous-button"
+                (click)="prev()">
+
+                <span aria-hidden="true">
+                    ←
+                </span>
+
+                <span>
+                    Previous
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="step4-navigation-button step4-next-button"
+                [disabled]="!type_snow"
+                (click)="next()">
+
+                <span>
+                    Next
+                </span>
+
+                <span aria-hidden="true">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </footer>
 
 </div>
-
-<!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!type_snow"
-        [disabled]="!type_snow"
-        (click)="next()">NEXT</button>

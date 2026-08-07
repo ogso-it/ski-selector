@@ -1,3 +1,5 @@
+import { generate } from "rxjs";
+
  export const skis = [
     // {
     //   family: 'SUPER ROCKER',
@@ -617,14 +619,15 @@
       min_height: 0,
       max_weight: 60,
       min_weight: 0,
+      sidecut: '128-86-113',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['carving','resort','touring-front-mountain' ],
       snow : ['hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/'  //      link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/letouno2026.webp',
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno-2/'  //      link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
 
   
     },
@@ -638,14 +641,15 @@
       min_height: 168,
       max_weight: 61,
       min_weight: 74,
+      sidecut: '130-87-115',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['carving','resort','touring-front-mountain' ],
       snow : ['hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',   //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/'  // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/letouno2026.webp',   //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno-2/'  // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
   
   
   
@@ -660,14 +664,15 @@
       min_height: 176,
       max_weight: 87,
       min_weight: 75,
+      sidecut: '132-88-117',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['carving','resort','touring-front-mountain' ],
       snow : ['hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/TOUNO.webp',  //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno/' // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/letouno2026.webp',  //src : 'https://ogso-mountain-essentials.com/app/ski-photos/COSMIQUE.png',
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/le-touno-2/' // link : 'https://ogso-mountain-essentials.com/product/cosmique-90-sr/'
   
   
   
@@ -682,14 +687,15 @@
       min_height: 170,
       max_weight: 73,
       min_weight: 59,
+      sidecut: '133-102-119',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRIZZLY.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly/' , //  link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/grizzly2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly-2/' , //  link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
      // award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/g-s.png'
   
   
@@ -704,14 +710,15 @@
       min_height: 178,
       max_weight: 83,
       min_weight: 74,
+      sidecut: '136-104-122',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRIZZLY.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly/' , // link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/grizzly2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly-2/' , // link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
      // award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/g-s.png'
   
   
@@ -726,14 +733,15 @@
       min_height: 186,
       max_weight: 95,
       min_weight: 84,
+      sidecut: '139-106-125',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRIZZLY.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly/' ,  // link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/grizzly2026.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly-2/' ,  // link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
      // award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/g-s.png'
   
   
@@ -748,15 +756,15 @@
       min_height: 194,
       max_weight: 999,
       min_weight: 96,
+      sidecut: '142-108-128',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GRIZZLY.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly/' ,   // link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
-     // award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/g-s.png'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/grizzly2026.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/DIABLE.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/grizzly-2/' ,  //link : 'https://ogso-mountain-essentials.com/product/diable-100-sr-ml/',
   
   
     }
@@ -770,14 +778,15 @@
       min_height: 0,
       max_weight: 69,
       min_weight: 0,
+      sidecut: '136-108-123',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BIG.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big/' , //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/big2026.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big-2/' , //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
   
   
     }
@@ -790,14 +799,15 @@
       min_height: 176,
       max_weight: 83,
       min_weight: 70,
+      sidecut: '139-110-126',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BIG.webp',    //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big/' ,   //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/big2026.webp',    //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big-2/' ,   //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
   
   
     }
@@ -810,14 +820,15 @@
       min_height: 184,
       max_weight: 97,
       min_weight: 84,
+      sidecut: '142-112-129',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BIG.webp',    //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big/'     //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/big2026.webp',    //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big-2/'     //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
   
   
     }
@@ -830,14 +841,15 @@
       min_height: 192,
       max_weight: 999,
       min_weight: 98,
+      sidecut: '145-114-132',
       ski_level: ['newbie', 'intermediate', 'confirmed', 'pro-guide'],
       playground: ['all-mountain' , 'freeride' , 'freetouring'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BIG.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
-      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big/'   //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/big2026.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/SPENCER.png",
+      link :'https://ogso-mountain-essentials.com/shop/free-ride-series/big-2/'   //link : 'https://ogso-mountain-essentials.com/product/spencer-110-sr-ml/'
   
   
     }
@@ -851,15 +863,16 @@
       max_height: 166,
       min_height: 0,
       max_weight: 55,
-      min_weight: 0,
+      min_weight: 0,  
+      sidecut: '113-83-102',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-race', 'touring-front-mountain','touring-back-mountain' ],
       snow : ['crud'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SWISS.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/swiss2026.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss-2/'
   
     },
     {
@@ -871,14 +884,15 @@
       min_height: 167,
       max_weight: 68,
       min_weight: 56,
+      sidecut: '116-84-105',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-race', 'touring-front-mountain','touring-back-mountain'  ],
       snow : ['crud'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SWISS.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/swiss2026.webp',  // src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss-2/'
   
   
     }
@@ -892,14 +906,15 @@
       min_height: 175,
       max_weight: 91,
       min_weight: 69,
+      sidecut: '118-85-107',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-race', 'touring-front-mountain','touring-back-mountain'  ],
       snow : [ 'crud'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SWISS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/swiss2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss-2/'
   
   
     }
@@ -914,14 +929,15 @@
       min_height: 0,
       max_weight: 59,
       min_weight: 0,
+      sidecut: '127-94-115',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain',],
       snow : ['hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/STS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts-2/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/sts2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts/'
   
   
     },
@@ -934,6 +950,7 @@
       min_height: 172,
       max_weight: 74,
       min_weight: 60,
+      sidecut: '129-95-117',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain'],
 
@@ -941,8 +958,8 @@
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/STS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts-2/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/sts2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts/'
   
   
     }
@@ -957,6 +974,7 @@
       min_height: 188,
       max_weight: 95,
       min_weight: 88,
+      sidecut: '131-96-119',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain'],
 
@@ -964,8 +982,8 @@
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/STS.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
-      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts-2/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/sts2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts/'
   
   
     }
@@ -974,12 +992,13 @@
     {
       family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
-      name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
+      name: 'GRAN DADDY', //name: 'COUTURIER 100 NEO UL',
       size: 178,
       max_height: 173,
       min_height: 0,
       max_weight: 59,
-      min_weight: 0,
+      min_weight: 0,  
+      sidecut: '140-105-126',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-back-mountain','touring-mountaineering'],
 
@@ -987,8 +1006,8 @@
       ski_style: ['technical-precision','fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
-      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/' //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/gd2026.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
+      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/gran-daddy/' //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
       //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
   
   
@@ -996,12 +1015,13 @@
     {
       family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
-      name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
+      name: 'GRAN DADDY', //name: 'COUTURIER 100 NEO UL',
       size: 170,
       max_height: 181,
       min_height: 174,
       max_weight: 73,
       min_weight: 59,
+      sidecut: '138-104-124',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-back-mountain','touring-mountaineering'],
 
@@ -1010,8 +1030,8 @@
       ski_style: ['technical-precision','fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
-      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/'  //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/gd2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
+      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/gran-daddy/'  //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
       //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
   
   
@@ -1021,12 +1041,13 @@
     {
       family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
-      name: 'GRAND DADDY', //name: 'COUTURIER 100 NEO UL',
+      name: 'GRAN DADDY', //name: 'COUTURIER 100 NEO UL',
       size: 186,
       max_height: 189,
       min_height: 182,
       max_weight: 86,
       min_weight: 74,
+      sidecut: '142-106-128',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['touring-back-mountain','touring-mountaineering'],
 
@@ -1034,8 +1055,8 @@
       ski_style: ['technical-precision','fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/GD.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
-      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/grand-daddy/', //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/gd2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
+      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/gran-daddy/', //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
       //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
   
   
@@ -1048,18 +1069,40 @@
       family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
-      size: 162, //size: 176,
+      size: 170, //size: 176,
       max_height: 178,
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '129-95-117',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['playride','resort'],
       snow : ['powder'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUMON.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryumon2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryumon-2/'
+  
+  
+    },
+    {
+      family: 'PLAY AND RIDE',
+      category: 'MEDIUM LIGHT',
+      name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
+      size: 178, //size: 176,
+      max_height: 178,
+      min_height: 168,
+      max_weight: 76,
+      min_weight: 64,
+      Sidecut: '131-96-119',
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['playride','resort'],
+      snow : ['powder'],
+      ski_style: ['fun-surf','technical-precision'],
+      riding_speed: ['high-speed','moderate-speed'],
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryumon2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
       link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryumon/'
   
   
@@ -1068,39 +1111,20 @@
       family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
-      size: 172, //size: 176,
+      size: 186, //size: 176,
       max_height: 178,
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '133-97-121',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['playride','resort'],
       snow : ['powder'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUMON.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryumon/'
-  
-  
-    },
-    {
-      family: 'PLAY AND RIDE',
-      category: 'MEDIUM LIGHT',
-      name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
-      size: 182, //size: 176,
-      max_height: 178,
-      min_height: 168,
-      max_weight: 76,
-      min_weight: 64,
-      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['playride','resort'],
-      snow : ['powder'],
-      ski_style: ['fun-surf','technical-precision'],
-      riding_speed: ['high-speed','moderate-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUMON.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryumon/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryumon2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryumon-2/'
   
   
     },
@@ -1119,8 +1143,8 @@
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/KOIRYU.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/scurry-odyssey-series/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/koiryu2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/koiryu-2/'
   
   
     },
@@ -1128,19 +1152,20 @@
       family: 'PLAY AND RIDE',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
-      size: 172, //size: 176,
+      size: 166, //size: 176,
       max_height: 178,
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      Sidecut: '131-87-117',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['playride','carving','resort'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/KOIRYU.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/scurry-odyssey-series/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/koiryu2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/koiryu-2/'
   
   
     },
@@ -1153,14 +1178,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '135-89-121',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['playride','carving','resort'],
       snow : ['powder'],
       ski_style: ['fun-surf'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/KOIRYU.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/scurry-odyssey-series/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/koiryu2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/koiryu-2/'
   
   
     },
@@ -1173,14 +1199,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '128-96-118',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['all-mountain','resort','touring-back-mountain', 'touring-front-mountain','freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CDF.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/crf2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer-2/'
   
   
     },
@@ -1193,14 +1220,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '130-97-120',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['all-mountain','resort','touring-back-mountain', 'touring-front-mountain','freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CDF.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/crf2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer-2/'
   
   
     },
@@ -1213,14 +1241,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '132-98-122',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
       playground: ['all-mountain','resort','touring-back-mountain', 'touring-front-mountain','freetouring'],
       snow : ['crud'],
       ski_style: ['fun-surf','technical-precision'],
       riding_speed: ['high-speed','moderate-speed'],
       turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CDF.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/crf2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer-2/'
   
   
     },
@@ -1233,14 +1262,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '136-108-123',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-      snow : ['powder'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['touring-back-mountain','all-mountain','freetouring'],
+         snow : ['powder','crud'],
+       ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/corbets2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/corbets/'
   
   
     },{
@@ -1252,14 +1282,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '139-110-126',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-      snow : ['powder'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['touring-back-mountain','all-mountain','freetouring'],
+      snow : ['powder','crud'],
+      ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/corbets2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/corbets/'
   
   
     },{
@@ -1271,14 +1302,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      Sidecut: '142-112-129',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-      snow : ['powder'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['touring-back-mountain','all-mountain','freetouring'],
+      snow : ['powder','crud'],
+       ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/corbets2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/corbets//'
   
   
     },{
@@ -1290,14 +1322,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '145-114-132',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['touring-back-mountain'],
-      snow : ['powder'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['touring-back-mountain','all-mountain','freetouring'],
+      snow : ['powder','crud'],
+      ski_style: ['fun-surf'],
       riding_speed: ['moderate-speed'],
-      turn : ['long'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/CORBETS-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['short'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/corbets2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/corbets/'
   
   
     },{
@@ -1309,14 +1342,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '133-102-119',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['freetouring'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['all-mountain','touring-back-mountain','touring mountaineering'],
+      snow : ['crud', 'powder'],
+      ski_style: ['technical-precision'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/schwarztor2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/schwarztor/'
   
   
     },
@@ -1329,14 +1363,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '136-104-122',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['freetouring'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['all-mountain','touring-back-mountain','touring mountaineering'],
+      snow : ['crud', 'powder'],
+      ski_style: ['technical-precision'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/schwarztor2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/schwarztor/'
   
   
     },
@@ -1349,14 +1384,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '139-106-125',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['freetouring'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+       playground: ['all-mountain','touring-back-mountain','touring mountaineering'],
+      snow : ['crud', 'powder'],
+      ski_style: ['technical-precision'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/schwarztor2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/schwarztor/'
   
   
     },
@@ -1369,14 +1405,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '142-108-128',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['freetouring'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+       playground: ['all-mountain','touring-back-mountain','touring mountaineering'],
+      snow : ['crud', 'powder'],
+      ski_style: ['technical-precision'],
       riding_speed: ['moderate-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/SCHUARZTOR-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/schwarztor2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/zero-sophisto-series/schwarztor/'
   
   
     },
@@ -1389,14 +1426,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      Sidecut: '134-102-122',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['playride'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['all-mountain','freeride-carving','playride','resort','resort'],
+      snow : ['crud', 'powder', 'hard'],
+      ski_style: ['fun-surf'],
       riding_speed: ['high-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryujin2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryujin/'
   
   
     },
@@ -1409,14 +1447,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '136-103-124',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['playride'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['all-mountain','freeride-carving','playride','resort','resort'],
+      snow : ['crud', 'powder', 'hard'],
+      ski_style: ['fun-surf'],
       riding_speed: ['high-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryujin2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryujin/'
   
   
     },
@@ -1429,14 +1468,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '138-104-126',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['playride'],
-      snow : ['crud'],
-      ski_style: ['fun-surf','technical-precision'],
+      playground: ['all-mountain','freeride-carving','playride','resort','resort'],
+      snow : ['crud', 'powder', 'hard'],
+      ski_style: ['fun-surf'],
       riding_speed: ['high-speed'],
       turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/RYUJIN-26.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/ryujin2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/scurry-odyssey-series/ryujin/'
   
   
     },
@@ -1449,14 +1489,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '137-107-127',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-      playground: ['freetouring'],
-      snow : ['powder'],
+      playground: ['all-mountain','freeride-carving','playride' , 'resort'],
+      snow : ['crud', 'hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/barbey2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/barbey/'
   
   
     },
@@ -1469,14 +1510,15 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '139-108-129',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-       playground: ['freetouring'],
-      snow : ['powder'],
+      playground: ['all-mountain','freeride-carving','playride' , 'resort'],
+      snow : ['crud', 'hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/barbey2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/barbey/'
   
   
     },
@@ -1489,14 +1531,16 @@
       min_height: 168,
       max_weight: 76,
       min_weight: 64,
+      sidecut: '141-109-131',
       ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
-       playground: ['freetouring'],
-      snow : ['powder'],
+      playground: ['all-mountain','freeride-carving','playride' , 'resort'],
+      snow : ['crud', 'hard'],
       ski_style: ['technical-precision'],
       riding_speed: ['high-speed'],
-      turn : ['short'],
-      src : 'https://ogso-mountain-essentials.com/app/ski-photos/BARBEY.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
-      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/croix-de-fer/'
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/barbey2026.webp',//src : "https://ogso-mountain-essentials.com/app/ski-photos/DANAIDES.png",
+      link : 'https://ogso-mountain-essentials.com/shop/contemporary-series/barbey/'
+      
   
   
     },

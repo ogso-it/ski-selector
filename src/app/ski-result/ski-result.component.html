@@ -1,252 +1,687 @@
 <div class="results-container">
 
-  <!-- VIDEO BACKGROUND -->
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="assets/images/BACKGROUND.webm" type="video/webm">
-  </video>
+    <!--======================================================
+    BACKGROUND VIDEO
+    ======================================================-->
 
-  <!-- CONTENT -->
-  <div class="content-overlay">
+    <video
+        class="bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
 
-    <!-- HEADER -->
-    <header class="results-header">
-      <img src="assets/images/ogsologo.png" alt="OGSO" class="main-logo">
-      <button class="export-btn" (click)="generateAndDownloadPDF()" [disabled]="isGeneratingPDF">
-        <span>{{ isGeneratingPDF ? 'GENERATING...' : 'EXPORT PDF' }}</span>
-        <span class="btn-arrow">→</span>
-      </button>
-    </header>
+        <source
+            src="assets/images/BACKGROUND.webm"
+            type="video/webm"
+        >
 
-    <!-- MAIN CONTENT -->
-    <main class="results-main">
+    </video>
 
-      <!-- Loading -->
-      <div *ngIf="isLoading" class="loading-state">
+
+    <!--======================================================
+    CONTENT
+    ======================================================-->
+
+    <div class="content-overlay">
+
+
+        <!--==================================================
+        HEADER
+        ==================================================-->
+
+        <header class="results-header">
+
+
+            <!-- LOGO -->
+
+            <img
+                src="assets/images/ogsologo.png"
+                alt="OGSO"
+                class="main-logo"
+            >
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="header-actions">
+
+
+                <!--==========================================
+                RETAKE QUIZ
+                ==========================================-->
+
+                <button
+                    type="button"
+                    class="retake-btn"
+                    (click)="retakeQuiz()"
+                >
+
+                    <span
+                        class="btn-arrow"
+                        aria-hidden="true"
+                    >
+
+                        ←
+
+                    </span>
+
+
+                    <span>
+
+                        RETAKE THE QUIZ
+
+                    </span>
+
+                </button>
+
+
+                <!--==========================================
+                EXPORT PDF
+                ==========================================-->
+
+                <button
+                    type="button"
+                    class="export-btn"
+                    (click)="generateAndDownloadPDF()"
+                    [disabled]="isGeneratingPDF"
+                >
+
+                    <span>
+
+                        {{
+                            isGeneratingPDF
+                                ? 'GENERATING...'
+                                : 'EXPORT PDF'
+                        }}
+
+                    </span>
+
+
+                    <span
+                        class="btn-arrow"
+                        aria-hidden="true"
+                    >
+
+                        →
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!--==================================================
+        MAIN
+        ==================================================-->
+
+        <main class="results-main">
+
+
+            <!--==============================================
+            LOADING
+            ==============================================-->
+
+            <div
+                *ngIf="isLoading"
+                class="loading-state"
+            >
+
+                <div class="spinner"></div>
+
+
+                <p>
+
+                    Finding your perfect ski matches...
+
+                </p>
+
+            </div>
+
+
+            <!--==============================================
+            RESULTS
+            ==============================================-->
+
+            <div
+                *ngIf="!isLoading"
+                class="results-layout"
+            >
+
+
+                <!--==========================================
+                PROFILE PANEL
+                ==========================================-->
+
+                <aside class="profile-panel">
+
+
+                    <h2 class="profile-title">
+
+                        YOUR PROFILE
+
+                    </h2>
+
+
+                    <!--======================================
+                    HEIGHT
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            HEIGHT
+
+                        </label>
+
+
+                        <div
+                            class="profile-control slider-control"
+                        >
+
+
+                            <input
+                                type="number"
+                                [ngModel]="height"
+                                (ngModelChange)="onHeightChange($event)"
+                                min="140"
+                                max="220"
+                            >
+
+
+                            <input
+                                type="range"
+                                [ngModel]="height"
+                                (ngModelChange)="onHeightChange($event)"
+                                (input)="onHeightInput($event)"
+                                (mouseup)="onSliderRelease()"
+                                (touchend)="onSliderRelease()"
+                                min="140"
+                                max="220"
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    WEIGHT
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            WEIGHT
+
+                        </label>
+
+
+                        <div
+                            class="profile-control slider-control"
+                        >
+
+
+                            <input
+                                type="number"
+                                [ngModel]="weight"
+                                (ngModelChange)="onWeightChange($event)"
+                                min="40"
+                                max="150"
+                            >
+
+
+                            <input
+                                type="range"
+                                [ngModel]="weight"
+                                (ngModelChange)="onWeightChange($event)"
+                                (input)="onWeightInput($event)"
+                                (mouseup)="onSliderRelease()"
+                                (touchend)="onSliderRelease()"
+                                min="40"
+                                max="150"
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    TERRAIN
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            TERRAIN
+
+                        </label>
+
+
+                        <select
+                            [ngModel]="terrain_type"
+                            (ngModelChange)="onTerrainChange($event)"
+                        >
+
+
+                            <option
+                                *ngFor="
+                                    let option
+                                    of terrainOptions
+                                "
+                                [value]="option"
+                            >
+
+                                {{
+                                    formatTerrain(
+                                        option
+                                    )
+                                }}
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    SNOW
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            SNOW
+
+                        </label>
+
+
+                        <select
+                            [ngModel]="type_snow"
+                            (ngModelChange)="onSnowChange($event)"
+                        >
+
+
+                            <option
+                                *ngFor="
+                                    let option
+                                    of snowOptions
+                                "
+                                [value]="option"
+                            >
+
+                                {{
+                                    formatSnow(
+                                        option
+                                    )
+                                }}
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    STYLE
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            STYLE
+
+                        </label>
+
+
+                        <select
+                            [ngModel]="ski_level_fun"
+                            (ngModelChange)="onStyleChange($event)"
+                        >
+
+
+                            <option
+                                *ngFor="
+                                    let option
+                                    of funOptions
+                                "
+                                [value]="option"
+                            >
+
+                                {{
+                                    formatStyle(
+                                        option
+                                    )
+                                }}
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    TURNS
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            TURNS
+
+                        </label>
+
+
+                        <select
+                            [ngModel]="ski_turns"
+                            (ngModelChange)="onTurnsChange($event)"
+                        >
+
+
+                            <option
+                                *ngFor="
+                                    let option
+                                    of turnOptions
+                                "
+                                [value]="option"
+                            >
+
+                                {{
+                                    formatTurns(
+                                        option
+                                    )
+                                }}
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!--======================================
+                    SPEED
+                    ======================================-->
+
+                    <div class="profile-field">
+
+
+                        <label>
+
+                            SPEED
+
+                        </label>
+
+
+                        <select
+                            [ngModel]="ski_speed"
+                            (ngModelChange)="onSpeedChange($event)"
+                        >
+
+
+                            <option
+                                *ngFor="
+                                    let option
+                                    of speedOptions
+                                "
+                                [value]="option"
+                            >
+
+                                {{
+                                    formatSpeed(
+                                        option
+                                    )
+                                }}
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                </aside>
+
+
+                <!--==========================================
+                RESULTS PANEL
+                ==========================================-->
+
+                <section class="results-panel">
+
+
+                    <h1 class="results-title">
+
+                        YOUR PERFECT MATCH
+
+                    </h1>
+
+
+                    <!--======================================
+                    CARDS
+                    ======================================-->
+
+                    <div class="cards-grid">
+
+
+                        <article
+                            class="ski-card"
+                            *ngFor="
+                                let ski
+                                of resultat | slice:0:3;
+                                let i = index
+                            "
+                        >
+
+
+                            <!--================================
+                            RANK
+                            ================================-->
+
+                            <div
+                                class="card-rank"
+                                [style.background]="getRankColor(i)"
+                            >
+
+                                {{ i + 1 }}
+
+                            </div>
+
+
+                            <!--================================
+                            NAME
+                            ================================-->
+
+                            <h2 class="ski-name">
+
+                                {{ ski.name }}
+
+                            </h2>
+
+
+                            <!--================================
+                            FAMILY
+                            ================================-->
+
+                            <p class="ski-family">
+
+                                {{ ski.family }}
+
+                            </p>
+
+
+                            <!--================================
+                            SIZE + SIDECUT
+                            ================================-->
+
+                            <p class="ski-size">
+
+                                {{ ski.size }} cm
+
+                                /
+
+                                {{ ski.sidecut || 'N/A' }} mm
+
+                            </p>
+
+
+                            <!--================================
+                            IMAGE
+                            ================================-->
+
+                            <div class="ski-image">
+
+
+                                <img
+                                    [src]="ski.src"
+                                    [alt]="ski.name"
+                                >
+
+
+                            </div>
+
+
+                            <!--================================
+                            ACTIONS
+                            ================================-->
+
+                            <div class="card-actions">
+
+
+                                <!-- DISCOVER -->
+
+                                <button
+                                    type="button"
+                                    class="discover-btn"
+                                    (click)="openSki(ski)"
+                                >
+
+                                    DISCOVER THE SKI
+
+                                    <span
+                                        aria-hidden="true"
+                                    >
+
+                                        →
+
+                                    </span>
+
+                                </button>
+
+
+                                <!-- DEALER -->
+
+                                <button
+                                    type="button"
+                                    class="dealer-btn"
+                                    (click)="openDealer()"
+                                >
+
+                                    FIND A DEALER
+
+                                    <span
+                                        aria-hidden="true"
+                                    >
+
+                                        →
+
+                                    </span>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!--======================================================
+    PDF LOADING
+    ======================================================-->
+
+    <div
+        class="pdf-overlay"
+        *ngIf="isGeneratingPDF"
+    >
+
+
         <div class="spinner"></div>
-        <p>Finding your perfect ski matches...</p>
-      </div>
 
-      <!-- Results -->
-      <div *ngIf="!isLoading" class="results-content">
 
-        <!-- Title -->
-        <h1 class="main-title">YOUR PERFECT SKI MATCH</h1>
+        <p>
 
-        <!-- Cards Grid -->
-        <div class="cards-grid">
-          <div class="ski-card" 
-               *ngFor="let ski of resultat | slice:0:3; let i = index"
-               (click)="openSki(ski)">
-            
-            <!-- Rank Badge -->
-            <div class="card-rank" [style.background]="getRankColor(i)">
-              {{ i + 1 }}
-            </div>
+            Generating PDF...
 
-            <!-- Image -->
-            <div class="card-image">
-              <img [src]="ski.src" [alt]="ski.name">
-            </div>
+        </p>
 
-            <!-- Info -->
-            <div class="card-details">
-              <h3 class="ski-name">{{ ski.name }}</h3>
-              <p class="ski-family">{{ ski.family || 'OGSO' }}</p>
-              
-              <div class="ski-specs">
-                {{ ski.size }} cm • {{ ski.weight || 'N/A' }} g
-              </div>
 
-              <!-- Score -->
-              <div class="ski-score">
-                <span class="score-badge" [style.background]="getScoreColor(ski.score || 0)">
-                  {{ ski.score }}%
-                </span>
-                <span class="score-text">MATCH</span>
-              </div>
+    </div>
 
-              <!-- View Button -->
-              <button class="view-details">
-                VIEW DETAILS
-                <span class="arrow">→</span>
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <!-- Profile Section -->
-        <div class="profile-wrapper">
-          <h2 class="profile-title">YOUR PROFILE</h2>
+    <!--======================================================
+    PDF SUCCESS
+    ======================================================-->
 
-          <!-- Stats -->
-          <div class="profile-stats">
-            <div class="stat-block">
-              <span class="stat-icon">📏</span>
-              <div class="stat-info">
-                <span class="stat-label">Height</span>
-                <span class="stat-number">{{ height }} cm</span>
-              </div>
-            </div>
+    <div
+        class="success-toast"
+        *ngIf="pdfGenerated"
+    >
 
-            <div class="stat-block">
-              <span class="stat-icon">⚖️</span>
-              <div class="stat-info">
-                <span class="stat-label">Weight</span>
-                <span class="stat-number">{{ weight }} kg</span>
-              </div>
-            </div>
+        ✓ PDF generated successfully
 
-            <div class="stat-block">
-              <span class="stat-icon">🏔️</span>
-              <div class="stat-info">
-                <span class="stat-label">Terrain</span>
-                <span class="stat-number">{{ formatTerrain(terrain_type) }}</span>
-              </div>
-            </div>
+    </div>
 
-            <div class="stat-block">
-              <span class="stat-icon">❄️</span>
-              <div class="stat-info">
-                <span class="stat-label">Snow</span>
-                <span class="stat-number">{{ formatSnow(type_snow) }}</span>
-              </div>
-            </div>
-
-            <div class="stat-block">
-              <span class="stat-icon">🎨</span>
-              <div class="stat-info">
-                <span class="stat-label">Style</span>
-                <span class="stat-number">{{ formatStyle(ski_level_fun) }}</span>
-              </div>
-            </div>
-
-            <div class="stat-block">
-              <span class="stat-icon">🔄</span>
-              <div class="stat-info">
-                <span class="stat-label">Turns</span>
-                <span class="stat-number">{{ formatTurns(ski_turns) }}</span>
-              </div>
-            </div>
-
-            <div class="stat-block">
-              <span class="stat-icon">⚡</span>
-              <div class="stat-info">
-                <span class="stat-label">Speed</span>
-                <span class="stat-number">{{ formatSpeed(ski_speed) }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Editor avec sliders intégrés -->
-          <div class="preferences-editor">
-            <div class="editor-grid">
-              <!-- Height Input avec slider -->
-              <div class="editor-item" title="Height (cm)">
-                <label title="Height (cm)">H</label>
-                <div class="input-with-slider">
-                  <input type="number" 
-                         [ngModel]="height" 
-                         (ngModelChange)="onHeightChange($event)" 
-                         title="Height in centimeters"
-                         min="140" 
-                         max="220"
-                         step="1">
-                  <input type="range"
-                         [ngModel]="height"
-                         (ngModelChange)="onHeightChange($event)"
-                         (input)="onHeightInput($event)"
-                         (mouseup)="onSliderRelease()"
-                         (touchend)="onSliderRelease()"
-                         min="140"
-                         max="220"
-                         step="1"
-                         class="range-slider">
-                </div>
-              </div>
-
-              <!-- Weight Input avec slider -->
-              <div class="editor-item" title="Weight (kg)">
-                <label title="Weight (kg)">W</label>
-                <div class="input-with-slider">
-                  <input type="number" 
-                         [ngModel]="weight" 
-                         (ngModelChange)="onWeightChange($event)" 
-                         title="Weight in kilograms"
-                         min="40" 
-                         max="150"
-                         step="1">
-                  <input type="range"
-                         [ngModel]="weight"
-                         (ngModelChange)="onWeightChange($event)"
-                         (input)="onWeightInput($event)"
-                         (mouseup)="onSliderRelease()"
-                         (touchend)="onSliderRelease()"
-                         min="40"
-                         max="150"
-                         step="1"
-                         class="range-slider">
-                </div>
-              </div>
-
-              <!-- Terrain Select -->
-              <div class="editor-item" title="Terrain type">
-                <label title="Terrain type">T</label>
-                <select [ngModel]="terrain_type" (ngModelChange)="onTerrainChange($event)" title="Select terrain">
-                  <option *ngFor="let opt of terrainOptions" [value]="opt">{{ formatTerrain(opt) }}</option>
-                </select>
-              </div>
-
-              <!-- Snow Select -->
-              <div class="editor-item" title="Snow condition">
-                <label title="Snow condition">S</label>
-                <select [ngModel]="type_snow" (ngModelChange)="onSnowChange($event)" title="Select snow type">
-                  <option *ngFor="let opt of snowOptions" [value]="opt">{{ formatSnow(opt) }}</option>
-                </select>
-              </div>
-
-              <!-- Style Select -->
-              <div class="editor-item" title="Skiing style">
-                <label title="Skiing style">ST</label>
-                <select [ngModel]="ski_level_fun" (ngModelChange)="onStyleChange($event)" title="Select style">
-                  <option *ngFor="let opt of funOptions" [value]="opt">{{ formatStyle(opt) }}</option>
-                </select>
-              </div>
-
-              <!-- Turns Select -->
-              <div class="editor-item" title="Turning preference">
-                <label title="Turning preference">TU</label>
-                <select [ngModel]="ski_turns" (ngModelChange)="onTurnsChange($event)" title="Select turns preference">
-                  <option *ngFor="let opt of turnOptions" [value]="opt">{{ formatTurns(opt) }}</option>
-                </select>
-              </div>
-
-              <!-- Speed Select -->
-              <div class="editor-item" title="Speed preference">
-                <label title="Speed preference">SP</label>
-                <select [ngModel]="ski_speed" (ngModelChange)="onSpeedChange($event)" title="Select speed">
-                  <option *ngFor="let opt of speedOptions" [value]="opt">{{ formatSpeed(opt) }}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <p class="footer-credit">OGSO • Smart Product Selector</p>
-        </div>
-
-      </div>
-    </main>
-
-  </div>
-
-  <!-- PDF Overlay -->
-  <div class="pdf-overlay" *ngIf="isGeneratingPDF">
-    <div class="spinner"></div>
-    <p>Generating PDF...</p>
-  </div>
-
-  <!-- Success Toast -->
-  <div class="success-toast" *ngIf="pdfGenerated">
-    ✓ PDF generated successfully
-  </div>
 
 </div>

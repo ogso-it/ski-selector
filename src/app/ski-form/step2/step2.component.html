@@ -1,67 +1,204 @@
-<!-- STEP 2 CONTENT -->
+<div class="step2">
 
-<div class="step-layout">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      ABILITY LEVEL<br>
-      IS RELEVANT<br>
-      FOR CHOOSING<br>
-      A SKI
-    </h1>
-  </div>
+    <section class="step2-copy">
 
-  <!-- RIGHT RADIO BUTTONS -->
-  <div class="right">
-    <h2 class="section-title">WHAT IS YOUR SKI LEVEL?</h2>
-    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-    
-    <div class="radio-list">
-      <label class="radio-option" [class.selected]="selectedLevel === 'newbie'">
-        <input type="radio" 
-               name="skiLevel" 
-               value="newbie" 
-               (change)="onLevelChange('newbie')"
-               [checked]="selectedLevel === 'newbie'">
-        <span class="radio-label">NEWBIE</span>
-      </label>
+        <h1 class="step2-title">
+            How would you describe your skiing?
+        </h1>
 
-      <label class="radio-option" [class.selected]="selectedLevel === 'intermediate'">
-        <input type="radio" 
-               name="skiLevel" 
-               value="intermediate" 
-               (change)="onLevelChange('intermediate')"
-               [checked]="selectedLevel === 'intermediate'">
-        <span class="radio-label">INTERMEDIATE</span>
-      </label>
+        <p class="step2-description">
+            Choose the level that best matches your experience.
+        </p>
 
-      <label class="radio-option" [class.selected]="selectedLevel === 'confirmed'">
-        
-        <input type="radio" 
-               name="skiLevel" 
-               value="confirmed" 
-               (change)="onLevelChange('confirmed')"
-               [checked]="selectedLevel === 'confirmed'">
-        <span class="radio-label">CONFIRMED</span>
-      </label>
+    </section>
 
-      <label class="radio-option" [class.selected]="selectedLevel === 'pro-guide'">
-        <input type="radio" 
-               name="skiLevel" 
-               value="pro-guide" 
-               (change)="onLevelChange('pro-guide')"
-               [checked]="selectedLevel === 'pro-guide'">
-        <span class="radio-label">PRO-GUIDE</span>
-      </label>
-    </div>
-  </div>
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <section class="step2-content">
+
+        <!-- SKI -->
+
+        <div class="step2-ski">
+
+            <video
+                #skiVideo
+                class="step2-ski-video"
+                muted
+                playsinline
+                preload="auto">
+            </video>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+
+        <div class="step2-options">
+
+            <!-- BEGINNER -->
+
+            <label
+                class="step2-level-card"
+                [class.active]="selectedLevel === 'beginner'">
+
+                <input
+                    type="radio"
+                    name="level"
+                    value="beginner"
+                    [checked]="selectedLevel === 'beginner'"
+                    (change)="onLevelChange('beginner')">
+
+                <div class="step2-card-content">
+
+                    <h3>
+                        Beginner
+                    </h3>
+
+                    <p>
+                        Still learning the basics
+                    </p>
+
+                </div>
+
+            </label>
+
+
+            <!-- INTERMEDIATE -->
+
+            <label
+                class="step2-level-card"
+                [class.active]="selectedLevel === 'intermediate'">
+
+                <input
+                    type="radio"
+                    name="level"
+                    value="intermediate"
+                    [checked]="selectedLevel === 'intermediate'"
+                    (change)="onLevelChange('intermediate')">
+
+                <div class="step2-card-content">
+
+                    <h3>
+                        Intermediate
+                    </h3>
+
+                    <p>
+                        Comfortable on red &amp; blue runs
+                    </p>
+
+                </div>
+
+            </label>
+
+
+            <!-- ADVANCED -->
+
+            <label
+                class="step2-level-card"
+                [class.active]="selectedLevel === 'advanced'">
+
+                <input
+                    type="radio"
+                    name="level"
+                    value="advanced"
+                    [checked]="selectedLevel === 'advanced'"
+                    (change)="onLevelChange('advanced')">
+
+                <div class="step2-card-content">
+
+                    <h3>
+                        Advanced
+                    </h3>
+
+                    <p>
+                        Confident on black runs
+                    </p>
+
+                </div>
+
+            </label>
+
+
+            <!-- EXPERT -->
+
+            <label
+                class="step2-level-card"
+                [class.active]="selectedLevel === 'expert'">
+
+                <input
+                    type="radio"
+                    name="level"
+                    value="expert"
+                    [checked]="selectedLevel === 'expert'"
+                    (change)="onLevelChange('expert')">
+
+                <div class="step2-card-content">
+
+                    <h3>
+                        Expert
+                    </h3>
+
+                    <p>
+                        Any terrain, any conditions
+                    </p>
+
+                </div>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="step2-footer">
+
+        <div class="step2-footer-actions">
+
+            <button
+                type="button"
+                class="step2-navigation-button step2-previous-button"
+                (click)="prev()">
+
+                <span aria-hidden="true">
+                    ←
+                </span>
+
+                <span>
+                    Previous
+                </span>
+
+            </button>
+
+            <button
+                type="button"
+                class="step2-navigation-button step2-next-button"
+                [disabled]="!selectedLevel"
+                (click)="next()">
+
+                <span>
+                    Next
+                </span>
+
+                <span aria-hidden="true">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </footer>
 
 </div>
-
-<!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!selectedLevel"
-        [disabled]="!selectedLevel"
-        (click)="next()">NEXT</button>

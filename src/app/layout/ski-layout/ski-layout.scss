@@ -1,264 +1,1072 @@
-:host {
-  display: block;
-  width: 100%;
-  height: 100vh;
+:host{
+    display:block;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
 }
 
-/* BACKGROUND */
-.layout-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/*==========================================================
+BACKGROUND — DESKTOP ORIGINAL
+==========================================================*/
+.layout-container{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:#000;
 }
 
-.layout-bg-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.layout-bg-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    z-index:0;
+    transform:translateZ(0);
+    backface-visibility:hidden;
+    will-change:transform;
 }
 
-/* PANEL */
-.layout-panel-wrapper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/*==========================================================
+PANEL — DESKTOP ORIGINAL
+==========================================================*/
+.layout-panel-wrapper{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.layout-panel {
-  position: relative;
-  width: min(92vw, 1350px);
-  height: min(85vh, 820px);
+.layout-panel{
+    position:relative;
+    width:min(1680px,92vw);
+    aspect-ratio:1920/1080;
 }
 
-.layout-panel-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.layout-panel-picture{
+    position:absolute;
+    inset:0;
+    display:block;
+    width:100%;
+    height:100%;
 }
 
-.layout-panel-content {
-  position: absolute;
-  inset: 0;
+.layout-panel-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
 }
 
-/* ===== DESKTOP - INCHANGÉ (≥ 1200px) ===== */
-@media screen and (min-width: 1200px) {
-  .layout-header {
-    position: absolute;
-    top: 20px;
-    left: 6%;
-    right: 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+.layout-panel-content{
+    position:absolute;
+    inset:0;
+    --panel-padding:90px;
+}
+/*==========================================================
+SAFE AREA
+==========================================================*/
 
-  .layout-header-left {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+.layout-safe-area{
 
-  .layout-header-title {
-    color: white;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 0;
-  }
+    position:relative;
 
-  .layout-steps-container {
-    display: flex;
-    gap: 25px;
-  }
+    width:100%;
+    height:100%;
 
-  .step-number {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 13px;
-    transition: all 0.3s ease;
-    position: relative;
-    cursor: default;
-    
-    &.active {
-      color: #00eaff;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, #00aaff, #00eaff);
-        border-radius: 2px;
-      }
-    }
-    
-    &.completed {
-      color: #00aaff;
-    }
-  }
-
-  .layout-logo {
-    height: 120px;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .layout-body {
-    position: absolute;
-    inset: 0;
-    overflow: auto;
-  }
+    min-width:0;
+    min-height:0;
+}
+/*==========================================================
+HEADER — DESKTOP ORIGINAL
+==========================================================*/
+.layout-header{
+    position:absolute;
+    top:48px;
+    left:var(--panel-padding);
+    right:var(--panel-padding);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:20;
 }
 
-/* ===== TABLETTE ET MOBILE - TOUS LES AUTRES ÉCRANS ===== */
-@media screen and (max-width: 1199px) {
-  .layout-panel {
-    width: 95vw;
-    height: 90vh;
-  }
-
-  .layout-header {
-    position: absolute;
-    top: clamp(10px, 2vh, 20px);
-    left: 4%;
-    right: 4%;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(5px, 1vh, 10px);
-  }
-
-  .layout-header-left {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(3px, 0.8vh, 5px);
-    width: 100%;
-  }
-
-  .layout-header-title {
-    color: white;
-    font-size: clamp(11px, 2.5vw, 13px);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin: 0;
-    text-align: center;
-  }
-
-  .layout-steps-container {
-    display: flex;
-    gap: clamp(10px, 2vw, 20px);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .step-number {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: clamp(11px, 2.5vw, 13px);
-    transition: all 0.3s ease;
-    position: relative;
-    cursor: default;
-    
-    &.active {
-      color: #00eaff;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, #00aaff, #00eaff);
-        border-radius: 2px;
-      }
-    }
-    
-    &.completed {
-      color: #00aaff;
-    }
-  }
-
-  .layout-header-right {
-    position: absolute;
-    top: clamp(5px, 1vh, 10px);
-    right: clamp(5px, 2vw, 10px);
-  }
-
-  .layout-logo {
-    height: clamp(40px, 8vh, 80px);
-    width: auto;
-    object-fit: contain;
-  }
-
-  .layout-body {
-    position: absolute;
-    inset: 0;
-    overflow: auto;
-  }
-
-  // Tablettes (768px - 1024px)
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .layout-panel {
-      width: 90vw;
-      height: 85vh;
-    }
-
-    .layout-logo {
-      height: 70px;
-    }
-  }
-
-  // Petits mobiles (< 480px)
-  @media screen and (max-width: 480px) {
-    .layout-panel {
-      width: 98vw;
-      height: 95vh;
-    }
-
-    .layout-steps-container {
-      gap: 8px;
-    }
-
-    .layout-logo {
-      height: 35px;
-    }
-  }
-
-  // Mode paysage
-  @media screen and (max-width: 1024px) and (orientation: landscape) {
-    .layout-panel {
-      height: 85vh;
-    }
-
-    .layout-header {
-      top: 5px;
-    }
-
-    .layout-logo {
-      height: 35px;
-    }
-  }
+.layout-header-left{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 
-// Très grands écrans
-@media screen and (min-width: 1920px) {
-  .layout-panel {
-    width: 1400px;
-    height: 900px;
-  }
+.layout-header-title{
+    margin:0;
+    color:#fff;
+    font-size:14px;
+    letter-spacing:3px;
+}
 
-  .layout-logo {
-    height: 140px;
-  }
+.layout-steps-container{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.step-number{
+    position:relative;
+    color:rgba(255,255,255,.5);
+    font-size:14px;
+}
+
+.step-number.active{
+    color:#00eaff;
+}
+
+.step-number.active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:100%;
+    height:2px;
+    background:#00eaff;
+}
+
+.step-number.completed{
+    color:#00bfff;
+}
+
+.layout-mobile-step{
+    display:none;
+}
+
+.layout-header-right{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+}
+
+.layout-logo{
+    width:265px;
+    height:auto;
+    display:block;
+    transform:translateY(8px);
+}
+
+/*==========================================================
+BODY — DESKTOP ORIGINAL
+==========================================================*/
+.layout-body{
+    position:absolute;
+    top:170px;
+    left:var(--panel-padding);
+    right:var(--panel-padding);
+    bottom:85px;
+    overflow:hidden;
+}
+
+.layout-body-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    min-height:0;
+}
+
+/*==========================================================
+RESPONSIVE V2
+TABLET
+601px → 1024px
+==========================================================*/
+
+@media screen and (min-width:601px) and (max-width:1024px){
+
+    :host{
+
+        width:100%;
+        height:100dvh;
+
+        overflow:hidden;
+    }
+
+    .layout-container{
+
+        width:100%;
+        height:100dvh;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    BACKGROUND
+    ======================================================*/
+
+    .layout-bg-video{
+
+        object-fit:cover;
+        object-position:center;
+    }
+
+
+    /*======================================================
+    WRAPPER
+    ======================================================*/
+
+    .layout-panel-wrapper{
+
+        position:absolute;
+        inset:0;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        padding:20px;
+    }
+
+
+    /*======================================================
+    PANEL
+    ======================================================*/
+
+    .layout-panel{
+
+        position:relative;
+
+        width:min(430px,100%);
+        height:100%;
+
+        max-height:900px;
+
+        border-radius:0;
+
+        overflow:hidden;
+
+        background:
+
+            linear-gradient(
+
+                180deg,
+
+                rgba(42,42,42,.35),
+
+                rgba(20,20,20,.28)
+
+            );
+
+        backdrop-filter:blur(14px);
+
+        -webkit-backdrop-filter:blur(14px);
+
+        border:1px solid rgba(255,255,255,.08);
+
+        box-shadow:
+
+            0 25px 70px rgba(0,0,0,.45);
+    }
+
+
+    .layout-panel::before{
+
+        content:"";
+
+        position:absolute;
+
+        inset:0;
+
+        background:
+
+            linear-gradient(
+
+                180deg,
+
+                rgba(255,255,255,.02),
+
+                rgba(0,0,0,.10)
+
+            );
+
+        pointer-events:none;
+
+        z-index:0;
+    }
+
+
+    /*======================================================
+    REMOVE PANEL IMAGE
+    ======================================================*/
+
+    .layout-panel-picture{
+
+        display:none !important;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .layout-panel-content{
+
+        position:absolute;
+
+        inset:0;
+
+        z-index:2;
+
+        display:flex;
+
+        flex-direction:column;
+
+        padding:28px;
+    }
+
+
+    .layout-safe-area{
+
+        display:flex;
+
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+    }
+
+
+    /*======================================================
+    HEADER
+    ======================================================*/
+
+    .layout-header{
+
+        position:relative;
+
+        inset:auto;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        margin-bottom:34px;
+    }
+
+
+    .layout-header-left{
+
+        display:flex;
+
+        flex-direction:column;
+    }
+
+
+    /* cacher le header desktop */
+
+    .layout-header-title{
+
+        display:none;
+    }
+
+    .layout-steps-container{
+
+        display:none;
+    }
+
+
+    /* afficher uniquement Step X of 7 */
+
+    .layout-mobile-step{
+
+        display:block;
+
+        color:#fff;
+
+        font-size:13px;
+
+        font-weight:600;
+
+        letter-spacing:.02em;
+    }
+
+
+    .layout-header-right{
+
+        display:flex;
+
+        align-items:center;
+    }
+
+
+    .layout-logo{
+
+        width:120px;
+
+        height:auto;
+
+        transform:none;
+    }
+
+
+    /*======================================================
+    BODY
+    ======================================================*/
+
+    .layout-body{
+
+        position:relative;
+
+        inset:auto;
+
+        flex:1;
+
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    .layout-body-content{
+
+        width:100%;
+        height:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        min-width:0;
+        min-height:0;
+    }
+
+}
+/*==========================================================
+RESPONSIVE V2
+MOBILE
+0px → 600px
+==========================================================*/
+
+@media screen and (max-width:600px){
+
+    :host{
+
+        width:100%;
+        height:100dvh;
+
+        overflow:hidden;
+    }
+
+    .layout-container{
+
+        width:100%;
+        height:100dvh;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    BACKGROUND
+    ======================================================*/
+
+    .layout-bg-video{
+
+        object-fit:cover;
+        object-position:center;
+    }
+
+
+    /*======================================================
+    WRAPPER
+    ======================================================*/
+
+    .layout-panel-wrapper{
+
+        position:absolute;
+        inset:0;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        padding:16px;
+    }
+
+
+    /*======================================================
+    GLASS PANEL
+    ======================================================*/
+
+    .layout-panel{
+
+        position:relative;
+
+        width:min(390px,100%);
+        height:100%;
+
+        max-height:860px;
+
+        overflow:hidden;
+
+        border-radius:0;
+
+        background:
+
+            linear-gradient(
+
+                180deg,
+
+                rgba(45,45,45,.32),
+
+                rgba(20,20,20,.24)
+
+            );
+
+        backdrop-filter:blur(18px);
+
+        -webkit-backdrop-filter:blur(18px);
+
+        border:1px solid rgba(255,255,255,.06);
+
+        box-shadow:
+
+            0 18px 60px rgba(0,0,0,.48);
+    }
+
+
+    .layout-panel::before{
+
+        content:"";
+
+        position:absolute;
+        inset:0;
+
+        background:
+
+            linear-gradient(
+
+                180deg,
+
+                rgba(255,255,255,.03),
+
+                rgba(0,0,0,.12)
+
+            );
+
+        pointer-events:none;
+
+        z-index:0;
+    }
+
+
+    /*======================================================
+    REMOVE PNG PANEL
+    ======================================================*/
+
+    .layout-panel-picture{
+
+        display:none !important;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .layout-panel-content{
+
+        position:absolute;
+
+        inset:0;
+
+        z-index:2;
+
+        display:flex;
+
+        flex-direction:column;
+
+        padding:
+
+            26px
+            20px
+            18px;
+    }
+
+
+    .layout-safe-area{
+
+        display:flex;
+
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+    }
+
+
+    /*======================================================
+    HEADER
+    ======================================================*/
+
+    .layout-header{
+
+        position:relative;
+
+        inset:auto;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        margin-bottom:26px;
+    }
+
+
+    .layout-header-left{
+
+        display:flex;
+
+        flex-direction:column;
+    }
+
+
+    /* cacher desktop */
+
+    .layout-header-title{
+
+        display:none;
+    }
+
+    .layout-steps-container{
+
+        display:none;
+    }
+
+
+    /* afficher uniquement Step */
+
+    .layout-mobile-step{
+
+        display:block;
+
+        color:#fff;
+
+        font-size:13px;
+
+        font-weight:600;
+
+        letter-spacing:.02em;
+    }
+
+
+    .layout-header-right{
+
+        display:flex;
+
+        align-items:center;
+    }
+
+
+    .layout-logo{
+
+        width:110px;
+
+        height:auto;
+
+        transform:none;
+    }
+
+
+    /*======================================================
+    BODY
+    ======================================================*/
+
+    .layout-body{
+
+        position:relative;
+
+        inset:auto;
+
+        flex:1;
+
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    .layout-body-content{
+
+        display:flex;
+
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+    }
+
+}
+/*==========================================================
+RESPONSIVE V2
+PARTIE 3/3
+SMALL MOBILE + LANDSCAPE + SAFE AREA + FINITIONS
+==========================================================*/
+
+
+/*==========================================================
+SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:390px){
+
+    .layout-panel-wrapper{
+        padding:12px;
+    }
+
+    .layout-panel{
+        width:100%;
+        height:100%;
+
+        max-height:none;
+    }
+
+    .layout-panel-content{
+        padding:
+            22px
+            16px
+            14px;
+    }
+
+    .layout-header{
+        margin-bottom:22px;
+    }
+
+    .layout-mobile-step{
+        font-size:12px;
+    }
+
+    .layout-logo{
+        width:100px;
+    }
+}
+
+
+/*==========================================================
+EXTRA SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:340px){
+
+    .layout-panel-wrapper{
+        padding:8px;
+    }
+
+    .layout-panel-content{
+        padding:
+            18px
+            14px
+            12px;
+    }
+
+    .layout-header{
+        margin-bottom:18px;
+    }
+
+    .layout-mobile-step{
+        font-size:11px;
+    }
+
+    .layout-logo{
+        width:90px;
+    }
+}
+
+
+/*==========================================================
+SHORT MOBILE
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:760px){
+
+    .layout-panel-wrapper{
+        padding:10px;
+    }
+
+    .layout-panel-content{
+        padding:
+            18px
+            16px
+            12px;
+    }
+
+    .layout-header{
+        margin-bottom:16px;
+    }
+
+    .layout-mobile-step{
+        font-size:11px;
+    }
+
+    .layout-logo{
+        width:92px;
+    }
+}
+
+
+/*==========================================================
+VERY SHORT MOBILE
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:650px){
+
+    .layout-panel-wrapper{
+        padding:6px;
+    }
+
+    .layout-panel-content{
+        padding:
+            14px
+            14px
+            10px;
+    }
+
+    .layout-header{
+        margin-bottom:12px;
+    }
+
+    .layout-mobile-step{
+        font-size:10px;
+    }
+
+    .layout-logo{
+        width:84px;
+    }
+}
+
+
+/*==========================================================
+MOBILE LANDSCAPE
+==========================================================*/
+
+@media screen
+and (orientation:landscape)
+and (max-height:600px){
+
+    .layout-panel-wrapper{
+        padding:10px 16px;
+    }
+
+    .layout-panel{
+        width:100%;
+        height:100%;
+
+        max-width:none;
+        max-height:none;
+    }
+
+    .layout-panel-content{
+        padding:
+            14px
+            22px
+            10px;
+    }
+
+    .layout-header{
+        margin-bottom:12px;
+    }
+
+    .layout-mobile-step{
+        font-size:11px;
+    }
+
+    .layout-logo{
+        width:96px;
+    }
+
+    .layout-body{
+        min-height:0;
+    }
+}
+
+
+/*==========================================================
+TABLET LANDSCAPE FINISH
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px)
+and (orientation:landscape){
+
+    .layout-panel-wrapper{
+        padding:16px;
+    }
+
+    .layout-panel{
+        width:min(820px,100%);
+        height:100%;
+    }
+
+    .layout-panel-content{
+        padding:
+            24px
+            28px
+            18px;
+    }
+
+    .layout-header{
+        margin-bottom:24px;
+    }
+
+    .layout-logo{
+        width:115px;
+    }
+}
+
+
+/*==========================================================
+SAFE AREA
+==========================================================*/
+
+@supports (padding:env(safe-area-inset-top)){
+
+    @media screen and (max-width:1024px){
+
+        .layout-panel-wrapper{
+            padding-top:
+                max(10px,env(safe-area-inset-top));
+
+            padding-right:
+                max(10px,env(safe-area-inset-right));
+
+            padding-bottom:
+                max(10px,env(safe-area-inset-bottom));
+
+            padding-left:
+                max(10px,env(safe-area-inset-left));
+        }
+
+        .layout-panel-content{
+            padding-top:
+                max(18px,env(safe-area-inset-top));
+
+            padding-right:
+                max(16px,env(safe-area-inset-right));
+
+            padding-bottom:
+                max(12px,env(safe-area-inset-bottom));
+
+            padding-left:
+                max(16px,env(safe-area-inset-left));
+        }
+    }
+}
+
+
+/*==========================================================
+FORCE RESPONSIVE HEADER
+==========================================================*/
+
+@media screen and (max-width:1024px){
+
+    .layout-header-title,
+    .layout-steps-container{
+        display:none !important;
+    }
+
+    .layout-mobile-step{
+        display:block !important;
+    }
+
+    .layout-header{
+        flex-direction:row !important;
+        justify-content:space-between !important;
+        align-items:center !important;
+    }
+
+    .layout-header-left,
+    .layout-header-right{
+        width:auto;
+    }
+}
+
+
+/*==========================================================
+FORCE TRANSPARENT PANEL
+==========================================================*/
+
+@media screen and (max-width:1024px){
+
+    .layout-panel-picture{
+        display:none !important;
+    }
+
+    .layout-panel{
+        background:
+            linear-gradient(
+                180deg,
+                rgba(38,38,38,.26),
+                rgba(16,16,16,.18)
+            ) !important;
+
+        backdrop-filter:blur(14px);
+        -webkit-backdrop-filter:blur(14px);
+
+        border:1px solid rgba(255,255,255,.07);
+    }
+
+    .layout-panel::before{
+        background:
+            linear-gradient(
+                180deg,
+                rgba(255,255,255,.025),
+                rgba(0,0,0,.08)
+            );
+    }
+}
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+@media (hover:none){
+
+    .layout-logo{
+        user-select:none;
+        -webkit-user-select:none;
+
+        pointer-events:none;
+    }
+}
+
+
+/*==========================================================
+REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .layout-bg-video{
+        animation:none !important;
+        transition:none !important;
+    }
+
+    .layout-panel,
+    .layout-panel::before{
+        transition:none !important;
+    }
 }

@@ -1,47 +1,137 @@
-<!-- STEP 7 CONTENT -->
+<section class="step7">
 
-<div class="step-layout">
+    <!-- HEADER -->
+    <header class="step7-copy">
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      IT'S ALL<br>
-      ABOUT<br>
-      YOU
-    </h1>
-  </div>
+        <h1 class="step7-title">
+            What matters most to you?
+        </h1>
 
-  <!-- RIGHT RADIO BUTTONS -->
-  <div class="right">
-    <h2 class="section-title">WHAT IS YOUR SKIING STYLE?</h2>
-    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-    
-    <div class="radio-list">
-      <label class="radio-option" [class.selected]="selectedStyle === 'technical-precision'">
-        <input type="radio" 
-               name="skiingStyle" 
-               value="technical-precision" 
-               (change)="onStyleChange('technical-precision')"
-               [checked]="selectedStyle === 'technical-precision'">
-        <span class="radio-label">TECHNICAL PRECISION</span>
-      </label>
+        <p class="step7-description">
+            The final piece of your skiing profile.
+        </p>
 
-      <label class="radio-option" [class.selected]="selectedStyle === 'fun-surf'">
-        <input type="radio" 
-               name="skiingStyle" 
-               value="fun-surf" 
-               (change)="onStyleChange('fun-surf')"
-               [checked]="selectedStyle === 'fun-surf'">
-        <span class="radio-label">FUN & SURF</span>
-      </label>
+    </header>
+
+
+    <!-- CONTENT -->
+    <div class="step7-content">
+
+        <!-- PREVIEW -->
+        <div class="step7-preview">
+
+            <video
+                #styleVideo
+                class="step7-style-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+
+                <source
+                    src="assets/images/apparence7.webm"
+                    type="video/webm">
+
+            </video>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+        <div class="step7-options">
+
+            <div class="step7-style-list">
+
+                <!-- TECHNICAL PRECISION -->
+                <label
+                    class="step7-style-card"
+                    [class.active]="selectedStyle === 'technical-precision'">
+
+                    <input
+                        type="radio"
+                        name="skiStyle"
+                        value="technical-precision"
+                        [checked]="selectedStyle === 'technical-precision'"
+                        (change)="onStyleChange('technical-precision')">
+
+                    <div class="step7-card-content">
+
+                        <h3>
+                            Technical Precision
+                        </h3>
+
+                        <p>
+                            Clean carving, perfect form
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- FUN & SURF -->
+                <label
+                    class="step7-style-card"
+                    [class.active]="selectedStyle === 'fun-surf'">
+
+                    <input
+                        type="radio"
+                        name="skiStyle"
+                        value="fun-surf"
+                        [checked]="selectedStyle === 'fun-surf'"
+                        (change)="onStyleChange('fun-surf')">
+
+                    <div class="step7-card-content">
+
+                        <h3>
+                            Fun & Surf
+                        </h3>
+
+                        <p>
+                            Jumps, creative skiing
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-</div>
 
-<!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!selectedStyle"
-        [disabled]="!selectedStyle"
-        (click)="next()">NEXT</button>
+    <!-- FOOTER -->
+    <footer class="step7-footer">
+
+        <div class="step7-footer-actions">
+
+            <button
+                type="button"
+                class="step7-navigation-button step7-previous-button"
+                (click)="prev()">
+
+                <span aria-hidden="true">←</span>
+                <span>Previous</span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="step7-navigation-button step7-next-button"
+                [disabled]="!selectedStyle"
+                (click)="next()">
+
+                <span>Find My Ski</span>
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </div>
+
+    </footer>
+
+</section>

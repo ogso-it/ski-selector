@@ -1,0 +1,1811 @@
+/*==========================================================
+ROOT
+==========================================================*/
+
+:host{
+    --orange:#ff5b27;
+    --white:#ffffff;
+    --white80:rgba(255,255,255,.82);
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    color:var(--white);
+
+    box-sizing:border-box;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing:inherit;
+}
+
+
+/*==========================================================
+MAIN LAYOUT
+==========================================================*/
+
+.step4{
+    display:grid;
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr)
+        72px;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    overflow:hidden;
+
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+}
+
+
+/*==========================================================
+HEADER
+==========================================================*/
+
+.step4-copy{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+
+    width:100%;
+}
+
+
+/*==========================================================
+STEP NUMBER
+==========================================================*/
+
+.step4-number{
+    display:block;
+
+    margin:0 0 16px;
+
+    color:var(--white80);
+
+    font-size:14px;
+    font-weight:600;
+
+    line-height:1;
+    letter-spacing:.02em;
+}
+
+
+/*==========================================================
+TITLE
+==========================================================*/
+
+.step4-title{
+    margin:0;
+
+    width:100%;
+    max-width:none;
+
+    color:var(--white);
+
+    font-size:64px;
+    font-weight:700;
+
+    line-height:.96;
+    letter-spacing:-.045em;
+
+    white-space:normal;
+}
+
+
+/*==========================================================
+DESCRIPTION
+==========================================================*/
+
+.step4-description{
+    margin:14px 0 0;
+
+    width:620px;
+    max-width:620px;
+
+    color:var(--white80);
+
+    font-size:18px;
+    font-weight:500;
+
+    line-height:1.42;
+}
+
+
+/*==========================================================
+CONTENT
+==========================================================*/
+
+.step4-content{
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+        420px
+        minmax(640px,1fr);
+
+    align-items:center;
+
+    column-gap:110px;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+}
+
+
+/*==========================================================
+SNOW PREVIEW
+==========================================================*/
+
+.step4-preview{
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    overflow:visible;
+}
+
+
+/*==========================================================
+SNOW VIDEO
+==========================================================*/
+
+.step4-snow-video{
+    position:relative;
+    z-index:2;
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    max-width:480px;
+    max-height:430px;
+
+    object-fit:contain;
+    object-position:center;
+
+    transform:scale(1.12);
+    transform-origin:center;
+
+    pointer-events:none;
+
+    backface-visibility:hidden;
+    will-change:transform;
+
+    filter:
+        drop-shadow(0 20px 24px rgba(0,0,0,.35));
+}
+
+
+/*==========================================================
+PREVIEW SHADOW
+==========================================================*/
+
+.step4-preview::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:13%;
+
+    width:65%;
+    height:24px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.26);
+
+    filter:blur(16px);
+
+    opacity:.68;
+
+    pointer-events:none;
+}
+
+
+/*==========================================================
+OPTIONS
+==========================================================*/
+
+.step4-options{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+}
+
+
+/*==========================================================
+SNOW LIST
+==========================================================*/
+
+.step4-snow-list{
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+    width:100%;
+}
+
+
+/*==========================================================
+SNOW CARD
+==========================================================*/
+
+.step4-snow-card{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    min-height:74px;
+
+    padding:15px 24px;
+
+    border:1px solid rgba(255,255,255,.30);
+    border-radius:14px;
+
+    background:rgba(255,255,255,.018);
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        border-color .22s ease,
+        background-color .22s ease,
+        box-shadow .22s ease,
+        transform .22s ease;
+}
+
+
+/*==========================================================
+HIDDEN RADIO
+==========================================================*/
+
+.step4-snow-card input{
+    position:absolute;
+
+    width:1px;
+    height:1px;
+
+    opacity:0;
+
+    pointer-events:none;
+}
+
+
+/*==========================================================
+CARD CONTENT
+==========================================================*/
+
+.step4-card-content{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    width:100%;
+}
+
+
+/*==========================================================
+CARD TITLE
+==========================================================*/
+
+.step4-card-content h3{
+    margin:0;
+
+    color:var(--white);
+
+    font-size:22px;
+    font-weight:700;
+
+    line-height:1.05;
+}
+
+
+/*==========================================================
+CARD DESCRIPTION
+==========================================================*/
+
+.step4-card-content p{
+    margin:5px 0 0;
+
+    color:var(--white80);
+
+    font-size:14px;
+    font-weight:500;
+
+    line-height:1.3;
+}
+
+
+/*==========================================================
+LEFT ACCENT
+==========================================================*/
+
+.step4-snow-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    bottom:0;
+    left:0;
+
+    width:3px;
+
+    background:var(--orange);
+
+    transform:scaleY(0);
+    transform-origin:center;
+
+    transition:transform .22s ease;
+}
+
+
+/*==========================================================
+BACKGROUND ACCENT
+==========================================================*/
+
+.step4-snow-card::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,91,39,.14),
+            rgba(255,91,39,.025)
+        );
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .22s ease;
+}
+
+
+/*==========================================================
+CARD HOVER
+==========================================================*/
+
+.step4-snow-card:hover{
+    border-color:rgba(255,255,255,.60);
+
+    background:rgba(255,255,255,.045);
+
+    transform:translateY(-2px);
+}
+
+
+/*==========================================================
+CARD ACTIVE
+==========================================================*/
+
+.step4-snow-card.active{
+    border-color:var(--orange);
+
+    background:rgba(255,91,39,.045);
+
+    box-shadow:
+        0 0 0 1px rgba(255,91,39,.20),
+        0 12px 28px rgba(255,91,39,.12);
+}
+
+.step4-snow-card.active::before{
+    transform:scaleY(1);
+}
+
+.step4-snow-card.active::after{
+    opacity:1;
+}
+
+.step4-snow-card.active
+.step4-card-content p{
+    color:var(--white);
+}
+
+
+/*==========================================================
+CARD FOCUS
+==========================================================*/
+
+.step4-snow-card:focus-within{
+    border-color:var(--orange);
+
+    box-shadow:
+        0 0 0 4px rgba(255,91,39,.16);
+}
+
+
+/*==========================================================
+CARD PRESS
+==========================================================*/
+
+.step4-snow-card:active{
+    transform:scale(.99);
+}
+
+
+/*==========================================================
+FOOTER
+==========================================================*/
+
+.step4-footer{
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    height:72px;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    flex-shrink:0;
+}
+
+
+/*==========================================================
+FOOTER ACTIONS
+==========================================================*/
+
+.step4-footer-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+}
+
+
+/*==========================================================
+NAVIGATION BUTTON
+==========================================================*/
+
+.step4-navigation-button{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:12px;
+
+    min-width:150px;
+    height:52px;
+
+    padding:0 30px;
+
+    border:none;
+    border-radius:999px;
+
+    font-family:inherit;
+
+    font-size:15px;
+    font-weight:700;
+
+    line-height:1;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    touch-action:manipulation;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        background-color .22s ease,
+        border-color .22s ease,
+        color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease,
+        opacity .22s ease;
+}
+
+.step4-navigation-button
+span[aria-hidden="true"]{
+    font-size:18px;
+
+    line-height:1;
+
+    transition:transform .22s ease;
+}
+
+
+/*==========================================================
+PREVIOUS BUTTON
+==========================================================*/
+
+.step4-previous-button{
+    color:var(--white);
+
+    background:transparent;
+
+    border:1px solid rgba(255,255,255,.35);
+}
+
+.step4-previous-button:hover{
+    background:rgba(255,255,255,.05);
+
+    border-color:rgba(255,255,255,.65);
+}
+
+.step4-previous-button:hover
+span[aria-hidden="true"]{
+    transform:translateX(-4px);
+}
+
+
+/*==========================================================
+NEXT BUTTON
+==========================================================*/
+
+.step4-next-button{
+    color:var(--white);
+
+    background:var(--orange);
+
+    border:1px solid var(--orange);
+
+    box-shadow:
+        0 10px 22px rgba(255,91,39,.25);
+}
+
+.step4-next-button:hover:not(:disabled){
+    background:#ff6a39;
+
+    border-color:#ff6a39;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(255,91,39,.34);
+}
+
+.step4-next-button:hover:not(:disabled)
+span[aria-hidden="true"]{
+    transform:translateX(4px);
+}
+
+
+/*==========================================================
+BUTTON STATES
+==========================================================*/
+
+.step4-navigation-button:focus{
+    outline:none;
+}
+
+.step4-navigation-button:focus-visible{
+    outline:none;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.14);
+}
+
+.step4-navigation-button:active:not(:disabled){
+    transform:scale(.98);
+}
+
+.step4-next-button:disabled{
+    opacity:.42;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+}
+
+
+/*==========================================================
+VIDEO CONTROLS
+==========================================================*/
+
+.step4-snow-video::-webkit-media-controls{
+    display:none !important;
+}
+
+.step4-snow-video::-webkit-media-controls-panel{
+    display:none !important;
+}
+/*==========================================================
+STEP 4
+TABLET RESPONSIVE
+PARTIE 1A
+STRUCTURE + COPY + LAYOUT
+601px → 1024px
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px){
+
+    .step4{
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step4-copy{
+        flex:0 0 auto;
+
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+        width:100%;
+
+        margin:0 0 26px;
+        padding:0;
+
+        text-align:left;
+    }
+
+    .step4-number{
+        display:none;
+    }
+
+    .step4-title{
+        width:100%;
+        max-width:620px;
+
+        margin:0;
+
+        font-size:46px;
+        font-weight:700;
+
+        line-height:.96;
+        letter-spacing:-.05em;
+
+        text-wrap:balance;
+    }
+
+    .step4-description{
+        width:100%;
+        max-width:430px;
+
+        margin:12px 0 0;
+
+        color:rgba(255,255,255,.82);
+
+        font-size:16px;
+        font-weight:500;
+
+        line-height:1.42;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .step4-content{
+        flex:1;
+
+        display:grid;
+
+        grid-template-columns:
+            250px
+            minmax(0,1fr);
+
+        align-items:center;
+
+        column-gap:34px;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        padding:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    OPTIONS WRAPPER
+    ======================================================*/
+
+    .step4-options{
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+    }
+        /*======================================================
+    SNOW PREVIEW
+    ======================================================*/
+
+    .step4-preview{
+        position:relative;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:250px;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:visible;
+    }
+
+    .step4-snow-video{
+        display:block;
+
+        width:220px;
+        height:100%;
+
+        max-height:300px;
+
+        object-fit:contain;
+        object-position:center;
+
+        transform:scale(1.08);
+        transform-origin:center;
+
+        pointer-events:none;
+
+        filter:
+            drop-shadow(
+                0 18px 22px rgba(0,0,0,.30)
+            );
+    }
+
+    .step4-preview::after{
+        content:"";
+
+        position:absolute;
+
+        left:50%;
+        bottom:13%;
+
+        width:150px;
+        height:18px;
+
+        transform:translateX(-50%);
+
+        border-radius:50%;
+
+        background:rgba(0,0,0,.22);
+
+        filter:blur(14px);
+
+        opacity:.68;
+
+        pointer-events:none;
+    }
+
+
+    /*======================================================
+    SNOW LIST
+    ======================================================*/
+
+    .step4-snow-list{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+        gap:10px;
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+    }
+
+
+    /*======================================================
+    SNOW CARD
+    ======================================================*/
+
+    .step4-snow-card{
+        position:relative;
+
+        display:flex;
+        align-items:center;
+
+        width:100%;
+        min-width:0;
+        min-height:64px;
+
+        padding:12px 16px;
+
+        border:1px solid rgba(255,255,255,.30);
+        border-radius:13px;
+
+        background:rgba(255,255,255,.018);
+
+        backdrop-filter:blur(5px);
+        -webkit-backdrop-filter:blur(5px);
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+
+        transition:
+            border-color .22s ease,
+            background-color .22s ease,
+            box-shadow .22s ease,
+            transform .22s ease;
+    }
+
+    .step4-card-content{
+        position:relative;
+        z-index:2;
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+        width:100%;
+
+        min-width:0;
+    }
+
+    .step4-card-content h3{
+        margin:0;
+
+        color:#fff;
+
+        font-size:17px;
+        font-weight:700;
+
+        line-height:1.08;
+    }
+
+    .step4-card-content p{
+        margin:4px 0 0;
+
+        color:rgba(255,255,255,.82);
+
+        font-size:11px;
+        font-weight:500;
+
+        line-height:1.28;
+    }
+
+
+    /*======================================================
+    CARD ACTIVE
+    ======================================================*/
+
+    .step4-snow-card.active{
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.07);
+
+        box-shadow:
+            0 0 0 1px rgba(255,91,39,.10),
+            0 10px 24px rgba(255,91,39,.10);
+    }
+
+    .step4-snow-card.active::before{
+        transform:scaleY(1);
+    }
+
+    .step4-snow-card.active::after{
+        opacity:1;
+    }
+
+    .step4-snow-card.active .step4-card-content p{
+        color:#fff;
+    }
+
+
+    /*======================================================
+    CARD HOVER
+    ======================================================*/
+
+    .step4-snow-card:hover{
+        border-color:rgba(255,255,255,.55);
+
+        background:rgba(255,255,255,.04);
+
+        transform:translateY(-2px);
+    }
+
+    .step4-snow-card:active{
+        transform:scale(.99);
+    }
+        /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step4-footer{
+
+        flex:0 0 auto;
+
+        display:flex;
+
+        align-items:center;
+
+        width:100%;
+
+        height:64px;
+
+        min-height:64px;
+
+        margin-top:22px;
+
+        border-top:1px solid rgba(255,255,255,.10);
+    }
+
+
+    .step4-footer-actions{
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        width:100%;
+        height:100%;
+    }
+
+
+    /*======================================================
+    BUTTONS
+    ======================================================*/
+
+    .step4-navigation-button{
+
+        min-width:128px;
+
+        height:42px;
+
+        padding:0 20px;
+
+        gap:8px;
+
+        font-size:13px;
+
+        border-radius:999px;
+    }
+
+    .step4-navigation-button span[aria-hidden="true"]{
+
+        font-size:15px;
+    }
+
+
+    /*======================================================
+    TABLET PORTRAIT
+    ======================================================*/
+
+    @media (orientation:portrait){
+
+        .step4-copy{
+
+            margin-bottom:30px;
+        }
+
+        .step4-title{
+
+            font-size:42px;
+        }
+
+        .step4-description{
+
+            max-width:390px;
+
+            font-size:15px;
+        }
+
+        .step4-content{
+
+            grid-template-columns:
+
+                220px
+
+                minmax(0,1fr);
+
+            column-gap:26px;
+        }
+
+        .step4-preview{
+
+            width:220px;
+        }
+
+        .step4-snow-video{
+
+            width:190px;
+
+            max-height:285px;
+
+            transform:scale(1.03);
+        }
+
+        .step4-snow-list{
+
+            gap:10px;
+        }
+
+        .step4-snow-card{
+
+            min-height:60px;
+
+            padding:11px 15px;
+        }
+
+        .step4-card-content h3{
+
+            font-size:16px;
+        }
+
+        .step4-card-content p{
+
+            font-size:10px;
+        }
+
+    }
+
+
+    /*======================================================
+    TABLET LANDSCAPE
+    ======================================================*/
+
+    @media (orientation:landscape){
+
+        .step4-copy{
+
+            margin-bottom:18px;
+        }
+
+        .step4-title{
+
+            font-size:38px;
+        }
+
+        .step4-description{
+
+            font-size:14px;
+        }
+
+        .step4-content{
+
+            grid-template-columns:
+
+                235px
+
+                minmax(0,1fr);
+
+            column-gap:30px;
+        }
+
+        .step4-preview{
+
+            width:235px;
+        }
+
+        .step4-snow-video{
+
+            width:205px;
+
+            max-height:250px;
+
+            transform:scale(.98);
+        }
+
+        .step4-preview::after{
+
+            width:120px;
+
+            height:16px;
+        }
+
+        .step4-snow-list{
+
+            gap:8px;
+        }
+
+        .step4-snow-card{
+
+            min-height:52px;
+
+            padding:10px 14px;
+        }
+
+        .step4-card-content h3{
+
+            font-size:15px;
+        }
+
+        .step4-card-content p{
+
+            margin-top:3px;
+
+            font-size:10px;
+        }
+
+        .step4-footer{
+
+            margin-top:14px;
+
+            height:56px;
+
+            min-height:56px;
+        }
+
+        .step4-navigation-button{
+
+            min-width:118px;
+
+            height:38px;
+
+            font-size:12px;
+        }
+
+    }
+
+}/*==========================================================
+STEP 4
+RESPONSIVE MOBILE
+0 → 600px
+==========================================================*/
+
+@media screen and (max-width:600px){
+
+    .step4{
+
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step4-copy{
+
+        flex:0 0 auto;
+
+        margin:0 0 20px;
+
+        padding:0;
+    }
+
+    .step4-number{
+
+        display:none;
+    }
+
+    .step4-title{
+
+        width:100%;
+        max-width:310px;
+
+        margin:0;
+
+        font-size:36px;
+
+        font-weight:700;
+
+        line-height:.96;
+
+        letter-spacing:-.05em;
+    }
+
+    .step4-description{
+
+        width:100%;
+        max-width:270px;
+
+        margin-top:10px;
+
+        font-size:14px;
+
+        line-height:1.4;
+    }
+
+
+   /*======================================================
+PREVIEW
+======================================================*/
+
+.step4-content{
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    min-height:0;
+
+    overflow:hidden;
+}
+
+.step4-preview{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:260px;
+
+    margin-top:40px;      /* descend l'animation */
+    margin-bottom:20px;
+}
+
+.step4-snow-video{
+
+    width:280px;
+
+    max-width:280px;
+    max-height:280px;
+
+    object-fit:contain;
+
+    transform:scale(3.5);
+
+    transform-origin:center;
+}
+
+.step4-preview::after{
+
+    width:140px;
+    height:14px;
+
+    bottom:8%;
+}
+
+    /*======================================================
+    OPTIONS
+    ======================================================*/
+
+    .step4-options{
+
+        width:100%;
+    }
+
+    .step4-snow-list{
+
+        display:flex;
+        flex-direction:column;
+
+        gap:8px;
+
+        width:100%;
+    }
+
+
+    /*======================================================
+    CARD
+    ======================================================*/
+
+    .step4-snow-card{
+
+        min-height:56px;
+
+        padding:10px 14px;
+
+        border-radius:12px;
+
+        border:1px solid rgba(255,255,255,.30);
+
+        background:rgba(255,255,255,.02);
+
+        backdrop-filter:blur(5px);
+    }
+
+    .step4-card-content h3{
+
+        font-size:15px;
+
+        line-height:1.08;
+    }
+
+    .step4-card-content p{
+
+        margin-top:4px;
+
+        font-size:10px;
+
+        line-height:1.28;
+    }
+
+    .step4-snow-card.active{
+
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.08);
+
+        box-shadow:
+
+            0 0 0 1px rgba(255,91,39,.10),
+
+            0 8px 20px rgba(255,91,39,.10);
+    }
+
+
+    /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step4-footer{
+
+        flex:0 0 auto;
+
+        height:58px;
+
+        margin-top:16px;
+
+        border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .step4-footer-actions{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+        width:100%;
+    }
+
+    .step4-navigation-button{
+
+        width:100%;
+
+        min-width:0;
+
+        height:40px;
+
+        padding:0 10px;
+
+        font-size:11px;
+    }
+
+    .step4-navigation-button span[aria-hidden="true"]{
+
+        font-size:14px;
+    }
+
+}/*==========================================================
+STEP 4
+SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:390px){
+
+    .step4-copy{
+
+        margin-bottom:16px;
+    }
+
+    .step4-title{
+
+        max-width:270px;
+
+        font-size:31px;
+    }
+
+    .step4-description{
+
+        max-width:240px;
+
+        font-size:12px;
+    }
+
+    .step4-content{
+
+        gap:18px;
+    }
+
+    .step4-preview{
+
+        width:155px;
+        height:135px;
+    }
+
+    .step4-snow-video{
+
+        width:155px;
+
+        max-height:150px;
+    }
+
+    .step4-preview::after{
+
+        width:84px;
+        height:10px;
+    }
+
+    .step4-snow-list{
+
+        gap:7px;
+    }
+
+    .step4-snow-card{
+
+        min-height:50px;
+
+        padding:9px 12px;
+    }
+
+    .step4-card-content h3{
+
+        font-size:14px;
+    }
+
+    .step4-card-content p{
+
+        font-size:9px;
+    }
+
+    .step4-footer{
+
+        height:54px;
+
+        margin-top:12px;
+    }
+
+    .step4-navigation-button{
+
+        height:36px;
+
+        font-size:10px;
+    }
+
+}
+
+
+/*==========================================================
+EXTRA SMALL
+==========================================================*/
+
+@media screen and (max-width:340px){
+
+    .step4-title{
+
+        font-size:28px;
+    }
+
+    .step4-description{
+
+        font-size:11px;
+    }
+
+    .step4-preview{
+
+        width:135px;
+        height:120px;
+    }
+
+    .step4-snow-video{
+
+        width:135px;
+    }
+
+    .step4-snow-card{
+
+        min-height:46px;
+    }
+
+    .step4-card-content h3{
+
+        font-size:13px;
+    }
+
+    .step4-card-content p{
+
+        font-size:8px;
+    }
+
+}
+
+
+/*==========================================================
+SHORT HEIGHT
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:760px){
+
+    .step4-copy{
+
+        margin-bottom:12px;
+    }
+
+    .step4-title{
+
+        font-size:29px;
+    }
+
+    .step4-description{
+
+        margin-top:6px;
+
+        font-size:11px;
+    }
+
+    .step4-content{
+
+        gap:14px;
+    }
+
+    .step4-preview{
+
+        width:140px;
+        height:120px;
+    }
+
+    .step4-snow-video{
+
+        width:140px;
+
+        max-height:130px;
+    }
+
+    .step4-snow-list{
+
+        gap:6px;
+    }
+
+    .step4-snow-card{
+
+        min-height:44px;
+
+        padding:8px 10px;
+    }
+
+    .step4-card-content h3{
+
+        font-size:12px;
+    }
+
+    .step4-card-content p{
+
+        margin-top:2px;
+
+        font-size:8px;
+    }
+
+    .step4-footer{
+
+        height:50px;
+
+        margin-top:10px;
+    }
+
+    .step4-navigation-button{
+
+        height:34px;
+
+        font-size:9px;
+    }
+
+}
+
+
+/*==========================================================
+LANDSCAPE
+==========================================================*/
+
+@media screen
+and (orientation:landscape)
+and (max-height:520px){
+
+    .step4-copy{
+
+        margin-bottom:8px;
+    }
+
+    .step4-title{
+
+        max-width:420px;
+
+        font-size:24px;
+    }
+
+    .step4-description{
+
+        max-width:360px;
+
+        margin-top:4px;
+
+        font-size:9px;
+    }
+
+    .step4-content{
+
+        display:grid;
+
+        grid-template-columns:
+
+            125px
+
+            minmax(0,1fr);
+
+        column-gap:20px;
+
+        align-items:center;
+    }
+
+    .step4-preview{
+
+        width:125px;
+        height:110px;
+    }
+
+    .step4-snow-video{
+
+        width:108px;
+
+        max-height:108px;
+    }
+
+    .step4-preview::after{
+
+        width:72px;
+        height:8px;
+    }
+
+    .step4-snow-list{
+
+        gap:5px;
+    }
+
+    .step4-snow-card{
+
+        min-height:36px;
+
+        padding:6px 10px;
+    }
+
+    .step4-card-content h3{
+
+        font-size:10px;
+    }
+
+    .step4-card-content p{
+
+        display:none;
+    }
+
+    .step4-footer{
+
+        height:42px;
+
+        margin-top:6px;
+    }
+
+    .step4-navigation-button{
+
+        height:30px;
+
+        font-size:8px;
+    }
+
+}
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+@media (hover:none){
+
+    .step4-snow-card:hover{
+
+        transform:none;
+
+        border-color:rgba(255,255,255,.30);
+
+        background:rgba(255,255,255,.02);
+    }
+
+    .step4-snow-card.active:hover{
+
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.08);
+    }
+
+    .step4-navigation-button:hover{
+
+        transform:none;
+    }
+
+}
+
+
+/*==========================================================
+REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .step4-snow-video,
+    .step4-snow-card,
+    .step4-navigation-button{
+
+        transition:none !important;
+    }
+
+}

@@ -1,0 +1,1810 @@
+/*==========================================================
+ROOT
+==========================================================*/
+
+:host{
+
+    --orange:#ff5b27;
+    --white:#ffffff;
+    --white80:rgba(255,255,255,.82);
+    --white60:rgba(255,255,255,.60);
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    color:var(--white);
+
+    box-sizing:border-box;
+
+}
+
+*,
+*::before,
+*::after{
+
+    box-sizing:inherit;
+
+}
+
+
+/*==========================================================
+MAIN LAYOUT
+==========================================================*/
+
+.step2{
+
+    display:grid;
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr)
+        72px;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    overflow:hidden;
+
+}
+
+
+/*==========================================================
+HEADER
+==========================================================*/
+
+.step2-copy{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    width:100%;
+
+    flex-shrink:0;
+
+}
+
+
+/*==========================================================
+TITLE
+==========================================================*/
+
+.step2 .step2-title{
+
+ margin:0;
+
+    width:100%;
+
+    max-width:none;
+
+    font-size:64px;
+
+    font-weight:700;
+
+    line-height:.92;
+
+    letter-spacing:-.055em;
+
+}
+
+
+/*==========================================================
+DESCRIPTION
+==========================================================*/
+
+.step2 .step2-description{
+
+    margin:14px 0 0;
+
+    width:560px;
+
+    max-width:560px;
+
+    color:var(--white80);
+
+    font-size:18px;
+
+    font-weight:500;
+
+    line-height:1.42;
+
+}
+
+
+/*==========================================================
+CONTENT
+==========================================================*/
+
+.step2-content{
+
+    display:grid;
+
+    grid-template-columns:
+        420px
+        minmax(640px,1fr);
+
+    align-items:center;
+
+    column-gap:120px;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+}
+
+
+/*==========================================================
+SKI COLUMN
+==========================================================*/
+
+.step2-ski{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+}
+
+
+/*==========================================================
+OPTIONS COLUMN
+==========================================================*/
+
+.step2-options{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:10px;
+
+    width:100%;
+
+    min-width:0;
+
+}
+/*==========================================================
+SKI VIDEO
+==========================================================*/
+
+.step2-ski-video{
+
+    position:relative;
+
+    z-index:2;
+
+    display:block;
+
+    width:300px;
+
+    height:100%;
+
+    max-height:500px;
+
+    object-fit:contain;
+
+    transform:scale(1.28);
+
+    transform-origin:center center;
+
+    backface-visibility:hidden;
+
+    will-change:transform;
+
+    filter:
+        drop-shadow(0 16px 20px rgba(0,0,0,.30));
+
+}
+
+
+/*==========================================================
+SKI SHADOW
+==========================================================*/
+
+.step2-ski::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:16px;
+
+    width:125px;
+
+    height:18px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.22);
+
+    filter:blur(10px);
+
+    opacity:.7;
+
+    pointer-events:none;
+
+}
+
+
+/*==========================================================
+VIDEO CONTROLS
+==========================================================*/
+
+.step2-ski-video::-webkit-media-controls{
+
+    display:none !important;
+
+}
+
+.step2-ski-video::-webkit-media-controls-panel{
+
+    display:none !important;
+
+}
+
+
+/*==========================================================
+LEVEL CARD
+==========================================================*/
+
+.step2-level-card{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:74px;
+
+    padding:15px 24px;
+
+    border:1px solid rgba(255,255,255,.28);
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.018);
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        border-color .22s ease,
+        background-color .22s ease,
+        box-shadow .22s ease,
+        transform .22s ease;
+
+}
+
+
+/*==========================================================
+HIDDEN RADIO
+==========================================================*/
+
+.step2-level-card input{
+
+    position:absolute;
+
+    width:1px;
+
+    height:1px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+/*==========================================================
+CARD CONTENT
+==========================================================*/
+
+.step2-card-content{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    width:100%;
+
+}
+
+
+/*==========================================================
+CARD TITLE
+==========================================================*/
+
+.step2-card-content h3{
+
+    margin:0;
+
+    color:var(--white);
+
+    font-size:22px;
+
+    font-weight:700;
+
+    line-height:1.05;
+
+}
+
+
+/*==========================================================
+CARD DESCRIPTION
+==========================================================*/
+
+.step2-card-content p{
+
+    margin:4px 0 0;
+
+    color:var(--white80);
+
+    font-size:14px;
+
+    font-weight:500;
+
+    line-height:1.3;
+
+}
+
+
+/*==========================================================
+CARD LEFT ACCENT
+==========================================================*/
+
+.step2-level-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    bottom:0;
+
+    width:3px;
+
+    background:var(--orange);
+
+    transform:scaleY(0);
+
+    transform-origin:center;
+
+    transition:transform .22s ease;
+
+}
+
+
+/*==========================================================
+CARD BACKGROUND ACCENT
+==========================================================*/
+
+.step2-level-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,91,39,.12),
+            rgba(255,91,39,.025)
+        );
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .22s ease;
+
+}
+
+
+/*==========================================================
+CARD HOVER
+==========================================================*/
+
+.step2-level-card:hover{
+
+    border-color:rgba(255,255,255,.58);
+
+    background:rgba(255,255,255,.045);
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==========================================================
+CARD ACTIVE
+==========================================================*/
+
+.step2-level-card.active{
+
+    border-color:var(--orange);
+
+    background:rgba(255,91,39,.045);
+
+    box-shadow:
+        0 0 0 1px rgba(255,91,39,.20),
+        0 12px 28px rgba(255,91,39,.12);
+
+}
+
+.step2-level-card.active::before{
+
+    transform:scaleY(1);
+
+}
+
+.step2-level-card.active::after{
+
+    opacity:1;
+
+}
+
+.step2-level-card.active p{
+
+    color:var(--white);
+
+}
+
+
+/*==========================================================
+CARD FOCUS
+==========================================================*/
+
+.step2-level-card:focus-within{
+
+    border-color:var(--orange);
+
+    box-shadow:
+        0 0 0 4px rgba(255,91,39,.16);
+
+}
+
+
+/*==========================================================
+CARD PRESS
+==========================================================*/
+
+.step2-level-card:active{
+
+    transform:scale(.99);
+
+}
+
+
+/*==========================================================
+CARD DISABLED
+==========================================================*/
+
+.step2-level-card.disabled{
+
+    opacity:.45;
+
+    pointer-events:none;
+
+}
+/*==========================================================
+FOOTER
+==========================================================*/
+
+.step2-footer{
+
+    display:flex;
+
+    align-items:center;
+
+    width:100%;
+    height:72px;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    flex-shrink:0;
+
+}
+
+
+
+/*==========================================================
+FOOTER ACTIONS
+==========================================================*/
+
+.step2-footer-actions{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    width:100%;
+    max-width:100%;
+    height:100%;
+
+    margin:0 auto;
+    padding:0;
+}
+
+
+/*==========================================================
+NAVIGATION BUTTON
+==========================================================*/
+
+.step2-navigation-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    min-width:145px;
+    height:50px;
+
+    padding:0 26px;
+
+    border:none;
+    border-radius:999px;
+
+    font-family:inherit;
+
+    font-size:15px;
+    font-weight:700;
+
+    line-height:1;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    touch-action:manipulation;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        background-color .20s ease,
+        border-color .20s ease,
+        color .20s ease,
+        transform .20s ease,
+        box-shadow .20s ease,
+        opacity .20s ease;
+}
+
+.step2-navigation-button span[aria-hidden="true"]{
+    font-size:19px;
+    line-height:1;
+
+    transition:transform .20s ease;
+}
+
+
+/*==========================================================
+PREVIOUS BUTTON
+==========================================================*/
+
+.step2-previous-button{
+    margin-left:0;
+
+    color:var(--white);
+
+    background:transparent;
+
+    border:1px solid rgba(255,255,255,.35);
+}
+
+.step2-previous-button:hover{
+    background:rgba(255,255,255,.06);
+
+    border-color:rgba(255,255,255,.65);
+}
+
+.step2-previous-button:hover span[aria-hidden="true"]{
+    transform:translateX(-4px);
+}
+
+
+/*==========================================================
+NEXT BUTTON
+==========================================================*/
+
+.step2-next-button{
+    margin-right:0;
+
+    color:var(--white);
+
+    background:var(--orange);
+
+    border:1px solid var(--orange);
+
+    box-shadow:
+        0 10px 20px rgba(255,91,39,.28);
+}
+
+.step2-next-button:hover:not(:disabled){
+    background:#ff6a39;
+
+    border-color:#ff6a39;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 28px rgba(255,91,39,.35);
+}
+
+.step2-next-button:hover:not(:disabled)
+span[aria-hidden="true"]{
+    transform:translateX(4px);
+}
+
+/*==========================================================
+BUTTON STATES
+==========================================================*/
+
+.step2-navigation-button:focus{
+
+    outline:none;
+
+}
+
+.step2-navigation-button:focus-visible{
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.14);
+
+}
+
+.step2-navigation-button:active:not(:disabled){
+
+    transform:scale(.98);
+
+}
+
+.step2-next-button:disabled{
+
+    opacity:.42;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+
+}
+/*==========================================================
+VISUAL POLISH
+==========================================================*/
+
+.step2{
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+    text-rendering:optimizeLegibility;
+
+}
+
+
+/*==========================================================
+COPY
+==========================================================*/
+
+.step2-copy{
+
+    isolation:isolate;
+
+}
+
+
+/*==========================================================
+CONTENT
+==========================================================*/
+
+.step2-content{
+
+    align-self:center;
+
+}
+
+
+/*==========================================================
+SKI VIDEO QUALITY
+==========================================================*/
+
+.step2-ski-video{
+
+    image-rendering:auto;
+
+    object-position:center center;
+
+    pointer-events:none;
+
+}
+
+
+/*==========================================================
+VIDEO PERFORMANCE
+==========================================================*/
+
+.step2-ski-video{
+
+    contain:layout paint;
+
+}
+
+
+/*==========================================================
+GROUND SHADOW
+==========================================================*/
+
+.step2-ski::after{
+
+    opacity:.65;
+
+}
+
+
+/*==========================================================
+CARD TEXT
+==========================================================*/
+
+.step2-card-content{
+
+    text-wrap:pretty;
+
+}
+
+
+/*==========================================================
+BUTTON PERFORMANCE
+==========================================================*/
+
+.step2-navigation-button{
+
+    -webkit-user-select:none;
+
+    touch-action:manipulation;
+
+}
+
+
+/*==========================================================
+TRANSITIONS
+==========================================================*/
+
+.step2-level-card,
+.step2-navigation-button{
+
+    will-change:transform;
+
+}
+
+
+/*==========================================================
+ACCESSIBILITY
+==========================================================*/
+
+.step2-level-card:focus-visible{
+
+    outline:none;
+
+}
+
+.step2-navigation-button:focus-visible{
+
+    outline:none;
+
+}
+
+
+/*==========================================================
+FINAL TABLET RESPONSIVE
+==========================================================*/
+
+/*==========================================================
+STEP 2 — RESPONSIVE
+NOUVEAU DESIGN TRANSPARENT
+Le desktop reste inchangé.
+==========================================================*/
+
+
+/*==========================================================
+TABLET
+601px → 1024px
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px){
+
+    .step2{
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step2-copy{
+        flex:0 0 auto;
+
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+        width:100%;
+
+        padding:0;
+        margin:0 0 28px;
+
+        text-align:left;
+    }
+
+    .step2-title{
+        width:100%;
+        max-width:560px;
+
+        margin:0;
+
+        font-size:44px !important;
+        font-weight:700;
+
+        line-height:.97;
+        letter-spacing:-.05em;
+
+        text-wrap:balance;
+    }
+
+    .step2-description{
+        width:100% !important;
+        max-width:450px !important;
+
+        margin:12px 0 0;
+
+        font-size:16px !important;
+        font-weight:500;
+
+        line-height:1.42;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .step2-content{
+        flex:1;
+
+        display:grid;
+
+        grid-template-columns:
+            145px
+            minmax(0,1fr);
+
+        align-items:center;
+
+        column-gap:34px;
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+
+        padding:0;
+    }
+
+
+    /*======================================================
+    SKI PREVIEW
+    ======================================================*/
+
+    .step2-ski{
+        position:relative;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+           width:170px;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:visible;
+    }
+
+    .step2-ski-video{
+        display:block;
+
+          width:130px;
+        height:100%;
+
+         max-height:390px;
+
+        object-fit:contain;
+        object-position:center;
+
+        transform:scale(2.8);
+        transform-origin:center;
+    }
+
+    .step2-ski::after{
+        bottom:12%;
+
+        width:72px;
+        height:12px;
+
+        filter:blur(8px);
+    }
+
+
+    /*======================================================
+    OPTIONS
+    ======================================================*/
+
+    .step2-options{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+        gap:10px;
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+    }
+
+    .step2-level-card{
+        width:100%;
+        min-width:0;
+        min-height:62px;
+
+        padding:12px 16px;
+
+        border:1px solid rgba(255,255,255,.30);
+        border-radius:13px;
+
+        background:rgba(255,255,255,.018);
+
+        backdrop-filter:blur(5px);
+        -webkit-backdrop-filter:blur(5px);
+
+        box-sizing:border-box;
+    }
+
+    .step2-level-card.active{
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.07);
+
+        box-shadow:
+            0 0 0 1px rgba(255,91,39,.10),
+            0 10px 24px rgba(255,91,39,.10);
+    }
+
+    .step2-card-content h3{
+        margin:0;
+
+        font-size:17px;
+
+        line-height:1.08;
+    }
+
+    .step2-card-content p{
+        margin:4px 0 0;
+
+        font-size:11px;
+
+        line-height:1.28;
+    }
+
+
+    /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step2-footer{
+        flex:0 0 auto;
+
+        display:flex;
+        align-items:center;
+
+        width:100%;
+        height:64px;
+
+        min-height:64px;
+
+        margin-top:22px;
+
+        border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .step2-footer-actions{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+
+        width:100%;
+        height:100%;
+    }
+
+    .step2-navigation-button{
+        min-width:125px;
+        height:42px;
+
+        padding:0 20px;
+
+        gap:8px;
+
+        font-size:13px;
+    }
+}
+
+
+/*==========================================================
+TABLET PORTRAIT
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px)
+and (orientation:portrait){
+
+    .step2-copy{
+        margin-bottom:32px;
+    }
+
+    .step2-title{
+        max-width:520px;
+
+        font-size:42px !important;
+    }
+
+    .step2-description{
+        max-width:420px !important;
+
+        font-size:15px !important;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            125px
+            minmax(0,1fr);
+
+        column-gap:28px;
+    }
+
+    .step2-ski{
+        width:155px;
+    }
+
+    .step2-ski-video{
+         width:118px;
+
+    max-height:365px;
+
+    transform:scale(2.8);
+    }
+
+    .step2-level-card{
+        min-height:60px;
+
+        padding:11px 15px;
+    }
+
+    .step2-card-content h3{
+        font-size:16px;
+    }
+
+    .step2-card-content p{
+        font-size:10px;
+    }
+}
+
+
+/*==========================================================
+TABLET LANDSCAPE
+==========================================================*/
+
+@media screen
+and (min-width:601px)
+and (max-width:1024px)
+and (orientation:landscape){
+
+    .step2-copy{
+        margin-bottom:18px;
+    }
+
+    .step2-title{
+        font-size:38px !important;
+    }
+
+    .step2-description{
+        margin-top:8px;
+
+        font-size:14px !important;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            135px
+            minmax(0,1fr);
+
+        column-gap:32px;
+    }
+
+    .step2-ski{
+        width:165px;
+    }
+
+    .step2-ski-video{
+
+    width:122px;
+
+    max-height:335px;
+
+    transform:scale(2.80);
+}
+
+    .step2-options{
+        gap:8px;
+    }
+
+    .step2-level-card{
+        min-height:53px;
+
+        padding:9px 14px;
+    }
+
+    .step2-card-content h3{
+        font-size:15px;
+    }
+
+    .step2-card-content p{
+        margin-top:3px;
+
+        font-size:10px;
+    }
+
+    .step2-footer{
+        height:58px;
+        min-height:58px;
+
+        margin-top:14px;
+    }
+
+    .step2-navigation-button{
+        height:38px;
+
+        font-size:12px;
+    }
+}
+
+
+/*==========================================================
+MOBILE
+0px → 600px
+==========================================================*/
+
+@media screen and (max-width:600px){
+
+    .step2{
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step2-copy{
+        flex:0 0 auto;
+
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+        width:100%;
+
+        padding:0;
+        margin:0 0 24px;
+
+        text-align:left;
+    }
+
+    .step2-title{
+        width:100%;
+        max-width:310px;
+
+        margin:0;
+
+        font-size:36px !important;
+        font-weight:700;
+
+        line-height:.98;
+        letter-spacing:-.05em;
+
+        text-wrap:balance;
+    }
+
+    .step2-description{
+        width:100% !important;
+        max-width:275px !important;
+
+        margin:10px 0 0;
+
+        font-size:14px !important;
+        font-weight:500;
+
+        line-height:1.38;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .step2-content{
+        flex:1;
+
+        display:grid;
+
+        grid-template-columns:
+            64px
+            minmax(0,1fr);
+
+        align-items:center;
+
+        column-gap:18px;
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+
+        padding:0;
+    }
+
+
+    /*======================================================
+    SKI PREVIEW
+    ======================================================*/
+
+    .step2-ski{
+        position:relative;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+       width:58px;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:visible;
+    }
+
+    .step2-ski-video{
+        display:block;
+
+        width:58px;
+        height:100%;
+
+        max-height:310px;
+
+        object-fit:contain;
+
+        transform:scale(2.8);
+        transform-origin:center;
+    }
+
+    .step2-ski::after{
+        bottom:14%;
+
+        width:46px;
+        height:9px;
+
+        filter:blur(7px);
+    }
+
+
+    /*======================================================
+    OPTIONS
+    ======================================================*/
+
+    .step2-options{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+        gap:8px;
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+    }
+
+    .step2-level-card{
+        width:100%;
+        min-width:0;
+        min-height:58px;
+
+        padding:10px 13px;
+
+        border:1px solid rgba(255,255,255,.30);
+        border-radius:12px;
+
+        background:rgba(255,255,255,.018);
+
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
+
+        box-sizing:border-box;
+    }
+
+    .step2-level-card.active{
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.07);
+
+        box-shadow:
+            0 0 0 1px rgba(255,91,39,.10),
+            0 8px 20px rgba(255,91,39,.09);
+    }
+
+    .step2-card-content h3{
+        margin:0;
+
+        font-size:15px;
+
+        line-height:1.06;
+    }
+
+    .step2-card-content p{
+        margin:3px 0 0;
+
+        font-size:9px;
+
+        line-height:1.22;
+    }
+
+
+    /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step2-footer{
+        flex:0 0 auto;
+
+        display:flex;
+        align-items:center;
+
+        width:100%;
+        height:60px;
+
+        min-height:60px;
+
+        margin-top:18px;
+
+        padding:0;
+
+        border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .step2-footer-actions{
+        display:grid;
+
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(0,1fr);
+
+        align-items:center;
+
+        gap:10px;
+
+        width:100%;
+        height:100%;
+    }
+
+    .step2-navigation-button{
+        width:100%;
+        min-width:0;
+
+        height:40px;
+
+        padding:0 10px;
+
+        gap:7px;
+
+        font-size:11px;
+    }
+
+    .step2-navigation-button span[aria-hidden="true"]{
+        font-size:14px;
+    }
+}
+
+
+/*==========================================================
+SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:390px){
+
+    .step2-copy{
+        margin-bottom:20px;
+    }
+
+    .step2-title{
+        max-width:275px;
+
+        font-size:32px !important;
+    }
+
+    .step2-description{
+        max-width:245px !important;
+
+        font-size:12px !important;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            55px
+            minmax(0,1fr);
+
+        column-gap:14px;
+    }
+
+    .step2-ski{
+        width:64px;
+    }
+
+    .step2-ski-video{
+        width:52px;
+
+        max-height:260px;
+
+        transform:scale(2.80);
+    }
+
+    .step2-options{
+        gap:7px;
+    }
+
+    .step2-level-card{
+        min-height:54px;
+
+        padding:9px 11px;
+    }
+
+    .step2-card-content h3{
+        font-size:14px;
+    }
+
+    .step2-card-content p{
+        font-size:8px;
+    }
+
+    .step2-footer{
+        height:56px;
+        min-height:56px;
+
+        margin-top:14px;
+    }
+
+    .step2-navigation-button{
+        height:37px;
+
+        font-size:10px;
+    }
+}
+
+
+/*==========================================================
+EXTRA SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:340px){
+
+    .step2-title{
+        font-size:29px !important;
+    }
+
+    .step2-description{
+        font-size:11px !important;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            48px
+            minmax(0,1fr);
+
+        column-gap:11px;
+    }
+
+    .step2-ski{
+        width:48px;
+    }
+
+    .step2-ski-video{
+        width:40px;
+
+        transform:scale(2.8);
+    }
+
+    .step2-level-card{
+        min-height:49px;
+
+        padding:8px 9px;
+    }
+
+    .step2-card-content h3{
+        font-size:13px;
+    }
+}
+
+
+/*==========================================================
+SHORT MOBILE
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:760px){
+
+    .step2-copy{
+        margin-bottom:14px;
+    }
+
+    .step2-title{
+        font-size:29px !important;
+    }
+
+    .step2-description{
+        margin-top:6px;
+
+        font-size:11px !important;
+
+        line-height:1.28;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            48px
+            minmax(0,1fr);
+
+        column-gap:12px;
+    }
+
+    .step2-ski{
+        width:48px;
+    }
+
+    .step2-ski-video{
+        width:40px;
+
+        max-height:215px;
+
+        transform:scale(2.8);
+    }
+
+    .step2-options{
+        gap:5px;
+    }
+
+    .step2-level-card{
+        min-height:44px;
+
+        padding:7px 9px;
+    }
+
+    .step2-card-content h3{
+        font-size:12px;
+    }
+
+    .step2-card-content p{
+        margin-top:2px;
+
+        font-size:7px;
+    }
+
+    .step2-footer{
+        height:50px;
+        min-height:50px;
+
+        margin-top:10px;
+    }
+
+    .step2-navigation-button{
+        height:34px;
+
+        font-size:9px;
+    }
+}
+
+
+/*==========================================================
+MOBILE LANDSCAPE
+==========================================================*/
+
+@media screen
+and (orientation:landscape)
+and (max-height:520px){
+
+    .step2-copy{
+        margin-bottom:8px;
+    }
+
+    .step2-title{
+        max-width:420px;
+
+        font-size:24px !important;
+    }
+
+    .step2-description{
+        max-width:380px !important;
+
+        margin-top:4px;
+
+        font-size:9px !important;
+    }
+
+    .step2-content{
+        grid-template-columns:
+            90px
+            minmax(0,1fr);
+
+        column-gap:22px;
+    }
+
+    .step2-ski{
+        width:90px;
+    }
+
+    .step2-ski-video{
+        width:68px;
+
+        max-height:145px;
+
+        transform:scale(2.8);
+    }
+
+    .step2-options{
+        gap:4px;
+    }
+
+    .step2-level-card{
+        min-height:31px;
+
+        padding:5px 8px;
+
+        border-radius:8px;
+    }
+
+    .step2-card-content h3{
+        font-size:10px;
+    }
+
+    .step2-card-content p{
+        display:none;
+    }
+
+    .step2-footer{
+        height:42px;
+        min-height:42px;
+
+        margin-top:5px;
+    }
+
+    .step2-navigation-button{
+        height:29px;
+
+        font-size:8px;
+    }
+}
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+@media (hover:none){
+
+    .step2-level-card:hover{
+        transform:none;
+
+        border-color:rgba(255,255,255,.30);
+
+        background:rgba(255,255,255,.018);
+    }
+
+    .step2-level-card.active:hover{
+        border-color:var(--orange);
+
+        background:rgba(255,91,39,.07);
+    }
+
+    .step2-navigation-button:hover{
+        transform:none;
+    }
+}
+
+
+/*==========================================================
+REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .step2-ski-video,
+    .step2-level-card,
+    .step2-navigation-button,
+    .step2-navigation-button span{
+        transition:none !important;
+    }
+}

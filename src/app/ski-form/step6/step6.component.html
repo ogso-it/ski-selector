@@ -1,88 +1,141 @@
-<!-- STEP 6 CONTENT -->
-<div class="step-layout">
+<section class="step6">
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      IT'S ALL<br>
-      ABOUT<br>
-      YOU
-    </h1>
-  </div>
+    <!-- HEADER -->
+    <header class="step6-copy">
 
-  <!-- SPEED ANIMATION -->
-  <!-- <div class="center-animation" *ngIf="selectedSpeed">
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto">
-      <source
-        src="assets/animations/step6.webm"
-        type="video/webm">
-    </video>
-  </div> -->
 
-  <!-- RIGHT RADIO BUTTONS -->
-  <div class="right">
-    <h2 class="section-title">DO YOU PREFER?</h2>
 
-    <p class="required-field">
-      <span class="asterisk">*</span>
-      This field is required
-    </p>
+        <h1 class="step6-title">
+            What speed do you prefer?
+        </h1>
 
-    <div class="radio-list">
+        <p class="step6-description">
+            Your preferred pace helps us define the right level of stability
+            and responsiveness.
+        </p>
 
-      <label
-        class="radio-option"
-        [class.selected]="selectedSpeed === 'moderate-speed'">
+    </header>
 
-        <input
-          type="radio"
-          name="speedPreference"
-          value="moderate-speed"
-          (change)="onSpeedChange('moderate-speed')"
-          [checked]="selectedSpeed === 'moderate-speed'">
 
-        <span class="radio-label">
-          MODERATE SPEED
-        </span>
-      </label>
+    <!-- CONTENT -->
+    <div class="step6-content">
 
-      <label
-        class="radio-option"
-        [class.selected]="selectedSpeed === 'high-speed'">
+        <!-- ANIMATION -->
+        <div class="step6-preview">
 
-        <input
-          type="radio"
-          name="speedPreference"
-          value="high-speed"
-          (change)="onSpeedChange('high-speed')"
-          [checked]="selectedSpeed === 'high-speed'">
+            <video
+                #speedVideo
+                class="step6-speed-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+            >
+                <source
+                    src="assets/images/apparence6.webm"
+                    type="video/webm">
+            </video>
 
-        <span class="radio-label">
-          HIGH SPEED
-        </span>
-      </label>
+        </div>
+
+
+        <!-- OPTIONS -->
+        <div class="step6-options">
+
+            <div class="step6-speed-list">
+
+                <!-- MODERATE SPEED -->
+                <label
+                    class="step6-speed-card"
+                    [class.active]="selectedSpeed === 'moderate-speed'"
+                >
+
+                    <input
+                        type="radio"
+                        name="speedPreference"
+                        value="moderate-speed"
+                        [checked]="selectedSpeed === 'moderate-speed'"
+                        (change)="onSpeedChange('moderate-speed')"
+                    >
+
+                    <div class="step6-card-content">
+
+                        <h3>
+                            Moderate Speed
+                        </h3>
+
+                        <p>
+                            Controlled, comfortable and confidence-inspiring
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- HIGH SPEED -->
+                <label
+                    class="step6-speed-card"
+                    [class.active]="selectedSpeed === 'high-speed'"
+                >
+
+                    <input
+                        type="radio"
+                        name="speedPreference"
+                        value="high-speed"
+                        [checked]="selectedSpeed === 'high-speed'"
+                        (change)="onSpeedChange('high-speed')"
+                    >
+
+                    <div class="step6-card-content">
+
+                        <h3>
+                            High Speed
+                        </h3>
+
+                        <p>
+                            Fast, powerful and highly stable
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
 
     </div>
-  </div>
 
-</div>
 
-<!-- BUTTONS -->
-<button
-  class="prev-btn"
-  (click)="prev()">
-  PREV
-</button>
+    <!-- FOOTER -->
+    <footer class="step6-footer">
 
-<button
-  class="next-btn"
-  [class.disabled]="!selectedSpeed"
-  [disabled]="!selectedSpeed"
-  (click)="next()">
-  NEXT
-</button>
+        <div class="step6-footer-actions">
+
+            <button
+                type="button"
+                class="step6-navigation-button step6-previous-button"
+                (click)="prev()"
+            >
+                <span aria-hidden="true">←</span>
+                <span>Previous</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="step6-navigation-button step6-next-button"
+                [disabled]="!selectedSpeed"
+                (click)="next()"
+            >
+                <span>Next</span>
+                <span aria-hidden="true">→</span>
+            </button>
+
+        </div>
+
+    </footer>
+
+</section>

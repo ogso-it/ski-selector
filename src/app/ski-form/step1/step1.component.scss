@@ -1,312 +1,1645 @@
-/* ===== STEP LAYOUT - CENTRAGE VERTICAL ===== */
-.step-layout {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 8%;
-  padding-top: 60px;
-  padding-bottom: 80px;
-  z-index: 5;
+/*==========================================================
+STEP 1
+ROOT
+==========================================================*/
+
+:host{
+    --orange:#ff5b27;
+    --white:#ffffff;
+    --white80:rgba(255,255,255,.82);
+    --white60:rgba(255,255,255,.60);
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    color:var(--white);
+
+    box-sizing:border-box;
 }
 
-/* ===== LEFT TEXT ===== */
-.left {
-  width: 40%;
+*,
+*::before,
+*::after{
+    box-sizing:inherit;
 }
 
-.left h1 {
-  color: #ff6a00;
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 1.05;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: -1px;
+
+/*==========================================================
+MAIN LAYOUT
+==========================================================*/
+
+.step1{
+    position:relative;
+
+    display:grid;
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr)
+        72px;
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
 }
 
-/* ===== RIGHT INPUTS ===== */
-.right {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+
+/*==========================================================
+COPY AREA
+==========================================================*/
+
+.step1-copy{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+
+    width:100%;
+
+    min-width:0;
+
+    padding-top:18px;
+
+    isolation:isolate;
 }
 
-.input-block h2 {
-  color: #ff6a00;
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+
+/*==========================================================
+TITLE
+==========================================================*/
+
+.step1-title{
+    width:100%;
+    max-width:none;
+
+    margin:0;
+
+    color:var(--white);
+
+    font-size:64px;
+    font-weight:700;
+
+    line-height:.92;
+    letter-spacing:-.055em;
+
+    text-wrap:balance;
 }
 
-.range-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: white;
-  margin-bottom: 5px;
-  font-weight: 300;
+
+/*==========================================================
+DESCRIPTION
+==========================================================*/
+
+.step1-description{
+    width:100%;
+    max-width:720px;
+
+    margin:14px 0 0;
+
+    color:var(--white80);
+
+    font-size:18px;
+    font-weight:500;
+
+    line-height:1.42;
+
+    text-wrap:pretty;
 }
 
-.value {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-  color: white;
-  margin: 10px 0 8px 0;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+/*==========================================================
+MAIN CONTENT
+==========================================================*/
+
+.step1-controls{
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+        190px
+        170px
+        190px;
+
+    justify-content:center;
+    align-items:center;
+
+    column-gap:82px;
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    align-self:center;
+
+    transform:translateY(18px);
 }
 
-/* ===== SLIDER ===== */
-input[type=range] {
-  width: 100%;
-  height: 6px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  -webkit-appearance: none;
-  outline: none;
+
+/*==========================================================
+MEASUREMENT COLUMN
+==========================================================*/
+
+.measurement{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+
+    width:190px;
+
+    min-width:0;
 }
 
-input[type=range]::-webkit-slider-thumb {
-  width: 22px;
-  height: 22px;
-  background: #ff6a00;
-  border-radius: 50%;
-  -webkit-appearance: none;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(255, 106, 0, 0.5);
-  transition: all 0.2s ease;
+
+/*==========================================================
+MEASUREMENT ALIGNMENT
+==========================================================*/
+
+.measurement-height{
+    justify-self:end;
 }
 
-input[type=range]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  background: #ff8c00;
+.measurement-weight{
+    justify-self:start;
 }
 
-input[type=range]::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  background: #ff6a00;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(255, 106, 0, 0.5);
-  transition: all 0.2s ease;
-  border: none;
+
+/*==========================================================
+MEASUREMENT VALUE
+==========================================================*/
+
+.measurement-value{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+
+    width:100%;
+
+    margin:0 0 22px;
+
+    color:var(--white);
+
+    white-space:nowrap;
+    text-align:center;
+
+    text-shadow:
+        0 2px 10px rgba(0,0,0,.22);
 }
 
-input[type=range]::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  background: #ff8c00;
+.measurement-value strong{
+    font-size:56px;
+    font-weight:700;
+
+    line-height:.9;
+    letter-spacing:-.05em;
 }
 
-/* ===== BUTTONS ===== */
-.prev-btn {
-  position: absolute;
-  left: 6%;
-  bottom: 12%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 10px 35px;
-  border-radius: 30px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
+.measurement-value span{
+    margin-left:7px;
+    margin-bottom:5px;
+
+    color:var(--white);
+
+    font-size:16px;
+    font-weight:600;
+
+    line-height:1;
 }
 
-.prev-btn:hover {
-  border-color: white;
-  background: rgba(255, 255, 255, 0.1);
+
+/*==========================================================
+MEASUREMENT LABEL
+==========================================================*/
+
+.measurement-label{
+    display:block;
+
+    width:100%;
+
+    margin-top:20px;
+
+    color:var(--white);
+
+    font-size:13px;
+    font-weight:700;
+
+    line-height:1;
+
+    letter-spacing:.05em;
+    text-align:center;
+    text-transform:uppercase;
+}
+/*==========================================================
+SLIDER
+==========================================================*/
+
+.slider{
+    position:relative;
+
+    width:48px;
+    height:270px;
+
+    min-height:270px;
+
+    cursor:ns-resize;
+
+    touch-action:none;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    -webkit-tap-highlight-color:transparent;
 }
 
-.next-btn {
-  position: absolute;
-  right: 6%;
-  bottom: 12%;
-  background: linear-gradient(90deg, #00aaff, #00eaff);
-  border: none;
-  padding: 10px 35px;
-  border-radius: 30px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
-  z-index: 10;
-  transition: all 0.3s ease;
+
+/*==========================================================
+SLIDER TRACK
+==========================================================*/
+
+.slider-track{
+    position:absolute;
+
+    top:0;
+    bottom:0;
+    left:50%;
+
+    width:4px;
+
+    transform:translateX(-50%);
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.38);
 }
 
-.next-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 234, 255, 0.5);
+
+/*==========================================================
+SLIDER FILL
+==========================================================*/
+
+.slider-fill{
+    position:absolute;
+
+    left:50%;
+    bottom:0;
+
+    width:4px;
+
+    transform:translateX(-50%);
+
+    border-radius:999px;
+
+    background:var(--orange);
+
+    box-shadow:
+        0 0 8px rgba(255,91,39,.25),
+        0 0 18px rgba(255,91,39,.18);
 }
 
-/* ===== RESPONSIVE ===== */
 
-/* Large desktop */
-@media (max-width: 1200px) {
-  .left h1 {
-    font-size: 50px;
-  }
-  
-  .input-block h2 {
-    font-size: 18px;
-  }
+/*==========================================================
+SLIDER THUMB
+==========================================================*/
+
+.slider-thumb{
+    position:absolute;
+
+    left:50%;
+
+    width:26px;
+    height:26px;
+
+    transform:translate(-50%,50%);
+
+    border:4px solid var(--orange);
+    border-radius:50%;
+
+    background:var(--white);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.28);
+
+    transition:
+        width .18s ease,
+        height .18s ease,
+        box-shadow .18s ease;
 }
 
-/* Tablette */
-@media (max-width: 1024px) {
-  .left h1 {
-    font-size: 42px;
-  }
-  
-  .right {
-    width: 45%;
-    gap: 30px;
-  }
-  
-  .input-block h2 {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-  
-  .value {
-    font-size: 22px;
-  }
+
+/*==========================================================
+SLIDER HOVER
+==========================================================*/
+
+.slider:hover .slider-thumb{
+    width:30px;
+    height:30px;
+
+    box-shadow:
+        0 0 0 6px rgba(255,91,39,.14),
+        0 5px 16px rgba(0,0,0,.35);
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .step-layout {
-    position: relative;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 20px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    gap: 40px;
-  }
-  
-  .left {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .left h1 {
-    font-size: 36px;
-    text-align: center;
-  }
-  
-  .right {
-    width: 100%;
-    gap: 35px;
-  }
-  
-  .input-block h2 {
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  .range-labels {
-    font-size: 13px;
-  }
-  
-  .value {
-    font-size: 28px;
-    margin: 15px 0;
-  }
-  
-  /* Ajustement des boutons pour mobile */
-  .prev-btn, .next-btn {
-    position: fixed;
-    bottom: 20px;
-    padding: 12px 25px;
-    font-size: 13px;
-  }
-  
-  .prev-btn {
-    left: 20px;
-    width: auto;
-  }
-  
-  .next-btn {
-    right: 20px;
-    width: auto;
-  }
+
+/*==========================================================
+SLIDER FOCUS
+==========================================================*/
+
+.slider:focus{
+    outline:none;
 }
 
-/* Petit mobile */
-@media (max-width: 480px) {
-  .step-layout {
-    padding-top: 90px;
-    padding-bottom: 90px;
-    gap: 30px;
-  }
-  
-  .left h1 {
-    font-size: 28px;
-  }
-  
-  .right {
-    gap: 30px;
-  }
-  
-  .input-block h2 {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .range-labels {
-    font-size: 12px;
-  }
-  
-  .value {
-    font-size: 24px;
-    margin: 12px 0;
-  }
-  
-  .prev-btn, .next-btn {
-    padding: 10px 20px;
-    font-size: 12px;
-    bottom: 15px;
-  }
-  
-  input[type=range]::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-  }
+.slider:focus-visible .slider-thumb{
+    box-shadow:
+        0 0 0 6px rgba(255,91,39,.20),
+        0 5px 16px rgba(0,0,0,.35);
 }
 
-/* Très petit mobile */
-@media (max-width: 360px) {
-  .step-layout {
-    padding-top: 80px;
-    padding-bottom: 80px;
-    gap: 25px;
-  }
-  
-  .left h1 {
-    font-size: 24px;
-  }
-  
-  .input-block h2 {
-    font-size: 13px;
-  }
-  
-  .value {
-    font-size: 22px;
-  }
-  
-  .prev-btn, .next-btn {
-    padding: 8px 16px;
-    font-size: 11px;
-  }
+
+/*==========================================================
+SLIDER END CAPS
+==========================================================*/
+
+.slider::before,
+.slider::after{
+    content:"";
+
+    position:absolute;
+    left:50%;
+
+    width:10px;
+    height:2px;
+
+    transform:translateX(-50%);
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.45);
 }
+
+.slider::before{
+    top:-2px;
+}
+
+.slider::after{
+    bottom:-2px;
+}
+
+
+/*==========================================================
+DRAGGING STATE
+==========================================================*/
+
+.step1.dragging,
+.step1.dragging *{
+    cursor:ns-resize !important;
+
+    user-select:none !important;
+    -webkit-user-select:none !important;
+}
+
+
+/*==========================================================
+SKI PREVIEW
+==========================================================*/
+
+.ski-preview{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    justify-self:center;
+    align-self:center;
+
+    width:125px;
+    height:310px;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:visible;
+
+    transform:translateY(18px);
+}
+
+
+/*==========================================================
+SKI VIDEO
+==========================================================*/
+
+.ski-video{
+    position:relative;
+    z-index:2;
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+    object-position:center center;
+
+    transform:scale(2.38);
+    transform-origin:center center;
+
+    pointer-events:none;
+
+    image-rendering:auto;
+
+    backface-visibility:hidden;
+    will-change:transform;
+
+    filter:
+        drop-shadow(0 10px 12px rgba(0,0,0,.22));
+}
+
+
+/*==========================================================
+SKI SHADOW
+==========================================================*/
+
+.ski-preview::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:8px;
+
+    width:86px;
+    height:16px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.18);
+
+    filter:blur(8px);
+
+    opacity:.55;
+
+    pointer-events:none;
+}
+
+
+/*==========================================================
+VIDEO CONTROLS
+==========================================================*/
+
+.ski-video::-webkit-media-controls{
+    display:none !important;
+}
+
+.ski-video::-webkit-media-controls-panel{
+    display:none !important;
+}
+/*==========================================================
+FOOTER
+==========================================================*/
+
+.step1-footer{
+    position:relative;
+    z-index:5;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    height:72px;
+
+    min-width:0;
+    min-height:72px;
+
+    padding:0;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    flex-shrink:0;
+}
+
+
+/*==========================================================
+FOOTER ACTIONS
+==========================================================*/
+
+.step1-footer-actions{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    width:100%;
+    max-width:100%;
+    height:100%;
+
+    margin:0;
+    padding:0;
+}
+
+
+/*==========================================================
+NAVIGATION BUTTON
+==========================================================*/
+
+.step1-navigation-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    min-width:145px;
+    height:50px;
+
+    padding:0 26px;
+
+    border-radius:999px;
+
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+
+    line-height:1;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    touch-action:manipulation;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        background-color .20s ease,
+        border-color .20s ease,
+        color .20s ease,
+        transform .20s ease,
+        box-shadow .20s ease,
+        opacity .20s ease;
+}
+
+.step1-navigation-button span[aria-hidden="true"]{
+    font-size:19px;
+    line-height:1;
+
+    transition:transform .20s ease;
+}
+
+
+/*==========================================================
+PREVIOUS BUTTON
+==========================================================*/
+
+.step1-previous-button{
+    margin:0;
+
+    color:var(--white);
+
+    background:transparent;
+
+    border:1px solid rgba(255,255,255,.35);
+}
+
+.step1-previous-button:hover{
+    background:rgba(255,255,255,.06);
+
+    border-color:rgba(255,255,255,.65);
+}
+
+.step1-previous-button:hover span[aria-hidden="true"]{
+    transform:translateX(-4px);
+}
+
+
+/*==========================================================
+NEXT BUTTON
+==========================================================*/
+
+.step1-next-button{
+    margin:0;
+
+    color:var(--white);
+
+    background:var(--orange);
+
+    border:1px solid var(--orange);
+
+    box-shadow:
+        0 10px 20px rgba(255,91,39,.28);
+}
+
+.step1-next-button:hover:not(:disabled){
+    background:#ff6a39;
+
+    border-color:#ff6a39;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 28px rgba(255,91,39,.35);
+}
+
+.step1-next-button:hover:not(:disabled)
+span[aria-hidden="true"]{
+    transform:translateX(4px);
+}
+
+
+/*==========================================================
+BUTTON STATES
+==========================================================*/
+
+.step1-navigation-button:focus{
+    outline:none;
+}
+
+.step1-navigation-button:focus-visible{
+    outline:none;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.14);
+}
+
+.step1-navigation-button:active:not(:disabled){
+    transform:scale(.98);
+}
+
+.step1-navigation-button:disabled{
+    opacity:.42;
+
+    cursor:not-allowed;
+
+    pointer-events:none;
+
+    box-shadow:none;
+}
+
+
+/*==========================================================
+STEP 1
+TABLET
+601 → 1024px
+==========================================================*/
+
+@media screen and (min-width:601px) and (max-width:1024px){
+
+    .step1{
+
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step1-copy{
+
+        flex:0 0 auto;
+
+        padding:0;
+
+        margin-bottom:34px;
+    }
+
+    .step1-title{
+
+        width:100%;
+        max-width:520px;
+
+        margin:0;
+
+        font-size:44px;
+        font-weight:700;
+
+        line-height:.95;
+
+        letter-spacing:-.05em;
+    }
+
+    .step1-description{
+
+        width:100%;
+        max-width:430px;
+
+        margin-top:14px;
+
+        font-size:16px;
+
+        line-height:1.45;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .step1-controls{
+
+        flex:1;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+
+        gap:42px;
+
+        width:100%;
+
+        min-height:0;
+
+        transform:none;
+    }
+
+
+    /*======================================================
+    HEIGHT / WEIGHT
+    ======================================================*/
+
+    .measurement{
+
+        width:115px;
+
+        display:flex;
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .measurement-value{
+
+        margin-bottom:18px;
+    }
+
+    .measurement-value strong{
+
+        font-size:48px;
+    }
+
+    .measurement-value span{
+
+        margin-left:5px;
+
+        font-size:13px;
+    }
+
+    .measurement-label{
+
+        margin-top:16px;
+
+        font-size:11px;
+
+        letter-spacing:.06em;
+    }
+
+
+    /*======================================================
+    SLIDER
+    ======================================================*/
+
+    .slider{
+
+        width:40px;
+        height:215px;
+
+        min-height:215px;
+    }
+
+    .slider-track,
+    .slider-fill{
+
+        width:4px;
+    }
+
+    .slider-thumb{
+
+        width:24px;
+        height:24px;
+
+        border-width:4px;
+    }
+
+
+    /*======================================================
+    SKI
+    ======================================================*/
+
+   .ski-preview{
+
+    width:100px;
+    height:290px;
+}
+
+.ski-video{
+
+    transform:scale(2.10);
+}
+
+    .ski-video{
+
+        transform:scale(1.75);
+    }
+
+
+    /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step1-footer{
+
+        flex:0 0 auto;
+
+        height:68px;
+
+        margin-top:26px;
+    }
+
+    .step1-footer-actions{
+
+        width:100%;
+
+        display:flex;
+
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .step1-navigation-button{
+
+        min-width:130px;
+        height:44px;
+
+        padding:0 22px;
+
+        font-size:14px;
+    }
+
+
+    /*======================================================
+    PORTRAIT
+    ======================================================*/
+
+    @media (orientation:portrait){
+
+        .step1-copy{
+
+            margin-bottom:42px;
+        }
+
+        .step1-controls{
+
+            gap:34px;
+        }
+
+        .measurement{
+
+            width:105px;
+        }
+
+        .slider{
+
+            height:205px;
+        }
+
+        .ski-preview{
+
+    width:96px;
+    height:280px;
+}
+
+.ski-video{
+
+    transform:scale(2.05);
+}
+
+        .ski-video{
+
+            transform:scale(1.65);
+        }
+
+    }
+
+
+    /*======================================================
+    LANDSCAPE
+    ======================================================*/
+
+    @media (orientation:landscape){
+
+        .step1-copy{
+
+            margin-bottom:24px;
+        }
+
+        .step1-title{
+
+            font-size:40px;
+        }
+
+        .step1-description{
+
+            font-size:15px;
+        }
+
+        .step1-controls{
+
+            gap:50px;
+        }
+
+        .measurement{
+
+            width:120px;
+        }
+
+        .slider{
+
+            height:195px;
+        }
+
+       .ski-preview{
+
+    width:108px;
+    height:270px;
+}
+
+.ski-video{
+
+    transform:scale(2.08);
+}
+
+        .ski-video{
+
+            transform:scale(1.70);
+        }
+
+        .step1-footer{
+
+            margin-top:18px;
+        }
+
+    }
+
+}
+/*==========================================================
+STEP 1
+MOBILE
+0 → 600px
+==========================================================*/
+
+@media screen and (max-width:600px){
+
+    .step1{
+
+        display:flex;
+        flex-direction:column;
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /*======================================================
+    COPY
+    ======================================================*/
+
+    .step1-copy{
+
+        flex:0 0 auto;
+
+        padding:0;
+
+        margin-bottom:26px;
+    }
+
+    .step1-title{
+
+        margin:0;
+
+        max-width:300px;
+
+        font-size:36px;
+        font-weight:700;
+
+        line-height:.95;
+
+        letter-spacing:-.05em;
+    }
+
+    .step1-description{
+
+        margin-top:12px;
+
+        max-width:280px;
+
+        font-size:14px;
+
+        line-height:1.42;
+    }
+
+
+    /*======================================================
+    CONTENT
+    ======================================================*/
+
+    .step1-controls{
+
+        flex:1;
+
+        display:flex;
+
+        justify-content:center;
+        align-items:center;
+
+        gap:20px;
+
+        width:100%;
+
+        min-height:0;
+
+        transform:none;
+    }
+
+
+    /*======================================================
+    MEASUREMENTS
+    ======================================================*/
+
+    .measurement{
+
+        width:82px;
+
+        display:flex;
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .measurement-value{
+
+        margin-bottom:14px;
+    }
+
+    .measurement-value strong{
+
+        font-size:40px;
+    }
+
+    .measurement-value span{
+
+        margin-left:4px;
+
+        margin-bottom:4px;
+
+        font-size:11px;
+    }
+
+    .measurement-label{
+
+        margin-top:14px;
+
+        font-size:10px;
+
+        letter-spacing:.05em;
+    }
+
+
+    /*======================================================
+    SLIDERS
+    ======================================================*/
+
+    .slider{
+
+        width:34px;
+        height:185px;
+
+        min-height:185px;
+    }
+
+    .slider-track,
+    .slider-fill{
+
+        width:4px;
+    }
+
+    .slider-thumb{
+
+        width:22px;
+        height:22px;
+
+        border-width:4px;
+    }
+
+
+    /*======================================================
+    SKI
+    ======================================================*/
+
+    .ski-preview{
+
+    width:82px;
+    height:245px;
+}
+
+.ski-video{
+
+    transform:scale(1.90);
+}
+
+    .ski-video{
+
+        transform:scale(2.20);
+    }
+
+
+    /*======================================================
+    FOOTER
+    ======================================================*/
+
+    .step1-footer{
+
+        flex:0 0 auto;
+
+        margin-top:22px;
+
+        height:62px;
+    }
+
+    .step1-footer-actions{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+        width:100%;
+    }
+
+    .step1-navigation-button{
+
+        width:100%;
+
+        min-width:0;
+
+        height:42px;
+
+        padding:0 12px;
+
+        font-size:12px;
+    }
+
+    .step1-navigation-button span[aria-hidden="true"]{
+
+        font-size:15px;
+    }
+
+}
+
+
+/*==========================================================
+SMALL MOBILE
+==========================================================*/
+
+@media screen and (max-width:390px){
+
+    .step1-title{
+
+        max-width:260px;
+
+        font-size:31px;
+    }
+
+    .step1-description{
+
+        max-width:245px;
+
+        font-size:13px;
+    }
+
+    .step1-controls{
+
+        gap:16px;
+    }
+
+    .measurement{
+
+        width:72px;
+    }
+
+    .measurement-value strong{
+
+        font-size:36px;
+    }
+
+    .slider{
+
+        width:30px;
+        height:165px;
+    }
+
+  .ski-preview{
+
+    width:72px;
+    height:220px;
+}
+
+.ski-video{
+
+    transform:scale(2.00);
+}
+    .step1-footer{
+
+        margin-top:18px;
+
+        height:58px;
+    }
+
+    .step1-navigation-button{
+
+        height:38px;
+
+        font-size:11px;
+    }
+
+}
+
+
+/*==========================================================
+EXTRA SMALL
+==========================================================*/
+
+@media screen and (max-width:340px){
+
+    .step1-title{
+
+        font-size:28px;
+    }
+
+    .step1-description{
+
+        font-size:12px;
+    }
+
+    .step1-controls{
+
+        gap:12px;
+    }
+
+    .measurement{
+
+        width:66px;
+    }
+
+    .measurement-value strong{
+
+        font-size:32px;
+    }
+
+    .slider{
+
+        height:150px;
+    }
+
+    .ski-preview{
+
+        width:50px;
+        height:170px;
+    }
+
+    .ski-video{
+
+        transform:scale(1.30);
+    }
+
+}/*==========================================================
+STEP 1
+RESPONSIVE FINAL
+LANDSCAPE + SHORT HEIGHT + SAFE AREA
+==========================================================*/
+
+
+/*==========================================================
+SHORT HEIGHT
+==========================================================*/
+
+@media screen
+and (max-width:600px)
+and (max-height:760px){
+
+    .step1-copy{
+
+        margin-bottom:18px;
+    }
+
+    .step1-title{
+
+        font-size:30px;
+    }
+
+    .step1-description{
+
+        margin-top:8px;
+
+        font-size:12px;
+    }
+
+    .step1-controls{
+
+        gap:16px;
+    }
+
+    .measurement{
+
+        width:70px;
+    }
+
+    .measurement-value{
+
+        margin-bottom:10px;
+    }
+
+    .measurement-value strong{
+
+        font-size:34px;
+    }
+
+    .measurement-label{
+
+        margin-top:10px;
+
+        font-size:9px;
+    }
+
+    .slider{
+
+        width:30px;
+        height:150px;
+
+        min-height:150px;
+    }
+
+    .slider-thumb{
+
+        width:20px;
+        height:20px;
+    }
+
+    .ski-preview{
+
+        width:54px;
+        height:170px;
+    }
+
+    .ski-video{
+
+        transform:scale(1.34);
+    }
+
+    .step1-footer{
+
+        margin-top:14px;
+
+        height:54px;
+    }
+
+    .step1-navigation-button{
+
+        height:36px;
+
+        font-size:11px;
+    }
+
+}
+
+
+/*==========================================================
+MOBILE LANDSCAPE
+==========================================================*/
+
+@media screen
+and (orientation:landscape)
+and (max-height:520px){
+
+    .step1{
+
+        display:grid;
+
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            auto
+            minmax(0,1fr)
+            46px;
+    }
+
+    .step1-copy{
+
+        margin-bottom:10px;
+    }
+
+    .step1-title{
+
+        max-width:420px;
+
+        font-size:26px;
+    }
+
+    .step1-description{
+
+        max-width:420px;
+
+        margin-top:6px;
+
+        font-size:10px;
+    }
+
+    .step1-controls{
+
+        gap:26px;
+    }
+
+    .measurement{
+
+        width:76px;
+    }
+
+    .measurement-value{
+
+        margin-bottom:6px;
+    }
+
+    .measurement-value strong{
+
+        font-size:28px;
+    }
+
+    .measurement-value span{
+
+        font-size:8px;
+    }
+
+    .measurement-label{
+
+        margin-top:6px;
+
+        font-size:8px;
+    }
+
+    .slider{
+
+        width:26px;
+        height:105px;
+    }
+
+    .slider-thumb{
+
+        width:18px;
+        height:18px;
+
+        border-width:3px;
+    }
+
+    .ski-preview{
+
+        width:58px;
+        height:115px;
+    }
+
+    .ski-video{
+
+        transform:scale(1.18);
+    }
+
+    .step1-footer{
+
+        margin-top:8px;
+
+        height:46px;
+    }
+
+    .step1-navigation-button{
+
+        height:32px;
+
+        font-size:10px;
+    }
+
+}
+
+
+/*==========================================================
+SAFE AREA
+==========================================================*/
+
+@supports (padding: env(safe-area-inset-bottom)){
+
+    @media screen and (max-width:600px){
+
+        .step1{
+
+            padding-bottom:env(safe-area-inset-bottom);
+        }
+
+    }
+
+}
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+@media (hover:none){
+
+    .slider:hover .slider-thumb{
+
+        width:22px;
+        height:22px;
+
+        box-shadow:
+            0 4px 14px rgba(0,0,0,.28);
+    }
+
+    .step1-navigation-button:hover{
+
+        transform:none;
+    }
+
+}
+
+
+/*==========================================================
+REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .ski-video,
+    .slider-thumb,
+    .step1-navigation-button{
+
+        transition:none !important;
+    }
+
+}
+
+
+/*==========================================================
+HIGH DPI
+==========================================================*/
+
+@media (-webkit-min-device-pixel-ratio:2),
+       (min-resolution:192dpi){
+
+    .ski-video{
+
+        image-rendering:auto;
+    }
+
+}
+
+
+/*==========================================================
+END STEP 1 RESPONSIVE
+==========================================================*/

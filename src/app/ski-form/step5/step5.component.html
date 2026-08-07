@@ -1,47 +1,134 @@
-<!-- STEP 5 CONTENT -->
+<section class="step5">
 
-<div class="step-layout">
+    <!-- HEADER -->
+    <header class="step5-copy">
 
-  <!-- LEFT TEXT -->
-  <div class="left">
-    <h1>
-      IT'S ALL<br>
-      ABOUT<br>
-      YOU
-    </h1>
-  </div>
 
-  <!-- RIGHT RADIO BUTTONS -->
-  <div class="right">
-    <h2 class="section-title">DO YOU PREFER?</h2>
-    <p class="required-field"><span class="asterisk">*</span> This field is required</p>
-    
-    <div class="radio-list">
-      <label class="radio-option" [class.selected]="selectedTurn === 'short'">
-        <input type="radio" 
-               name="turnPreference" 
-               value="short" 
-               (change)="onTurnChange('short')"
-               [checked]="selectedTurn === 'short'">
-        <span class="radio-label">SHORT TURNS</span>
-      </label>
 
-      <label class="radio-option" [class.selected]="selectedTurn === 'long'">
-        <input type="radio" 
-               name="turnPreference" 
-               value="long" 
-               (change)="onTurnChange('long')"
-               [checked]="selectedTurn === 'long'">
-        <span class="radio-label">LONG TURNS</span>
-      </label>
+        <h1 class="step5-title">
+            What type of turns do you enjoy?
+        </h1>
+
+        <p class="step5-description">
+            Your preferred carving style tells us a lot.
+        </p>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <div class="step5-content">
+
+        <!-- VIDEO -->
+        <div class="step5-preview">
+
+            <video
+                #turnVideo
+                class="step5-turn-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+            >
+                <source
+                    src="assets/images/apparence5.webm"
+                    type="video/webm">
+            </video>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+        <div class="step5-options">
+
+            <div class="step5-turn-list">
+
+                <!-- SHORT -->
+                <label
+                    class="step5-turn-card"
+                    [class.active]="selectedTurn === 'short'">
+
+                    <input
+                        type="radio"
+                        name="turnType"
+                        value="short"
+                        [checked]="selectedTurn === 'short'"
+                        (change)="onTurnChange('short')">
+
+                    <div class="step5-card-content">
+
+                        <h3>Short Turns</h3>
+
+                        <p>
+                            Quick, precise and rapid edge changes
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- LONG -->
+                <label
+                    class="step5-turn-card"
+                    [class.active]="selectedTurn === 'long'">
+
+                    <input
+                        type="radio"
+                        name="turnType"
+                        value="long"
+                        [checked]="selectedTurn === 'long'"
+                        (change)="onTurnChange('long')">
+
+                    <div class="step5-card-content">
+
+                        <h3>Long Turns</h3>
+
+                        <p>
+                            Smooth, stable and flowing carving lines
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-</div>
 
-<!-- BUTTONS -->
-<button class="prev-btn" (click)="prev()">PREV</button>
-<button class="next-btn" 
-        [class.disabled]="!selectedTurn"
-        [disabled]="!selectedTurn"
-        (click)="next()">NEXT</button>
+    <!-- FOOTER -->
+    <footer class="step5-footer">
+
+        <div class="step5-footer-actions">
+
+            <button
+                type="button"
+                class="step5-navigation-button step5-previous-button"
+                (click)="prev()">
+
+                <span aria-hidden="true">←</span>
+                <span>Previous</span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="step5-navigation-button step5-next-button"
+                [disabled]="!selectedTurn"
+                (click)="next()">
+
+                <span>Next</span>
+                <span aria-hidden="true">→</span>
+
+            </button>
+
+        </div>
+
+    </footer>
+
+</section>
