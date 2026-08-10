@@ -1287,8 +1287,11 @@ RESPONSIVE MOBILE
 
 @media screen and (max-width:600px){
 
-    .step6{
+    /*======================================================
+    MAIN
+    ======================================================*/
 
+    .step6{
         display:flex;
         flex-direction:column;
 
@@ -1307,41 +1310,40 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-copy{
-
         flex:0 0 auto;
 
-        margin:0 0 20px;
+        width:100%;
+
+        margin:0 0 10px;
 
         padding:0;
     }
 
-    .step6-number{
 
+    .step6-number{
         display:none;
     }
 
-    .step6-title{
 
+    .step6-title{
         width:100%;
         max-width:310px;
 
         margin:0;
 
         font-size:36px;
-
         font-weight:700;
 
         line-height:.96;
-
         letter-spacing:-.05em;
     }
 
+
     .step6-description{
-
         width:100%;
-        max-width:270px;
+        max-width:290px;
 
-        margin-top:10px;
+        margin:10px 0 0;
 
         font-size:14px;
 
@@ -1354,18 +1356,19 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-content{
-
         flex:1;
 
         display:flex;
         flex-direction:column;
 
-        justify-content:center;
+        justify-content:flex-start;
         align-items:center;
 
-        gap:22px;
+        width:100%;
 
         min-height:0;
+
+        gap:0;
 
         overflow:hidden;
     }
@@ -1376,38 +1379,97 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-preview{
+        position:relative;
 
-        width:180px;
-        height:180px;
+        display:flex;
 
-        flex:0 0 auto;
+        justify-content:center;
+        align-items:center;
+
+        width:100%;
+
+        /*
+        IMPORTANT :
+        cette hauteur crée l'espace entre
+        le texte et les réponses
+        */
+        height:300px;
+
+        flex:0 0 300px;
+
+        margin:0;
+
+        overflow:visible;
 
         transform:none;
+
+        pointer-events:none;
     }
 
-   .step6-speed-video{
 
-    width:290px;
+    /*======================================================
+    VIDEO / ANIMATION
+    ======================================================*/
 
-    max-width:290px;
+    .step6-speed-video{
+        display:block;
 
-    max-height:290px;
+        width:290px;
+        height:auto;
 
-    object-fit:contain;
+        max-width:290px;
+        max-height:290px;
 
-    transform:
-        translateY(60px)
-        scale(2.2);
-}
+        object-fit:contain;
+        object-position:center;
+
+        /*
+        PAS DE translateY(60px)
+
+        Le preview lui-même centre maintenant
+        verticalement l'animation.
+        */
+        transform:
+            translateY(0)
+            scale(1.75);
+
+        transform-origin:center;
+
+        pointer-events:none;
+
+        filter:
+            drop-shadow(
+                0 18px 24px rgba(0,0,0,.32)
+            );
+    }
+
+
+    /*======================================================
+    SHADOW
+    ======================================================*/
 
     .step6-preview::after{
+        content:"";
 
-        width:95px;
-        height:12px;
+        position:absolute;
 
+        left:50%;
         bottom:12%;
 
+        width:105px;
+        height:12px;
+
+        transform:translateX(-50%);
+
+        border-radius:50%;
+
+        background:rgba(0,0,0,.20);
+
         filter:blur(9px);
+
+        opacity:.65;
+
+        pointer-events:none;
     }
 
 
@@ -1416,18 +1478,33 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-options{
-
-        width:100%;
-    }
-
-    .step6-speed-list{
+        flex:0 0 auto;
 
         display:flex;
+
+        align-items:flex-start;
+        justify-content:center;
+
+        width:100%;
+
+        margin:0;
+    }
+
+
+    /*======================================================
+    SPEED LIST
+    ======================================================*/
+
+    .step6-speed-list{
+        display:flex;
+
         flex-direction:column;
 
         gap:8px;
 
         width:100%;
+
+        margin:0;
     }
 
 
@@ -1436,14 +1513,13 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-speed-card{
-
         min-height:58px;
 
         padding:10px 14px;
 
-        border-radius:12px;
-
         border:1px solid rgba(255,255,255,.30);
+
+        border-radius:12px;
 
         background:rgba(255,255,255,.02);
 
@@ -1451,15 +1527,15 @@ RESPONSIVE MOBILE
         -webkit-backdrop-filter:blur(5px);
     }
 
-    .step6-card-content h3{
 
+    .step6-card-content h3{
         font-size:15px;
 
         line-height:1.08;
     }
 
-    .step6-card-content p{
 
+    .step6-card-content p{
         margin-top:4px;
 
         font-size:10px;
@@ -1467,8 +1543,12 @@ RESPONSIVE MOBILE
         line-height:1.28;
     }
 
-    .step6-speed-card.active{
 
+    /*======================================================
+    ACTIVE
+    ======================================================*/
+
+    .step6-speed-card.active{
         border-color:var(--orange);
 
         background:rgba(255,91,39,.08);
@@ -1484,7 +1564,6 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step6-footer{
-
         flex:0 0 auto;
 
         height:58px;
@@ -1494,8 +1573,8 @@ RESPONSIVE MOBILE
         border-top:1px solid rgba(255,255,255,.08);
     }
 
-    .step6-footer-actions{
 
+    .step6-footer-actions{
         display:grid;
 
         grid-template-columns:1fr 1fr;
@@ -1505,8 +1584,8 @@ RESPONSIVE MOBILE
         width:100%;
     }
 
-    .step6-navigation-button{
 
+    .step6-navigation-button{
         width:100%;
 
         min-width:0;
@@ -1518,16 +1597,13 @@ RESPONSIVE MOBILE
         font-size:11px;
     }
 
-    .step6-navigation-button span[aria-hidden="true"]{
 
+    .step6-navigation-button
+    span[aria-hidden="true"]{
         font-size:14px;
     }
 
 }
-/*==========================================================
-STEP 6
-SMALL MOBILE
-==========================================================*/
 
 @media screen and (max-width:390px){
 

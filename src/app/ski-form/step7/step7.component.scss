@@ -1317,10 +1317,19 @@ RESPONSIVE MOBILE
 0 → 600px
 ==========================================================*/
 
+/*==========================================================
+STEP 7
+RESPONSIVE MOBILE
+0 → 600px
+==========================================================*/
+
 @media screen and (max-width:600px){
 
-    .step7{
+    /*======================================================
+    MAIN
+    ======================================================*/
 
+    .step7{
         display:flex;
         flex-direction:column;
 
@@ -1339,41 +1348,37 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-copy{
-
         flex:0 0 auto;
 
-        margin:0 0 20px;
+        width:100%;
+
+        margin:0 0 10px;
 
         padding:0;
     }
 
     .step7-number{
-
         display:none;
     }
 
     .step7-title{
-
         width:100%;
         max-width:310px;
 
         margin:0;
 
         font-size:36px;
-
         font-weight:700;
 
         line-height:.96;
-
         letter-spacing:-.05em;
     }
 
     .step7-description{
-
         width:100%;
-        max-width:270px;
+        max-width:290px;
 
-        margin-top:10px;
+        margin:10px 0 0;
 
         font-size:14px;
 
@@ -1386,18 +1391,19 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-content{
-
         flex:1;
 
         display:flex;
         flex-direction:column;
 
-        justify-content:center;
+        justify-content:flex-start;
         align-items:center;
 
-        gap:22px;
+        width:100%;
 
         min-height:0;
+
+        gap:0;
 
         overflow:hidden;
     }
@@ -1408,40 +1414,85 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-preview{
+        position:relative;
 
-        width:180px;
-        height:170px;
+        display:flex;
 
-        flex:0 0 auto;
+        justify-content:center;
+        align-items:center;
+
+        width:100%;
+
+        height:300px;
+        flex:0 0 300px;
+
+        margin:0;
+
+        overflow:visible;
+
+        transform:none;
+
+        pointer-events:none;
     }
 
+
+    /*======================================================
+    VIDEO / ANIMATION
+    ======================================================*/
+
     .step7-style-video{
+        display:block;
 
-    width:290px;
+        width:300px;
+        height:auto;
 
-    max-width:290px;
+        max-width:300px;
+        max-height:300px;
 
-    max-height:290px;
+        object-fit:contain;
+        object-position:center;
 
-    object-fit:contain;
+        transform:
+            translateY(0)
+            scale(1.60);
 
-    transform:
-        translateY(70px)
-        scale(1.80);
+        transform-origin:center;
 
-    transform-origin:center;
+        pointer-events:none;
 
-    pointer-events:none;
-}
+        filter:
+            drop-shadow(
+                0 18px 24px rgba(0,0,0,.32)
+            );
+    }
+
+
+    /*======================================================
+    SHADOW
+    ======================================================*/
 
     .step7-preview::after{
+        content:"";
 
-        width:95px;
+        position:absolute;
+
+        left:50%;
+        bottom:10%;
+
+        width:105px;
         height:12px;
 
-        bottom:12%;
+        transform:translateX(-50%);
+
+        border-radius:50%;
+
+        background:rgba(0,0,0,.20);
 
         filter:blur(9px);
+
+        opacity:.65;
+
+        pointer-events:none;
     }
 
 
@@ -1450,18 +1501,32 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-options{
+        flex:0 0 auto;
+
+        display:flex;
+
+        justify-content:center;
+        align-items:flex-start;
 
         width:100%;
+
+        margin:0;
     }
 
-    .step7-style-list{
 
+    /*======================================================
+    STYLE LIST
+    ======================================================*/
+
+    .step7-style-list{
         display:flex;
         flex-direction:column;
 
         gap:8px;
 
         width:100%;
+
+        margin:0;
     }
 
 
@@ -1470,14 +1535,13 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-style-card{
-
         min-height:58px;
 
         padding:10px 14px;
 
-        border-radius:12px;
-
         border:1px solid rgba(255,255,255,.30);
+
+        border-radius:12px;
 
         background:rgba(255,255,255,.02);
 
@@ -1486,14 +1550,12 @@ RESPONSIVE MOBILE
     }
 
     .step7-card-content h3{
-
         font-size:15px;
 
         line-height:1.08;
     }
 
     .step7-card-content p{
-
         margin-top:4px;
 
         font-size:10px;
@@ -1501,8 +1563,12 @@ RESPONSIVE MOBILE
         line-height:1.28;
     }
 
-    .step7-style-card.active{
 
+    /*======================================================
+    ACTIVE
+    ======================================================*/
+
+    .step7-style-card.active{
         border-color:var(--orange);
 
         background:rgba(255,91,39,.08);
@@ -1518,7 +1584,6 @@ RESPONSIVE MOBILE
     ======================================================*/
 
     .step7-footer{
-
         flex:0 0 auto;
 
         height:58px;
@@ -1529,7 +1594,6 @@ RESPONSIVE MOBILE
     }
 
     .step7-footer-actions{
-
         display:grid;
 
         grid-template-columns:1fr 1fr;
@@ -1540,7 +1604,6 @@ RESPONSIVE MOBILE
     }
 
     .step7-navigation-button{
-
         width:100%;
 
         min-width:0;
@@ -1552,12 +1615,7 @@ RESPONSIVE MOBILE
         font-size:11px;
     }
 
-    /*======================================================
-    FINAL BUTTON
-    ======================================================*/
-
     .step7-next-button{
-
         min-width:0;
 
         white-space:nowrap;
@@ -1565,8 +1623,8 @@ RESPONSIVE MOBILE
         font-size:10px;
     }
 
-    .step7-navigation-button span[aria-hidden="true"]{
-
+    .step7-navigation-button
+    span[aria-hidden="true"]{
         font-size:14px;
     }
 
