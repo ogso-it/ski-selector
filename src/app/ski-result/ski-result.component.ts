@@ -1159,19 +1159,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
   RETAKE QUIZ
   ========================================================*/
 
-  retakeQuiz(): void {
-
-    /*
-     * IMPORTANT :
-     * Si ta première étape utilise par exemple /ski/step1,
-     * remplace simplement '/ski-selector' ci-dessous.
-     */
-
-    this.router.navigate([
-      '/ski-selector'
-    ]);
-
-  }
+ retakeQuiz(): void {
+  this.router.navigateByUrl('/');
+}
 
 
   /*========================================================

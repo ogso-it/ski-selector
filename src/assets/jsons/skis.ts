@@ -611,7 +611,7 @@ import { generate } from "rxjs";
   
     // },
       {
-      family: 'PLAY AND RIDE',
+      family: 'CONTEMPORARY',
       category: 'ULTRA LIGHT', 
       name: 'LE TOUNO',   // name: 'COSMIQUE 90 SR UL',
       size: 162,  // size: 160,
@@ -633,7 +633,7 @@ import { generate } from "rxjs";
     },
 
     {
-      family: 'PLAY AND RIDE',
+      family: 'CONTEMPORARY',
       category: 'ULTRA LIGHT',
       name: 'LE TOUNO', // name: 'COSMIQUE 90 SR UL',
       size: 172,   // size: 168,
@@ -656,7 +656,7 @@ import { generate } from "rxjs";
     }
     ,
     {
-      family: 'PLAY AND RIDE',
+      family: 'CONTEMPORARY',
       category: 'ULTRA LIGHT',
       name: 'LE TOUNO', // name: 'COSMIQUE 90 SR UL',
       size: 182,  // size: 176,
@@ -1066,7 +1066,7 @@ import { generate } from "rxjs";
    
     
      {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 170, //size: 176,
@@ -1087,7 +1087,7 @@ import { generate } from "rxjs";
   
     },
     {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 178, //size: 176,
@@ -1108,7 +1108,7 @@ import { generate } from "rxjs";
   
     },
     {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'RYUMON', //name: 'DANAÏDES 90 NEO ML',
       size: 186, //size: 176,
@@ -1129,7 +1129,7 @@ import { generate } from "rxjs";
   
     },
      {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 162, //size: 176,
@@ -1149,7 +1149,7 @@ import { generate } from "rxjs";
   
     },
     {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 166, //size: 176,
@@ -1170,7 +1170,7 @@ import { generate } from "rxjs";
   
     },
     {
-      family: 'PLAY AND RIDE',
+      family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
       size: 182, //size: 176,
@@ -1191,7 +1191,7 @@ import { generate } from "rxjs";
   
     },
      {
-      family: 'FRONT RESORT',
+      family: 'CONTEMPORARY',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 162, //size: 176,
@@ -1212,7 +1212,7 @@ import { generate } from "rxjs";
   
     },
       {
-      family: 'FRONT RESORT',
+      family: 'CONTEMPORARY',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 172, //size: 176,
@@ -1233,7 +1233,7 @@ import { generate } from "rxjs";
   
     },
       {
-      family: 'FRONT RESORT',
+      family: 'CONTEMPORARY',
       category: 'MEDIUM LIGHT',
       name: 'CROIX DE FER', //name: 'DANAÏDES 90 NEO ML',
       size: 182, //size: 176,
