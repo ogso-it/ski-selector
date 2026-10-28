@@ -917,9 +917,51 @@ import { generate } from "rxjs";
       link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss-2/'
   
   
+    },
+    {
+      family: 'ULTRA TOUR',
+      category: 'ULTRA LIGHT',
+      name: 'SWISS', //name: 'JAEGER 80 NEO UL',
+      size: 186, //size: 172,
+      max_height: 182,
+      min_height: 175,
+      max_weight: 91,
+      min_weight: 69,
+      sidecut: '118-85-107',
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-mountaineering','touring-race', 'touring-front-mountain','touring-back-mountain'  ],
+      snow : [ 'crud'],
+      ski_style: ['technical-precision'],
+      riding_speed: ['high-speed','moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/swiss2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/JAEGER.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/swiss-2/'
+  
+  
     }
     ,
-   
+   {
+      family: 'ULTRA TOUR',
+      category: 'ULTRA LIGHT',
+      name: 'STS', //name: 'THOR 90 NEO UL',
+      size: 162, //size: 160,
+      max_height: 171,
+      min_height: 0,
+      max_weight: 59,
+      min_weight: 0,
+      sidecut: '127-94-115',
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-mountaineering','touring-back-mountain','touring-front-mountain',],
+      snow : ['hard'],
+      ski_style: ['technical-precision'],
+      riding_speed: ['high-speed','moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/sts2026.webp', //src : "https://ogso-mountain-essentials.com/app/ski-photos/THOR.png",
+      link : 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/sts/'
+  
+  
+    },
+    
     {
       family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
@@ -988,7 +1030,29 @@ import { generate } from "rxjs";
   
     }
     ,
-   
+    {
+      family: 'ULTRA TOUR',
+      category: 'ULTRA LIGHT',
+      name: 'GRAN DADDY', //name: 'COUTURIER 100 NEO UL',
+      size: 162,
+      max_height: 173,
+      min_height: 0,
+      max_weight: 59,
+      min_weight: 0,  
+      sidecut: '140-105-126',
+      ski_level: ['intermediate', 'confirmed', 'pro-guide','newbie'],
+      playground: ['touring-back-mountain','touring-mountaineering'],
+
+      snow :  ['powder'],
+      ski_style: ['technical-precision','fun-surf'],
+      riding_speed: ['high-speed','moderate-speed'],
+      turn : ['long'],
+      src : 'https://ogso-mountain-essentials.com/app/ski-photos/26-27/gd2026.webp',  //src : "https://ogso-mountain-essentials.com/app/ski-photos/COUTURIER.png",
+      link: 'https://ogso-mountain-essentials.com/shop/ultra-tour-series/gran-daddy/' //link : 'https://ogso-mountain-essentials.com/product/couturier-100-neo-ul/',
+      //award : 'https://ogso-mountain-essentials.com/app/ski-photos/awards/b-e.png'
+  
+  
+    },
     {
       family: 'ULTRA TOUR',
       category: 'ULTRA LIGHT',
@@ -1132,7 +1196,7 @@ import { generate } from "rxjs";
       family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
-      size: 162, //size: 176,
+      size: 166, //size: 176,
       max_height: 178,
       min_height: 168,
       max_weight: 76,
@@ -1152,7 +1216,7 @@ import { generate } from "rxjs";
       family: 'SCURRY ODYSSEY',
       category: 'MEDIUM LIGHT',
       name: 'KOIRYU', //name: 'DANAÏDES 90 NEO ML',
-      size: 166, //size: 176,
+      size: 174, //size: 176,
       max_height: 178,
       min_height: 168,
       max_weight: 76,
