@@ -1,0 +1,12 @@
+# Fichiers non envoyés par « vercel deploy » (Vercel recompile le projet en ligne)
+.angular
+dist
+node_modules
+.git
+.vscode
+.env*
+y
+ski-selector
+
+# Projet After Effects source, inutile au site
+*.aep
