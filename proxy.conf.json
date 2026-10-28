@@ -1,0 +1,8 @@
+{
+  "/ski-photos": {
+    "target": "https://ogso-mountain-essentials.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/ski-photos": "/app/ski-photos" }
+  }
+}

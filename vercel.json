@@ -5,6 +5,10 @@
   "installCommand": "npm install --legacy-peer-deps",
   "routes": [
     {
+      "src": "/ski-photos/(.*)",
+      "dest": "https://ogso-mountain-essentials.com/app/ski-photos/$1"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },

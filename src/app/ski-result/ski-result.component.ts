@@ -16,7 +16,7 @@ import {
 
 import { skis } from 'src/assets/jsons/skis';
 import { HttpClient } from '@angular/common/http';
-import { jsPDF } from 'jspdf';
+import { SkiPdfService } from '../services/ski-pdf.service';
 
 
 /*==========================================================
@@ -277,7 +277,9 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
     private ngZone: NgZone,
 
-    private router: Router
+    private router: Router,
+
+    private skiPdf: SkiPdfService
 
   ) {}
 
@@ -438,6 +440,47 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
 
     return map[terrain] || terrain;
+
+  }
+
+
+  /*========================================================
+  FORMAT LEVEL
+  (valeurs du questionnaire et du catalogue)
+  ========================================================*/
+
+  formatLevel(
+    level: string
+  ): string {
+
+    const map: {
+      [key: string]: string
+    } = {
+
+      'beginner':
+        'Beginner',
+
+      'newbie':
+        'Beginner',
+
+      'intermediate':
+        'Intermediate',
+
+      'advanced':
+        'Advanced',
+
+      'confirmed':
+        'Advanced',
+
+      'expert':
+        'Expert',
+
+      'pro-guide':
+        'Expert'
+
+    };
+
+    return map[level] || level;
 
   }
 
@@ -1166,960 +1209,45 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
   /*========================================================
   GENERATE PDF
+  La mise en page est dans services/ski-pdf.service.ts
   ========================================================*/
 
   async generatePDF(): Promise<void> {
 
     this.isGeneratingPDF = true;
 
-
     try {
 
-      const doc =
-        new jsPDF({
+      await this.skiPdf.download({
 
-          orientation: 'portrait',
-
-          unit: 'mm',
-
-          format: 'a4'
-
-        });
-
-
-      const pageWidth =
-        doc.internal.pageSize
-          .getWidth();
-
-
-      const pageHeight =
-        doc.internal.pageSize
-          .getHeight();
-
-
-      const margin = 20;
-
-
-      /*====================================================
-      COLORS
-      ====================================================*/
-
-      const colors = {
-
-        bgDark: [
-          11,
-          12,
-          20
+        profile: [
+          { label: 'Height', value: `${this.height} cm` },
+          { label: 'Weight', value: `${this.weight} kg` },
+          { label: 'Level', value: this.formatLevel(this.skiLevel) },
+          { label: 'Terrain', value: this.formatTerrain(this.terrainType) },
+          { label: 'Snow', value: this.formatSnow(this.typeSnow) },
+          { label: 'Turns', value: this.formatTurns(this.turns) },
+          { label: 'Speed', value: this.formatSpeed(this.stable) },
+          { label: 'Style', value: this.formatStyle(this.skiStyleFun) }
         ],
 
-        bgCard: [
-          30,
-          30,
-          40
-        ],
+        skis: this.resultat
 
-        orange: [
-          255,
-          106,
-          0
-        ],
-
-        white: [
-          255,
-          255,
-          255
-        ],
-
-        gray: [
-          150,
-          150,
-          150
-        ],
-
-        lightGray: [
-          200,
-          200,
-          200
-        ]
-
-      };
-
-
-      /*====================================================
-      HEADER
-      ====================================================*/
-
-      doc.setFillColor(
-        colors.bgDark[0],
-        colors.bgDark[1],
-        colors.bgDark[2]
-      );
-
-
-      doc.rect(
-        0,
-        0,
-        pageWidth,
-        35,
-        'F'
-      );
-
-
-      doc.setFillColor(
-        colors.orange[0],
-        colors.orange[1],
-        colors.orange[2]
-      );
-
-
-      doc.rect(
-        0,
-        30,
-        pageWidth,
-        5,
-        'F'
-      );
-
-
-      doc.setTextColor(
-        colors.orange[0],
-        colors.orange[1],
-        colors.orange[2]
-      );
-
-
-      doc.setFontSize(24);
-
-
-      doc.setFont(
-        'helvetica',
-        'bold'
-      );
-
-
-      doc.text(
-        'OGSO',
-        margin,
-        18
-      );
-
-
-      doc.setTextColor(
-        colors.white[0],
-        colors.white[1],
-        colors.white[2]
-      );
-
-
-      doc.setFontSize(12);
-
-
-      doc.setFont(
-        'helvetica',
-        'normal'
-      );
-
-
-      doc.text(
-        'SKI RECOMMENDATIONS',
-        margin,
-        26
-      );
-
-
-      const dateStr =
-        new Date()
-          .toLocaleDateString(
-            'en-US',
-            {
-
-              month: 'short',
-
-              day: 'numeric',
-
-              year: 'numeric'
-
-            }
-          );
-
-
-      doc.setTextColor(
-        colors.gray[0],
-        colors.gray[1],
-        colors.gray[2]
-      );
-
-
-      doc.setFontSize(8);
-
-
-      doc.text(
-        dateStr,
-        pageWidth - margin,
-        18,
-        {
-          align: 'right'
-        }
-      );
-
-
-      /*====================================================
-      PROFILE
-      ====================================================*/
-
-      let yPos = 45;
-
-
-      doc.setTextColor(
-        colors.orange[0],
-        colors.orange[1],
-        colors.orange[2]
-      );
-
-
-      doc.setFontSize(14);
-
-
-      doc.setFont(
-        'helvetica',
-        'bold'
-      );
-
-
-      doc.text(
-        'PROFILE',
-        margin,
-        yPos
-      );
-
-
-      yPos += 10;
-
-
-      const colWidth =
-        (
-          pageWidth -
-          margin * 2
-        ) / 4;
-
-
-      const colPositions = [
-
-        margin +
-        colWidth / 2,
-
-        margin +
-        colWidth * 1.5,
-
-        margin +
-        colWidth * 2.5,
-
-        margin +
-        colWidth * 3.5
-
-      ];
-
-
-      doc.setTextColor(
-        colors.gray[0],
-        colors.gray[1],
-        colors.gray[2]
-      );
-
-
-      doc.setFontSize(8);
-
-
-      doc.setFont(
-        'helvetica',
-        'normal'
-      );
-
-
-      doc.text(
-        'H',
-        colPositions[0],
-        yPos,
-        {
-          align: 'center'
-        }
-      );
-
-
-      doc.text(
-        'W',
-        colPositions[1],
-        yPos,
-        {
-          align: 'center'
-        }
-      );
-
-
-      doc.text(
-        'TER',
-        colPositions[2],
-        yPos,
-        {
-          align: 'center'
-        }
-      );
-
-
-      doc.text(
-        'SNOW',
-        colPositions[3],
-        yPos,
-        {
-          align: 'center'
-        }
-      );
-
-
-      yPos += 5;
-
-
-      doc.setFillColor(
-        colors.bgCard[0],
-        colors.bgCard[1],
-        colors.bgCard[2]
-      );
-
-
-      doc.roundedRect(
-
-        margin,
-
-        yPos,
-
-        pageWidth -
-        margin * 2,
-
-        20,
-
-        3,
-
-        3,
-
-        'F'
-
-      );
-
-
-      doc.setTextColor(
-        colors.white[0],
-        colors.white[1],
-        colors.white[2]
-      );
-
-
-      doc.setFontSize(10);
-
-
-      doc.setFont(
-        'helvetica',
-        'bold'
-      );
-
-
-      doc.text(
-
-        `${this.height} cm`,
-
-        colPositions[0],
-
-        yPos + 13,
-
-        {
-          align: 'center'
-        }
-
-      );
-
-
-      doc.text(
-
-        `${this.weight} kg`,
-
-        colPositions[1],
-
-        yPos + 13,
-
-        {
-          align: 'center'
-        }
-
-      );
-
-
-      doc.text(
-
-        this.formatTerrain(
-          this.terrainType
-        ),
-
-        colPositions[2],
-
-        yPos + 13,
-
-        {
-          align: 'center'
-        }
-
-      );
-
-
-      doc.text(
-
-        this.formatSnow(
-          this.typeSnow
-        ),
-
-        colPositions[3],
-
-        yPos + 13,
-
-        {
-          align: 'center'
-        }
-
-      );
-
-
-      yPos += 35;
-
-
-      /*====================================================
-      TOP 3
-      ====================================================*/
-
-      doc.setTextColor(
-        colors.orange[0],
-        colors.orange[1],
-        colors.orange[2]
-      );
-
-
-      doc.setFontSize(16);
-
-
-      doc.setFont(
-        'helvetica',
-        'bold'
-      );
-
-
-      doc.text(
-        'TOP 3 SKIS',
-        margin,
-        yPos
-      );
-
-
-      yPos += 10;
-
-
-      for (
-        let i = 0;
-        i <
-        Math.min(
-          3,
-          this.resultat.length
-        );
-        i++
-      ) {
-
-        const ski =
-          this.resultat[i];
-
-
-        /*==================================================
-        CARD
-        ==================================================*/
-
-        doc.setFillColor(
-          colors.bgCard[0],
-          colors.bgCard[1],
-          colors.bgCard[2]
-        );
-
-
-        doc.roundedRect(
-
-          margin,
-
-          yPos,
-
-          pageWidth -
-          margin * 2,
-
-          35,
-
-          3,
-
-          3,
-
-          'F'
-
-        );
-
-
-        /*==================================================
-        MEDAL
-        ==================================================*/
-
-        const medalColors = [
-
-          [
-            255,
-            215,
-            0
-          ],
-
-          [
-            192,
-            192,
-            192
-          ],
-
-          [
-            205,
-            127,
-            50
-          ]
-
-        ];
-
-
-        const circleX =
-          margin + 17;
-
-
-        const circleY =
-          yPos + 12;
-
-
-        const circleRadius = 8;
-
-
-        doc.setFillColor(
-
-          medalColors[i][0],
-
-          medalColors[i][1],
-
-          medalColors[i][2]
-
-        );
-
-
-        doc.circle(
-
-          circleX,
-
-          circleY,
-
-          circleRadius,
-
-          'F'
-
-        );
-
-
-        doc.setTextColor(
-          colors.bgDark[0],
-          colors.bgDark[1],
-          colors.bgDark[2]
-        );
-
-
-        doc.setFontSize(11);
-
-
-        doc.setFont(
-          'helvetica',
-          'bold'
-        );
-
-
-        doc.text(
-
-          `${i + 1}`,
-
-          circleX,
-
-          circleY + 4,
-
-          {
-            align: 'center'
-          }
-
-        );
-
-
-        /*==================================================
-        NAME
-        ==================================================*/
-
-        doc.setTextColor(
-          colors.white[0],
-          colors.white[1],
-          colors.white[2]
-        );
-
-
-        doc.setFontSize(12);
-
-
-        doc.setFont(
-          'helvetica',
-          'bold'
-        );
-
-
-        doc.text(
-
-          ski.name,
-
-          margin + 40,
-
-          yPos + 12
-
-        );
-
-
-        /*==================================================
-        FAMILY
-        ==================================================*/
-
-        doc.setTextColor(
-          colors.gray[0],
-          colors.gray[1],
-          colors.gray[2]
-        );
-
-
-        doc.setFontSize(8);
-
-
-        doc.setFont(
-          'helvetica',
-          'normal'
-        );
-
-
-        doc.text(
-
-          ski.family || 'OGSO',
-
-          margin + 40,
-
-          yPos + 21
-
-        );
-
-
-        /*==================================================
-        SIZE + SIDECUT
-        ==================================================*/
-
-        const specsX =
-          pageWidth / 2 - 10;
-
-
-        doc.setTextColor(
-          colors.lightGray[0],
-          colors.lightGray[1],
-          colors.lightGray[2]
-        );
-
-
-        doc.setFontSize(9);
-
-
-        doc.setFont(
-          'helvetica',
-          'normal'
-        );
-
-
-        doc.text(
-
-          `${ski.size} cm`,
-
-          specsX,
-
-          yPos + 12
-
-        );
-
-
-        doc.text(
-
-          `${ski.sidecut || 'N/A'} mm`,
-
-          specsX,
-
-          yPos + 21
-
-        );
-
-
-        /*==================================================
-        SCORE
-        ==================================================*/
-
-        const score =
-          ski.score || 0;
-
-
-        let scoreRgb:
-          number[];
-
-
-        if (
-          score >= 90
-        ) {
-
-          scoreRgb = [
-            16,
-            185,
-            129
-          ];
-
-        }
-
-        else if (
-          score >= 70
-        ) {
-
-          scoreRgb = [
-            59,
-            130,
-            246
-          ];
-
-        }
-
-        else if (
-          score >= 50
-        ) {
-
-          scoreRgb = [
-            245,
-            158,
-            11
-          ];
-
-        }
-
-        else {
-
-          scoreRgb = [
-            239,
-            68,
-            68
-          ];
-
-        }
-
-
-        const scoreX =
-          pageWidth -
-          margin -
-          40;
-
-
-        const scoreY =
-          yPos + 7;
-
-
-        const scoreWidth =
-          30;
-
-
-        const scoreHeight =
-          18;
-
-
-        doc.setFillColor(
-
-          scoreRgb[0],
-
-          scoreRgb[1],
-
-          scoreRgb[2]
-
-        );
-
-
-        doc.roundedRect(
-
-          scoreX,
-
-          scoreY,
-
-          scoreWidth,
-
-          scoreHeight,
-
-          5,
-
-          5,
-
-          'F'
-
-        );
-
-
-        doc.setTextColor(
-          colors.white[0],
-          colors.white[1],
-          colors.white[2]
-        );
-
-
-        doc.setFontSize(14);
-
-
-        doc.setFont(
-          'helvetica',
-          'bold'
-        );
-
-
-        doc.text(
-
-          `${score}%`,
-
-          scoreX +
-          scoreWidth / 2,
-
-          scoreY +
-          scoreHeight / 2 +
-          2,
-
-          {
-            align: 'center'
-          }
-
-        );
-
-
-        yPos += 42;
-
-      }
-
-
-      /*====================================================
-      FOOTER
-      ====================================================*/
-
-      doc.setDrawColor(
-        colors.gray[0],
-        colors.gray[1],
-        colors.gray[2]
-      );
-
-
-      doc.setLineWidth(.3);
-
-
-      doc.line(
-
-        margin,
-
-        pageHeight - 15,
-
-        pageWidth - margin,
-
-        pageHeight - 15
-
-      );
-
-
-      doc.setTextColor(
-        colors.gray[0],
-        colors.gray[1],
-        colors.gray[2]
-      );
-
-
-      doc.setFontSize(7);
-
-
-      doc.setFont(
-        'helvetica',
-        'normal'
-      );
-
-
-      doc.text(
-
-        'OGSO - Smart Product Selector',
-
-        pageWidth / 2,
-
-        pageHeight - 8,
-
-        {
-          align: 'center'
-        }
-
-      );
-
-
-      /*====================================================
-      DOWNLOAD
-      ====================================================*/
-
-      const fileName =
-
-        `OGSO_Ski_Recommendations_${new Date().getTime()}.pdf`;
-
-
-      doc.save(
-        fileName
-      );
-
+      });
 
       this.pdfGenerated = true;
 
+      setTimeout(() => {
+        this.pdfGenerated = false;
+      }, 3000);
 
-      setTimeout(
-        () => {
+    } catch (error) {
 
-          this.pdfGenerated = false;
+      console.error('PDF Generation Error:', error);
 
-        },
-        3000
-      );
+      alert('Failed to generate PDF. Please try again.');
 
-
-    }
-
-    catch (
-      error
-    ) {
-
-      console.error(
-
-        'PDF Generation Error:',
-
-        error
-
-      );
-
-
-      alert(
-
-        'Failed to generate PDF. Please try again.'
-
-      );
-
-    }
-
-    finally {
+    } finally {
 
       this.isGeneratingPDF = false;
 
