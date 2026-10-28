@@ -4,36 +4,32 @@
   <meta charset="utf-8">
   <title>Ogso Smart Product Selector</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Find your perfect OGSO ski, matched to your style, terrain and technique.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
- 
 
- 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <style>
+    html, body { background: #000; }
+  </style>
 </head>
 <body>
   <app-root></app-root>
 
-
-     <!-- jQuery-js include -->
-     <script src="./assets/js/bootstrap.min.js"></script>
-     <!-- Bootstrap-js include -->
-     <script src="./assets/js/jquery-3.6.0.min-dist.js"></script>
-     <!-- jQuery-validate-js include -->
-     <script src="./assets/js/jquery-3.6.0.min.js"></script>
-     <!-- Custom-js include -->
-     <script src="./assets/js/jquery.validate.min.js"></script>
-   
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
- <!-- Google fonts -->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet">
- <!-- Bootstrap-css include -->
- <link rel="stylesheet" type="text/css" href="./assets/css/animate.min.css">
- <!-- Animate-css include -->
- <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
- <!-- Main-StyleSheet include -->
- <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <!--
+    Ces feuilles restent en fin de body : elles doivent passer APRÈS
+    les styles Angular dans la cascade (le design a été réglé ainsi).
+    jQuery / Bootstrap JS / animate.css / Font Awesome retirés : inutilisés.
+  -->
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap-css include -->
+  <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+  <!-- Main-StyleSheet include -->
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
 </body>
 </html>

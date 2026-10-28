@@ -92,6 +92,8 @@ export class Step1Component
 
   private isNavigating = false;
 
+  private hasNavigated = false;
+
   private fadeFallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 
@@ -863,9 +865,15 @@ export class Step1Component
   ===================================================== */
 
   private navigateToStep2(): void {
-    if (!this.isNavigating) {
+    /*
+     * Plusieurs déclencheurs possibles (ended, error, play() rejeté,
+     * timer de secours) : on ne navigue qu'une seule fois.
+     */
+    if (!this.isNavigating || this.hasNavigated) {
       return;
     }
+
+    this.hasNavigated = true;
 
     this.clearFadeFallbackTimer();
 
@@ -873,6 +881,7 @@ export class Step1Component
       .navigate(['/ski/step2'])
       .catch(error => {
         this.isNavigating = false;
+        this.hasNavigated = false;
 
         this.errorHandler.handleNavigationError(
           error,

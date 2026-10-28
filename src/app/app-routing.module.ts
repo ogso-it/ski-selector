@@ -11,6 +11,7 @@ import { Step4Component } from './ski-form/step4/step4.component';
 import { Step5Component } from './ski-form/step5/step5.component';
 import { Step6Component } from './ski-form/step6/step6.component';
 import { Step7Component } from './ski-form/step7/step7.component';
+import { stepGuard } from './guards/step.guard';
 
 const routes: Routes = [
 
@@ -21,18 +22,21 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'choose-your-gear', component: ChooseYourGearComponent },
+      { path: 'ski', redirectTo: 'ski/step1', pathMatch: 'full' },
       { path: 'ski/step1', component: Step1Component },
-      { path: 'ski/step2', component: Step2Component },
-      { path: 'ski/step3', component: Step3Component },
-      { path: 'ski/step4', component: Step4Component },
-      { path: 'ski/step5', component: Step5Component },
-      { path: 'ski/step6', component: Step6Component },
-      { path: 'ski/step7', component: Step7Component },
+      { path: 'ski/step2', component: Step2Component, canActivate: [stepGuard], data: { step: 2 } },
+      { path: 'ski/step3', component: Step3Component, canActivate: [stepGuard], data: { step: 3 } },
+      { path: 'ski/step4', component: Step4Component, canActivate: [stepGuard], data: { step: 4 } },
+      { path: 'ski/step5', component: Step5Component, canActivate: [stepGuard], data: { step: 5 } },
+      { path: 'ski/step6', component: Step6Component, canActivate: [stepGuard], data: { step: 6 } },
+      { path: 'ski/step7', component: Step7Component, canActivate: [stepGuard], data: { step: 7 } },
     ]
   },
 
   // Route indépendante pour les résultats (SANS le layout)
-  { path: 'recommanded-skis', component: SkiResultComponent }
+  { path: 'recommanded-skis', component: SkiResultComponent, canActivate: [stepGuard], data: { step: 8 } },
+
+  { path: '**', redirectTo: '' }
 
 ];
 
