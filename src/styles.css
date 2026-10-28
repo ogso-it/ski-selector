@@ -128,3 +128,110 @@
   margin : auto !important;
 
 }
+
+/* =========================================================
+   SPS — ANIMATIONS GLOBALES
+   Les pages routées dans le layout entrent en cascade :
+   hôte > racine (.stepN / .home-content) > sections.
+   On anime `translate` / `scale` (propriétés indépendantes)
+   pour ne jamais écraser les `transform` des composants.
+   ========================================================= */
+
+:root {
+  --sps-ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Gabarit du shell mobile / tablette (layout + bouton son) */
+@media screen and (max-width: 1024px) {
+  :root {
+    --shell-gap: clamp(8px, 2.6vw, 24px);
+    --shell-top: max(var(--shell-gap), env(safe-area-inset-top));
+    --shell-right: max(var(--shell-gap), env(safe-area-inset-right));
+    --shell-bottom: max(var(--shell-gap), env(safe-area-inset-bottom));
+    --shell-left: max(var(--shell-gap), env(safe-area-inset-left));
+    --shell-radius: clamp(18px, 3.2vw, 30px);
+    --panel-pad-y: clamp(18px, 4.8vw, 40px);
+    --panel-pad-x: clamp(18px, 4.8vw, 40px);
+    --header-h: clamp(38px, 5vw, 50px);
+    --header-gap: clamp(18px, 3.2vh, 36px);
+    --sound-size: 36px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) and (max-height: 520px) {
+  :root {
+    --shell-gap: 8px;
+    --panel-pad-y: 14px;
+    --panel-pad-x: 22px;
+    --header-h: 34px;
+    --header-gap: 10px;
+    --sound-size: 30px;
+  }
+}
+
+.layout-body-content > :not(router-outlet) > * > * {
+  animation: sps-rise .7s var(--sps-ease-out) backwards;
+}
+
+.layout-body-content > :not(router-outlet) > * > :nth-child(1) { animation-delay: .05s; }
+.layout-body-content > :not(router-outlet) > * > :nth-child(2) { animation-delay: .15s; }
+.layout-body-content > :not(router-outlet) > * > :nth-child(3) { animation-delay: .25s; }
+.layout-body-content > :not(router-outlet) > * > :nth-child(4) { animation-delay: .35s; }
+
+/* Cartes d'options : cascade puis "pop" à la sélection */
+
+.layout-body-content [class$="-options"] label {
+  animation: sps-rise .6s var(--sps-ease-out) backwards;
+}
+
+.layout-body-content [class$="-options"] label:nth-child(1) { animation-delay: .25s; }
+.layout-body-content [class$="-options"] label:nth-child(2) { animation-delay: .32s; }
+.layout-body-content [class$="-options"] label:nth-child(3) { animation-delay: .39s; }
+.layout-body-content [class$="-options"] label:nth-child(4) { animation-delay: .46s; }
+.layout-body-content [class$="-options"] label:nth-child(n+5) { animation-delay: .53s; }
+
+.layout-body-content [class$="-options"] label.active:nth-child(n) {
+  animation: sps-pick .45s var(--sps-ease-out);
+}
+
+/* Boutons de navigation : retour tactile */
+
+[class*="-navigation-button"],
+.hero-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+[class*="-navigation-button"]:not(:disabled):active,
+.hero-btn:active {
+  scale: .97;
+  transition: scale .1s ease;
+}
+
+@keyframes sps-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes sps-pick {
+  0%   { scale: 1; }
+  40%  { scale: 1.025; }
+  100% { scale: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

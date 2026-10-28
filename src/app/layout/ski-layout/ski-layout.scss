@@ -44,6 +44,7 @@ PANEL — DESKTOP ORIGINAL
     position:relative;
     width:min(1680px,92vw);
     aspect-ratio:1920/1080;
+    animation:layout-panel-in .9s cubic-bezier(.22,1,.36,1) both;
 }
 
 .layout-panel-picture{
@@ -116,15 +117,18 @@ HEADER — DESKTOP ORIGINAL
 
 .step-number{
     position:relative;
+    padding:0;
+    border:0;
+    background:none;
     color:rgba(255,255,255,.5);
+    font:inherit;
     font-size:14px;
+    line-height:1;
+    cursor:default;
+    transition:color .3s ease, transform .3s ease;
 }
 
-.step-number.active{
-    color:#00eaff;
-}
-
-.step-number.active::after{
+.step-number::after{
     content:"";
     position:absolute;
     left:0;
@@ -132,10 +136,54 @@ HEADER — DESKTOP ORIGINAL
     width:100%;
     height:2px;
     background:#00eaff;
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.step-number.active{
+    color:#00eaff;
+}
+
+.step-number.active::after{
+    transform:scaleX(1);
 }
 
 .step-number.completed{
     color:#00bfff;
+    cursor:pointer;
+}
+
+.step-number.completed:hover,
+.step-number.completed:focus-visible{
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.step-number:focus-visible{
+    outline:2px solid #00eaff;
+    outline-offset:4px;
+    border-radius:2px;
+}
+
+.layout-mobile-progress{
+    display:block;
+    width:100%;
+    min-width:96px;
+    height:2px;
+    margin-top:6px;
+    border-radius:2px;
+    background:rgba(255,255,255,.18);
+    overflow:hidden;
+}
+
+.layout-mobile-progress > span{
+    display:block;
+    height:100%;
+    min-width:6px;
+    background:#00eaff;
+    border-radius:inherit;
+    transition:width .6s cubic-bezier(.22,1,.36,1);
 }
 
 .layout-mobile-step{
@@ -176,868 +224,178 @@ BODY — DESKTOP ORIGINAL
     min-height:0;
 }
 
+/* Accueil : pas d'indicateur d'étape tant que le questionnaire n'a pas commencé */
+.is-home .layout-steps-container,
+.is-home .layout-mobile-step{
+    visibility:hidden;
+}
+
 /*==========================================================
-RESPONSIVE V2
-TABLET
-601px → 1024px
+DESKTOP SCALING — 1025px +
+Le contenu est dessiné à 1680 × 945 px puis mis à l'échelle
+(--panel-scale calculé dans ski-layout.ts) : rendu identique
+sur 1366, 1440, 1920 px ou plus, sans débordement en hauteur.
 ==========================================================*/
 
-@media screen and (min-width:601px) and (max-width:1024px){
-
-    :host{
-
-        width:100%;
-        height:100dvh;
-
-        overflow:hidden;
-    }
-
-    .layout-container{
-
-        width:100%;
-        height:100dvh;
-
-        overflow:hidden;
-    }
-
-
-    /*======================================================
-    BACKGROUND
-    ======================================================*/
-
-    .layout-bg-video{
-
-        object-fit:cover;
-        object-position:center;
-    }
-
-
-    /*======================================================
-    WRAPPER
-    ======================================================*/
-
-    .layout-panel-wrapper{
-
-        position:absolute;
-        inset:0;
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-
-        padding:20px;
-    }
-
-
-    /*======================================================
-    PANEL
-    ======================================================*/
+@media screen and (min-width:1025px){
 
     .layout-panel{
-
-        position:relative;
-
-        width:min(430px,100%);
-        height:100%;
-
-        max-height:900px;
-
-        border-radius:0;
-
-        overflow:hidden;
-
-        background:
-
-            linear-gradient(
-
-                180deg,
-
-                rgba(42,42,42,.35),
-
-                rgba(20,20,20,.28)
-
-            );
-
-        backdrop-filter:blur(14px);
-
-        -webkit-backdrop-filter:blur(14px);
-
-        border:1px solid rgba(255,255,255,.08);
-
-        box-shadow:
-
-            0 25px 70px rgba(0,0,0,.45);
+        width:min(1920px, 92vw, calc((100vh - 24px) * 16 / 9));
     }
-
-
-    .layout-panel::before{
-
-        content:"";
-
-        position:absolute;
-
-        inset:0;
-
-        background:
-
-            linear-gradient(
-
-                180deg,
-
-                rgba(255,255,255,.02),
-
-                rgba(0,0,0,.10)
-
-            );
-
-        pointer-events:none;
-
-        z-index:0;
-    }
-
-
-    /*======================================================
-    REMOVE PANEL IMAGE
-    ======================================================*/
-
-    .layout-panel-picture{
-
-        display:none !important;
-    }
-
-
-    /*======================================================
-    CONTENT
-    ======================================================*/
-
-    .layout-panel-content{
-
-        position:absolute;
-
-        inset:0;
-
-        z-index:2;
-
-        display:flex;
-
-        flex-direction:column;
-
-        padding:28px;
-    }
-
 
     .layout-safe-area{
-
-        display:flex;
-
-        flex-direction:column;
-
-        width:100%;
-        height:100%;
+        width:1680px;
+        height:945px;
+        transform:scale(var(--panel-scale,1));
+        transform-origin:0 0;
     }
-
-
-    /*======================================================
-    HEADER
-    ======================================================*/
-
-    .layout-header{
-
-        position:relative;
-
-        inset:auto;
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:center;
-
-        margin-bottom:34px;
-    }
-
-
-    .layout-header-left{
-
-        display:flex;
-
-        flex-direction:column;
-    }
-
-
-    /* cacher le header desktop */
-
-    .layout-header-title{
-
-        display:none;
-    }
-
-    .layout-steps-container{
-
-        display:none;
-    }
-
-
-    /* afficher uniquement Step X of 7 */
-
-    .layout-mobile-step{
-
-        display:block;
-
-        color:#fff;
-
-        font-size:13px;
-
-        font-weight:600;
-
-        letter-spacing:.02em;
-    }
-
-
-    .layout-header-right{
-
-        display:flex;
-
-        align-items:center;
-    }
-
-
-    .layout-logo{
-
-        width:120px;
-
-        height:auto;
-
-        transform:none;
-    }
-
-
-    /*======================================================
-    BODY
-    ======================================================*/
-
-    .layout-body{
-
-        position:relative;
-
-        inset:auto;
-
-        flex:1;
-
-        min-height:0;
-
-        overflow:hidden;
-    }
-
-
-    .layout-body-content{
-
-        width:100%;
-        height:100%;
-
-        display:flex;
-
-        flex-direction:column;
-
-        min-width:0;
-        min-height:0;
-    }
-
 }
-/*==========================================================
-RESPONSIVE V2
-MOBILE
-0px → 600px
-==========================================================*/
 
-@media screen and (max-width:600px){
-
-    :host{
-
-        width:100%;
-        height:100dvh;
-
-        overflow:hidden;
+@keyframes layout-panel-in{
+    from{
+        opacity:0;
+        scale:.97;
     }
-
-    .layout-container{
-
-        width:100%;
-        height:100dvh;
-
-        overflow:hidden;
-    }
-
-
-    /*======================================================
-    BACKGROUND
-    ======================================================*/
-
-    .layout-bg-video{
-
-        object-fit:cover;
-        object-position:center;
-    }
-
-
-    /*======================================================
-    WRAPPER
-    ======================================================*/
-
-    .layout-panel-wrapper{
-
-        position:absolute;
-        inset:0;
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-
-        padding:16px;
-    }
-
-
-    /*======================================================
-    GLASS PANEL
-    ======================================================*/
-
-    .layout-panel{
-
-        position:relative;
-
-        width:min(390px,100%);
-        height:100%;
-
-        max-height:860px;
-
-        overflow:hidden;
-
-        border-radius:0;
-
-        background:
-
-            linear-gradient(
-
-                180deg,
-
-                rgba(45,45,45,.32),
-
-                rgba(20,20,20,.24)
-
-            );
-
-        backdrop-filter:blur(18px);
-
-        -webkit-backdrop-filter:blur(18px);
-
-        border:1px solid rgba(255,255,255,.06);
-
-        box-shadow:
-
-            0 18px 60px rgba(0,0,0,.48);
-    }
-
-
-    .layout-panel::before{
-
-        content:"";
-
-        position:absolute;
-        inset:0;
-
-        background:
-
-            linear-gradient(
-
-                180deg,
-
-                rgba(255,255,255,.03),
-
-                rgba(0,0,0,.12)
-
-            );
-
-        pointer-events:none;
-
-        z-index:0;
-    }
-
-
-    /*======================================================
-    REMOVE PNG PANEL
-    ======================================================*/
-
-    .layout-panel-picture{
-
-        display:none !important;
-    }
-
-
-    /*======================================================
-    CONTENT
-    ======================================================*/
-
-    .layout-panel-content{
-
-        position:absolute;
-
-        inset:0;
-
-        z-index:2;
-
-        display:flex;
-
-        flex-direction:column;
-
-        padding:
-
-            26px
-            20px
-            18px;
-    }
-
-
-    .layout-safe-area{
-
-        display:flex;
-
-        flex-direction:column;
-
-        width:100%;
-        height:100%;
-    }
-
-
-    /*======================================================
-    HEADER
-    ======================================================*/
-
-    .layout-header{
-
-        position:relative;
-
-        inset:auto;
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:center;
-
-        margin-bottom:26px;
-    }
-
-
-    .layout-header-left{
-
-        display:flex;
-
-        flex-direction:column;
-    }
-
-
-    /* cacher desktop */
-
-    .layout-header-title{
-
-        display:none;
-    }
-
-    .layout-steps-container{
-
-        display:none;
-    }
-
-
-    /* afficher uniquement Step */
-
-    .layout-mobile-step{
-
-        display:block;
-
-        color:#fff;
-
-        font-size:13px;
-
-        font-weight:600;
-
-        letter-spacing:.02em;
-    }
-
-
-    .layout-header-right{
-
-        display:flex;
-
-        align-items:center;
-    }
-
-
-    .layout-logo{
-
-        width:110px;
-
-        height:auto;
-
-        transform:none;
-    }
-
-
-    /*======================================================
-    BODY
-    ======================================================*/
-
-    .layout-body{
-
-        position:relative;
-
-        inset:auto;
-
-        flex:1;
-
-        min-height:0;
-
-        overflow:hidden;
-    }
-
-
-    .layout-body-content{
-
-        display:flex;
-
-        flex-direction:column;
-
-        width:100%;
-        height:100%;
-
-        min-width:0;
-        min-height:0;
-    }
-
-}
-/*==========================================================
-RESPONSIVE V2
-PARTIE 3/3
-SMALL MOBILE + LANDSCAPE + SAFE AREA + FINITIONS
-==========================================================*/
-
-
-/*==========================================================
-SMALL MOBILE
-==========================================================*/
-
-@media screen and (max-width:390px){
-
-    .layout-panel-wrapper{
-        padding:12px;
-    }
-
-    .layout-panel{
-        width:100%;
-        height:100%;
-
-        max-height:none;
-    }
-
-    .layout-panel-content{
-        padding:
-            22px
-            16px
-            14px;
-    }
-
-    .layout-header{
-        margin-bottom:22px;
-    }
-
-    .layout-mobile-step{
-        font-size:12px;
-    }
-
-    .layout-logo{
-        width:100px;
+    to{
+        opacity:1;
+        scale:1;
     }
 }
 
 
 /*==========================================================
-EXTRA SMALL MOBILE
-==========================================================*/
-
-@media screen and (max-width:340px){
-
-    .layout-panel-wrapper{
-        padding:8px;
-    }
-
-    .layout-panel-content{
-        padding:
-            18px
-            14px
-            12px;
-    }
-
-    .layout-header{
-        margin-bottom:18px;
-    }
-
-    .layout-mobile-step{
-        font-size:11px;
-    }
-
-    .layout-logo{
-        width:90px;
-    }
-}
-
-
-/*==========================================================
-SHORT MOBILE
-==========================================================*/
-
-@media screen
-and (max-width:600px)
-and (max-height:760px){
-
-    .layout-panel-wrapper{
-        padding:10px;
-    }
-
-    .layout-panel-content{
-        padding:
-            18px
-            16px
-            12px;
-    }
-
-    .layout-header{
-        margin-bottom:16px;
-    }
-
-    .layout-mobile-step{
-        font-size:11px;
-    }
-
-    .layout-logo{
-        width:92px;
-    }
-}
-
-
-/*==========================================================
-VERY SHORT MOBILE
-==========================================================*/
-
-@media screen
-and (max-width:600px)
-and (max-height:650px){
-
-    .layout-panel-wrapper{
-        padding:6px;
-    }
-
-    .layout-panel-content{
-        padding:
-            14px
-            14px
-            10px;
-    }
-
-    .layout-header{
-        margin-bottom:12px;
-    }
-
-    .layout-mobile-step{
-        font-size:10px;
-    }
-
-    .layout-logo{
-        width:84px;
-    }
-}
-
-
-/*==========================================================
-MOBILE LANDSCAPE
-==========================================================*/
-
-@media screen
-and (orientation:landscape)
-and (max-height:600px){
-
-    .layout-panel-wrapper{
-        padding:10px 16px;
-    }
-
-    .layout-panel{
-        width:100%;
-        height:100%;
-
-        max-width:none;
-        max-height:none;
-    }
-
-    .layout-panel-content{
-        padding:
-            14px
-            22px
-            10px;
-    }
-
-    .layout-header{
-        margin-bottom:12px;
-    }
-
-    .layout-mobile-step{
-        font-size:11px;
-    }
-
-    .layout-logo{
-        width:96px;
-    }
-
-    .layout-body{
-        min-height:0;
-    }
-}
-
-
-/*==========================================================
-TABLET LANDSCAPE FINISH
-==========================================================*/
-
-@media screen
-and (min-width:601px)
-and (max-width:1024px)
-and (orientation:landscape){
-
-    .layout-panel-wrapper{
-        padding:16px;
-    }
-
-    .layout-panel{
-        width:min(820px,100%);
-        height:100%;
-    }
-
-    .layout-panel-content{
-        padding:
-            24px
-            28px
-            18px;
-    }
-
-    .layout-header{
-        margin-bottom:24px;
-    }
-
-    .layout-logo{
-        width:115px;
-    }
-}
-
-
-/*==========================================================
-SAFE AREA
-==========================================================*/
-
-@supports (padding:env(safe-area-inset-top)){
-
-    @media screen and (max-width:1024px){
-
-        .layout-panel-wrapper{
-            padding-top:
-                max(10px,env(safe-area-inset-top));
-
-            padding-right:
-                max(10px,env(safe-area-inset-right));
-
-            padding-bottom:
-                max(10px,env(safe-area-inset-bottom));
-
-            padding-left:
-                max(10px,env(safe-area-inset-left));
-        }
-
-        .layout-panel-content{
-            padding-top:
-                max(18px,env(safe-area-inset-top));
-
-            padding-right:
-                max(16px,env(safe-area-inset-right));
-
-            padding-bottom:
-                max(12px,env(safe-area-inset-bottom));
-
-            padding-left:
-                max(16px,env(safe-area-inset-left));
-        }
-    }
-}
-
-
-/*==========================================================
-FORCE RESPONSIVE HEADER
+RESPONSIVE (≤ 1024px)
+Panneau vitré plein écran, marges fluides, en-tête unifié :
+[ STEP 3 / 7 ▬▬ ]              [ LOGO ] [ ♪ ]
+Les variables --shell-* sont définies dans styles.css
+(partagées avec le bouton son global).
 ==========================================================*/
 
 @media screen and (max-width:1024px){
+
+    :host,
+    .layout-container{
+        width:100%;
+        height:100vh;
+        height:100dvh;
+    }
+
+    .layout-panel-wrapper{
+        padding:
+            var(--shell-top)
+            var(--shell-right)
+            var(--shell-bottom)
+            var(--shell-left);
+    }
+
+    .layout-panel{
+        width:100%;
+        height:100%;
+        aspect-ratio:auto;
+        overflow:hidden;
+        border:1px solid rgba(255,255,255,.09);
+        border-radius:var(--shell-radius);
+        background:
+            linear-gradient(
+                180deg,
+                rgba(34,34,36,.55) 0%,
+                rgba(14,14,16,.42) 55%,
+                rgba(10,10,12,.30) 100%
+            );
+        backdrop-filter:blur(18px) saturate(120%);
+        -webkit-backdrop-filter:blur(18px) saturate(120%);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.07),
+            0 24px 60px rgba(0,0,0,.45);
+    }
+
+    /* fin liseré lumineux en haut du panneau */
+    .layout-panel::before{
+        content:"";
+        position:absolute;
+        top:0;
+        left:12%;
+        right:12%;
+        height:1px;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+        pointer-events:none;
+        z-index:3;
+    }
+
+    .layout-panel-picture{
+        display:none;
+    }
+
+    .layout-panel-content{
+        position:absolute;
+        inset:0;
+        z-index:2;
+        padding:var(--panel-pad-y) var(--panel-pad-x);
+    }
+
+    .layout-safe-area{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        height:100%;
+        transform:none;
+    }
+
+    /* En-tête */
+
+    .layout-header{
+        position:relative;
+        inset:auto;
+        flex:0 0 auto;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        height:var(--header-h);
+        margin:0 0 var(--header-gap);
+    }
 
     .layout-header-title,
     .layout-steps-container{
-        display:none !important;
+        display:none;
     }
 
     .layout-mobile-step{
-        display:block !important;
+        display:block;
+        color:rgba(255,255,255,.78);
+        font-size:11px;
+        font-weight:700;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+        line-height:1;
     }
 
-    .layout-header{
-        flex-direction:row !important;
-        justify-content:space-between !important;
-        align-items:center !important;
+    .layout-mobile-progress{
+        width:clamp(96px,26vw,160px);
+        margin-top:9px;
     }
 
-    .layout-header-left,
     .layout-header-right{
+        /* place réservée au bouton son global */
+        padding-right:calc(var(--sound-size) + 12px);
+    }
+
+    .layout-logo{
         width:auto;
+        height:calc(var(--header-h) - 4px);
+        max-width:40vw;
+        transform:none;
+    }
+
+    /* Corps */
+
+    .layout-body{
+        position:relative;
+        inset:auto;
+        flex:1 1 auto;
+        min-height:0;
+        overflow:hidden;
     }
 }
-
-
-/*==========================================================
-FORCE TRANSPARENT PANEL
-==========================================================*/
-
-@media screen and (max-width:1024px){
-
-    .layout-panel-picture{
-        display:none !important;
-    }
-
-    .layout-panel{
-        background:
-            linear-gradient(
-                180deg,
-                rgba(38,38,38,.26),
-                rgba(16,16,16,.18)
-            ) !important;
-
-        backdrop-filter:blur(14px);
-        -webkit-backdrop-filter:blur(14px);
-
-        border:1px solid rgba(255,255,255,.07);
-    }
-
-    .layout-panel::before{
-        background:
-            linear-gradient(
-                180deg,
-                rgba(255,255,255,.025),
-                rgba(0,0,0,.08)
-            );
-    }
-}
-
 
 /*==========================================================
 TOUCH DEVICES
@@ -1048,11 +406,9 @@ TOUCH DEVICES
     .layout-logo{
         user-select:none;
         -webkit-user-select:none;
-
         pointer-events:none;
     }
 }
-
 
 /*==========================================================
 REDUCED MOTION
@@ -1060,13 +416,11 @@ REDUCED MOTION
 
 @media (prefers-reduced-motion:reduce){
 
-    .layout-bg-video{
-        animation:none !important;
-        transition:none !important;
-    }
-
     .layout-panel,
-    .layout-panel::before{
+    .step-number,
+    .step-number::after,
+    .layout-mobile-progress > span{
+        animation:none !important;
         transition:none !important;
     }
 }

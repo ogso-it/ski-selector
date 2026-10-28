@@ -1,3 +1,5 @@
+@use '../step-responsive' as r;
+
 /*==========================================================
 STEP 1
 ROOT
@@ -136,8 +138,18 @@ MAIN CONTENT
         170px
         190px;
 
+    /*
+     * 3 lignes partagées par les 3 colonnes : valeur / barre / libellé.
+     * Le ski occupe la ligne des barres : même hauteur, même alignement.
+     */
+    grid-template-rows:
+        auto
+        270px
+        auto;
+
     justify-content:center;
-    align-items:center;
+    align-content:center;
+    align-items:stretch;
 
     column-gap:82px;
 
@@ -158,14 +170,7 @@ MEASUREMENT COLUMN
 ==========================================================*/
 
 .measurement{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-
-    width:190px;
-
-    min-width:0;
+    display:contents;
 }
 
 
@@ -173,12 +178,26 @@ MEASUREMENT COLUMN
 MEASUREMENT ALIGNMENT
 ==========================================================*/
 
-.measurement-height{
-    justify-self:end;
+.measurement-height > *{
+    grid-column:1;
+    justify-self:center;
 }
 
-.measurement-weight{
-    justify-self:start;
+.measurement-weight > *{
+    grid-column:3;
+    justify-self:center;
+}
+
+.measurement-value{
+    grid-row:1;
+}
+
+.slider{
+    grid-row:2;
+}
+
+.measurement-label{
+    grid-row:3;
 }
 
 
@@ -430,18 +449,19 @@ SKI PREVIEW
     align-items:center;
     justify-content:center;
 
+    grid-column:2;
+    grid-row:2;
+
     justify-self:center;
-    align-self:center;
+    align-self:stretch;
 
     width:125px;
-    height:310px;
+    height:auto;
 
     min-width:0;
     min-height:0;
 
     overflow:visible;
-
-    transform:translateY(18px);
 }
 
 
@@ -461,7 +481,10 @@ SKI VIDEO
     object-fit:contain;
     object-position:center center;
 
-    transform:scale(2.38);
+    /* --fit-* : le ski est ajusté à la hauteur exacte des barres (fit-video.directive.ts) */
+    transform:
+        translate(var(--fit-x, 0px), var(--fit-y, 0px))
+        scale(var(--fit-scale, 2.38));
     transform-origin:center center;
 
     pointer-events:none;
@@ -701,945 +724,101 @@ BUTTON STATES
 
 
 /*==========================================================
-STEP 1
-TABLET
-601 → 1024px
+RESPONSIVE (≤ 1024px) — système commun : ../_step-responsive.scss
 ==========================================================*/
 
-@media screen and (min-width:601px) and (max-width:1024px){
+@include r.shell('step1');
 
-    .step1{
+/*----------------------------------------------------------
+STEP 1 : taille | ski | poids
+Même grille que le desktop (valeur / barre / libellé) ;
+la ligne des barres prend toute la hauteur disponible et
+le ski s'y ajuste exactement.
+----------------------------------------------------------*/
 
-        display:flex;
-        flex-direction:column;
+@media #{r.$tablet-down} {
 
-        width:100%;
-        height:100%;
-
-        min-width:0;
-        min-height:0;
-
-        overflow:hidden;
+    .step1-controls {
+        flex: 1 1 auto;
+        grid-template-columns: minmax(0, 1fr) minmax(0, .9fr) minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        align-content: stretch;
+        justify-content: stretch;
+        column-gap: clamp(8px, 3vw, 40px);
+        width: min(100%, 620px);
+        height: auto;
+        min-height: 0;
+        /* barres et ski gardent une hauteur raisonnable sur grand écran */
+        max-height: 600px;
+        margin: auto;
+        padding: clamp(16px, 3vh, 36px) 0 clamp(14px, 2.4vh, 28px);
+        transform: none;
     }
 
-
-    /*======================================================
-    COPY
-    ======================================================*/
-
-    .step1-copy{
-
-        flex:0 0 auto;
-
-        padding:0;
-
-        margin-bottom:34px;
+    .measurement-value {
+        width: auto;
+        margin-bottom: clamp(12px, 2vh, 22px);
     }
 
-    .step1-title{
-
-        width:100%;
-        max-width:520px;
-
-        margin:0;
-
-        font-size:44px;
-        font-weight:700;
-
-        line-height:.95;
-
-        letter-spacing:-.05em;
+    .measurement-value strong {
+        font-size: clamp(38px, min(11vw, 5.6vh), 56px);
     }
 
-    .step1-description{
-
-        width:100%;
-        max-width:430px;
-
-        margin-top:14px;
-
-        font-size:16px;
-
-        line-height:1.45;
+    .measurement-value span {
+        font-size: clamp(13px, 1.8vh, 16px);
     }
 
-
-    /*======================================================
-    CONTENT
-    ======================================================*/
-
-    .step1-controls{
-
-        flex:1;
-
-        display:flex;
-
-        align-items:center;
-        justify-content:center;
-
-        gap:42px;
-
-        width:100%;
-
-        min-height:0;
-
-        transform:none;
+    .slider {
+        height: auto;
+        min-height: 0;
     }
 
-
-    /*======================================================
-    HEIGHT / WEIGHT
-    ======================================================*/
-
-    .measurement{
-
-        width:115px;
-
-        display:flex;
-        flex-direction:column;
-
-        align-items:center;
+    .measurement-label {
+        width: auto;
+        margin-top: clamp(12px, 2vh, 20px);
+        font-size: 12px;
+        letter-spacing: .08em;
     }
 
-    .measurement-value{
-
-        margin-bottom:18px;
+    .ski-preview {
+        width: 100%;
     }
 
-    .measurement-value strong{
-
-        font-size:48px;
+    .ski-video {
+        position: absolute;
+        inset: 0;
     }
 
-    .measurement-value span{
-
-        margin-left:5px;
-
-        font-size:13px;
+    .ski-preview::before {
+        bottom: -4px;
+        width: 60%;
     }
-
-    .measurement-label{
-
-        margin-top:16px;
-
-        font-size:11px;
-
-        letter-spacing:.06em;
-    }
-
-
-    /*======================================================
-    SLIDER
-    ======================================================*/
-
-    .slider{
-
-        width:40px;
-        height:215px;
-
-        min-height:215px;
-    }
-
-    .slider-track,
-    .slider-fill{
-
-        width:4px;
-    }
-
-    .slider-thumb{
-
-        width:24px;
-        height:24px;
-
-        border-width:4px;
-    }
-
-
-    /*======================================================
-    SKI
-    ======================================================*/
-
-   .ski-preview{
-
-    width:100px;
-    height:290px;
 }
 
-.ski-video{
+@media #{r.$landscape} {
 
-    transform:scale(2.10);
+    .step1-controls {
+        width: min(100%, 560px);
+        padding: clamp(8px, 2vh, 20px) 0;
+    }
+
+    .measurement-value strong {
+        font-size: clamp(26px, 7vh, 52px);
+    }
+
+    .measurement-value {
+        margin-bottom: 8px;
+    }
+
+    .measurement-label {
+        margin-top: 8px;
+    }
 }
 
-    .ski-video{
+@media (hover: none) {
 
-        transform:scale(1.75);
+    .slider:hover .slider-thumb {
+        width: 26px;
+        height: 26px;
     }
-
-
-    /*======================================================
-    FOOTER
-    ======================================================*/
-
-    .step1-footer{
-
-        flex:0 0 auto;
-
-        height:68px;
-
-        margin-top:26px;
-    }
-
-    .step1-footer-actions{
-
-        width:100%;
-
-        display:flex;
-
-        justify-content:space-between;
-        align-items:center;
-    }
-
-    .step1-navigation-button{
-
-        min-width:130px;
-        height:44px;
-
-        padding:0 22px;
-
-        font-size:14px;
-    }
-
-
-    /*======================================================
-    PORTRAIT
-    ======================================================*/
-
-    @media (orientation:portrait){
-
-        .step1-copy{
-
-            margin-bottom:42px;
-        }
-
-        .step1-controls{
-
-            gap:34px;
-        }
-
-        .measurement{
-
-            width:105px;
-        }
-
-        .slider{
-
-            height:205px;
-        }
-
-        .ski-preview{
-
-    width:96px;
-    height:280px;
 }
-
-.ski-video{
-
-    transform:scale(2.05);
-}
-
-        .ski-video{
-
-            transform:scale(1.65);
-        }
-
-    }
-
-
-    /*======================================================
-    LANDSCAPE
-    ======================================================*/
-
-    @media (orientation:landscape){
-
-        .step1-copy{
-
-            margin-bottom:24px;
-        }
-
-        .step1-title{
-
-            font-size:40px;
-        }
-
-        .step1-description{
-
-            font-size:15px;
-        }
-
-        .step1-controls{
-
-            gap:50px;
-        }
-
-        .measurement{
-
-            width:120px;
-        }
-
-        .slider{
-
-            height:195px;
-        }
-
-       .ski-preview{
-
-    width:108px;
-    height:270px;
-}
-
-.ski-video{
-
-    transform:scale(2.08);
-}
-
-        .ski-video{
-
-            transform:scale(1.70);
-        }
-
-        .step1-footer{
-
-            margin-top:18px;
-        }
-
-    }
-
-}
-/*==========================================================
-STEP 1
-MOBILE
-0 → 600px
-==========================================================*/
-
-@media screen and (max-width:600px){
-
-    .step1{
-
-        display:flex;
-        flex-direction:column;
-
-        width:100%;
-        height:100%;
-
-        min-width:0;
-        min-height:0;
-
-        overflow:hidden;
-    }
-
-
-    /*======================================================
-    COPY
-    ======================================================*/
-
-    .step1-copy{
-
-        flex:0 0 auto;
-
-        padding:0;
-
-        margin-bottom:26px;
-    }
-
-    .step1-title{
-
-        margin:0;
-
-        max-width:300px;
-
-        font-size:36px;
-        font-weight:700;
-
-        line-height:.95;
-
-        letter-spacing:-.05em;
-    }
-
-    .step1-description{
-
-        margin-top:12px;
-
-        max-width:280px;
-
-        font-size:14px;
-
-        line-height:1.42;
-    }
-
-
-    /*======================================================
-    CONTENT
-    ======================================================*/
-
-    .step1-controls{
-
-        flex:1;
-
-        display:flex;
-
-        justify-content:center;
-        align-items:center;
-
-        gap:20px;
-
-        width:100%;
-
-        min-height:0;
-
-        transform:none;
-    }
-
-
-    /*======================================================
-    MEASUREMENTS
-    ======================================================*/
-
-    .measurement{
-
-        width:82px;
-
-        display:flex;
-        flex-direction:column;
-
-        align-items:center;
-    }
-
-    .measurement-value{
-
-        margin-bottom:14px;
-    }
-
-    .measurement-value strong{
-
-        font-size:40px;
-    }
-
-    .measurement-value span{
-
-        margin-left:4px;
-
-        margin-bottom:4px;
-
-        font-size:11px;
-    }
-
-    .measurement-label{
-
-        margin-top:14px;
-
-        font-size:10px;
-
-        letter-spacing:.05em;
-    }
-
-
-    /*======================================================
-    SLIDERS
-    ======================================================*/
-
-    .slider{
-
-        width:34px;
-        height:185px;
-
-        min-height:185px;
-    }
-
-    .slider-track,
-    .slider-fill{
-
-        width:4px;
-    }
-
-    .slider-thumb{
-
-        width:22px;
-        height:22px;
-
-        border-width:4px;
-    }
-
-
-    /*======================================================
-    SKI
-    ======================================================*/
-
-    .ski-preview{
-
-    width:82px;
-    height:245px;
-}
-
-.ski-video{
-
-    transform:scale(1.90);
-}
-
-    .ski-video{
-
-        transform:scale(2.20);
-    }
-
-
-    /*======================================================
-    FOOTER
-    ======================================================*/
-
-    .step1-footer{
-
-        flex:0 0 auto;
-
-        margin-top:22px;
-
-        height:62px;
-    }
-
-    .step1-footer-actions{
-
-        display:grid;
-
-        grid-template-columns:1fr 1fr;
-
-        gap:10px;
-
-        width:100%;
-    }
-
-    .step1-navigation-button{
-
-        width:100%;
-
-        min-width:0;
-
-        height:42px;
-
-        padding:0 12px;
-
-        font-size:12px;
-    }
-
-    .step1-navigation-button span[aria-hidden="true"]{
-
-        font-size:15px;
-    }
-
-}
-
-
-/*==========================================================
-SMALL MOBILE
-==========================================================*/
-
-@media screen and (max-width:390px){
-
-    .step1-title{
-
-        max-width:260px;
-
-        font-size:31px;
-    }
-
-    .step1-description{
-
-        max-width:245px;
-
-        font-size:13px;
-    }
-
-    .step1-controls{
-
-        gap:16px;
-    }
-
-    .measurement{
-
-        width:72px;
-    }
-
-    .measurement-value strong{
-
-        font-size:36px;
-    }
-
-    .slider{
-
-        width:30px;
-        height:165px;
-    }
-
-  .ski-preview{
-
-    width:72px;
-    height:220px;
-}
-
-.ski-video{
-
-    transform:scale(2.00);
-}
-    .step1-footer{
-
-        margin-top:18px;
-
-        height:58px;
-    }
-
-    .step1-navigation-button{
-
-        height:38px;
-
-        font-size:11px;
-    }
-
-}
-
-
-/*==========================================================
-EXTRA SMALL
-==========================================================*/
-
-@media screen and (max-width:340px){
-
-    .step1-title{
-
-        font-size:28px;
-    }
-
-    .step1-description{
-
-        font-size:12px;
-    }
-
-    .step1-controls{
-
-        gap:12px;
-    }
-
-    .measurement{
-
-        width:66px;
-    }
-
-    .measurement-value strong{
-
-        font-size:32px;
-    }
-
-    .slider{
-
-        height:150px;
-    }
-
-    .ski-preview{
-
-        width:50px;
-        height:170px;
-    }
-
-    .ski-video{
-
-        transform:scale(1.30);
-    }
-
-}/*==========================================================
-STEP 1
-RESPONSIVE FINAL
-LANDSCAPE + SHORT HEIGHT + SAFE AREA
-==========================================================*/
-
-
-/*==========================================================
-SHORT HEIGHT
-==========================================================*/
-
-@media screen
-and (max-width:600px)
-and (max-height:760px){
-
-    .step1-copy{
-
-        margin-bottom:18px;
-    }
-
-    .step1-title{
-
-        font-size:30px;
-    }
-
-    .step1-description{
-
-        margin-top:8px;
-
-        font-size:12px;
-    }
-
-    .step1-controls{
-
-        gap:16px;
-    }
-
-    .measurement{
-
-        width:70px;
-    }
-
-    .measurement-value{
-
-        margin-bottom:10px;
-    }
-
-    .measurement-value strong{
-
-        font-size:34px;
-    }
-
-    .measurement-label{
-
-        margin-top:10px;
-
-        font-size:9px;
-    }
-
-    .slider{
-
-        width:30px;
-        height:150px;
-
-        min-height:150px;
-    }
-
-    .slider-thumb{
-
-        width:20px;
-        height:20px;
-    }
-
-    .ski-preview{
-
-        width:54px;
-        height:170px;
-    }
-
-    .ski-video{
-
-        transform:scale(1.34);
-    }
-
-    .step1-footer{
-
-        margin-top:14px;
-
-        height:54px;
-    }
-
-    .step1-navigation-button{
-
-        height:36px;
-
-        font-size:11px;
-    }
-
-}
-
-
-/*==========================================================
-MOBILE LANDSCAPE
-==========================================================*/
-
-@media screen
-and (orientation:landscape)
-and (max-height:520px){
-
-    .step1{
-
-        display:grid;
-
-        grid-template-columns:
-            1fr;
-
-        grid-template-rows:
-            auto
-            minmax(0,1fr)
-            46px;
-    }
-
-    .step1-copy{
-
-        margin-bottom:10px;
-    }
-
-    .step1-title{
-
-        max-width:420px;
-
-        font-size:26px;
-    }
-
-    .step1-description{
-
-        max-width:420px;
-
-        margin-top:6px;
-
-        font-size:10px;
-    }
-
-    .step1-controls{
-
-        gap:26px;
-    }
-
-    .measurement{
-
-        width:76px;
-    }
-
-    .measurement-value{
-
-        margin-bottom:6px;
-    }
-
-    .measurement-value strong{
-
-        font-size:28px;
-    }
-
-    .measurement-value span{
-
-        font-size:8px;
-    }
-
-    .measurement-label{
-
-        margin-top:6px;
-
-        font-size:8px;
-    }
-
-    .slider{
-
-        width:26px;
-        height:105px;
-    }
-
-    .slider-thumb{
-
-        width:18px;
-        height:18px;
-
-        border-width:3px;
-    }
-
-    .ski-preview{
-
-        width:58px;
-        height:115px;
-    }
-
-    .ski-video{
-
-        transform:scale(1.18);
-    }
-
-    .step1-footer{
-
-        margin-top:8px;
-
-        height:46px;
-    }
-
-    .step1-navigation-button{
-
-        height:32px;
-
-        font-size:10px;
-    }
-
-}
-
-
-/*==========================================================
-SAFE AREA
-==========================================================*/
-
-@supports (padding: env(safe-area-inset-bottom)){
-
-    @media screen and (max-width:600px){
-
-        .step1{
-
-            padding-bottom:env(safe-area-inset-bottom);
-        }
-
-    }
-
-}
-
-
-/*==========================================================
-TOUCH DEVICES
-==========================================================*/
-
-@media (hover:none){
-
-    .slider:hover .slider-thumb{
-
-        width:22px;
-        height:22px;
-
-        box-shadow:
-            0 4px 14px rgba(0,0,0,.28);
-    }
-
-    .step1-navigation-button:hover{
-
-        transform:none;
-    }
-
-}
-
-
-/*==========================================================
-REDUCED MOTION
-==========================================================*/
-
-@media (prefers-reduced-motion:reduce){
-
-    .ski-video,
-    .slider-thumb,
-    .step1-navigation-button{
-
-        transition:none !important;
-    }
-
-}
-
-
-/*==========================================================
-HIGH DPI
-==========================================================*/
-
-@media (-webkit-min-device-pixel-ratio:2),
-       (min-resolution:192dpi){
-
-    .ski-video{
-
-        image-rendering:auto;
-    }
-
-}
-
-
-/*==========================================================
-END STEP 1 RESPONSIVE
-==========================================================*/

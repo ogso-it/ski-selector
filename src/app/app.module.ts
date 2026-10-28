@@ -35,6 +35,7 @@ import { ChooseYourGearComponent } from './choose-your-gear/choose-your-gear.com
 import { HomeAnimationComponent } from './animation/home-animation/home-animation.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
+import { FitVideoDirective } from './shared/fit-video.directive';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { LottiePlayerComponent } from './lottie-player/lottie-player.component';
     SkiResultComponent,
     ChooseYourGearComponent,
     HomeAnimationComponent,
-    CarouselComponent
+    CarouselComponent,
+    FitVideoDirective
   ],
   imports: [
     BrowserModule,

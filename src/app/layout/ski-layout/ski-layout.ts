@@ -1,7 +1,23 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
+
+/*
+ * Largeur de référence du design desktop.
+ * Toutes les steps sont dessinées pour un panneau de 1680 × 945 px.
+ */
+const DESIGN_WIDTH = 1680;
 
 @Component({
   selector: 'app-ski-layout',
@@ -10,250 +26,124 @@ import { filter, Subscription } from 'rxjs';
   standalone: false
 })
 export class SkiLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
-  currentStep: number = 1;
-  private routerSubscription!: Subscription;
-  private isBrowser: boolean;
+
+  @ViewChild('panel')
+  private panelRef?: ElementRef<HTMLElement>;
+
+  @ViewChild('bgVideo')
+  private bgVideoRef?: ElementRef<HTMLVideoElement>;
+
+  readonly steps = [1, 2, 3, 4, 5, 6, 7];
+
+  currentStep = 1;
+
+  /** Page d'accueil : le questionnaire n'a pas encore commencé. */
+  isHome = true;
+
+  private routerSubscription?: Subscription;
+  private resizeObserver?: ResizeObserver;
+  private readonly isBrowser: boolean;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
+    @Inject(PLATFORM_ID) platformId: Object,
+    private router: Router,
+    private zone: NgZone
   ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    
-    // Initialiser la souscription aux événements de navigation uniquement dans le navigateur
-    if (this.isBrowser) {
-      this.routerSubscription = this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        this.updateCurrentStepFromUrl(event.urlAfterRedirects);
-      });
-    }
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  get progressPercent(): number {
+    return ((this.currentStep - 1) / (this.steps.length - 1)) * 100;
   }
 
   ngOnInit(): void {
-    // Mettre à jour l'étape courante au chargement initial
-    if (this.isBrowser) {
-      this.updateCurrentStepFromUrl(this.router.url);
-    }
+    this.updateCurrentStepFromUrl(this.router.url);
+
+    this.routerSubscription = this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(event => this.updateCurrentStepFromUrl(event.urlAfterRedirects));
   }
 
   ngAfterViewInit(): void {
-    // Initialiser la vidéo après le chargement de la vue
-    if (this.isBrowser) {
-      this.initVideo();
-    }
-  }
-
-  ngOnDestroy(): void {
-    // Nettoyer la souscription pour éviter les fuites mémoire
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
-  }
-
-  /**
-   * Met à jour l'étape courante en fonction de l'URL
-   * @param url L'URL à analyser
-   */
-  private updateCurrentStepFromUrl(url: string): void {
-    // Nettoyer l'URL (enlever les query params et ancres)
-    const cleanUrl = url.split('?')[0].split('#')[0];
-    
-    // Pattern pour trouver le numéro de l'étape
-    const stepPattern = /\/step(\d+)/;
-    const match = cleanUrl.match(stepPattern);
-    
-    if (match && match[1]) {
-      const stepNumber = parseInt(match[1], 10);
-      // Valider que c'est entre 1 et 7
-      if (stepNumber >= 1 && stepNumber <= 7) {
-        this.currentStep = stepNumber;
-      } else {
-        this.currentStep = 1;
-      }
-    } else {
-      // Pas de step dans l'URL (page d'accueil ou autre)
-      this.currentStep = 1;
-    }
-    
-    // Pour le debug (peut être retiré en production)
-    console.log('Current step:', this.currentStep, 'for URL:', url);
-  }
-
-  /**
-   * Initialise la vidéo background
-   */
-  private initVideo(): void {
-    // S'assurer qu'on est dans le navigateur
-    if (!this.isBrowser) return;
-
-    const video = document.querySelector('.layout-bg-video') as HTMLVideoElement;
-    if (!video) {
-      console.warn('Video element not found');
+    if (!this.isBrowser) {
       return;
     }
 
-    // Configuration pour mobile et desktop
-    video.muted = true;
-    video.playsInline = true;
-    video.disableRemotePlayback = true;
-    
-    // Attributs supplémentaires pour plus de compatibilité
-    video.setAttribute('playsinline', '');
-    video.setAttribute('muted', '');
-    video.setAttribute('autoplay', '');
-    video.setAttribute('loop', '');
-    video.setAttribute('disableRemotePlayback', '');
-    video.setAttribute('preload', 'auto');
-    
-    // Tenter de jouer la vidéo
-    this.attemptPlayVideo(video);
+    this.observePanelSize();
+    this.initVideo();
   }
 
-  /**
-   * Tente de jouer la vidéo avec gestion d'erreur
-   * @param video L'élément vidéo
-   */
-  private attemptPlayVideo(video: HTMLVideoElement): void {
-    const playPromise = video.play();
-    
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          console.log('Video playing successfully');
-        })
-        .catch(error => {
-          console.log('Video autoplay failed:', error);
-          this.showFallbackImage();
-          this.setupUserInteractionListener(video);
-        });
-    }
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
+    this.resizeObserver?.disconnect();
   }
 
-  /**
-   * Configure un listener pour jouer la vidéo après interaction utilisateur
-   * @param video L'élément vidéo
-   */
-  private setupUserInteractionListener(video: HTMLVideoElement): void {
-    const playVideoOnInteraction = () => {
-      video.play()
-        .then(() => {
-          console.log('Video started after user interaction');
-          this.hideFallbackImage();
-        })
-        .catch(e => {
-          console.log('Still failed to play video:', e);
-          this.showFallbackImage();
-        });
-      
-      // Retirer les listeners après la première interaction
-      document.removeEventListener('touchstart', playVideoOnInteraction);
-      document.removeEventListener('click', playVideoOnInteraction);
-      document.removeEventListener('scroll', playVideoOnInteraction);
-      document.removeEventListener('keydown', playVideoOnInteraction);
-    };
-
-    // Essayer avec différents événements pour plus de chances
-    document.addEventListener('touchstart', playVideoOnInteraction, { once: true });
-    document.addEventListener('click', playVideoOnInteraction, { once: true });
-    document.addEventListener('scroll', playVideoOnInteraction, { once: true });
-    document.addEventListener('keydown', playVideoOnInteraction, { once: true });
-  }
-
-  /**
-   * Affiche l'image de fallback
-   */
-  private showFallbackImage(): void {
-    const video = document.querySelector('.layout-bg-video') as HTMLVideoElement;
-    const fallback = document.querySelector('.layout-bg-fallback') as HTMLElement;
-    
-    if (video) {
-      video.style.display = 'none';
-    }
-    
-    if (fallback) {
-      fallback.style.display = 'block';
-      fallback.style.backgroundImage = 'url(assets/images/BACKGROUND-fallback.webp)';
-      fallback.style.backgroundSize = 'cover';
-      fallback.style.backgroundPosition = 'center';
-      fallback.style.backgroundRepeat = 'no-repeat';
-    }
-  }
-
-  /**
-   * Cache l'image de fallback
-   */
-  private hideFallbackImage(): void {
-    const video = document.querySelector('.layout-bg-video') as HTMLVideoElement;
-    const fallback = document.querySelector('.layout-bg-fallback') as HTMLElement;
-    
-    if (video) {
-      video.style.display = 'block';
-    }
-    
-    if (fallback) {
-      fallback.style.display = 'none';
-    }
-  }
-
-  /**
-   * Navigue vers une étape spécifique
-   * @param step Numéro de l'étape (1-7)
-   */
   goToStep(step: number): void {
-    if (step >= 1 && step <= 7) {
+    // On ne peut revenir que sur une étape déjà complétée
+    if (step >= 1 && step < this.currentStep) {
       this.router.navigate([`/ski/step${step}`]);
     }
   }
 
   /**
-   * Vérifie si une étape est active
-   * @param step Numéro de l'étape à vérifier
-   * @returns true si l'étape est active
+   * Met à jour l'étape courante en fonction de l'URL
    */
-  isStepActive(step: number): boolean {
-    return this.currentStep === step;
+  private updateCurrentStepFromUrl(url: string): void {
+    const cleanUrl = url.split('?')[0].split('#')[0];
+    const match = cleanUrl.match(/\/step(\d+)/);
+    const stepNumber = match ? parseInt(match[1], 10) : 1;
+
+    this.currentStep = stepNumber >= 1 && stepNumber <= 7 ? stepNumber : 1;
+    this.isHome = !match;
   }
 
   /**
-   * Obtient le numéro de l'étape suivante
-   * @returns Le numéro de l'étape suivante ou null si c'est la dernière
+   * Le contenu desktop est dessiné à taille fixe (1680 px) puis mis à
+   * l'échelle pour remplir le panneau, quelle que soit la taille d'écran.
    */
-  getNextStep(): number | null {
-    if (this.currentStep < 7) {
-      return this.currentStep + 1;
+  private observePanelSize(): void {
+    const panel = this.panelRef?.nativeElement;
+
+    if (!panel || typeof ResizeObserver === 'undefined') {
+      return;
     }
-    return null;
+
+    this.zone.runOutsideAngular(() => {
+      this.resizeObserver = new ResizeObserver(entries => {
+        const width = entries[0]?.contentRect.width ?? DESIGN_WIDTH;
+        panel.style.setProperty('--panel-scale', String(width / DESIGN_WIDTH));
+      });
+
+      this.resizeObserver.observe(panel);
+    });
   }
 
   /**
-   * Obtient le numéro de l'étape précédente
-   * @returns Le numéro de l'étape précédente ou null si c'est la première
+   * Initialise la vidéo background.
+   * Si l'autoplay est bloqué, l'image "poster" reste visible
+   * et la lecture est relancée à la première interaction.
    */
-  getPreviousStep(): number | null {
-    if (this.currentStep > 1) {
-      return this.currentStep - 1;
-    }
-    return null;
-  }
+  private initVideo(): void {
+    const video = this.bgVideoRef?.nativeElement;
 
-  /**
-   * Navigue vers l'étape suivante
-   */
-  goToNextStep(): void {
-    const nextStep = this.getNextStep();
-    if (nextStep) {
-      this.goToStep(nextStep);
+    if (!video) {
+      return;
     }
-  }
 
-  /**
-   * Navigue vers l'étape précédente
-   */
-  goToPreviousStep(): void {
-    const previousStep = this.getPreviousStep();
-    if (previousStep) {
-      this.goToStep(previousStep);
-    }
+    video.muted = true;
+    video.playsInline = true;
+    video.disableRemotePlayback = true;
+
+    video.play().catch(() => {
+      const retry = () => {
+        video.play().catch(() => {});
+        events.forEach(name => document.removeEventListener(name, retry));
+      };
+      const events = ['touchstart', 'click', 'keydown'];
+
+      events.forEach(name =>
+        document.addEventListener(name, retry, { once: true, passive: true })
+      );
+    });
   }
 }
