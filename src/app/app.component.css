@@ -1,0 +1,262 @@
+/* =========================================
+   SPS GLOBAL SOUND CONTROL
+   ========================================= */
+
+.sps-sound {
+
+  position: fixed;
+
+  top: 20px;
+  right: 22px;
+
+  z-index: 9999;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+
+  background: rgba(8, 8, 8, 0.72);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: rgba(255, 255, 255, 0.55);
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+/* Hover */
+
+.sps-sound:hover {
+
+  transform: scale(1.08);
+
+  color: white;
+
+  border-color: rgba(255, 255, 255, 0.5);
+
+  background: rgba(16, 16, 16, 0.9);
+
+}
+
+
+.sps-sound:focus-visible {
+
+  outline: 2px solid #ff5a00;
+
+  outline-offset: 3px;
+
+}
+
+
+.sps-sound:active {
+
+  transform: scale(0.94);
+
+}
+
+
+/* =========================================
+   SOUND ACTIVE
+   ========================================= */
+
+.sps-sound--active {
+
+  color: #ff5a00;
+
+  border-color: rgba(255, 90, 0, 0.65);
+
+  background: rgba(10, 10, 10, 0.9);
+
+  box-shadow:
+    0 0 10px rgba(255, 90, 0, 0.25),
+    0 0 24px rgba(255, 90, 0, 0.12);
+
+}
+
+
+/* =========================================
+   EQUALIZER
+   ========================================= */
+
+.sps-sound__equalizer {
+
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+
+}
+
+
+.sps-sound__equalizer span {
+
+  display: block;
+
+  width: 2px;
+
+  background: currentColor;
+
+  border-radius: 2px;
+
+}
+
+
+/* OFF POSITION */
+
+.sps-sound__equalizer span:nth-child(1) {
+  height: 5px;
+}
+
+.sps-sound__equalizer span:nth-child(2) {
+  height: 10px;
+}
+
+.sps-sound__equalizer span:nth-child(3) {
+  height: 7px;
+}
+
+.sps-sound__equalizer span:nth-child(4) {
+  height: 12px;
+}
+
+
+/* =========================================
+   PLAYING ANIMATION
+   ========================================= */
+
+.sps-sound--active .sps-sound__equalizer span:nth-child(1) {
+  animation: bar1 0.55s infinite alternate ease-in-out;
+}
+
+.sps-sound--active .sps-sound__equalizer span:nth-child(2) {
+  animation: bar2 0.7s infinite alternate ease-in-out;
+}
+
+.sps-sound--active .sps-sound__equalizer span:nth-child(3) {
+  animation: bar3 0.45s infinite alternate ease-in-out;
+}
+
+.sps-sound--active .sps-sound__equalizer span:nth-child(4) {
+  animation: bar1 0.65s infinite alternate-reverse ease-in-out;
+}
+
+
+/* =========================================
+   SMALL STATUS DOT
+   ========================================= */
+
+.sps-sound__indicator {
+
+  position: absolute;
+
+  right: 6px;
+  bottom: 6px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+}
+
+
+.sps-sound--active .sps-sound__indicator {
+
+  background: #ff5a00;
+
+  box-shadow: 0 0 6px rgba(255, 90, 0, 0.9);
+
+}
+
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes bar1 {
+
+  from {
+    height: 4px;
+  }
+
+  to {
+    height: 16px;
+  }
+
+}
+
+
+@keyframes bar2 {
+
+  from {
+    height: 8px;
+  }
+
+  to {
+    height: 14px;
+  }
+
+}
+
+
+@keyframes bar3 {
+
+  from {
+    height: 3px;
+  }
+
+  to {
+    height: 17px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE / TABLETTE
+   Aligné sur la ligne d'en-tête du panneau (variables dans styles.css)
+   ========================================= */
+
+@media screen and (max-width: 1024px) {
+
+  .sps-sound {
+
+    width: var(--sound-size);
+    height: var(--sound-size);
+
+    top: calc(var(--shell-top) + var(--panel-pad-y) + (var(--header-h) - var(--sound-size)) / 2);
+    right: calc(var(--shell-right) + var(--panel-pad-x));
+
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sps-sound--active .sps-sound__equalizer span {
+    animation: none;
+  }
+
+}

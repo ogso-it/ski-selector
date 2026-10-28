@@ -1,2 +1,25 @@
 <router-outlet></router-outlet>
+
 <app-firebase-test></app-firebase-test>
+
+
+<!-- SPS SOUND CONTROL -->
+
+<button
+  class="sps-sound"
+  [class.sps-sound--active]="soundEnabled"
+  (click)="toggleSound()"
+  [attr.aria-label]="soundEnabled ? 'Turn sound off' : 'Turn sound on'"
+  [attr.title]="soundEnabled ? 'Sound ON' : 'Sound OFF'"
+>
+
+  <div class="sps-sound__equalizer">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <span class="sps-sound__indicator"></span>
+
+</button>

@@ -1023,8 +1023,9 @@ select {
 .success-toast {
   position: fixed;
 
+  /* laisse la place au bouton son global (en haut à droite) */
   top: 24px;
-  right: 24px;
+  right: 80px;
 
   z-index: 1001;
 
@@ -1383,7 +1384,7 @@ select {
   /* TOAST */
 
   .success-toast {
-    top: 14px;
+    top: 64px;
     right: 14px;
     left: 14px;
 
