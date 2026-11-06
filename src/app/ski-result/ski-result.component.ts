@@ -1180,8 +1180,28 @@ export class SkiResultComponent implements OnInit, OnDestroy {
 
 
   /*========================================================
+  DISCOVER SKI (lien <a> dans le template)
+  ========================================================*/
+
+  trackDiscover(
+    ski: Ski
+  ): void {
+
+    this.trackSkiSelection(
+      ski
+    );
+
+  }
+
+
+  /*========================================================
   FIND A DEALER
   ========================================================*/
+
+  readonly dealerUrl =
+    'https://ogso-mountain-essentials.com/ogso-dealer-locator/';
+
+
 
   openDealer(): void {
 

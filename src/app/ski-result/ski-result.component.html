@@ -584,12 +584,21 @@
                             <div class="card-actions">
 
 
+                                <!--
+                                    Vrais liens (et non window.open) : les navigateurs
+                                    peuvent bloquer les onglets ouverts par script,
+                                    jamais un lien cliqué par le visiteur.
+                                -->
+
                                 <!-- DISCOVER -->
 
-                                <button
-                                    type="button"
+                                <a
+                                    *ngIf="ski.link"
                                     class="discover-btn"
-                                    (click)="openSki(ski)"
+                                    [href]="ski.link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    (click)="trackDiscover(ski)"
                                 >
 
                                     DISCOVER THE SKI
@@ -602,15 +611,16 @@
 
                                     </span>
 
-                                </button>
+                                </a>
 
 
                                 <!-- DEALER -->
 
-                                <button
-                                    type="button"
+                                <a
                                     class="dealer-btn"
-                                    (click)="openDealer()"
+                                    [href]="dealerUrl"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
 
                                     FIND A DEALER
@@ -623,7 +633,7 @@
 
                                     </span>
 
-                                </button>
+                                </a>
 
 
                             </div>
