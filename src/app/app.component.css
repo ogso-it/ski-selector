@@ -92,50 +92,57 @@
 
 
 /* =========================================
-   EQUALIZER
+   MUSIC NOTE
    ========================================= */
 
-.sps-sound__equalizer {
+.sps-sound__note {
 
-  height: 17px;
+  width: 19px;
+  height: 19px;
 
-  display: flex;
-  align-items: center;
+  overflow: visible;
 
-  gap: 2px;
+  fill: currentColor;
 
-}
+  transform-origin: 50% 80%;
 
-
-.sps-sound__equalizer span {
-
-  display: block;
-
-  width: 2px;
-
-  background: currentColor;
-
-  border-radius: 2px;
+  transition: transform 300ms ease;
 
 }
 
 
-/* OFF POSITION */
+.sps-sound__stems {
 
-.sps-sound__equalizer span:nth-child(1) {
-  height: 5px;
+  fill: none;
+
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
 }
 
-.sps-sound__equalizer span:nth-child(2) {
-  height: 10px;
+
+/* Trait barré : visible quand la musique est coupée */
+
+.sps-sound__slash {
+
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+
+  stroke-dasharray: 25;
+  stroke-dashoffset: 0;
+
+  transition: stroke-dashoffset 300ms ease;
+
 }
 
-.sps-sound__equalizer span:nth-child(3) {
-  height: 7px;
-}
 
-.sps-sound__equalizer span:nth-child(4) {
-  height: 12px;
+.sps-sound--active .sps-sound__slash {
+
+  stroke-dashoffset: 25;
+
 }
 
 
@@ -143,50 +150,47 @@
    PLAYING ANIMATION
    ========================================= */
 
-.sps-sound--active .sps-sound__equalizer span:nth-child(1) {
-  animation: bar1 0.55s infinite alternate ease-in-out;
-}
+/* La note se balance en rythme */
 
-.sps-sound--active .sps-sound__equalizer span:nth-child(2) {
-  animation: bar2 0.7s infinite alternate ease-in-out;
-}
-
-.sps-sound--active .sps-sound__equalizer span:nth-child(3) {
-  animation: bar3 0.45s infinite alternate ease-in-out;
-}
-
-.sps-sound--active .sps-sound__equalizer span:nth-child(4) {
-  animation: bar1 0.65s infinite alternate-reverse ease-in-out;
+.sps-sound--playing .sps-sound__note {
+  animation: sps-note-sway 1.6s ease-in-out infinite;
 }
 
 
-/* =========================================
-   SMALL STATUS DOT
-   ========================================= */
+/* Petites notes qui s'envolent */
 
-.sps-sound__indicator {
+.sps-sound__float {
 
   position: absolute;
 
-  right: 6px;
-  bottom: 6px;
+  left: 50%;
+  top: 4px;
 
-  width: 4px;
-  height: 4px;
+  color: #ff5a00;
 
-  border-radius: 50%;
+  font-size: 11px;
+  line-height: 1;
 
-  background: rgba(255, 255, 255, 0.25);
+  opacity: 0;
+
+  pointer-events: none;
 
 }
 
 
-.sps-sound--active .sps-sound__indicator {
+.sps-sound--playing .sps-sound__float--1 {
+  animation: sps-note-float 2.8s ease-out infinite;
+}
 
-  background: #ff5a00;
+.sps-sound--playing .sps-sound__float--2 {
+  animation: sps-note-float-alt 2.8s ease-out 1.4s infinite;
+}
 
-  box-shadow: 0 0 6px rgba(255, 90, 0, 0.9);
 
+/* Son activé mais en attente d'un premier clic (règle des navigateurs) */
+
+.sps-sound--active:not(.sps-sound--playing) {
+  animation: sps-sound-pulse 2s ease-in-out infinite;
 }
 
 
@@ -194,40 +198,69 @@
    ANIMATIONS
    ========================================= */
 
-@keyframes bar1 {
+@keyframes sps-note-sway {
 
-  from {
-    height: 4px;
+  0%, 100% {
+    transform: rotate(-7deg) translateY(0);
   }
 
-  to {
-    height: 16px;
-  }
-
-}
-
-
-@keyframes bar2 {
-
-  from {
-    height: 8px;
-  }
-
-  to {
-    height: 14px;
+  50% {
+    transform: rotate(7deg) translateY(-1px);
   }
 
 }
 
 
-@keyframes bar3 {
+@keyframes sps-note-float {
 
-  from {
-    height: 3px;
+  0% {
+    opacity: 0;
+    transform: translate(2px, 0) scale(0.7);
   }
 
-  to {
-    height: 17px;
+  20% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(12px, -22px) scale(1);
+  }
+
+}
+
+
+@keyframes sps-note-float-alt {
+
+  0% {
+    opacity: 0;
+    transform: translate(-8px, 0) scale(0.7);
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-20px, -20px) scale(0.95);
+  }
+
+}
+
+
+@keyframes sps-sound-pulse {
+
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(255, 90, 0, 0.35),
+      0 0 10px rgba(255, 90, 0, 0.2);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(255, 90, 0, 0),
+      0 0 18px rgba(255, 90, 0, 0.3);
   }
 
 }
@@ -255,7 +288,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .sps-sound--active .sps-sound__equalizer span {
+  .sps-sound--playing .sps-sound__note,
+  .sps-sound--playing .sps-sound__float,
+  .sps-sound--active:not(.sps-sound--playing) {
     animation: none;
   }
 
